@@ -1,98 +1,74 @@
 import OpenAI from "openai";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+export default async function handler(req, res) {
+  // CORS pour GitHub Pages
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  if (req.method === "OPTIONS") return res.status(200).end();
 
-const PROMPT = `
-Tu es un générateur de quiz de très haut niveau pour adultes cultivés.
+  try {
+    const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-Objectif :
-Générer 10 questions mélangées, en français, de difficulté élevée (niveau seconde générale lycée / concours / Programme Voltaire / culture générale).
+    // On accepte GET (sans avoid) ou POST (avec avoid)
+    let avoid = [];
+    if (req.method === "POST") {
+      // Vercel parse souvent le JSON automatiquement si content-type JSON
+      // sinon, req.body peut être une string
+      const body = typeof req.body === "string" ? JSON.parse(req.body) : (req.body || {});
+      avoid = Array.isArray(body.avoid) ? body.avoid.slice(0, 60).map(String) : [];
+    } else if (req.method !== "GET") {
+      return res.status(405).json({ error: "Method not allowed" });
+    }
 
-Répartition implicite (mais mélangée) :
-- Mathématiques (niveau bac ES, calcul mental, probabilités, fonctions, logique)
-- Français (orthographe, grammaire, accords, homophones, subjonctif, subtilités Voltaire)
-- Histoire (programme Terminale : Révolutions, XXe siècle, géopolitique, France, Europe)
-- Géographie (capitales, fleuves, montagnes, pays, cartes)
-- Culture générale (sciences, littérature, médias, actualité, pop culture, philosophie)
+    const avoidBlock = avoid.length
+      ? `Questions/thèmes récemment utilisés (à éviter absolument, même paraphrasés) :
+${avoid.map((s, i) => `${i + 1}. ${s}`).join("\n")}
 
-Contraintes ABSOLUES :
-- 10 questions exactement
-- 4 options par question
-- Toutes les options doivent être différentes
-- 1 seule bonne réponse
-- Les mauvaises réponses doivent être plausibles
-- Les questions doivent être toutes différentes
-- Interdiction de poser deux fois la même question ou le même thème exact
-- Niveau exigeant mais accessible
+Règle anti-répétition :
+- Ne réutilise aucun de ces items.
+- Évite aussi les “classiques” trop fréquents (Joconde, synonymes basiques, Tour Eiffel, etc.) si déjà présents.
+- Varie les domaines (auteurs, dates, concepts, lieux, sciences, médias, sport, techno, arts, institutions…).`
+      : "";
 
-Format JSON STRICT (sans texte autour) :
+    const prompt = `
+Tu es un générateur de quiz "core skills" en français.
+
+Génère EXACTEMENT 10 questions au total, format QCM (4 options) + explication courte (1 phrase).
+Répartition STRICTE :
+- Q1–Q2 : Calcul mental / petit problème (niveau lycée, sans calculatrice)
+- Q3–Q4 : Géographie (capitales/pays, fleuves, montagnes, régions…)
+- Q5–Q6 : Histoire niveau Terminale (programme France, niveau bac)
+- Q7–Q8 : Culture générale type Trivial Pursuit (sciences, médias, actu récente, culture pop incluse)
+- Q9–Q10 : Français (niveau un cran au-dessus du facile : accords subtils, homophones, syntaxe, fonctions, figures simples)
+
+Contraintes :
+- Une seule bonne réponse, pas d’ambiguïté.
+- Options courtes et plausibles.
+- Le champ "answer" doit être EXACTEMENT l’une des 4 options.
+- Interdiction de recycler des questions vues récemment : priorité à la nouveauté.
+
+${avoidBlock}
+
+Réponds UNIQUEMENT en JSON strict :
 [
-  {
-    "q": "...",
-    "options": ["A","B","C","D"],
-    "answer": "A",
-    "explanation": "..."
-  }
+  {"q":"...","options":["A","B","C","D"],"answer":"...","explanation":"..."},
+  ...
 ]
 `;
 
-function isValidQuestion(q){
-  if(!q || typeof q.q !== "string") return false;
-  if(!Array.isArray(q.options) || q.options.length !== 4) return false;
-  if(typeof q.answer !== "string") return false;
-
-  const opts = q.options.map(o => o.trim());
-  if(new Set(opts.map(o => o.toLowerCase())).size !== 4) return false;
-  if(!opts.map(o => o.toLowerCase()).includes(q.answer.trim().toLowerCase())) return false;
-
-  return true;
-}
-
-function normalizeQuizPayload(raw){
-  const arr = Array.isArray(raw) ? raw : raw?.questions;
-  if(!Array.isArray(arr)) return null;
-
-  const clean = arr.map(x => ({
-    q: String(x.q || "").trim(),
-    options: Array.isArray(x.options) ? x.options.map(o => String(o).trim()) : [],
-    answer: String(x.answer || "").trim(),
-    explanation: String(x.explanation || "").trim(),
-  }));
-
-  const valid = clean.filter(isValidQuestion);
-  return valid.length === 10 ? valid : null;
-}
-
-export default async function handler(req, res){
-  if(req.method !== "GET") return res.status(405).end();
-
-  let quiz = null;
-
-  for(let attempt = 1; attempt <= 2; attempt++){
-    const completion = await client.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [{ role: "system", content: PROMPT }],
-      temperature: 0.9,
+    const response = await client.responses.create({
+      model: "gpt-4.1-mini",
+      input: prompt,
+      // un peu plus de variété
+      temperature: 0.9
     });
 
-    const text = completion.choices[0].message.content.trim();
-    let parsed;
+    const text = response.output_text;
+    const quiz = JSON.parse(text);
 
-    try {
-      parsed = JSON.parse(text);
-    } catch {
-      continue;
-    }
-
-    quiz = normalizeQuizPayload(parsed);
-    if(quiz) break;
+    return res.status(200).json(quiz);
+  } catch (e) {
+    return res.status(500).json({ error: "Server error", details: String(e?.message || e) });
   }
-
-  if(!quiz){
-    return res.status(502).json({ error: "Quiz invalide généré, réessaie." });
-  }
-
-  res.status(200).json(quiz);
 }
