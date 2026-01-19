@@ -14,7 +14,7 @@ export default async function handler(req, res) {
  const prompt = `
 Tu es un professeur exigeant de lycée français.
 
-Génère 10 questions de quiz **mélangées et variées**, sans catégorie apparente, niveau Bac Terminale / Projet Voltaire / Culture générale exigeante.
+Génère 10 questions de quiz **mélangées et variées**, sans catégorie apparente, niveau lycée seconde générale / Projet Voltaire / Culture générale exigeante.
 
 Contraintes obligatoires :
 - Aucune question ne doit être triviale ou répétitive.
