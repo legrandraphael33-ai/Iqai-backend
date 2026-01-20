@@ -62,6 +62,14 @@ FRANÇAIS — style “Projet Voltaire” :
 - Questions d’orthographe/accords/homophones/participe passé/subjonctif, registres et pièges classiques MAIS pas “évidents”.
 - Évite les questions où toutes les options sont identiques (interdit absolu).
 
+CONTRÔLE QUALITÉ OBLIGATOIRE (avant de répondre) :
+- Pour CHAQUE question, vérifie que "answer" est EXACTEMENT l’une des 4 valeurs de "options" (copie exacte, mêmes accents/espaces).
+- Pour les questions de maths : recalculer le résultat, et vérifier que l’explication est cohérente avec le bon résultat.
+- Interdiction de donner une explication qui mène à un résultat différent de "answer".
+- Interdiction de donner 4 options toutes identiques (0 tolérance).
+- Interdiction d’avoir des options qui ne correspondent pas à la question (ex: calcul qui donne 119 mais réponse 118).
+
+
 FORMAT : retourne STRICTEMENT du JSON valide (pas de texte autour), sous forme d’un tableau de 10 objets :
 [
   {
