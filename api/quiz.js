@@ -32,30 +32,47 @@ Règle anti-répétition :
       : "";
 
     const prompt = `
-Tu es un générateur de quiz "core skills" en français.
+Tu es un professeur exigeant de lycée français (niveau Terminale générale/ES), mais tu restes clair, pédagogique et sans pièges gratuits.
 
-Génère EXACTEMENT 10 questions au total, format QCM (4 options) + explication courte (1 phrase).
-Répartition STRICTE :
-- Q1–Q2 : Calcul mental / petit problème (niveau lycée, sans calculatrice)
-- Q3–Q4 : Géographie (capitales/pays, fleuves, montagnes, régions…)
-- Q5–Q6 : Histoire niveau Terminale (programme France, niveau bac)
-- Q7–Q8 : Culture générale type Trivial Pursuit (sciences, médias, actu récente, culture pop incluse)
-- Q9–Q10 : Français (niveau un cran au-dessus du facile : accords subtils, homophones, syntaxe, fonctions, figures simples)
+Objectif :
+Génère 10 questions de quiz MÉLANGÉES (pas de catégories visibles), variées, intéressantes et non répétitives.
 
-Contraintes :
-- Une seule bonne réponse, pas d’ambiguïté.
-- Options courtes et plausibles.
-- Le champ "answer" doit être EXACTEMENT l’une des 4 options.
-- Interdiction de recycler des questions vues récemment : priorité à la nouveauté.
+Répartition implicite (sans l’afficher) :
+- maths : 2 questions
+- géographie : 2 questions
+- histoire (programme Terminale générale) : 2 questions
+- culture générale (incluant littérature, art, musique) : 2 questions
+- français (style Projet Voltaire : orthographe/grammaire/syntaxe) : 2 questions
 
-${avoidBlock}
+CONTRAINTES IMPORTANTES (anti-nul / anti-répétition) :
+- Interdiction des questions vues 1000 fois (Joconde, capitale de la France, “synonyme de rapide/heureux”, etc.).
+- Interdiction des doublons de type (pas 2 synonymes, pas 2 capitales ultra connues, etc.).
+- Chaque question doit être précise, sans ambiguïté, et avoir UNE seule bonne réponse.
+- Les 4 options doivent être toutes différentes, plausibles, et UNE seule correcte.
+- Donne une explication courte et correcte (1 à 2 phrases max).
 
-Réponds UNIQUEMENT en JSON strict :
+MATHS — RÈGLES STRICTES (calcul mental “balisé”) :
+- UNIQUEMENT du calcul mental faisable de tête (niveau “ça demande de s’accrocher”, mais sans outils).
+- Résultat final TOUJOURS un entier (ou une fraction très simple type 1/2, 3/4), jamais un long décimal.
+- Interdit : racines carrées, puissances/carrés, dérivées, intégrales, trigonométrie, équations compliquées, logarithmes, matrices, suites, formules longues.
+- Autorisé : pourcentages simples, proportions, vitesses/distance/temps simples, moyenne, règle de trois, probabilités très simples, logique de base, petites manipulations algébriques ultra légères.
+- Vérifie tes calculs AVANT de donner la réponse et l’explication.
+
+FRANÇAIS — style “Projet Voltaire” :
+- Questions d’orthographe/accords/homophones/participe passé/subjonctif, registres et pièges classiques MAIS pas “évidents”.
+- Évite les questions où toutes les options sont identiques (interdit absolu).
+
+FORMAT : retourne STRICTEMENT du JSON valide (pas de texte autour), sous forme d’un tableau de 10 objets :
 [
-  {"q":"...","options":["A","B","C","D"],"answer":"...","explanation":"..."},
-  ...
+  {
+    "q": "Question en français ?",
+    "options": ["A", "B", "C", "D"],
+    "answer": "B",
+    "explanation": "Explication courte."
+  }
 ]
 `;
+
 
     const response = await client.responses.create({
       model: "gpt-4.1-mini",
