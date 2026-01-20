@@ -1,5 +1,47 @@
 import OpenAI from "openai";
 
+function safeJsonArrayFromText(text) {
+  // Essaie direct
+  try {
+    const parsed = JSON.parse(text);
+    return parsed;
+  } catch {}
+
+  // Sinon: extrait le premier [...] (cas où le modèle met du texte autour)
+  const start = text.indexOf("[");
+  const end = text.lastIndexOf("]");
+  if (start !== -1 && end !== -1 && end > start) {
+    const slice = text.slice(start, end + 1);
+    return JSON.parse(slice);
+  }
+  throw new Error("JSON parse failed");
+}
+
+function isValidQuestion(q) {
+  if (!q || typeof q.q !== "string" || !q.q.trim()) return false;
+  if (!Array.isArray(q.options) || q.options.length !== 4) return false;
+  if (typeof q.answer !== "string" || !q.answer.trim()) return false;
+
+  const opts = q.options.map(o => String(o).trim()).filter(Boolean);
+  if (opts.length !== 4) return false;
+
+  // options uniques (case-insensitive)
+  const uniq = new Set(opts.map(o => o.toLowerCase()));
+  if (uniq.size !== 4) return false;
+
+  const ans = String(q.answer).trim();
+  if (!opts.includes(ans)) return false;
+
+  // explanation optionnelle mais utile
+  if (q.explanation != null && typeof q.explanation !== "string") return false;
+
+  return true;
+}
+
+function isValidQuiz(arr) {
+  return Array.isArray(arr) && arr.length === 10 && arr.every(isValidQuestion);
+}
+
 export default async function handler(req, res) {
   // CORS pour GitHub Pages
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -13,8 +55,6 @@ export default async function handler(req, res) {
     // On accepte GET (sans avoid) ou POST (avec avoid)
     let avoid = [];
     if (req.method === "POST") {
-      // Vercel parse souvent le JSON automatiquement si content-type JSON
-      // sinon, req.body peut être une string
       const body = typeof req.body === "string" ? JSON.parse(req.body) : (req.body || {});
       avoid = Array.isArray(body.avoid) ? body.avoid.slice(0, 60).map(String) : [];
     } else if (req.method !== "GET") {
@@ -27,7 +67,7 @@ ${avoid.map((s, i) => `${i + 1}. ${s}`).join("\n")}
 
 Règle anti-répétition :
 - Ne réutilise aucun de ces items.
-- Évite aussi les “classiques” trop fréquents (Joconde, synonymes basiques, Tour Eiffel, etc.) si déjà présents.
+- Évite aussi les “classiques” trop fréquents (Joconde, synonymes basiques, Tour Eiffel, etc.).
 - Varie les domaines (auteurs, dates, concepts, lieux, sciences, médias, sport, techno, arts, institutions…).`
       : "";
 
@@ -60,15 +100,16 @@ MATHS — RÈGLES STRICTES (calcul mental “balisé”) :
 
 FRANÇAIS — style “Projet Voltaire” :
 - Questions d’orthographe/accords/homophones/participe passé/subjonctif, registres et pièges classiques MAIS pas “évidents”.
-- Évite les questions où toutes les options sont identiques (interdit absolu).
+- Interdiction des options identiques.
+- La bonne réponse doit être EXACTEMENT une des options (copie exacte).
+
+${avoidBlock}
 
 CONTRÔLE QUALITÉ OBLIGATOIRE (avant de répondre) :
-- Pour CHAQUE question, vérifie que "answer" est EXACTEMENT l’une des 4 valeurs de "options" (copie exacte, mêmes accents/espaces).
-- Pour les questions de maths : recalculer le résultat, et vérifier que l’explication est cohérente avec le bon résultat.
+- Pour CHAQUE question, vérifie que "answer" est EXACTEMENT l’une des 4 valeurs de "options".
+- Pour les questions de maths : recalculer le résultat, et vérifier que l’explication est cohérente.
 - Interdiction de donner une explication qui mène à un résultat différent de "answer".
-- Interdiction de donner 4 options toutes identiques (0 tolérance).
-- Interdiction d’avoir des options qui ne correspondent pas à la question (ex: calcul qui donne 119 mais réponse 118).
-
+- Si tu n'arrives pas à respecter ces règles, recommence.
 
 FORMAT : retourne STRICTEMENT du JSON valide (pas de texte autour), sous forme d’un tableau de 10 objets :
 [
@@ -81,16 +122,39 @@ FORMAT : retourne STRICTEMENT du JSON valide (pas de texte autour), sous forme d
 ]
 `;
 
+    // Retry automatique si la sortie est invalide
+    let quiz = null;
+    let lastText = "";
 
-    const response = await client.responses.create({
-      model: "gpt-4.1-mini",
-      input: prompt,
-      // un peu plus de variété
-      temperature: 0.9
-    });
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      const response = await client.responses.create({
+        model: "gpt-4.1-mini",
+        input: prompt,
+        temperature: 0.8
+      });
 
-    const text = response.output_text;
-    const quiz = JSON.parse(text);
+      const text = response.output_text || "";
+      lastText = text;
+
+      let parsed;
+      try {
+        parsed = safeJsonArrayFromText(text);
+      } catch {
+        continue;
+      }
+
+      if (isValidQuiz(parsed)) {
+        quiz = parsed;
+        break;
+      }
+    }
+
+    if (!quiz) {
+      return res.status(500).json({
+        error: "Quiz invalide généré, réessaie.",
+        details: "Validation failed after retries."
+      });
+    }
 
     return res.status(200).json(quiz);
   } catch (e) {
