@@ -102,12 +102,11 @@ ${avoid.map((s, i) => `${i + 1}. ${s}`).join("\n")}
 
 Règle anti-répétition :
 - Ne réutilise aucun de ces items.
-- Évite aussi les “classiques” trop fréquents.
+- Évite aussi les "classiques" trop fréquents.
 - Varie les domaines.`
       : "";
 
-    const prompt = `
-Tu es un professeur exigeant de lycée français (niveau Terminale), clair et pédagogique.
+    const prompt = `Tu es un professeur exigeant de lycée français (niveau Terminale), clair et pédagogique.
 
 Génère 10 questions QCM variées en français.
 Chaque question:
@@ -118,29 +117,34 @@ Chaque question:
 
 ${avoidBlock}
 
-FORMAT : retourne STRICTEMENT du JSON valide (pas de texte autour), tableau de 10 objets:
-[
-  {"q":"...","options":["A","B","C","D"],"answer":"...","explanation":"..."}
-]
+FORMAT : retourne STRICTEMENT un objet JSON avec une clé "questions" contenant un tableau de 10 objets:
+{
+  "questions": [
+    {"q":"...","options":["A","B","C","D"],"answer":"...","explanation":"..."}
+  ]
+}
 `;
 
     // 1) Générer un quiz safe (ton existant) avec retry
     let safeQuiz = null;
     for (let attempt = 1; attempt <= 3; attempt++) {
+      // ✅ CORRECTIF : utiliser chat.completions.create au lieu de responses.create
       const response = await withTimeout(
-        client.responses.create({
-          model: "gpt-4.1-mini",
-          input: prompt,
-          temperature: 0.7
+        client.chat.completions.create({
+          model: "gpt-4o-mini",
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.7,
+          response_format: { type: "json_object" }
         }),
         18000,
         "safeQuiz_timeout"
       );
 
-      const text = response.output_text || "";
+      const text = response.choices[0]?.message?.content || "{}";
       let parsed;
       try {
-        parsed = safeJsonArrayFromText(text);
+        const obj = JSON.parse(text);
+        parsed = obj.questions || obj.data || [];
       } catch {
         continue;
       }
