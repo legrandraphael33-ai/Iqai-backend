@@ -3,23 +3,6 @@ import { generateHalluQuestions } from "../lib/generateHallu.js";
 import { injectHallus, getFallbackHallu } from "../lib/injectHallus.js";
 
 
-// ===============================
-// FALLBACK HALU (sécurité absolue)
-// ===============================
-function getFallbackHallu() {
-  return {
-    kind: "halu",
-    q: "Quel animal est connu pour photosynthétiser à l’âge adulte ?",
-    options: [
-      "Le paresseux",
-      "La méduse verte",
-      "Le corail",
-      "Le caméléon"
-    ],
-    answer: "",        // aucune bonne réponse
-    explanation: ""    // explication volontairement vide (clean côté front)
-  };
-}
 
 
 function safeJsonArrayFromText(text) {
