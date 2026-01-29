@@ -182,7 +182,7 @@ FORMAT : retourne STRICTEMENT du JSON valide (pas de texte autour), tableau de 1
 let hallus = [];
 try {
   hallus = await withTimeout(
-    generateHalluQuestions({ n: 2, timeoutMs: 12000 }),
+    generateHalluQuestions(client, { n: 2, timeoutMs: 12000 }),
     13000,
     "hallu_timeout"
   );
