@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { generateHalluQuestions } from "../lib/generateHallu.js";
-import { injectHallus, getFallbackHallu } from "../lib/injectHallus.js";
+import { injectHallus } from "../lib/injectHallus.js";
 
 
 
