@@ -1,5 +1,7 @@
 import OpenAI from "openai";
 import { generateHalluQuestions } from "../lib/generateHallu.js";
+import { injectHallus, getFallbackHallu } from "../lib/injectHallus.js";
+
 
 // ===============================
 // FALLBACK HALU (sécurité absolue)
