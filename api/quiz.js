@@ -1,6 +1,25 @@
 import OpenAI from "openai";
 import { generateHalluQuestions } from "../lib/generateHallu.js";
 
+// ===============================
+// FALLBACK HALU (sécurité absolue)
+// ===============================
+function getFallbackHallu() {
+  return {
+    kind: "halu",
+    q: "Quel animal est connu pour photosynthétiser à l’âge adulte ?",
+    options: [
+      "Le paresseux",
+      "La méduse verte",
+      "Le corail",
+      "Le caméléon"
+    ],
+    answer: "",        // aucune bonne réponse
+    explanation: ""    // explication volontairement vide (clean côté front)
+  };
+}
+
+
 function safeJsonArrayFromText(text) {
   try {
     return JSON.parse(text);
@@ -157,23 +176,45 @@ FORMAT : retourne STRICTEMENT du JSON valide (pas de texte autour), tableau de 1
       });
     }
 
-    // 2) Générer 2 hallus avec timeout + fallback
-    let hallus = [];
-    try {
-      hallus = await withTimeout(
-        generateHalluQuestions({ n: 2, timeoutMs: 12000 }),
-        13000,
-        "hallu_timeout"
-      );
-    } catch {
-      hallus = [];
-    }
+    // 2) Générer 2 hallus (avec garantie absolue)
+let hallus = [];
+try {
+  hallus = await withTimeout(
+    generateHalluQuestions({ n: 2, timeoutMs: 12000 }),
+    13000,
+    "hallu_timeout"
+  );
+} catch {
+  hallus = [];
+}
 
-    // 3) Injecter Q4 et Q8
-    const finalQuiz = injectHallus(safeQuiz, hallus);
+// nettoyage strict
+hallus = Array.isArray(hallus) ? hallus : [];
+hallus = hallus.filter(h =>
+  h &&
+  h.kind === "halu" &&
+  typeof h.q === "string" &&
+  h.q.trim() &&
+  Array.isArray(h.options) &&
+  h.options.length === 4
+);
 
-    return res.status(200).json(finalQuiz);
-  } catch (e) {
-    return res.status(500).json({ error: "Server error", details: String(e?.message || e) });
-  }
+// fallback garanti
+while (hallus.length < 2) {
+  hallus.push(getFallbackHallu());
+}
+hallus = hallus.slice(0, 2);
+
+// 3) Injection finale
+const finalQuiz = injectHallus(safeQuiz, hallus);
+
+return res.status(200).json(finalQuiz);
+
+    } catch (e) {
+  return res.status(500).json({
+    error: "Server error",
+    details: String(e?.message || e)
+  });
+}
+
 }
