@@ -136,7 +136,7 @@ FORMAT : retourne STRICTEMENT un objet JSON avec une clé "questions" contenant 
           temperature: 0.7,
           response_format: { type: "json_object" }
         }),
-        18000,
+        25000,
         "safeQuiz_timeout"
       );
 
