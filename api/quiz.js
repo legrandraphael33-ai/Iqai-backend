@@ -319,31 +319,54 @@ NE JAMAIS réutiliser ces questions ou des variantes.`
     // Tirer 10 thèmes aléatoires
     const randomThemes = getRandomThemes(10);
 
-    const prompt = `Tu es un créateur de quiz de culture générale pour un public adulte cultivé.
+    const prompt = `Tu es un créateur de quiz Trivial Pursuit pour adultes.
 
 Génère EXACTEMENT 10 questions QCM en français, une question par thème imposé ci-dessous.
 
 THÈMES IMPOSÉS (1 question par thème, dans l'ordre) :
 ${randomThemes.map((theme, i) => `${i + 1}. ${theme}`).join("\n")}
 
-NIVEAU DE DIFFICULTÉ :
-- Ni trop facile (évite "Quelle est la capitale de la France ?")
-- Ni trop difficile (évite "Formule chimique de l'azote liquide ?")
-- Niveau cible : culture générale solide, questions qu'une personne cultivée connaît
+NIVEAU : TRIVIAL PURSUIT
+- Questions qu'on pose dans un quiz de bar/soirée entre amis
+- Culture générale solide MAIS accessible
+- Le joueur doit réfléchir 2-3 secondes mais peut trouver
+
+EXEMPLES DE BON NIVEAU :
+✅ "Qui a peint 'Guernica' ?" (Picasso)
+✅ "Quelle est la monnaie du Japon ?" (Yen)
+✅ "Combien de cordes a une guitare classique ?" (6)
+✅ "En quelle année l'homme a marché sur la Lune ?" (1969)
+✅ "Quel océan borde l'ouest de l'Afrique ?" (Atlantique)
+✅ "Combien fait 7 × 9 ?" (63)
+
+🚫 BLACKLIST ABSOLUE - INTERDICTION TOTALE de ces sujets ultra-vus :
+- La Joconde / Léonard de Vinci
+- Tour Eiffel
+- Révolution française / 1789
+- Capitale de France / Paris
+- Einstein
+- Napoléon
+- Qui a écrit Les Misérables
+- Pluriel de cheval
+- Féminin d'acteur
+- Pizza italienne
+- 2+2 ou additions triviales
+
+DIVERSITÉ OBLIGATOIRE :
+- Varie les pays, époques, disciplines
+- Privilégie les œuvres/personnages moins connus mais reconnaissables
+- Exemples arts : Guernica, Le Cri, Le Baiser, La Jeune Fille à la perle
+- Exemples géo : Oslo, Buenos Aires, Hanoï (pas Paris/Londres)
+- Exemples histoire : 1969, 1945, chute mur Berlin (pas 1789)
 
 RÈGLES STRICTES :
-- Pour CHAQUE thème, génère UNE question pertinente sur ce thème précis
-- 4 options différentes et crédibles par question
+- Pour CHAQUE thème, génère UNE question pertinente Trivial Pursuit
+- 4 options différentes et plausibles
 - 1 seule bonne réponse
 - answer doit être EXACTEMENT l'une des 4 options
-- explanation courte et pédagogique (1-2 phrases max)
+- explanation courte et intéressante (1-2 phrases)
 
 ${avoidBlock}
-
-EXEMPLES de bon niveau :
-✅ "En quelle année est tombé le mur de Berlin ?" (1989)
-✅ "Quel est le plus grand désert du monde ?" (Antarctique)
-✅ "Qui a écrit '1984' ?" (George Orwell)
 
 FORMAT : retourne STRICTEMENT un objet JSON avec une clé "questions" contenant un tableau de 10 objets:
 {
