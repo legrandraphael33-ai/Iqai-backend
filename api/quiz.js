@@ -71,31 +71,33 @@ const THEME_BANK = [
   "les fractions et pourcentages simples",
   "les unités de mesure courantes",
   
-  // Français & Langue
+  // Français & Langue (limité)
   "les règles d'accord de conjugaison en français",
   "les homophones courants en français",
   "les figures de style littéraires",
-  "l'étymologie de mots français",
   
-  // Capitales (SANS la France)
+  // Capitales (SANS la France, variées)
   "les capitales d'Europe de l'Est",
   "les capitales d'Amérique du Sud",
-  "les capitales d'Asie",
-  "les capitales d'Afrique",
+  "les capitales d'Asie du Sud-Est",
+  "les capitales d'Afrique subsaharienne",
   "les capitales d'Océanie",
   "les capitales scandinaves",
+  "les capitales du Moyen-Orient",
   
-  // Histoire
-  "les grandes batailles de l'Histoire",
-  "les révolutions du 18e et 19e siècle",
-  "les inventions de la Renaissance",
-  "la Guerre Froide",
+  // Histoire MONDIALE (pas que française)
+  "les grandes batailles de l'Histoire mondiale",
+  "les empires antiques",
   "les explorateurs célèbres",
   "l'Antiquité romaine",
   "les pharaons égyptiens",
   "la Seconde Guerre mondiale",
   "les rois et reines d'Angleterre",
   "les présidents américains marquants",
+  "la Guerre Froide",
+  "les inventions de la Renaissance",
+  "les civilisations précolombiennes",
+  "la dynastie chinoise",
   
   // Géographie
   "les plus longs fleuves du monde",
@@ -106,10 +108,12 @@ const THEME_BANK = [
   "les volcans actifs",
   "les pays les plus peuplés",
   "les fuseaux horaires",
+  "les chutes d'eau célèbres",
+  "les grands lacs du monde",
   
   // Sciences
-  "le système solaire",
-  "les éléments du tableau périodique courants",
+  "le système solaire et les planètes",
+  "les éléments chimiques courants",
   "les organes du corps humain",
   "les maladies historiques",
   "les inventions du 20e siècle",
@@ -118,6 +122,8 @@ const THEME_BANK = [
   "les espèces en voie de disparition",
   "les dinosaures",
   "la génétique de base",
+  "les phénomènes naturels",
+  "les découvertes médicales",
   
   // Nature & Animaux
   "les records du monde animal",
@@ -127,42 +133,55 @@ const THEME_BANK = [
   "les arbres et forêts",
   "les phénomènes météorologiques",
   "les minéraux et pierres précieuses",
+  "les félins sauvages",
+  "les primates",
+  "les reptiles",
   
-  // Arts & Culture
+  // Arts & Culture MONDIALE
   "les peintres impressionnistes",
   "les sculpteurs célèbres",
   "les mouvements artistiques du 20e siècle",
-  "les musées célèbres",
+  "les musées célèbres du monde",
   "l'architecture gothique",
   "les monuments du monde",
   "les Sept Merveilles du monde",
+  "l'art contemporain",
+  "la photographie",
   
-  // Littérature
+  // Littérature MONDIALE
   "les auteurs du 19e siècle",
   "les prix Nobel de littérature",
   "les romans dystopiques",
   "les pièces de Shakespeare",
-  "les contes et légendes",
-  "les poètes français",
-  "les bandes dessinées franco-belges",
+  "les contes et légendes du monde",
+  "les poètes romantiques",
+  "les bandes dessinées japonaises (manga)",
+  "la science-fiction classique",
+  "les auteurs britanniques",
+  "les auteurs américains",
   
   // Cinéma
   "le cinéma des années 80",
   "le cinéma des années 90",
   "les réalisateurs oscarisés",
-  "les films cultes français",
   "les franchises cinéma à succès",
   "les acteurs et actrices légendaires",
   "les studios d'animation",
+  "le cinéma d'horreur",
+  "le cinéma d'action",
+  "les films de science-fiction",
   
   // Musique
   "les compositeurs classiques",
   "les instruments de musique",
   "le rock des années 70",
-  "la pop des années 2000",
+  "la pop des années 80",
+  "le hip-hop et rap",
   "les groupes britanniques célèbres",
   "les festivals de musique",
   "les genres musicaux",
+  "le jazz et le blues",
+  "la musique électronique",
   
   // Sport
   "les Jeux olympiques d'été",
@@ -172,17 +191,20 @@ const THEME_BANK = [
   "les règles du basketball",
   "les records du monde en athlétisme",
   "les champions de tennis",
-  "le Tour de France",
+  "le cyclisme professionnel",
   "les sports de combat",
   "les sports extrêmes",
+  "la Formule 1",
+  "le golf professionnel",
   
-  // Gastronomie
-  "les fromages français",
-  "les vins et vignobles",
-  "les cuisines du monde",
+  // Gastronomie MONDIALE
+  "les cuisines asiatiques",
+  "les cuisines méditerranéennes",
   "les épices et aromates",
   "les fruits exotiques",
   "les techniques de cuisson",
+  "les boissons alcoolisées du monde",
+  "les desserts célèbres",
   
   // Technologie
   "les inventeurs de l'informatique",
@@ -192,6 +214,8 @@ const THEME_BANK = [
   "les jeux vidéo cultes",
   "les consoles de jeux",
   "l'intelligence artificielle",
+  "les smartphones et tablettes",
+  "les cryptomonnaies",
   
   // Mythologie
   "la mythologie grecque",
@@ -199,12 +223,14 @@ const THEME_BANK = [
   "la mythologie nordique",
   "les créatures mythologiques",
   "les dieux égyptiens",
+  "la mythologie asiatique",
   
   // Religion & Philosophie
   "les grandes religions du monde",
   "les philosophes de l'Antiquité",
   "les philosophes des Lumières",
   "les courants philosophiques",
+  "les textes sacrés",
   
   // Économie & Société
   "les monnaies du monde",
@@ -212,6 +238,7 @@ const THEME_BANK = [
   "les organisations internationales",
   "les droits de l'homme",
   "les prix Nobel de la paix",
+  "l'Union Européenne",
   
   // Mode & Design
   "les grands couturiers",
@@ -223,23 +250,25 @@ const THEME_BANK = [
   "l'aviation commerciale",
   "les trains à grande vitesse",
   "les bateaux célèbres",
+  "les motos légendaires",
   
   // Espace
   "les missions spatiales",
   "les astronautes célèbres",
   "les satellites et sondes",
   "les étoiles et constellations",
+  "les galaxies",
   
   // Divers
   "les drapeaux du monde",
   "les symboles nationaux",
-  "les codes et langages secrets",
-  "les superstitions",
+  "les langues les plus parlées",
   "les records du Guinness",
-  "les phobies courantes",
-  "les couleurs et leur symbolique",
-  "les proverbes français",
-  "les signes du zodiaque"
+  "les inventions anciennes",
+  "les merveilles naturelles",
+  "les parcs nationaux célèbres",
+  "les villes les plus peuplées",
+  "les gratte-ciels célèbres"
 ];
 
 // Fonction pour tirer 10 thèmes aléatoires différents
@@ -375,8 +404,15 @@ FORMAT : retourne STRICTEMENT un objet JSON avec une clé "questions" contenant 
     // 2) Générer 2 hallus avec timeout + fallback
     let hallus = [];
     try {
+      // Passer les thèmes des positions 4 et 8 (index 3 et 7) aux hallus
+      const halluThemes = [randomThemes[3], randomThemes[7]];
+      
       hallus = await withTimeout(
-        generateHalluQuestions({ n: 2, timeoutMs: 12000 }),
+        generateHalluQuestions({ 
+          n: 2, 
+          timeoutMs: 12000,
+          themes: halluThemes 
+        }),
         13000,
         "hallu_timeout"
       );
