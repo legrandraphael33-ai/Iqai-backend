@@ -443,6 +443,17 @@ FORMAT : retourne STRICTEMENT un objet JSON avec une clé "questions" contenant 
       hallus = [];
     }
 
+    // 🔒 GARANTIE ABSOLUE : toujours 2 hallus
+while (hallus.length < 2) {
+  hallus.push({
+    q: "Quel métal liquide trouve-t-on encore dans la majorité des thermomètres modernes ?",
+    options: ["Mercure", "Aluminium", "Cuivre", "Fer"],
+    answer: "",
+    explanation: "Les thermomètres modernes n'utilisent plus de mercure à cause de sa toxicité.",
+    kind: "halu"
+  });
+}
+
     // 3) Injecter Q4 et Q8
     const finalQuiz = injectHallus(safeQuiz, hallus);
 
