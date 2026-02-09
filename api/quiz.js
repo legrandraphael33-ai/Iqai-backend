@@ -106,16 +106,39 @@ Règle anti-répétition :
 - Varie les domaines.`
       : "";
 
-    const prompt = `Tu es un professeur exigeant de lycée français (niveau Terminale), clair et pédagogique.
+    const prompt = `Tu es un créateur de quiz de culture générale pour un public adulte cultivé (niveau "quiz de bar entre amis").
 
-Génère 10 questions QCM variées en français.
-Chaque question:
-- 4 options différentes
+Génère 10 questions QCM en français de NIVEAU INTERMÉDIAIRE :
+- Ni trop faciles (évite "Quelle est la capitale de la France ?", "Quel est le féminin d'acteur ?")
+- Ni trop difficiles (évite "Quelle est la formule de l'azote liquide ?", "Prix Nobel de physique 1987 ?")
+- Niveau cible : questions qu'une personne cultivée connaît, mais qui nécessitent réflexion
+
+DIVERSITÉ THÉMATIQUE OBLIGATOIRE (varie au maximum) :
+- Histoire (événements marquants, dates importantes)
+- Géographie (capitales moins connues, records naturels, pièges classiques)
+- Sciences (découvertes, inventeurs, phénomènes naturels)
+- Arts & Culture (auteurs classiques, œuvres majeures, mouvements artistiques)
+- Sport (règles, records, compétitions majeures)
+- Actualité/Société (événements récents importants, institutions)
+- Cinéma/Musique (films/albums cultes, réalisateurs/artistes majeurs)
+
+EXEMPLES DE BON NIVEAU :
+✅ "En quelle année est tombé le mur de Berlin ?" (1989)
+✅ "Quel est le plus grand désert du monde ?" (Antarctique - piège courant)
+✅ "Qui a écrit '1984' ?" (George Orwell)
+✅ "Combien de joueurs dans une équipe de rugby ?" (15)
+✅ "Quelle est la plus haute montagne d'Afrique ?" (Kilimandjaro)
+
+Chaque question :
+- 4 options différentes et crédibles
 - 1 seule bonne réponse
 - answer EXACTEMENT une des options
-- explication courte (1-2 phrases max)
+- explanation courte (1-2 phrases max, pédagogique)
 
 ${avoidBlock}
+
+IMPÉRATIF : Aucune question triviale type "capitale de France", "féminin d'acteur", "couleur du ciel".
+IMPÉRATIF : Varie absolument les domaines (pas 3 questions de géo d'affilée).
 
 FORMAT : retourne STRICTEMENT un objet JSON avec une clé "questions" contenant un tableau de 10 objets:
 {
@@ -128,7 +151,6 @@ FORMAT : retourne STRICTEMENT un objet JSON avec une clé "questions" contenant 
     // 1) Générer un quiz safe (ton existant) avec retry
     let safeQuiz = null;
     for (let attempt = 1; attempt <= 3; attempt++) {
-      // ✅ CORRECTIF : utiliser chat.completions.create au lieu de responses.create
       const response = await withTimeout(
         client.chat.completions.create({
           model: "gpt-4o-mini",
@@ -148,9 +170,22 @@ FORMAT : retourne STRICTEMENT un objet JSON avec une clé "questions" contenant 
       } catch {
         continue;
       }
+      
+      // ✅ VALIDATION ANTI-REDITE : rejeter si questions déjà vues
       if (isValidQuiz(parsed)) {
-        safeQuiz = parsed;
-        break;
+        const avoidLower = avoid.map(q => q.toLowerCase().trim());
+        const hasDuplicate = parsed.some(q => 
+          avoidLower.some(oldQ => 
+            oldQ.includes(q.q.toLowerCase().trim()) || 
+            q.q.toLowerCase().trim().includes(oldQ)
+          )
+        );
+        
+        if (!hasDuplicate) {
+          safeQuiz = parsed;
+          break;
+        }
+        // Si duplicate trouvé, on continue à retry
       }
     }
 
