@@ -64,6 +64,190 @@ function injectHallus(safe10, hallu2) {
   return out.slice(0, 10);
 }
 
+// ========== BANK DE THÈMES VARIÉS ==========
+const THEME_BANK = [
+  // Tables & Maths de base
+  "les tables de multiplication",
+  "les fractions et pourcentages simples",
+  "les unités de mesure courantes",
+  
+  // Français & Langue
+  "les règles d'accord de conjugaison en français",
+  "les homophones courants en français",
+  "les figures de style littéraires",
+  "l'étymologie de mots français",
+  
+  // Capitales (SANS la France)
+  "les capitales d'Europe de l'Est",
+  "les capitales d'Amérique du Sud",
+  "les capitales d'Asie",
+  "les capitales d'Afrique",
+  "les capitales d'Océanie",
+  "les capitales scandinaves",
+  
+  // Histoire
+  "les grandes batailles de l'Histoire",
+  "les révolutions du 18e et 19e siècle",
+  "les inventions de la Renaissance",
+  "la Guerre Froide",
+  "les explorateurs célèbres",
+  "l'Antiquité romaine",
+  "les pharaons égyptiens",
+  "la Seconde Guerre mondiale",
+  "les rois et reines d'Angleterre",
+  "les présidents américains marquants",
+  
+  // Géographie
+  "les plus longs fleuves du monde",
+  "les plus hauts sommets par continent",
+  "les déserts du monde",
+  "les océans et mers",
+  "les îles célèbres",
+  "les volcans actifs",
+  "les pays les plus peuplés",
+  "les fuseaux horaires",
+  
+  // Sciences
+  "le système solaire",
+  "les éléments du tableau périodique courants",
+  "les organes du corps humain",
+  "les maladies historiques",
+  "les inventions du 20e siècle",
+  "les scientifiques célèbres",
+  "la physique newtonienne",
+  "les espèces en voie de disparition",
+  "les dinosaures",
+  "la génétique de base",
+  
+  // Nature & Animaux
+  "les records du monde animal",
+  "les mammifères marins",
+  "les oiseaux migrateurs",
+  "les insectes remarquables",
+  "les arbres et forêts",
+  "les phénomènes météorologiques",
+  "les minéraux et pierres précieuses",
+  
+  // Arts & Culture
+  "les peintres impressionnistes",
+  "les sculpteurs célèbres",
+  "les mouvements artistiques du 20e siècle",
+  "les musées célèbres",
+  "l'architecture gothique",
+  "les monuments du monde",
+  "les Sept Merveilles du monde",
+  
+  // Littérature
+  "les auteurs du 19e siècle",
+  "les prix Nobel de littérature",
+  "les romans dystopiques",
+  "les pièces de Shakespeare",
+  "les contes et légendes",
+  "les poètes français",
+  "les bandes dessinées franco-belges",
+  
+  // Cinéma
+  "le cinéma des années 80",
+  "le cinéma des années 90",
+  "les réalisateurs oscarisés",
+  "les films cultes français",
+  "les franchises cinéma à succès",
+  "les acteurs et actrices légendaires",
+  "les studios d'animation",
+  
+  // Musique
+  "les compositeurs classiques",
+  "les instruments de musique",
+  "le rock des années 70",
+  "la pop des années 2000",
+  "les groupes britanniques célèbres",
+  "les festivals de musique",
+  "les genres musicaux",
+  
+  // Sport
+  "les Jeux olympiques d'été",
+  "les Jeux olympiques d'hiver",
+  "les règles du football",
+  "les règles du rugby",
+  "les règles du basketball",
+  "les records du monde en athlétisme",
+  "les champions de tennis",
+  "le Tour de France",
+  "les sports de combat",
+  "les sports extrêmes",
+  
+  // Gastronomie
+  "les fromages français",
+  "les vins et vignobles",
+  "les cuisines du monde",
+  "les épices et aromates",
+  "les fruits exotiques",
+  "les techniques de cuisson",
+  
+  // Technologie
+  "les inventeurs de l'informatique",
+  "l'histoire d'Internet",
+  "les langages de programmation",
+  "les réseaux sociaux",
+  "les jeux vidéo cultes",
+  "les consoles de jeux",
+  "l'intelligence artificielle",
+  
+  // Mythologie
+  "la mythologie grecque",
+  "la mythologie romaine",
+  "la mythologie nordique",
+  "les créatures mythologiques",
+  "les dieux égyptiens",
+  
+  // Religion & Philosophie
+  "les grandes religions du monde",
+  "les philosophes de l'Antiquité",
+  "les philosophes des Lumières",
+  "les courants philosophiques",
+  
+  // Économie & Société
+  "les monnaies du monde",
+  "les entreprises multinationales",
+  "les organisations internationales",
+  "les droits de l'homme",
+  "les prix Nobel de la paix",
+  
+  // Mode & Design
+  "les grands couturiers",
+  "les styles vestimentaires",
+  "les designers célèbres",
+  
+  // Transport
+  "l'histoire de l'automobile",
+  "l'aviation commerciale",
+  "les trains à grande vitesse",
+  "les bateaux célèbres",
+  
+  // Espace
+  "les missions spatiales",
+  "les astronautes célèbres",
+  "les satellites et sondes",
+  "les étoiles et constellations",
+  
+  // Divers
+  "les drapeaux du monde",
+  "les symboles nationaux",
+  "les codes et langages secrets",
+  "les superstitions",
+  "les records du Guinness",
+  "les phobies courantes",
+  "les couleurs et leur symbolique",
+  "les proverbes français",
+  "les signes du zodiaque"
+];
+
+// Fonction pour tirer 10 thèmes aléatoires différents
+function getRandomThemes(n = 10) {
+  const shuffled = [...THEME_BANK].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, n);
+}
+
 // timeout helper côté serveur (évite les fonctions Vercel qui traînent)
 async function withTimeout(promise, ms, label = "timeout") {
   let t;
@@ -97,48 +281,40 @@ export default async function handler(req, res) {
     }
 
     const avoidBlock = avoid.length
-      ? `Questions/thèmes récemment utilisés (à éviter absolument, même paraphrasés) :
+      ? `Questions récemment utilisées (à éviter absolument) :
 ${avoid.map((s, i) => `${i + 1}. ${s}`).join("\n")}
 
-Règle anti-répétition :
-- Ne réutilise aucun de ces items.
-- Évite aussi les "classiques" trop fréquents.
-- Varie les domaines.`
+NE JAMAIS réutiliser ces questions ou des variantes.`
       : "";
 
-    const prompt = `Tu es un créateur de quiz de culture générale pour un public adulte cultivé (niveau "quiz de bar entre amis").
+    // Tirer 10 thèmes aléatoires
+    const randomThemes = getRandomThemes(10);
 
-Génère 10 questions QCM en français de NIVEAU INTERMÉDIAIRE :
-- Ni trop faciles (évite "Quelle est la capitale de la France ?", "Quel est le féminin d'acteur ?")
-- Ni trop difficiles (évite "Quelle est la formule de l'azote liquide ?", "Prix Nobel de physique 1987 ?")
-- Niveau cible : questions qu'une personne cultivée connaît, mais qui nécessitent réflexion
+    const prompt = `Tu es un créateur de quiz de culture générale pour un public adulte cultivé.
 
-DIVERSITÉ THÉMATIQUE OBLIGATOIRE (varie au maximum) :
-- Histoire (événements marquants, dates importantes)
-- Géographie (capitales moins connues, records naturels, pièges classiques)
-- Sciences (découvertes, inventeurs, phénomènes naturels)
-- Arts & Culture (auteurs classiques, œuvres majeures, mouvements artistiques)
-- Sport (règles, records, compétitions majeures)
-- Actualité/Société (événements récents importants, institutions)
-- Cinéma/Musique (films/albums cultes, réalisateurs/artistes majeurs)
+Génère EXACTEMENT 10 questions QCM en français, une question par thème imposé ci-dessous.
 
-EXEMPLES DE BON NIVEAU :
-✅ "En quelle année est tombé le mur de Berlin ?" (1989)
-✅ "Quel est le plus grand désert du monde ?" (Antarctique - piège courant)
-✅ "Qui a écrit '1984' ?" (George Orwell)
-✅ "Combien de joueurs dans une équipe de rugby ?" (15)
-✅ "Quelle est la plus haute montagne d'Afrique ?" (Kilimandjaro)
+THÈMES IMPOSÉS (1 question par thème, dans l'ordre) :
+${randomThemes.map((theme, i) => `${i + 1}. ${theme}`).join("\n")}
 
-Chaque question :
-- 4 options différentes et crédibles
+NIVEAU DE DIFFICULTÉ :
+- Ni trop facile (évite "Quelle est la capitale de la France ?")
+- Ni trop difficile (évite "Formule chimique de l'azote liquide ?")
+- Niveau cible : culture générale solide, questions qu'une personne cultivée connaît
+
+RÈGLES STRICTES :
+- Pour CHAQUE thème, génère UNE question pertinente sur ce thème précis
+- 4 options différentes et crédibles par question
 - 1 seule bonne réponse
-- answer EXACTEMENT une des options
-- explanation courte (1-2 phrases max, pédagogique)
+- answer doit être EXACTEMENT l'une des 4 options
+- explanation courte et pédagogique (1-2 phrases max)
 
 ${avoidBlock}
 
-IMPÉRATIF : Aucune question triviale type "capitale de France", "féminin d'acteur", "couleur du ciel".
-IMPÉRATIF : Varie absolument les domaines (pas 3 questions de géo d'affilée).
+EXEMPLES de bon niveau :
+✅ "En quelle année est tombé le mur de Berlin ?" (1989)
+✅ "Quel est le plus grand désert du monde ?" (Antarctique)
+✅ "Qui a écrit '1984' ?" (George Orwell)
 
 FORMAT : retourne STRICTEMENT un objet JSON avec une clé "questions" contenant un tableau de 10 objets:
 {
@@ -148,7 +324,7 @@ FORMAT : retourne STRICTEMENT un objet JSON avec une clé "questions" contenant 
 }
 `;
 
-    // 1) Générer un quiz safe (ton existant) avec retry
+    // 1) Générer un quiz safe avec retry
     let safeQuiz = null;
     for (let attempt = 1; attempt <= 3; attempt++) {
       const response = await withTimeout(
