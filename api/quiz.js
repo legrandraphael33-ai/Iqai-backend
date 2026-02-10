@@ -431,11 +431,10 @@ FORMAT : retourne STRICTEMENT un objet JSON avec une clé "questions" contenant 
       const halluThemes = [randomThemes[3], randomThemes[7]];
       
       hallus = await withTimeout(
-        generateHalluQuestions({ 
-          n: 2, 
-          timeoutMs: 12000,
-          themes: halluThemes 
-        }),
+        generateHalluQuestions(client, { 
+  n: 2,
+  themes: halluThemes 
+}),
         13000,
         "hallu_timeout"
       );
