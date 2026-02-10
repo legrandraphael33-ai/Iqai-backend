@@ -1,0 +1,1420 @@
+{
+  "questions": [
+    {
+      "q": "Qui a peint 'Guernica' ?",
+      "category": "Arts",
+      "options": ["Picasso", "Dalí", "Miró", "Goya"],
+      "answer": "Picasso",
+      "explanation": "Pablo Picasso a peint 'Guernica' en 1937, dénonçant le bombardement de la ville basque."
+    },
+    {
+      "q": "Quelle est la capitale de la Norvège ?",
+      "category": "Géographie",
+      "options": ["Stockholm", "Oslo", "Copenhague", "Helsinki"],
+      "answer": "Oslo",
+      "explanation": "Oslo est la capitale et la plus grande ville de Norvège."
+    },
+    {
+      "q": "En quelle année l'homme a-t-il marché sur la Lune ?",
+      "category": "Histoire",
+      "options": ["1965", "1969", "1971", "1975"],
+      "answer": "1969",
+      "explanation": "Neil Armstrong et Buzz Aldrin ont marché sur la Lune le 21 juillet 1969 lors de la mission Apollo 11."
+    },
+    {
+      "q": "Combien de cordes a une guitare classique ?",
+      "category": "Musique",
+      "options": ["4", "5", "6", "7"],
+      "answer": "6",
+      "explanation": "Une guitare classique possède 6 cordes, accordées généralement en Mi, La, Ré, Sol, Si, Mi."
+    },
+    {
+      "q": "Quel océan borde l'ouest de l'Afrique ?",
+      "category": "Géographie",
+      "options": ["Océan Indien", "Océan Atlantique", "Océan Pacifique", "Océan Arctique"],
+      "answer": "Océan Atlantique",
+      "explanation": "L'océan Atlantique borde la côte ouest du continent africain."
+    },
+    {
+      "q": "Qui a peint 'Le Cri' ?",
+      "category": "Arts",
+      "options": ["Van Gogh", "Munch", "Klimt", "Monet"],
+      "answer": "Munch",
+      "explanation": "Edvard Munch, peintre norvégien, a créé 'Le Cri' en 1893."
+    },
+    {
+      "q": "Combien fait 7 × 9 ?",
+      "category": "Mathématiques",
+      "options": ["56", "63", "72", "81"],
+      "answer": "63",
+      "explanation": "7 multiplié par 9 égale 63."
+    },
+    {
+      "q": "Quelle est la monnaie du Japon ?",
+      "category": "Géographie",
+      "options": ["Yuan", "Won", "Yen", "Baht"],
+      "answer": "Yen",
+      "explanation": "Le yen est la monnaie officielle du Japon depuis 1871."
+    },
+    {
+      "q": "En quelle année est tombé le mur de Berlin ?",
+      "category": "Histoire",
+      "options": ["1987", "1989", "1991", "1993"],
+      "answer": "1989",
+      "explanation": "Le mur de Berlin est tombé le 9 novembre 1989, marquant la fin de la Guerre froide."
+    },
+    {
+      "q": "Combien de joueurs composent une équipe de rugby sur le terrain ?",
+      "category": "Sport",
+      "options": ["11", "13", "15", "17"],
+      "answer": "15",
+      "explanation": "Une équipe de rugby à XV compte 15 joueurs sur le terrain."
+    },
+    {
+      "q": "Quel gaz représente environ 78% de l'atmosphère terrestre ?",
+      "category": "Sciences",
+      "options": ["Oxygène", "Azote", "Dioxyde de carbone", "Argon"],
+      "answer": "Azote",
+      "explanation": "L'azote compose environ 78% de l'atmosphère, l'oxygène environ 21%."
+    },
+    {
+      "q": "Qui a écrit '1984' ?",
+      "category": "Littérature",
+      "options": ["Aldous Huxley", "George Orwell", "Ray Bradbury", "H.G. Wells"],
+      "answer": "George Orwell",
+      "explanation": "George Orwell a publié '1984' en 1949, un roman dystopique célèbre."
+    },
+    {
+      "q": "Quelle est la capitale de l'Argentine ?",
+      "category": "Géographie",
+      "options": ["Santiago", "Lima", "Buenos Aires", "Montevideo"],
+      "answer": "Buenos Aires",
+      "explanation": "Buenos Aires est la capitale et la plus grande ville d'Argentine."
+    },
+    {
+      "q": "Combien de côtés a un octogone ?",
+      "category": "Mathématiques",
+      "options": ["6", "7", "8", "9"],
+      "answer": "8",
+      "explanation": "Un octogone est un polygone à huit côtés."
+    },
+    {
+      "q": "Qui a peint 'Le Baiser' ?",
+      "category": "Arts",
+      "options": ["Klimt", "Monet", "Renoir", "Degas"],
+      "answer": "Klimt",
+      "explanation": "Gustav Klimt a peint 'Le Baiser' entre 1907 et 1908, œuvre emblématique de l'Art nouveau."
+    },
+    {
+      "q": "Quel pays a remporté la Coupe du Monde de football en 2018 ?",
+      "category": "Sport",
+      "options": ["Brésil", "Allemagne", "France", "Argentine"],
+      "answer": "France",
+      "explanation": "La France a remporté la Coupe du Monde 2018 en Russie, battant la Croatie 4-2 en finale."
+    },
+    {
+      "q": "Combien de continents y a-t-il sur Terre ?",
+      "category": "Géographie",
+      "options": ["5", "6", "7", "8"],
+      "answer": "7",
+      "explanation": "Il y a 7 continents : Afrique, Amérique du Nord, Amérique du Sud, Antarctique, Asie, Europe, Océanie."
+    },
+    {
+      "q": "Quel est le plus long fleuve du monde ?",
+      "category": "Géographie",
+      "options": ["Amazone", "Nil", "Yangtsé", "Mississippi"],
+      "answer": "Nil",
+      "explanation": "Le Nil, avec environ 6 650 km, est généralement considéré comme le plus long fleuve."
+    },
+    {
+      "q": "Qui a composé 'Les Quatre Saisons' ?",
+      "category": "Musique",
+      "options": ["Bach", "Mozart", "Vivaldi", "Beethoven"],
+      "answer": "Vivaldi",
+      "explanation": "Antonio Vivaldi a composé 'Les Quatre Saisons' vers 1723."
+    },
+    {
+      "q": "Quelle planète est surnommée la 'planète rouge' ?",
+      "category": "Sciences",
+      "options": ["Vénus", "Mars", "Jupiter", "Saturne"],
+      "answer": "Mars",
+      "explanation": "Mars est appelée la planète rouge en raison de l'oxyde de fer présent sur sa surface."
+    },
+    {
+      "q": "Combien fait 12 × 8 ?",
+      "category": "Mathématiques",
+      "options": ["84", "92", "96", "104"],
+      "answer": "96",
+      "explanation": "12 multiplié par 8 égale 96."
+    },
+    {
+      "q": "Quelle est la capitale de l'Australie ?",
+      "category": "Géographie",
+      "options": ["Sydney", "Melbourne", "Canberra", "Brisbane"],
+      "answer": "Canberra",
+      "explanation": "Canberra est la capitale de l'Australie, bien que Sydney soit la ville la plus peuplée."
+    },
+    {
+      "q": "Qui a réalisé le film 'E.T. l'extra-terrestre' ?",
+      "category": "Cinéma",
+      "options": ["George Lucas", "Steven Spielberg", "James Cameron", "Ridley Scott"],
+      "answer": "Steven Spielberg",
+      "explanation": "Steven Spielberg a réalisé 'E.T.' en 1982, devenu un classique du cinéma."
+    },
+    {
+      "q": "Combien de touches noires y a-t-il sur un piano standard ?",
+      "category": "Musique",
+      "options": ["32", "36", "40", "44"],
+      "answer": "36",
+      "explanation": "Un piano standard de 88 touches possède 36 touches noires et 52 touches blanches."
+    },
+    {
+      "q": "Quel animal est le symbole de la Nouvelle-Zélande ?",
+      "category": "Géographie",
+      "options": ["Kangourou", "Koala", "Kiwi", "Wombat"],
+      "answer": "Kiwi",
+      "explanation": "Le kiwi, un oiseau incapable de voler, est l'emblème national de la Nouvelle-Zélande."
+    },
+    {
+      "q": "Quelle est la capitale du Vietnam ?",
+      "category": "Géographie",
+      "options": ["Hanoï", "Hô Chi Minh-Ville", "Da Nang", "Hué"],
+      "answer": "Hanoï",
+      "explanation": "Hanoï est la capitale du Vietnam depuis 1976."
+    },
+    {
+      "q": "Qui a écrit 'Le Petit Prince' ?",
+      "category": "Littérature",
+      "options": ["Jules Verne", "Antoine de Saint-Exupéry", "Albert Camus", "Marcel Pagnol"],
+      "answer": "Antoine de Saint-Exupéry",
+      "explanation": "Antoine de Saint-Exupéry a publié 'Le Petit Prince' en 1943."
+    },
+    {
+      "q": "Combien de valves a une trompette standard ?",
+      "category": "Musique",
+      "options": ["2", "3", "4", "5"],
+      "answer": "3",
+      "explanation": "Une trompette standard possède 3 valves (ou pistons)."
+    },
+    {
+      "q": "Quel est le plus haut sommet d'Afrique ?",
+      "category": "Géographie",
+      "options": ["Mont Kenya", "Kilimandjaro", "Mont Elgon", "Ras Dashan"],
+      "answer": "Kilimandjaro",
+      "explanation": "Le Kilimandjaro en Tanzanie culmine à 5 895 mètres."
+    },
+    {
+      "q": "Quelle mer sépare l'Europe de l'Afrique ?",
+      "category": "Géographie",
+      "options": ["Mer Noire", "Mer Rouge", "Mer Méditerranée", "Mer Caspienne"],
+      "answer": "Mer Méditerranée",
+      "explanation": "La mer Méditerranée sépare l'Europe au nord de l'Afrique au sud."
+    },
+    {
+      "q": "Combien fait 15 × 6 ?",
+      "category": "Mathématiques",
+      "options": ["80", "85", "90", "95"],
+      "answer": "90",
+      "explanation": "15 multiplié par 6 égale 90."
+    },
+    {
+      "q": "Qui a peint 'La Jeune Fille à la perle' ?",
+      "category": "Arts",
+      "options": ["Rembrandt", "Vermeer", "Rubens", "Bosch"],
+      "answer": "Vermeer",
+      "explanation": "Johannes Vermeer a peint ce tableau vers 1665, souvent surnommé 'la Joconde du Nord'."
+    },
+    {
+      "q": "Quel pays a inventé le tango ?",
+      "category": "Musique",
+      "options": ["Espagne", "Mexique", "Argentine", "Brésil"],
+      "answer": "Argentine",
+      "explanation": "Le tango est né à la fin du XIXe siècle à Buenos Aires, en Argentine."
+    },
+    {
+      "q": "Quelle est la capitale de la Suède ?",
+      "category": "Géographie",
+      "options": ["Oslo", "Stockholm", "Copenhague", "Helsinki"],
+      "answer": "Stockholm",
+      "explanation": "Stockholm est la capitale de la Suède depuis le XIIIe siècle."
+    },
+    {
+      "q": "Combien de pattes a une araignée ?",
+      "category": "Sciences",
+      "options": ["6", "8", "10", "12"],
+      "answer": "8",
+      "explanation": "Les araignées sont des arachnides et possèdent 8 pattes."
+    },
+    {
+      "q": "Qui a écrit 'Roméo et Juliette' ?",
+      "category": "Littérature",
+      "options": ["Molière", "Shakespeare", "Racine", "Corneille"],
+      "answer": "Shakespeare",
+      "explanation": "William Shakespeare a écrit 'Roméo et Juliette' vers 1595."
+    },
+    {
+      "q": "Quelle est la plus petite planète du système solaire ?",
+      "category": "Sciences",
+      "options": ["Mars", "Vénus", "Mercure", "Pluton"],
+      "answer": "Mercure",
+      "explanation": "Mercure est la plus petite planète et la plus proche du Soleil."
+    },
+    {
+      "q": "Combien de joueurs composent une équipe de basketball sur le terrain ?",
+      "category": "Sport",
+      "options": ["4", "5", "6", "7"],
+      "answer": "5",
+      "explanation": "Une équipe de basketball compte 5 joueurs sur le terrain."
+    },
+    {
+      "q": "Quel est le plus grand désert du monde ?",
+      "category": "Géographie",
+      "options": ["Sahara", "Gobi", "Antarctique", "Arabie"],
+      "answer": "Antarctique",
+      "explanation": "L'Antarctique est le plus grand désert du monde (désert froid) avec 14 millions de km²."
+    },
+    {
+      "q": "Qui a peint 'La Nuit étoilée' ?",
+      "category": "Arts",
+      "options": ["Monet", "Van Gogh", "Cézanne", "Gauguin"],
+      "answer": "Van Gogh",
+      "explanation": "Vincent van Gogh a peint 'La Nuit étoilée' en 1889 depuis l'asile de Saint-Rémy-de-Provence."
+    },
+    {
+      "q": "Quelle est la capitale du Canada ?",
+      "category": "Géographie",
+      "options": ["Toronto", "Vancouver", "Ottawa", "Montréal"],
+      "answer": "Ottawa",
+      "explanation": "Ottawa est la capitale fédérale du Canada depuis 1857."
+    },
+    {
+      "q": "Combien fait 9 × 11 ?",
+      "category": "Mathématiques",
+      "options": ["88", "99", "108", "121"],
+      "answer": "99",
+      "explanation": "9 multiplié par 11 égale 99."
+    },
+    {
+      "q": "Quel organe du corps humain produit l'insuline ?",
+      "category": "Sciences",
+      "options": ["Le foie", "Le pancréas", "L'estomac", "Les reins"],
+      "answer": "Le pancréas",
+      "explanation": "Le pancréas produit l'insuline, hormone régulant le taux de glucose dans le sang."
+    },
+    {
+      "q": "Qui a réalisé le film 'Pulp Fiction' ?",
+      "category": "Cinéma",
+      "options": ["Martin Scorsese", "Quentin Tarantino", "Coen Brothers", "David Lynch"],
+      "answer": "Quentin Tarantino",
+      "explanation": "Quentin Tarantino a réalisé 'Pulp Fiction' en 1994, Palme d'or à Cannes."
+    },
+    {
+      "q": "Quelle est la monnaie de la Suisse ?",
+      "category": "Géographie",
+      "options": ["Euro", "Franc suisse", "Couronne", "Livre"],
+      "answer": "Franc suisse",
+      "explanation": "Le franc suisse (CHF) est la monnaie officielle de la Suisse."
+    },
+    {
+      "q": "Combien de cordes a un violon ?",
+      "category": "Musique",
+      "options": ["3", "4", "5", "6"],
+      "answer": "4",
+      "explanation": "Un violon possède 4 cordes accordées en Sol, Ré, La, Mi."
+    },
+    {
+      "q": "Quelle ville est surnommée la 'Ville éternelle' ?",
+      "category": "Géographie",
+      "options": ["Athènes", "Rome", "Jérusalem", "Le Caire"],
+      "answer": "Rome",
+      "explanation": "Rome est appelée la Ville éternelle en raison de son histoire millénaire."
+    },
+    {
+      "q": "Qui a écrit 'Le Seigneur des Anneaux' ?",
+      "category": "Littérature",
+      "options": ["C.S. Lewis", "J.R.R. Tolkien", "George R.R. Martin", "Terry Pratchett"],
+      "answer": "J.R.R. Tolkien",
+      "explanation": "J.R.R. Tolkien a publié 'Le Seigneur des Anneaux' entre 1954 et 1955."
+    },
+    {
+      "q": "Combien de dents a un adulte humain en moyenne ?",
+      "category": "Sciences",
+      "options": ["28", "30", "32", "34"],
+      "answer": "32",
+      "explanation": "Un adulte possède 32 dents incluant les dents de sagesse."
+    },
+    {
+      "q": "Quelle est la capitale de l'Égypte ?",
+      "category": "Géographie",
+      "options": ["Alexandrie", "Le Caire", "Louxor", "Assouan"],
+      "answer": "Le Caire",
+      "explanation": "Le Caire est la capitale et la plus grande ville d'Égypte."
+    },
+    {
+      "q": "Quel pays a organisé les Jeux Olympiques d'été en 2016 ?",
+      "category": "Sport",
+      "options": ["Chine", "Royaume-Uni", "Brésil", "Japon"],
+      "answer": "Brésil",
+      "explanation": "Rio de Janeiro au Brésil a accueilli les JO d'été en 2016."
+    },
+    {
+      "q": "Combien fait 8 × 12 ?",
+      "category": "Mathématiques",
+      "options": ["84", "92", "96", "104"],
+      "answer": "96",
+      "explanation": "8 multiplié par 12 égale 96."
+    },
+    {
+      "q": "Qui a composé la 9e Symphonie ?",
+      "category": "Musique",
+      "options": ["Mozart", "Beethoven", "Bach", "Haydn"],
+      "answer": "Beethoven",
+      "explanation": "Ludwig van Beethoven a composé sa 9e Symphonie en 1824, incluant l'Hymne à la joie."
+    },
+    {
+      "q": "Quelle est la capitale de la Thaïlande ?",
+      "category": "Géographie",
+      "options": ["Hanoï", "Bangkok", "Manille", "Singapour"],
+      "answer": "Bangkok",
+      "explanation": "Bangkok est la capitale de la Thaïlande depuis 1782."
+    },
+    {
+      "q": "Combien de points vaut un panier à trois points au basketball ?",
+      "category": "Sport",
+      "options": ["1", "2", "3", "4"],
+      "answer": "3",
+      "explanation": "Un panier marqué derrière la ligne des trois points vaut 3 points."
+    },
+    {
+      "q": "Quel est le plus grand océan du monde ?",
+      "category": "Géographie",
+      "options": ["Atlantique", "Indien", "Pacifique", "Arctique"],
+      "answer": "Pacifique",
+      "explanation": "L'océan Pacifique couvre environ 165 millions de km², soit près de la moitié des océans."
+    },
+    {
+      "q": "Qui a écrit 'Les Raisins de la colère' ?",
+      "category": "Littérature",
+      "options": ["Ernest Hemingway", "John Steinbeck", "F. Scott Fitzgerald", "William Faulkner"],
+      "answer": "John Steinbeck",
+      "explanation": "John Steinbeck a publié 'Les Raisins de la colère' en 1939, Prix Pulitzer 1940."
+    },
+    {
+      "q": "Quelle est la monnaie du Royaume-Uni ?",
+      "category": "Géographie",
+      "options": ["Euro", "Dollar", "Livre sterling", "Couronne"],
+      "answer": "Livre sterling",
+      "explanation": "La livre sterling (GBP) est la monnaie officielle du Royaume-Uni."
+    },
+    {
+      "q": "Combien de fuseaux horaires traversent la Russie ?",
+      "category": "Géographie",
+      "options": ["7", "9", "11", "13"],
+      "answer": "11",
+      "explanation": "La Russie s'étend sur 11 fuseaux horaires, de UTC+2 à UTC+12."
+    },
+    {
+      "q": "Qui a peint 'Les Tournesols' ?",
+      "category": "Arts",
+      "options": ["Monet", "Van Gogh", "Renoir", "Cézanne"],
+      "answer": "Van Gogh",
+      "explanation": "Vincent van Gogh a peint plusieurs versions des 'Tournesols' entre 1888 et 1889."
+    },
+    {
+      "q": "Quelle est la capitale de la Pologne ?",
+      "category": "Géographie",
+      "options": ["Cracovie", "Varsovie", "Gdansk", "Poznan"],
+      "answer": "Varsovie",
+      "explanation": "Varsovie est la capitale de la Pologne depuis 1596."
+    },
+    {
+      "q": "Combien de joueurs composent une équipe de volley-ball sur le terrain ?",
+      "category": "Sport",
+      "options": ["4", "5", "6", "7"],
+      "answer": "6",
+      "explanation": "Une équipe de volley-ball compte 6 joueurs sur le terrain."
+    },
+    {
+      "q": "Quel élément chimique a pour symbole 'Au' ?",
+      "category": "Sciences",
+      "options": ["Argent", "Or", "Aluminium", "Arsenic"],
+      "answer": "Or",
+      "explanation": "Au est le symbole de l'or, du latin 'aurum'."
+    },
+    {
+      "q": "Qui a réalisé le film 'Les Dents de la mer' ?",
+      "category": "Cinéma",
+      "options": ["Francis Ford Coppola", "Steven Spielberg", "George Lucas", "Martin Scorsese"],
+      "answer": "Steven Spielberg",
+      "explanation": "Steven Spielberg a réalisé 'Les Dents de la mer' en 1975."
+    },
+    {
+      "q": "Quelle est la capitale de l'Autriche ?",
+      "category": "Géographie",
+      "options": ["Vienne", "Zurich", "Prague", "Budapest"],
+      "answer": "Vienne",
+      "explanation": "Vienne est la capitale de l'Autriche, célèbre pour sa musique classique."
+    },
+    {
+      "q": "Combien fait 13 × 7 ?",
+      "category": "Mathématiques",
+      "options": ["81", "91", "101", "111"],
+      "answer": "91",
+      "explanation": "13 multiplié par 7 égale 91."
+    },
+    {
+      "q": "Quel écrivain a créé le personnage de Sherlock Holmes ?",
+      "category": "Littérature",
+      "options": ["Agatha Christie", "Arthur Conan Doyle", "Edgar Allan Poe", "G.K. Chesterton"],
+      "answer": "Arthur Conan Doyle",
+      "explanation": "Sir Arthur Conan Doyle a créé Sherlock Holmes en 1887."
+    },
+    {
+      "q": "Quelle est la capitale de la Grèce ?",
+      "category": "Géographie",
+      "options": ["Thessalonique", "Athènes", "Patras", "Héraklion"],
+      "answer": "Athènes",
+      "explanation": "Athènes est la capitale de la Grèce et l'une des plus anciennes villes du monde."
+    },
+    {
+      "q": "Combien de vertèbres compte la colonne vertébrale humaine ?",
+      "category": "Sciences",
+      "options": ["26", "28", "30", "33"],
+      "answer": "33",
+      "explanation": "La colonne vertébrale compte 33 vertèbres (incluant les vertèbres sacrées et coccygiennes)."
+    },
+    {
+      "q": "Qui a peint 'La Persistance de la mémoire' (les montres molles) ?",
+      "category": "Arts",
+      "options": ["Picasso", "Dalí", "Miró", "Magritte"],
+      "answer": "Dalí",
+      "explanation": "Salvador Dalí a peint ce tableau surréaliste en 1931."
+    },
+    {
+      "q": "Quelle est la monnaie de l'Inde ?",
+      "category": "Géographie",
+      "options": ["Rupee", "Roupie", "Ringgit", "Baht"],
+      "answer": "Roupie",
+      "explanation": "La roupie indienne (INR) est la monnaie officielle de l'Inde."
+    },
+    {
+      "q": "Combien de grands lacs y a-t-il en Amérique du Nord ?",
+      "category": "Géographie",
+      "options": ["3", "4", "5", "6"],
+      "answer": "5",
+      "explanation": "Les cinq Grands Lacs sont : Supérieur, Michigan, Huron, Érié et Ontario."
+    },
+    {
+      "q": "Qui a écrit 'Orgueil et Préjugés' ?",
+      "category": "Littérature",
+      "options": ["Charlotte Brontë", "Jane Austen", "Emily Brontë", "George Eliot"],
+      "answer": "Jane Austen",
+      "explanation": "Jane Austen a publié 'Orgueil et Préjugés' en 1813."
+    },
+    {
+      "q": "Quelle est la capitale de la Finlande ?",
+      "category": "Géographie",
+      "options": ["Oslo", "Stockholm", "Helsinki", "Reykjavik"],
+      "answer": "Helsinki",
+      "explanation": "Helsinki est la capitale de la Finlande depuis 1812."
+    },
+    {
+      "q": "Combien fait 11 × 9 ?",
+      "category": "Mathématiques",
+      "options": ["88", "99", "108", "121"],
+      "answer": "99",
+      "explanation": "11 multiplié par 9 égale 99."
+    },
+    {
+      "q": "Quel sport pratique-t-on à Roland-Garros ?",
+      "category": "Sport",
+      "options": ["Golf", "Tennis", "Football", "Rugby"],
+      "answer": "Tennis",
+      "explanation": "Roland-Garros accueille le tournoi du Grand Chelem de tennis sur terre battue."
+    },
+    {
+      "q": "Qui a réalisé le film 'Le Parrain' ?",
+      "category": "Cinéma",
+      "options": ["Martin Scorsese", "Francis Ford Coppola", "Brian De Palma", "Michael Cimino"],
+      "answer": "Francis Ford Coppola",
+      "explanation": "Francis Ford Coppola a réalisé 'Le Parrain' en 1972."
+    },
+    {
+      "q": "Quelle est la capitale du Danemark ?",
+      "category": "Géographie",
+      "options": ["Stockholm", "Oslo", "Copenhague", "Helsinki"],
+      "answer": "Copenhague",
+      "explanation": "Copenhague est la capitale et la plus grande ville du Danemark."
+    },
+    {
+      "q": "Combien de touches blanches y a-t-il sur un piano standard ?",
+      "category": "Musique",
+      "options": ["48", "50", "52", "54"],
+      "answer": "52",
+      "explanation": "Un piano standard de 88 touches possède 52 touches blanches et 36 touches noires."
+    },
+    {
+      "q": "Qui a écrit 'Moby Dick' ?",
+      "category": "Littérature",
+      "options": ["Mark Twain", "Herman Melville", "Jack London", "Ernest Hemingway"],
+      "answer": "Herman Melville",
+      "explanation": "Herman Melville a publié 'Moby Dick' en 1851."
+    },
+    {
+      "q": "Quelle est la monnaie de la Chine ?",
+      "category": "Géographie",
+      "options": ["Yen", "Won", "Yuan", "Ringgit"],
+      "answer": "Yuan",
+      "explanation": "Le yuan (ou renminbi) est la monnaie officielle de la République populaire de Chine."
+    },
+    {
+      "q": "Combien de secondes y a-t-il dans une heure ?",
+      "category": "Mathématiques",
+      "options": ["1800", "2400", "3000", "3600"],
+      "answer": "3600",
+      "explanation": "Une heure contient 60 minutes × 60 secondes = 3600 secondes."
+    },
+    {
+      "q": "Qui a peint 'Le Déjeuner sur l'herbe' ?",
+      "category": "Arts",
+      "options": ["Monet", "Manet", "Renoir", "Degas"],
+      "answer": "Manet",
+      "explanation": "Édouard Manet a peint 'Le Déjeuner sur l'herbe' en 1863, œuvre qui fit scandale."
+    },
+    {
+      "q": "Quelle est la capitale de la Turquie ?",
+      "category": "Géographie",
+      "options": ["Istanbul", "Ankara", "Izmir", "Antalya"],
+      "answer": "Ankara",
+      "explanation": "Ankara est la capitale de la Turquie depuis 1923, bien qu'Istanbul soit la plus grande ville."
+    },
+    {
+      "q": "Combien de manches y a-t-il dans un match de tennis masculin en Grand Chelem ?",
+      "category": "Sport",
+      "options": ["3", "4", "5", "7"],
+      "answer": "5",
+      "explanation": "En Grand Chelem, les matchs masculins se jouent au meilleur des 5 manches."
+    },
+    {
+      "q": "Quel inventeur est associé à l'ampoule électrique ?",
+      "category": "Sciences",
+      "options": ["Nikola Tesla", "Thomas Edison", "Alexander Graham Bell", "Benjamin Franklin"],
+      "answer": "Thomas Edison",
+      "explanation": "Thomas Edison a perfectionné et commercialisé l'ampoule électrique à incandescence en 1879."
+    },
+    {
+      "q": "Quelle est la capitale de l'Irlande ?",
+      "category": "Géographie",
+      "options": ["Belfast", "Dublin", "Cork", "Galway"],
+      "answer": "Dublin",
+      "explanation": "Dublin est la capitale de la République d'Irlande depuis 1922."
+    },
+    {
+      "q": "Combien fait 14 × 6 ?",
+      "category": "Mathématiques",
+      "options": ["72", "78", "84", "90"],
+      "answer": "84",
+      "explanation": "14 multiplié par 6 égale 84."
+    },
+    {
+      "q": "Qui a écrit 'Cent ans de solitude' ?",
+      "category": "Littérature",
+      "options": ["Jorge Luis Borges", "Gabriel García Márquez", "Pablo Neruda", "Mario Vargas Llosa"],
+      "answer": "Gabriel García Márquez",
+      "explanation": "Gabriel García Márquez a publié 'Cent ans de solitude' en 1967, chef-d'œuvre du réalisme magique."
+    },
+    {
+      "q": "Quelle est la plus grande île du monde ?",
+      "category": "Géographie",
+      "options": ["Nouvelle-Guinée", "Bornéo", "Madagascar", "Groenland"],
+      "answer": "Groenland",
+      "explanation": "Le Groenland est la plus grande île avec 2,16 millions de km²."
+    },
+    {
+      "q": "Combien de joueurs y a-t-il dans une équipe de water-polo ?",
+      "category": "Sport",
+      "options": ["5", "6", "7", "8"],
+      "answer": "7",
+      "explanation": "Une équipe de water-polo compte 7 joueurs dans l'eau (dont 1 gardien)."
+    },
+    {
+      "q": "Qui a réalisé le film 'Psychose' ?",
+      "category": "Cinéma",
+      "options": ["Stanley Kubrick", "Alfred Hitchcock", "Orson Welles", "Billy Wilder"],
+      "answer": "Alfred Hitchcock",
+      "explanation": "Alfred Hitchcock a réalisé 'Psychose' en 1960, considéré comme un chef-d'œuvre du suspense."
+    },
+    {
+      "q": "Quelle est la capitale du Portugal ?",
+      "category": "Géographie",
+      "options": ["Madrid", "Lisbonne", "Porto", "Séville"],
+      "answer": "Lisbonne",
+      "explanation": "Lisbonne est la capitale du Portugal, l'une des plus anciennes villes d'Europe."
+    },
+    {
+      "q": "Combien d'os compte le corps humain adulte ?",
+      "category": "Sciences",
+      "options": ["186", "196", "206", "216"],
+      "answer": "206",
+      "explanation": "Le squelette adulte compte 206 os."
+    },
+    {
+      "q": "Comment s'écrit l'expression pour présenter ses excuses ?",
+      "category": "Français",
+      "options": ["Au temps pour moi", "Autant pour moi", "Au tant pour moi", "Aux temps pour moi"],
+      "answer": "Au temps pour moi",
+      "explanation": "L'expression correcte est 'au temps pour moi', issue du vocabulaire militaire."
+    },
+    {
+      "q": "Quelle est l'orthographe correcte ?",
+      "category": "Français",
+      "options": ["Cauchemar", "Cauchemard", "Cauchmar", "Cochemard"],
+      "answer": "Cauchemar",
+      "explanation": "On écrit 'cauchemar' sans 'd' à la fin."
+    },
+    {
+      "q": "Comment s'écrit le mot signifiant 'cadence musicale' ?",
+      "category": "Français",
+      "options": ["Rythme", "Rythym", "Rhytme", "Rytme"],
+      "answer": "Rythme",
+      "explanation": "Le mot 'rythme' s'écrit avec 'th' et 'y'."
+    },
+    {
+      "q": "Accord du participe passé : 'Les enfants que j'ai ... jouer' ?",
+      "category": "Français",
+      "options": ["entendu", "entendus", "entendue", "entendues"],
+      "answer": "entendu",
+      "explanation": "Avec un infinitif qui suit, le participe reste invariable."
+    },
+    {
+      "q": "On écrit : 'Ils se sont ... des questions' ?",
+      "category": "Français",
+      "options": ["posé", "posés", "posée", "posées"],
+      "answer": "posé",
+      "explanation": "Le COD 'des questions' est placé après, le participe reste invariable."
+    },
+    {
+      "q": "Quel est le pluriel de 'un œil' ?",
+      "category": "Français",
+      "options": ["des œils", "des yeux", "des œuils", "des œux"],
+      "answer": "des yeux",
+      "explanation": "Le pluriel irrégulier de 'œil' est 'yeux'."
+    },
+    {
+      "q": "Quelle figure de style : 'Ses yeux étaient deux étoiles' ?",
+      "category": "Français",
+      "options": ["Comparaison", "Métaphore", "Hyperbole", "Personnification"],
+      "answer": "Métaphore",
+      "explanation": "Une métaphore compare sans outil de comparaison explicite."
+    },
+    {
+      "q": "On écrit en un mot ou deux : 'Quoi que je fasse' ?",
+      "category": "Français",
+      "options": ["Quoique (un mot)", "Quoi que (deux mots)", "Quoi qu'(élision)", "Les trois sont corrects"],
+      "answer": "Quoi que (deux mots)",
+      "explanation": "'Quoi que' en deux mots signifie 'quelle que soit la chose que'."
+    },
+    {
+      "q": "Quel est le pluriel de 'un pneu' ?",
+      "category": "Français",
+      "options": ["des pneus", "des pneux", "des pneaus", "des pnus"],
+      "answer": "des pneus",
+      "explanation": "Le pluriel de 'pneu' est 'pneus' avec un 's'."
+    },
+    {
+      "q": "Comment s'écrit le mot signifiant 'ce jour même' ?",
+      "category": "Français",
+      "options": ["Aujoudh'ui", "Aujourd'hui", "Aujourdhui", "Aujourdui"],
+      "answer": "Aujourd'hui",
+      "explanation": "On écrit 'aujourd'hui' avec une apostrophe."
+    },
+    {
+      "q": "Quelle figure de style : 'La vie est un long fleuve tranquille' ?",
+      "category": "Français",
+      "options": ["Comparaison", "Métaphore", "Oxymore", "Euphémisme"],
+      "answer": "Métaphore",
+      "explanation": "Cette phrase compare la vie à un fleuve sans outil de comparaison (métaphore)."
+    },
+    {
+      "q": "Orthographe correcte ?",
+      "category": "Français",
+      "options": ["Dilemme", "Dilème", "Dilemne", "Dilêmme"],
+      "answer": "Dilemme",
+      "explanation": "On écrit 'dilemme' avec deux 'm'."
+    },
+    {
+      "q": "Accord : 'La plupart des gens ... contents' ?",
+      "category": "Français",
+      "options": ["est", "sont", "était", "étaient"],
+      "answer": "sont",
+      "explanation": "'La plupart de' s'accorde avec le complément pluriel : 'sont contents'."
+    },
+    {
+      "q": "Orthographe correcte ?",
+      "category": "Français",
+      "options": ["Déveloper", "Développer", "Devellopper", "Déveloper"],
+      "answer": "Développer",
+      "explanation": "On écrit 'développer' avec deux 'p'."
+    },
+    {
+      "q": "Quel est le pluriel de 'un bail' ?",
+      "category": "Français",
+      "options": ["des bails", "des baux", "des bailes", "des baulx"],
+      "answer": "des baux",
+      "explanation": "Le pluriel irrégulier de 'bail' est 'baux'."
+    },
+    {
+      "q": "Orthographe correcte ?",
+      "category": "Français",
+      "options": ["Chuchoter", "Chuchotter", "Chucotter", "Chucoter"],
+      "answer": "Chuchoter",
+      "explanation": "On écrit 'chuchoter' avec un seul 't'."
+    },
+    {
+      "q": "Figure de style : 'Un silence assourdissant' ?",
+      "category": "Français",
+      "options": ["Hyperbole", "Oxymore", "Antithèse", "Litote"],
+      "answer": "Oxymore",
+      "explanation": "Un oxymore associe deux termes contradictoires (silence/assourdissant)."
+    },
+    {
+      "q": "Orthographe correcte de cet adverbe ?",
+      "category": "Français",
+      "options": ["Apparemment", "Apparament", "Apparamment", "Aparemment"],
+      "answer": "Apparemment",
+      "explanation": "On écrit 'apparemment' avec deux 'm' et 'emment'."
+    },
+    {
+      "q": "Accord : 'Ci-joint ... les factures' ?",
+      "category": "Français",
+      "options": ["ci-joint", "ci-jointes", "ci-joints", "ci-jointe"],
+      "answer": "ci-jointes",
+      "explanation": "Placé après le nom, 'ci-joint' s'accorde : 'ci-jointes'."
+    },
+    {
+      "q": "Quel est le féminin de 'ambassadeur' ?",
+      "category": "Français",
+      "options": ["ambassadrice", "ambassadeuse", "ambassadeure", "ambassadresse"],
+      "answer": "ambassadrice",
+      "explanation": "Le féminin d'ambassadeur est 'ambassadrice'."
+    },
+    {
+      "q": "Orthographe correcte ?",
+      "category": "Français",
+      "options": ["Acceuil", "Accueil", "Acueil", "Acceuille"],
+      "answer": "Accueil",
+      "explanation": "On écrit 'accueil' avec deux 'c' et pas de 'e' après."
+    },
+    {
+      "q": "Figure de style : 'Il fait un temps de chien' ?",
+      "category": "Français",
+      "options": ["Expression idiomatique", "Métaphore", "Hyperbole", "Comparaison"],
+      "answer": "Expression idiomatique",
+      "explanation": "C'est une expression figée dont le sens est conventionnel."
+    },
+    {
+      "q": "Orthographe correcte ?",
+      "category": "Français",
+      "options": ["Imbécile", "Imbécille", "Imbécil", "Imbéscile"],
+      "answer": "Imbécile",
+      "explanation": "On écrit 'imbécile' avec un seul 'l'."
+    },
+    {
+      "q": "Pluriel de 'Monsieur' ?",
+      "category": "Français",
+      "options": ["Monsieurs", "Messieurs", "Monssieurs", "Monsieus"],
+      "answer": "Messieurs",
+      "explanation": "Le pluriel irrégulier de 'Monsieur' est 'Messieurs'."
+    },
+    {
+      "q": "Orthographe correcte ?",
+      "category": "Français",
+      "options": ["Entretien", "Entreti
+
+en", "Entretient", "Entretin"],
+      "answer": "Entretien",
+      "explanation": "On écrit 'entretien' sans 't' final."
+    },
+    {
+      "q": "Figure de style : 'Je meurs de faim' ?",
+      "category": "Français",
+      "options": ["Hyperbole", "Litote", "Métaphore", "Comparaison"],
+      "answer": "Hyperbole",
+      "explanation": "L'hyperbole est une exagération pour renforcer l'idée."
+    },
+    {
+      "q": "Accord : 'Une espèce de phénomène ... apparu' ?",
+      "category": "Français",
+      "options": ["est", "sont", "a", "ont"],
+      "answer": "est",
+      "explanation": "Avec 'espèce de', l'accord se fait avec 'espèce' (féminin singulier) : 'est apparu'."
+    },
+    {
+      "q": "Orthographe correcte ?",
+      "category": "Français",
+      "options": ["Perséverance", "Persévérance", "Perséverrance", "Persévérrance"],
+      "answer": "Persévérance",
+      "explanation": "On écrit 'persévérance' avec un accent aigu et un seul 'r'."
+    },
+    {
+      "q": "Pluriel de 'un festival' ?",
+      "category": "Français",
+      "options": ["des festivals", "des festivaux", "des festivales", "des festivalles"],
+      "answer": "des festivals",
+      "explanation": "Le pluriel de 'festival' est 'festivals' avec un 's'."
+    },
+    {
+      "q": "Orthographe correcte de l'adjectif ?",
+      "category": "Français",
+      "options": ["Abbérant", "Aberrant", "Abérant", "Abérrant"],
+      "answer": "Aberrant",
+      "explanation": "On écrit 'aberrant' avec un seul 'b' et deux 'r'."
+    },
+    {
+      "q": "Figure de style : 'Ce n'est pas mauvais' (pour dire que c'est bon) ?",
+      "category": "Français",
+      "options": ["Litote", "Euphémisme", "Antiphrase", "Périphrase"],
+      "answer": "Litote",
+      "explanation": "La litote consiste à dire moins pour suggérer plus."
+    },
+    {
+      "q": "Orthographe correcte ?",
+      "category": "Français",
+      "options": ["Professionel", "Professionnel", "Profesionnel", "Proffessionnel"],
+      "answer": "Professionnel",
+      "explanation": "On écrit 'professionnel' avec deux 's' et deux 'n'."
+    },
+    {
+      "q": "Accord : 'Vingt euros ... suffisants' ?",
+      "category": "Français",
+      "options": ["est", "sont", "était", "étaient"],
+      "answer": "sont",
+      "explanation": "'Vingt euros' est un pluriel, donc 'sont suffisants'."
+    },
+    {
+      "q": "Orthographe correcte ?",
+      "category": "Français",
+      "options": ["Aggraver", "Agraver", "Aggrâver", "Aggrâvé"],
+      "answer": "Aggraver",
+      "explanation": "On écrit 'aggraver' avec deux 'g'."
+    },
+    {
+      "q": "Figure de style : 'Les mortels' (pour parler des humains) ?",
+      "category": "Français",
+      "options": ["Périphrase", "Métonymie", "Synecdoque", "Antonomase"],
+      "answer": "Périphrase",
+      "explanation": "Une périphrase désigne une chose par une expression imagée."
+    },
+    {
+      "q": "Orthographe correcte ?",
+      "category": "Français",
+      "options": ["Connection", "Connexion", "Conection", "Conexion"],
+      "answer": "Connexion",
+      "explanation": "On écrit 'connexion' avec deux 'n' et un 'x'."
+    },
+    {
+      "q": "Pluriel de 'un travail' ?",
+      "category": "Français",
+      "options": ["des travails", "des travaux", "des travailles", "des travauxs"],
+      "answer": "des travaux",
+      "explanation": "Le pluriel irrégulier de 'travail' est 'travaux'."
+    },
+    {
+      "q": "Orthographe correcte ?",
+      "category": "Français",
+      "options": ["Occurrence", "Occurence", "Ocurrence", "Occurance"],
+      "answer": "Occurrence",
+      "explanation": "On écrit 'occurrence' avec deux 'c' et deux 'r'."
+    },
+    {
+      "q": "Accord : 'C'est moi qui ... raison' ?",
+      "category": "Français",
+      "options": ["a", "ai", "as", "ont"],
+      "answer": "ai",
+      "explanation": "Le verbe s'accorde avec l'antécédent de 'qui' : 'c'est moi qui ai'."
+    },
+    {
+      "q": "Qui a découvert la pénicilline ?",
+      "category": "Sciences",
+      "options": ["Louis Pasteur", "Alexander Fleming", "Marie Curie", "Robert Koch"],
+      "answer": "Alexander Fleming",
+      "explanation": "Alexander Fleming a découvert la pénicilline en 1928."
+    },
+    {
+      "q": "Quelle est la capitale de la Belgique ?",
+      "category": "Géographie",
+      "options": ["Amsterdam", "Bruxelles", "Luxembourg", "Anvers"],
+      "answer": "Bruxelles",
+      "explanation": "Bruxelles est la capitale de la Belgique et siège de l'Union européenne."
+    },
+    {
+      "q": "Qui a écrit 'Les Trois Mousquetaires' ?",
+      "category": "Littérature",
+      "options": ["Alexandre Dumas", "Victor Hugo", "Honoré de Balzac", "Émile Zola"],
+      "answer": "Alexandre Dumas",
+      "explanation": "Alexandre Dumas a publié 'Les Trois Mousquetaires' en 1844."
+    },
+    {
+      "q": "Combien fait 16 × 5 ?",
+      "category": "Mathématiques",
+      "options": ["70", "75", "80", "85"],
+      "answer": "80",
+      "explanation": "16 multiplié par 5 égale 80."
+    },
+    {
+      "q": "Quel réalisateur a créé la saga 'Star Wars' ?",
+      "category": "Cinéma",
+      "options": ["Steven Spielberg", "George Lucas", "James Cameron", "Ridley Scott"],
+      "answer": "George Lucas",
+      "explanation": "George Lucas a créé Star Wars et réalisé la trilogie originale."
+    },
+    {
+      "q": "Quelle est la capitale du Mexique ?",
+      "category": "Géographie",
+      "options": ["Guadalajara", "Monterrey", "Mexico", "Cancún"],
+      "answer": "Mexico",
+      "explanation": "Mexico (ou Mexico City) est la capitale du Mexique."
+    },
+    {
+      "q": "Qui a composé 'La Flûte enchantée' ?",
+      "category": "Musique",
+      "options": ["Bach", "Mozart", "Beethoven", "Haydn"],
+      "answer": "Mozart",
+      "explanation": "Wolfgang Amadeus Mozart a composé 'La Flûte enchantée' en 1791."
+    },
+    {
+      "q": "Quel est le plus grand mammifère du monde ?",
+      "category": "Sciences",
+      "options": ["Éléphant d'Afrique", "Baleine bleue", "Cachalot", "Rorqual commun"],
+      "answer": "Baleine bleue",
+      "explanation": "La baleine bleue peut mesurer jusqu'à 30 mètres et peser 170 tonnes."
+    },
+    {
+      "q": "Quelle est la capitale de la Croatie ?",
+      "category": "Géographie",
+      "options": ["Belgrade", "Zagreb", "Ljubljana", "Sarajevo"],
+      "answer": "Zagreb",
+      "explanation": "Zagreb est la capitale de la Croatie."
+    },
+    {
+      "q": "Combien de joueurs dans une équipe de handball ?",
+      "category": "Sport",
+      "options": ["5", "6", "7", "8"],
+      "answer": "7",
+      "explanation": "Une équipe de handball compte 7 joueurs sur le terrain (dont 1 gardien)."
+    },
+    {
+      "q": "Qui a peint 'Les Nymphéas' ?",
+      "category": "Arts",
+      "options": ["Monet", "Manet", "Renoir", "Cézanne"],
+      "answer": "Monet",
+      "explanation": "Claude Monet a créé une série de 'Nymphéas' à Giverny."
+    },
+    {
+      "q": "Quelle est la monnaie du Brésil ?",
+      "category": "Géographie",
+      "options": ["Peso", "Real", "Dollar", "Bolivar"],
+      "answer": "Real",
+      "explanation": "Le real brésilien (BRL) est la monnaie officielle du Brésil."
+    },
+    {
+      "q": "Combien fait 17 × 4 ?",
+      "category": "Mathématiques",
+      "options": ["64", "68", "72", "76"],
+      "answer": "68",
+      "explanation": "17 multiplié par 4 égale 68."
+    },
+    {
+      "q": "Qui a écrit 'L'Étranger' ?",
+      "category": "Littérature",
+      "options": ["Jean-Paul Sartre", "Albert Camus", "André Gide", "André Malraux"],
+      "answer": "Albert Camus",
+      "explanation": "Albert Camus a publié 'L'Étranger' en 1942."
+    },
+    {
+      "q": "Quel est le plus haut sommet d'Europe ?",
+      "category": "Géographie",
+      "options": ["Mont Blanc", "Mont Elbrouz", "Matterhorn", "Mont Rose"],
+      "answer": "Mont Elbrouz",
+      "explanation": "Le mont Elbrouz dans le Caucase culmine à 5 642 mètres."
+    },
+    {
+      "q": "Qui a réalisé le film 'Titanic' ?",
+      "category": "Cinéma",
+      "options": ["Steven Spielberg", "James Cameron", "Peter Jackson", "Christopher Nolan"],
+      "answer": "James Cameron",
+      "explanation": "James Cameron a réalisé 'Titanic' en 1997."
+    },
+    {
+      "q": "Combien de pattes a une fourmi ?",
+      "category": "Sciences",
+      "options": ["4", "6", "8", "10"],
+      "answer": "6",
+      "explanation": "Les fourmis, comme tous les insectes, possèdent 6 pattes."
+    },
+    {
+      "q": "Quelle est la capitale de la Hongrie ?",
+      "category": "Géographie",
+      "options": ["Prague", "Budapest", "Bucarest", "Sofia"],
+      "answer": "Budapest",
+      "explanation": "Budapest est la capitale de la Hongrie."
+    },
+    {
+      "q": "Qui a peint 'La Liberté guidant le peuple' ?",
+      "category": "Arts",
+      "options": ["Delacroix", "David", "Géricault", "Ingres"],
+      "answer": "Delacroix",
+      "explanation": "Eugène Delacroix a peint cette œuvre en 1830."
+    },
+    {
+      "q": "Combien de joueurs dans une équipe de baseball ?",
+      "category": "Sport",
+      "options": ["7", "8", "9", "10"],
+      "answer": "9",
+      "explanation": "Une équipe de baseball compte 9 joueurs sur le terrain."
+    },
+    {
+      "q": "Quel élément chimique a pour symbole 'Fe' ?",
+      "category": "Sciences",
+      "options": ["Fluor", "Fer", "Fermium", "Francium"],
+      "answer": "Fer",
+      "explanation": "Fe est le symbole du fer, du latin 'ferrum'."
+    },
+    {
+      "q": "Quelle est la capitale de la République tchèque ?",
+      "category": "Géographie",
+      "options": ["Bratislava", "Prague", "Varsovie", "Budapest"],
+      "answer": "Prague",
+      "explanation": "Prague est la capitale de la République tchèque."
+    },
+    {
+      "q": "Qui a écrit 'Germinal' ?",
+      "category": "Littérature",
+      "options": ["Émile Zola", "Victor Hugo", "Gustave Flaubert", "Honoré de Balzac"],
+      "answer": "Émile Zola",
+      "explanation": "Émile Zola a publié 'Germinal' en 1885."
+    },
+    {
+      "q": "Combien fait 18 × 3 ?",
+      "category": "Mathématiques",
+      "options": ["48", "52", "54", "56"],
+      "answer": "54",
+      "explanation": "18 multiplié par 3 égale 54."
+    },
+    {
+      "q": "Quel artiste a chanté 'Imagine' ?",
+      "category": "Musique",
+      "options": ["Paul McCartney", "John Lennon", "Bob Dylan", "David Bowie"],
+      "answer": "John Lennon",
+      "explanation": "John Lennon a sorti 'Imagine' en 1971."
+    },
+    {
+      "q": "Quelle est la capitale de la Suisse ?",
+      "category": "Géographie",
+      "options": ["Zurich", "Genève", "Berne", "Lausanne"],
+      "answer": "Berne",
+      "explanation": "Berne est la capitale fédérale de la Suisse."
+    },
+    {
+      "q": "Qui a réalisé le film 'Inception' ?",
+      "category": "Cinéma",
+      "options": ["Christopher Nolan", "Denis Villeneuve", "David Fincher", "Darren Aronofsky"],
+      "answer": "Christopher Nolan",
+      "explanation": "Christopher Nolan a réalisé 'Inception' en 2010."
+    },
+    {
+      "q": "Quel est le plus petit os du corps humain ?",
+      "category": "Sciences",
+      "options": ["L'étrier", "L'enclume", "Le marteau", "La phalange"],
+      "answer": "L'étrier",
+      "explanation": "L'étrier, situé dans l'oreille moyenne, mesure environ 3 mm."
+    },
+    {
+      "q": "Quelle est la capitale de l'Islande ?",
+      "category": "Géographie",
+      "options": ["Oslo", "Reykjavik", "Helsinki", "Nuuk"],
+      "answer": "Reykjavik",
+      "explanation": "Reykjavik est la capitale de l'Islande."
+    },
+    {
+      "q": "Qui a écrit 'Le Comte de Monte-Cristo' ?",
+      "category": "Littérature",
+      "options": ["Alexandre Dumas", "Victor Hugo", "Jules Verne", "Honoré de Balzac"],
+      "answer": "Alexandre Dumas",
+      "explanation": "Alexandre Dumas a publié 'Le Comte de Monte-Cristo' en 1844-1846."
+    },
+    {
+      "q": "Combien fait 19 × 5 ?",
+      "category": "Mathématiques",
+      "options": ["85", "90", "95", "100"],
+      "answer": "95",
+      "explanation": "19 multiplié par 5 égale 95."
+    },
+    {
+      "q": "Quel instrument joue Miles Davis ?",
+      "category": "Musique",
+      "options": ["Saxophone", "Trompette", "Piano", "Contrebasse"],
+      "answer": "Trompette",
+      "explanation": "Miles Davis était un trompettiste de jazz légendaire."
+    },
+    {
+      "q": "Quelle est la capitale de la Slovaquie ?",
+      "category": "Géographie",
+      "options": ["Prague", "Bratislava", "Ljubljana", "Zagreb"],
+      "answer": "Bratislava",
+      "explanation": "Bratislava est la capitale de la Slovaquie."
+    },
+    {
+      "q": "Qui a peint 'Les Demoiselles d'Avignon' ?",
+      "category": "Arts",
+      "options": ["Picasso", "Matisse", "Braque", "Léger"],
+      "answer": "Picasso",
+      "explanation": "Pablo Picasso a peint cette œuvre cubiste en 1907."
+    },
+    {
+      "q": "Combien de sets faut-il gagner pour remporter un match de volley ?",
+      "category": "Sport",
+      "options": ["2", "3", "4", "5"],
+      "answer": "3",
+      "explanation": "Il faut gagner 3 sets (au meilleur des 5) pour remporter un match de volley."
+    },
+    {
+      "q": "Quel gaz les plantes absorbent-elles lors de la photosynthèse ?",
+      "category": "Sciences",
+      "options": ["Oxygène", "Azote", "Dioxyde de carbone", "Hydrogène"],
+      "answer": "Dioxyde de carbone",
+      "explanation": "Les plantes absorbent le CO2 et libèrent de l'oxygène lors de la photosynthèse."
+    },
+    {
+      "q": "Quelle est la capitale de la Roumanie ?",
+      "category": "Géographie",
+      "options": ["Sofia", "Budapest", "Bucarest", "Belgrade"],
+      "answer": "Bucarest",
+      "explanation": "Bucarest est la capitale de la Roumanie."
+    },
+    {
+      "q": "Qui a réalisé le film 'Blade Runner' ?",
+      "category": "Cinéma",
+      "options": ["Stanley Kubrick", "Ridley Scott", "James Cameron", "Paul Verhoeven"],
+      "answer": "Ridley Scott",
+      "explanation": "Ridley Scott a réalisé 'Blade Runner' en 1982."
+    },
+    {
+      "q": "Combien fait 20 × 6 ?",
+      "category": "Mathématiques",
+      "options": ["100", "110", "120", "130"],
+      "answer": "120",
+      "explanation": "20 multiplié par 6 égale 120."
+    },
+    {
+      "q": "Qui a écrit 'Madame Bovary' ?",
+      "category": "Littérature",
+      "options": ["Émile Zola", "Gustave Flaubert", "Guy de Maupassant", "Honoré de Balzac"],
+      "answer": "Gustave Flaubert",
+      "explanation": "Gustave Flaubert a publié 'Madame Bovary' en 1857."
+    },
+    {
+      "q": "Quelle est la capitale de la Bulgarie ?",
+      "category": "Géographie",
+      "options": ["Bucarest", "Belgrade", "Sofia", "Tirana"],
+      "answer": "Sofia",
+      "explanation": "Sofia est la capitale de la Bulgarie."
+    },
+    {
+      "q": "Combien de touches a un clavier de piano standard ?",
+      "category": "Musique",
+      "options": ["76", "82", "88", "92"],
+      "answer": "88",
+      "explanation": "Un piano standard possède 88 touches."
+    },
+    {
+      "q": "Quel est l'animal le plus rapide au monde ?",
+      "category": "Sciences",
+      "options": ["Guépard", "Faucon pèlerin", "Antilope", "Espadon"],
+      "answer": "Faucon pèlerin",
+      "explanation": "Le faucon pèlerin peut atteindre 390 km/h en piqué."
+    },
+    {
+      "q": "Quelle est la capitale de la Serbie ?",
+      "category": "Géographie",
+      "options": ["Zagreb", "Belgrade", "Sarajevo", "Skopje"],
+      "answer": "Belgrade",
+      "explanation": "Belgrade est la capitale de la Serbie."
+    },
+    {
+      "q": "Qui a peint 'Le Radeau de la Méduse' ?",
+      "category": "Arts",
+      "options": ["Delacroix", "Géricault", "David", "Ingres"],
+      "answer": "Géricault",
+      "explanation": "Théodore Géricault a peint cette œuvre en 1818-1819."
+    },
+    {
+      "q": "Combien de minutes y a-t-il dans un match de football ?",
+      "category": "Sport",
+      "options": ["80", "90", "100", "120"],
+      "answer": "90",
+      "explanation": "Un match de football dure 90 minutes (2 mi-temps de 45 minutes)."
+    },
+    {
+      "q": "Quel élément chimique a pour symbole 'Ag' ?",
+      "category": "Sciences",
+      "options": ["Aluminium", "Argent", "Argon", "Or"],
+      "answer": "Argent",
+      "explanation": "Ag est le symbole de l'argent, du latin 'argentum'."
+    },
+    {
+      "q": "Quelle est la capitale de l'Ukraine ?",
+      "category": "Géographie",
+      "options": ["Kiev", "Odessa", "Kharkiv", "Lviv"],
+      "answer": "Kiev",
+      "explanation": "Kiev est la capitale de l'Ukraine."
+    },
+    {
+      "q": "Qui a écrit 'Les Fleurs du mal' ?",
+      "category": "Littérature",
+      "options": ["Arthur Rimbaud", "Charles Baudelaire", "Paul Verlaine", "Stéphane Mallarmé"],
+      "answer": "Charles Baudelaire",
+      "explanation": "Charles Baudelaire a publié 'Les Fleurs du mal' en 1857."
+    },
+    {
+      "q": "Combien fait 25 × 4 ?",
+      "category": "Mathématiques",
+      "options": ["90", "95", "100", "105"],
+      "answer": "100",
+      "explanation": "25 multiplié par 4 égale 100."
+    },
+    {
+      "q": "Qui a composé 'Le Lac des cygnes' ?",
+      "category": "Musique",
+      "options": ["Tchaïkovski", "Prokofiev", "Stravinsky", "Rachmaninov"],
+      "answer": "Tchaïkovski",
+      "explanation": "Piotr Ilitch Tchaïkovski a composé ce ballet en 1875-1876."
+    },
+    {
+      "q": "Quelle est la capitale des Pays-Bas ?",
+      "category": "Géographie",
+      "options": ["Rotterdam", "La Haye", "Amsterdam", "Utrecht"],
+      "answer": "Amsterdam",
+      "explanation": "Amsterdam est la capitale des Pays-Bas, bien que le gouvernement siège à La Haye."
+    },
+    {
+      "q": "Qui a réalisé le film 'Citizen Kane' ?",
+      "category": "Cinéma",
+      "options": ["John Ford", "Orson Welles", "Billy Wilder", "Frank Capra"],
+      "answer": "Orson Welles",
+      "explanation": "Orson Welles a réalisé et joué dans 'Citizen Kane' en 1941."
+    },
+    {
+      "q": "Combien de chromosomes possède un être humain ?",
+      "category": "Sciences",
+      "options": ["42", "44", "46", "48"],
+      "answer": "46",
+      "explanation": "Les êtres humains possèdent 46 chromosomes (23 paires)."
+    },
+    {
+      "q": "Quelle est la capitale de l'Estonie ?",
+      "category": "Géographie",
+      "options": ["Riga", "Tallinn", "Vilnius", "Helsinki"],
+      "answer": "Tallinn",
+      "explanation": "Tallinn est la capitale de l'Estonie."
+    },
+    {
+      "q": "Qui a peint 'Le Jardin des délices' ?",
+      "category": "Arts",
+      "options": ["Bosch", "Bruegel", "Van Eyck", "Memling"],
+      "answer": "Bosch",
+      "explanation": "Jérôme Bosch a peint ce triptyque entre 1490 et 1510."
+    },
+    {
+      "q": "Combien de périodes y a-t-il dans un match de hockey sur glace ?",
+      "category": "Sport",
+      "options": ["2", "3", "4", "5"],
+      "answer": "3",
+      "explanation": "Un match de hockey sur glace se joue en 3 périodes de 20 minutes."
+    },
+    {
+      "q": "Quelle vitamine est produite par la peau lors de l'exposition au soleil ?",
+      "category": "Sciences",
+      "options": ["Vitamine A", "Vitamine C", "Vitamine D", "Vitamine E"],
+      "answer": "Vitamine D",
+      "explanation": "La peau synthétise la vitamine D grâce aux rayons UV du soleil."
+    },
+    {
+      "q": "Quelle est la capitale de la Lettonie ?",
+      "category": "Géographie",
+      "options": ["Tallinn", "Riga", "Vilnius", "Minsk"],
+      "answer": "Riga",
+      "explanation": "Riga est la capitale de la Lettonie."
+    },
+    {
+      "q": "Qui a écrit 'L'Odyssée' ?",
+      "category": "Littérature",
+      "options": ["Homère", "Virgile", "Ovide", "Hésiode"],
+      "answer": "Homère",
+      "explanation": "Homère est l'auteur présumé de 'L'Odyssée', épopée grecque antique."
+    },
+    {
+      "q": "Combien fait 30 × 3 ?",
+      "category": "Mathématiques",
+      "options": ["60", "70", "80", "90"],
+      "answer": "90",
+      "explanation": "30 multiplié par 3 égale 90."
+    },
+    {
+      "q": "Quel groupe a chanté 'Bohemian Rhapsody' ?",
+      "category": "Musique",
+      "options": ["The Beatles", "Queen", "Led Zeppelin", "Pink Floyd"],
+      "answer": "Queen",
+      "explanation": "Queen a sorti 'Bohemian Rhapsody' en 1975."
+    },
+    {
+      "q": "Quelle est la capitale de la Lituanie ?",
+      "category": "Géographie",
+      "options": ["Riga", "Tallinn", "Vilnius", "Varsovie"],
+      "answer": "Vilnius",
+      "explanation": "Vilnius est la capitale de la Lituanie."
+    },
+    {
+      "q": "Qui a réalisé le film '2001 : L'Odyssée de l'espace' ?",
+      "category": "Cinéma",
+      "options": ["Stanley Kubrick", "Steven Spielberg", "George Lucas", "Ridley Scott"],
+      "answer": "Stanley Kubrick",
+      "explanation": "Stanley Kubrick a réalisé ce film de science-fiction en 1968."
+    },
+    {
+      "q": "Combien de cœurs a une pieuvre ?",
+      "category": "Sciences",
+      "options": ["1", "2", "3", "4"],
+      "answer": "3",
+      "explanation": "Une pieuvre possède 3 cœurs : un principal et deux branchiaux."
+    },
+    {
+      "q": "Quelle est la capitale de la Slovénie ?",
+      "category": "Géographie",
+      "options": ["Zagreb", "Ljubljana", "Bratislava", "Sarajevo"],
+      "answer": "Ljubljana",
+      "explanation": "Ljubljana est la capitale de la Slovénie."
+    },
+    {
+      "q": "Qui a peint 'La Grande Vague de Kanagawa' ?",
+      "category": "Arts",
+      "options": ["Hokusai", "Hiroshige", "Utamaro", "Kuniyoshi"],
+      "answer": "Hokusai",
+      "explanation": "Katsushika Hokusai a créé cette célèbre estampe vers 1830-1833."
+    },
+    {
+      "q": "Combien de trous y a-t-il sur un parcours de golf standard ?",
+      "category": "Sport",
+      "options": ["9", "12", "18", "24"],
+      "answer": "18",
+      "explanation": "Un parcours de golf standard comporte 18 trous."
+    },
+    {
+      "q": "Quel est le plus grand organe du corps humain ?",
+      "category": "Sciences",
+      "options": ["Le foie", "La peau", "Le cerveau", "Les poumons"],
+      "answer": "La peau",
+      "explanation": "La peau est le plus grand organe, couvrant environ 2 m² chez un adulte."
+    }
+  ]
+}
