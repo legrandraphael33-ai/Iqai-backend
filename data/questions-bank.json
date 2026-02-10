@@ -827,14 +827,12 @@
       "explanation": "Le pluriel irrégulier de 'Monsieur' est 'Messieurs'."
     },
     {
-      "q": "Orthographe correcte ?",
-      "category": "Français",
-      "options": ["Entretien", "Entreti
-
-en", "Entretient", "Entretin"],
-      "answer": "Entretien",
-      "explanation": "On écrit 'entretien' sans 't' final."
-    },
+  "q": "Orthographe correcte ?",
+  "category": "Français",
+  "options": ["Entretien", "Entretiens", "Entretient", "Entretin"],
+  "answer": "Entretien",
+  "explanation": "On écrit 'entretien' sans 't' final."
+},
     {
       "q": "Figure de style : 'Je meurs de faim' ?",
       "category": "Français",
