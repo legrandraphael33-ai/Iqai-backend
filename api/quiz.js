@@ -6,13 +6,13 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Charger la bank de questions
 const questionsPath = path.join(__dirname, '../data/questions-bank.json');
 const questionsData = JSON.parse(fs.readFileSync(questionsPath, 'utf-8'));
 const QUESTIONS_BANK = questionsData.questions;
 
 function normalizeQuestion(q) {
   return {
+    id: q.id || String(q.q).substring(0, 20), // On ajoute un ID pour le suivi
     q: String(q.q ?? ""),
     options: Array.isArray(q.options) ? q.options.map(String).slice(0, 4) : [],
     answer: String(q.answer ?? ""),
@@ -21,19 +21,23 @@ function normalizeQuestion(q) {
   };
 }
 
-function getRandomPositions() {
-  // Tirer 2 positions aléatoires différentes entre 0 et 9
-  const pos1 = Math.floor(Math.random() * 10);
-  let pos2 = Math.floor(Math.random() * 10);
-  while (pos2 === pos1) {
-    pos2 = Math.floor(Math.random() * 10);
+// Mélange de Fisher-Yates pour un vrai hasard
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
-  return [pos1, pos2].sort((a, b) => a - b);
+  return array;
 }
 
-function getRandomQuestions(n = 8) {
-  // Tirer 8 questions aléatoires avec max 2 par catégorie
-  const shuffled = [...QUESTIONS_BANK].sort(() => Math.random() - 0.5);
+// MODIFICATION : On accepte une liste d'IDs à exclure (les questions des jours passés)
+function getRandomQuestions(n = 8, excludeIds = []) {
+  const filtered = QUESTIONS_BANK.filter(q => !excludeIds.includes(q.id || String(q.q).substring(0, 20)));
+  
+  // Si on a trop filtré et qu'il n'y a plus assez de questions, on reprend tout
+  const pool = filtered.length >= n ? filtered : QUESTIONS_BANK;
+  
+  const shuffled = shuffle([...pool]);
   const categoryCount = {};
   const selected = [];
   
@@ -41,102 +45,81 @@ function getRandomQuestions(n = 8) {
     const cat = q.category || "Culture générale";
     if (!categoryCount[cat]) categoryCount[cat] = 0;
     
-    // Max 2 questions par catégorie
     if (categoryCount[cat] < 2) {
       selected.push(normalizeQuestion(q));
       categoryCount[cat]++;
-      
       if (selected.length === n) break;
     }
   }
-  
   return selected;
+}
+
+function getRandomPositions() {
+  const pos1 = Math.floor(Math.random() * 10);
+  let pos2 = Math.floor(Math.random() * 10);
+  while (pos2 === pos1) pos2 = Math.floor(Math.random() * 10);
+  return [pos1, pos2].sort((a, b) => a - b);
 }
 
 function injectHallus(safe8, hallu2, positions) {
   const s = safe8.map(q => ({ ...q, kind: "safe" }));
-  const h = hallu2.slice(0, 2).map(q => ({ ...normalizeQuestion(q), kind: "halu" }));
-  
-  // Fallback si pas assez d'hallus : compléter avec des questions safe
-  if (h.length < 2) {
-    const allSafe = [...s, ...s].slice(0, 10).map(q => ({ ...q, kind: "safe" }));
-    return allSafe;
-  }
-  
+  const backupHallus = [
+    { q: "En quelle année Mbappé a-t-il gagné la LDC avec le PSG ?", options: ["2020", "2021", "2022", "2023"], answer: "2020", explanation: "L'événement n'a jamais eu lieu : Mbappé n'a jamais gagné la C1 avec le PSG.", category: "Sport" },
+    { q: "Quel est le nom du 4ème film de la trilogie 'Le Seigneur des Anneaux' ?", options: ["Le Retour du Dragon", "L'Ombre du Passé", "La Quête Finale", "Le Destin d'Aragorn"], answer: "La Quête Finale", explanation: "C'est une trilogie : il n'existe que 3 films originaux.", category: "Cinéma" }
+  ];
+
+  let h = [...hallu2];
+  while (h.length < 2) { h.push(backupHallus[h.length]); }
+
   const result = [];
-  let safeIndex = 0;
-  let halluIndex = 0;
-  
+  let safeIdx = 0;
+  let halluIdx = 0;
+
   for (let i = 0; i < 10; i++) {
-    if (positions.includes(i) && halluIndex < 2) {
-      result.push(h[halluIndex]);
-      halluIndex++;
-    } else if (safeIndex < 8) {
-      result.push(s[safeIndex]);
-      safeIndex++;
+    if (positions.includes(i) && halluIdx < 2) {
+      result.push({ ...normalizeQuestion(h[halluIdx]), kind: "halu" });
+      halluIdx++;
+    } else {
+      result.push({ ...s[safeIdx], kind: "safe" });
+      safeIdx++;
     }
   }
-  
-  return result.slice(0, 10);
-}
-
-async function withTimeout(promise, ms, label = "timeout") {
-  let t;
-  const timeout = new Promise((_, reject) => {
-    t = setTimeout(() => reject(new Error(label)), ms);
-  });
-  try {
-    return await Promise.race([promise, timeout]);
-  } finally {
-    clearTimeout(t);
-  }
+  return result;
 }
 
 export default async function handler(req, res) {
-  // CORS
+  // CORS...
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   if (req.method === "OPTIONS") return res.status(200).end();
 
   try {
-    // 1) Tirer 8 questions safe de la bank
-    const safeQuestions = getRandomQuestions(8);
-    
-    // 2) Tirer 2 positions aléatoires pour les hallus
+    // RECUPERATION DES IDS DEJA JOUÉS (envoyés par le front-end)
+    const { playedIds } = req.body || {}; 
+    const exclude = Array.isArray(playedIds) ? playedIds : [];
+
+    const safeQuestions = getRandomQuestions(8, exclude);
     const halluPositions = getRandomPositions();
-    
-    // 3) Générer 2 hallus (thèmes basés sur les positions)
-    const halluThemes = halluPositions.map(pos => 
-      safeQuestions[Math.min(pos, 7)]?.category || "culture générale"
-    );
-    
+    const halluThemes = halluPositions.map(pos => safeQuestions[Math.min(pos, 7)]?.category || "culture générale");
+
     let hallus = [];
     try {
-      hallus = await withTimeout(
-        generateHalluQuestions({ 
-          n: 2, 
-          timeoutMs: 18000,
-          themes: halluThemes 
-        }),
-        19000,
-        "hallu_timeout"
-      );
+      // On réduit un peu le timeout pour être plus réactif
+      const hPromise = generateHalluQuestions({ n: 2, themes: halluThemes });
+      hallus = await Promise.race([
+        hPromise,
+        new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 12000))
+      ]);
     } catch (err) {
-      console.error("Hallu generation failed:", err);
-      hallus = [];
+      console.error("Hallu error:", err.message);
     }
-    
-    // 4) Injecter les hallus aux positions aléatoires
+
     const finalQuiz = injectHallus(safeQuestions, hallus, halluPositions);
-    
     return res.status(200).json(finalQuiz);
-    
+
   } catch (e) {
-    console.error("Quiz generation error:", e);
-    return res.status(500).json({ 
-      error: "Server error", 
-      details: String(e?.message || e) 
-    });
+    console.error("Global Error:", e);
+    return res.status(500).json({ error: "Server error" });
   }
 }
