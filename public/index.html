@@ -1128,77 +1128,84 @@ function advanceQuestion(){
 
   // Exposer la fonction globalement pour l'appeler après le quiz
   window.showNotifPopup = showNotifPopup;
-  // ==========================================
-//      FONCTIONS POUR LE CLASSEMENT (RANKING)
 // ==========================================
+  // FONCTIONS POUR LE CLASSEMENT (RANKING)
+  // ==========================================
 
-// 1. Charger et afficher le Top 3
-async function loadLeaderboard() {
-    const list = document.getElementById('leaderboardList');
-    if (!list) return;
+  // 1. Charger et afficher le Top 3
+  async function loadLeaderboard() {
+      const list = document.getElementById('leaderboardList');
+      if (!list) return;
 
-    try {
-        const res = await fetch('/api/leaderboard');
-        const top3 = await res.json();
+      try {
+          const res = await fetch('/api/leaderboard');
+          const top3 = await res.json();
 
-        if (!top3 || top3.length === 0) {
-            list.innerHTML = "<p style='font-size:0.9em; color:#888; font-style:italic;'>Personne n'a encore bravé l'IA aujourd'hui. Sois le premier !</p>";
-        } else {
-            list.innerHTML = top3.map((p, i) => `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding: 10px 0; border-bottom: 1px solid #eee;">
-                    <span style="font-size: 1.05em;">
-                        ${i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'} 
-                        <strong>${p.pseudo}</strong>
-                    </span>
-                    <span style="background: #263238; color: white; padding: 3px 10px; border-radius: 6px; font-weight: bold; font-family: sans-serif;">
-                        ${p.score} pts
-                    </span>
-                </div>
-            `).join('');
-        }
-    } catch (err) {
-        console.error("Erreur ranking:", err);
-        list.innerHTML = "<p style='color:#a8164a; font-size:0.9em;'>Le classement est temporairement indisponible.</p>";
-    }
-}
+          if (!top3 || top3.length === 0) {
+              list.innerHTML = "<p style='font-size:0.9em; color:#888; font-style:italic;'>Personne n'a encore bravé l'IA aujourd'hui. Sois le premier !</p>";
+          } else {
+              list.innerHTML = top3.map((p, i) => `
+                  <div style="display:flex; justify-content:space-between; align-items:center; padding: 10px 0; border-bottom: 1px solid #eee;">
+                      <span style="font-size: 1.05em;">
+                          ${i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'} 
+                          <strong>${p.pseudo}</strong>
+                      </span>
+                      <span style="background: #263238; color: white; padding: 3px 10px; border-radius: 6px; font-weight: bold; font-family: sans-serif;">
+                          ${p.score} pts
+                      </span>
+                  </div>
+              `).join('');
+          }
+      } catch (err) {
+          console.error("Erreur ranking:", err);
+          list.innerHTML = "<p style='color:#a8164a; font-size:0.9em;'>Le classement est temporairement indisponible.</p>";
+      }
+  }
 
-// 2. Envoyer le score du joueur
-async function submitScore() {
-    const pseudoInput = document.getElementById('playerPseudo');
-    const pseudo = pseudoInput.value.trim();
-    
-    if (!pseudo) {
-        alert("Hé ! Il nous faut un petit nom pour le podium !");
-        return;
-    }
+  // 2. Envoyer le score du joueur
+  async function submitScore() {
+      const pseudoInput = document.getElementById('playerPseudo');
+      const pseudo = pseudoInput.value.trim();
+      
+      if (!pseudo) {
+          alert("Hé ! Il nous faut un petit nom pour le podium !");
+          return;
+      }
 
-    if (pseudo.length < 2) {
-        alert("Ton pseudo est un peu court, non ? (2 caractères min)");
-        return;
-    }
+      if (pseudo.length < 2) {
+          alert("Ton pseudo est un peu court, non ? (2 caractères min)");
+          return;
+      }
 
-    // On récupère le score total calculé dans showResult
-    const finalScore = score + vigilance;
+      // On récupère le score total calculé dans showResult
+      const finalScore = score + vigilance;
 
-    try {
-        const response = await fetch('/api/leaderboard', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ pseudo: pseudo, score: finalScore }) 
-        });
+      try {
+          const response = await fetch('/api/leaderboard', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ pseudo: pseudo, score: finalScore }) 
+          });
 
-        if (response.ok) {
-            // Si c'est bon, on cache la zone de saisie et on rafraîchit le podium
-            document.getElementById('pseudoInputArea').style.display = 'none';
-            await loadLeaderboard();
-        } else {
-            alert("Petit souci technique lors de l'envoi du score.");
-        }
-    } catch (err) {
-        console.error(err);
-        alert("Impossible de joindre le serveur pour enregistrer ton score.");
-    }
-}
+          if (response.ok) {
+              // Si c'est bon, on cache la zone de saisie et on rafraîchit le podium
+              document.getElementById('pseudoInputArea').style.display = 'none';
+              await loadLeaderboard();
+          } else {
+              alert("Petit souci technique lors de l'envoi du score.");
+          }
+      } catch (err) {
+          console.error(err);
+          alert("Impossible de joindre le serveur pour enregistrer ton score.");
+      }
+  }
+
+  // On attache la fonction à l'objet window pour être sûr que le onclick="submitScore()" du HTML la trouve
+  window.submitScore = submitScore;
+  // Cette ligne relance l'animation du titre au chargement de la page
+  window.onload = () => {
+      animateTitle({ letterDelayMs: 140, initialDelayMs: 80 });
+  };
 </script>
 </body>
 </html>
