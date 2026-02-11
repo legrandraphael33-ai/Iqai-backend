@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IQAI Test - I Quit AI</title>
+<link rel="icon" href="data:,">
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- OneSignal Push Notifications -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "dc73bf96-dbcf-4498-ab4d-5639c66b16ea",
+    });
+  });
+</script>
+
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --title-font:'Press Start 2P', monospace;
+    --body-font:'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+  body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    background: linear-gradient(135deg,#f0c79e,#e3a56b);
+    padding:20px;
+    font-family: var(--body-font);
+  }
+
+  h1{
+    font-family: var(--title-font);
+    font-size:2.25em;
+    margin-bottom:8px;
+    text-align:center;
+    line-height:1.15;
+    letter-spacing:0.5px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.18);
+    white-space: nowrap;
+  }
+  h1 span{display:inline-block;}
+
+  .title-sep{
+    margin:0 10px;
+    opacity:0;
+    transform:translateY(-1px);
+    color: rgba(255,255,255,0.92);
+  }
+  .title-sep.cursor-on{
+    opacity:0.92;
+    animation: caretBlink 1.7s steps(1,end) infinite;
+  }
+  @keyframes caretBlink{
+    0%,49%{opacity:0.92;}
+    50%,100%{opacity:0;}
+  }
+
+  p.subtitle{
+    text-align:center;
+    margin-bottom:24px;
+    font-size:1.45em;
+    font-weight:800;
+    color:#ffffff;
+    text-shadow:0 3px 12px rgba(0,0,0,0.28);
+    letter-spacing:0.2px;
+  }
+
+  .container{
+    max-width:560px;width:100%;
+    background:#ffffff;color:#333;
+    border-radius:18px;
+    padding:26px;
+    box-shadow:0 10px 28px rgba(0,0,0,0.18);
+  }
+
+  .question{
+    margin-bottom:14px;
+    font-weight:800;
+    font-size:1.05em;
+    line-height:1.35;
+  }
+
+  .options button{
+    margin:6px 0;
+    width:100%;
+    padding:12px 14px 12px 44px;
+    border:none;
+    border-radius:12px;
+    background:#ff8f00;
+    color:#fff;
+    cursor:pointer;
+    font-weight:800;
+    transition:0.2s;
+    position:relative;
+    text-align:left;
+    font-family:var(--body-font);
+    font-size:1em;
+  }
+  .options button:hover{background:#f57c00;}
+
+  .options button.selected{
+    background:#263238 !important;
+    outline:3px solid rgba(255,143,0,0.55);
+    box-shadow:0 8px 18px rgba(0,0,0,0.15);
+    transform:translateY(1px);
+  }
+  .options button::before{
+    content:"";
+    position:absolute;left:12px;top:50%;
+    transform:translateY(-50%);
+    width:20px;height:20px;border-radius:6px;
+    border:2px solid rgba(255,255,255,0.85);
+    background:rgba(255,255,255,0.12);
+  }
+  .options button.selected::before{
+    content:"✓";
+    display:flex;align-items:center;justify-content:center;
+    font-weight:900;color:#fff;
+    background:rgba(255,255,255,0.25);
+  }
+
+  #nextBtn{
+    margin-top:12px;width:100%;
+    padding:12px;border:none;border-radius:12px;
+    background:#263238;color:#fff;
+    cursor:pointer;font-weight:800;
+    transition:0.2s;
+    font-family:var(--body-font);
+    font-size:1em;
+  }
+  #nextBtn:hover{filter:brightness(1.05);}
+  #nextBtn:disabled{opacity:0.55;cursor:not-allowed;}
+
+  .score,.streak,.feedback{text-align:center;margin-top:10px;}
+  .feedback{font-style:italic;color:#27ae60;font-weight:800;}
+
+  #shareBtn, #restartBtn{
+    margin-top:12px;width:100%;
+    padding:12px;border:none;border-radius:12px;
+    cursor:pointer;font-weight:900;
+    font-size:1em;
+  }
+  
+  #restartBtn{
+    background:#263238;color:#fff;
+  }
+  #restartBtn:hover{filter:brightness(1.05);}
+  
+  #shareBtn{
+    background:#0077b5;color:#fff;
+  }
+  #shareBtn:hover { background: #005885; }
+
+  .hidden{display:none;}
+
+  #reviewContainer{margin-top:18px;}
+  #reviewContainer h3{margin:8px 0 10px;font-size:1.05em;}
+  .reviewItem{
+    padding:10px 12px;
+    border:1px solid rgba(0,0,0,0.08);
+    border-radius:12px;margin-bottom:10px;
+    background:rgba(0,0,0,0.02);
+    line-height:1.35;
+    font-size:0.98em;
+  }
+
+  .errorBox{
+    margin-top:10px;
+    padding:12px;
+    border-radius:12px;
+    background:#fff3f3;
+    border:1px solid rgba(255,0,0,0.15);
+    color:#8a1f1f;
+    font-weight:700;
+    line-height:1.35;
+    font-size:0.98em;
+  }
+
+  .answerTag{
+    display:inline-block;
+    padding:2px 8px;
+    border-radius:999px;
+    font-weight:900;
+    line-height:1.2;
+  }
+  .answerTag.ok{
+    background: rgba(39,174,96,0.12);
+    border: 1px solid rgba(39,174,96,0.35);
+    color:#1f7a3f;
+  }
+  .answerTag.bad{
+    background: rgba(255,60,120,0.14);
+    border: 1px solid rgba(255,60,120,0.40);
+    color:#a8164a;
+  }
+
+  .haluBanner{
+    margin-top:8px;
+    padding:8px 10px;
+    border-radius:12px;
+    font-weight:900;
+    background: rgba(255, 60, 120, 0.12);
+    border: 1px solid rgba(255, 60, 120, 0.35);
+    color:#a8164a;
+    line-height:1.5;
+  }
+
+  #tokenContainer{
+    width: min(520px, 100%);
+    margin: 0 auto 16px auto;
+    padding: 12px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+
+  #tokenImage{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:14px;
+  }
+
+  #tokenCanvas{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:14px;
+  }
+
+  #startBtn{
+    width:100%;
+    padding:16px;
+    font-size:1.05em;
+    font-weight:900;
+    border:none;
+    border-radius:14px;
+    background: linear-gradient(#2f3a41, #1f2a30);
+    color:#fff;
+    cursor:pointer;
+    transition:0.2s;
+    font-family: var(--title-font);
+    letter-spacing:0.5px;
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,0.12),
+      inset 0 -3px 0 rgba(0,0,0,0.25),
+      0 10px 28px rgba(0,0,0,0.18);
+    border: 2px solid rgba(255,255,255,0.12);
+  }
+  #startBtn:active{
+    transform: translateY(2px);
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,0.10),
+      inset 0 -2px 0 rgba(0,0,0,0.22),
+      0 6px 18px rgba(0,0,0,0.18);
+  }
+  #startBtn:hover{filter:brightness(1.05);}
+
+  #timerLine{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+  }
+  #timerDisplay{
+    font-family: var(--title-font);
+    font-size: 0.82em;
+    color: #1f2a30;
+    background: rgba(255, 143, 0, 0.18);
+    border: 2px solid rgba(255, 143, 0, 0.45);
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.35);
+    padding: 7px 12px;
+    border-radius: 999px;
+  }
+  #timerDisplay.timer-urgent{
+    background: rgba(255, 60, 120, 0.16);
+    border-color: rgba(255, 60, 120, 0.55);
+    color: #a8164a;
+  }
+
+  #doubtBtn{
+    margin-top:10px;
+    width:100%;
+    padding:12px;
+    border-radius:12px;
+    border:2px dashed rgba(255,143,0,0.8);
+    background:#fff3e0;
+    font-weight:900;
+    cursor:pointer;
+    font-family: var(--body-font);
+  }
+  #doubtBtn:active{transform: translateY(1px);}
+  #doubtBtn:disabled{opacity:0.55;cursor:not-allowed;}
+
+  .cooldownMessage{
+    text-align:center;
+    padding:20px;
+    background:rgba(255,143,0,0.12);
+    border-radius:12px;
+    margin-top:16px;
+  }
+  .cooldownMessage h2{
+    font-size:1.5em;
+    margin-bottom:12px;
+    color:#263238;
+  }
+  .cooldownMessage p{
+    font-size:1.1em;
+    line-height:1.5;
+    color:#555;
+  }
+
+  /* Popup custom pour les notifications */
+  .notifPopup{
+    position:fixed;
+    top:0;left:0;right:0;bottom:0;
+    background:rgba(0,0,0,0.6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding:20px;
+  }
+  .notifPopup.hidden{display:none;}
+  
+  .notifPopupContent{
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    max-width:450px;
+    width:100%;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,0.3);
+    animation:popupSlide 0.3s ease;
+  }
+  
+  @keyframes popupSlide{
+    from{transform:translateY(-30px);opacity:0;}
+    to{transform:translateY(0);opacity:1;}
+  }
+  
+  .notifPopup h2{
+    font-size:1.5em;
+    margin-bottom:12px;
+    color:#263238;
+  }
+  
+  .notifPopup p{
+    font-size:1.05em;
+    line-height:1.5;
+    color:#555;
+    margin-bottom:24px;
+  }
+  
+  .notifPopup .btnPrimary{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#ff8f00;
+    color:#fff;
+    font-weight:900;
+    font-size:1.1em;
+    cursor:pointer;
+    margin-bottom:10px;
+    transition:0.2s;
+  }
+  .notifPopup .btnPrimary:hover{background:#f57c00;}
+  
+  .notifPopup .btnSecondary{
+    background:none;
+    border:none;
+    color:#999;
+    font-size:0.9em;
+    cursor:pointer;
+    padding:8px;
+  }
+  .notifPopup .btnSecondary:hover{color:#666;}
+
+  @media (max-width: 420px){
+    h1{font-size:1.45em;letter-spacing:0.2px;}
+    .title-sep{margin:0 6px;}
+    p.subtitle{font-size:1.15em;}
+  }
+</style>
+</head>
+
+<body>
+  <h1 id="title"></h1>
+  <p class="subtitle">I Quit AI</p>
+
+  <div id="startScreen" class="container">
+    <h2 style="text-align:center;margin-bottom:16px;font-weight:900;">Appuie pour démarrer</h2>
+    <button id="startBtn">▶ START</button>
+  </div>
+
+  <div class="container hidden" id="gameContainer">
+    <div id="quiz">
+      <div id="timerLine">
+        <div></div>
+        <div id="timerDisplay" class="hidden">⏱ 30</div>
+      </div>
+
+      <div id="questionContainer"></div>
+      <div class="options" id="optionsContainer"></div>
+
+      <button id="nextBtn" disabled>Suivant</button>
+      <button id="doubtBtn" class="hidden">🤔 J'ai un doute</button>
+
+      <div id="errorContainer" class="hidden"></div>
+    </div>
+
+    <div id="result" class="hidden">
+      <!-- TOKEN EN HAUT -->
+      <div id="tokenContainer" class="hidden">
+        <img id="tokenImage" class="hidden" />
+        <canvas id="tokenCanvas" class="hidden" width="500" height="250"></canvas>
+      </div>
+
+      <!-- DÉTAILS DU SCORE -->
+      <div id="scoreDetails" style="text-align:center; margin-bottom:16px;"></div>
+      
+      <p class="feedback" id="feedbackDisplay"></p>
+      <p class="streak" id="gamesPlayedDisplay"></p>
+
+      <!-- BOUTONS REJOUER / PARTAGER -->
+      <button id="restartBtn">🔄 Rejouer demain</button>
+      <button id="shareBtn">📤 Partager sur LinkedIn</button>
+
+      <!-- REVIEW DES QUESTIONS -->
+      <div id="reviewContainer"></div>
+
+      <div id="rankingSection" style="margin-top: 25px; padding: 20px; background: #fdfdfd; border-radius: 15px; border: 2px solid #263238; text-align: left;">
+          <h3 style="margin-top:0; color:#263238; font-size: 1.2em; font-family: var(--body-font);">🏆 Podium du Jour</h3>
+          <div id="leaderboardList" style="margin-bottom: 20px; font-family: var(--body-font);">
+              <p style="font-size: 0.9em; color: #666;">Chargement des champions...</p>
+          </div>
+
+          <div id="pseudoInputArea" style="background: #f1f1f1; padding: 15px; border-radius: 10px; font-family: var(--body-font);">
+              <label style="display: block; font-size: 0.8em; margin-bottom: 8px; font-weight: bold;">TON PSEUDO POUR LE TOP 3 :</label>
+              <div style="display: flex; gap: 8px;">
+                  <input type="text" id="playerPseudo" maxlength="12" placeholder="Ex: Raph" style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+                  <button onclick="submitScore()" style="background: #263238; color: white; border: none; padding: 0 15px; border-radius: 8px; font-weight: bold; cursor: pointer;">OK</button>
+              </div>
+          </div>
+      </div>
+      
+      <!-- COMMENT ÇA MARCHE (tout en bas) -->
+      <div id="howItWorks" style="margin-top:20px; padding:12px; background:rgba(255,143,0,0.12); border-radius:10px; font-size:0.92em; line-height:1.5;">
+        <strong>📊 Comment ça marche ?</strong><br>
+        ✅ Bonne réponse (safe) = +1 point<br>
+        ✅ Hallu détectée (doute) = +1 point<br>
+        ❌ Mauvaise réponse = 0 point<br>
+        ❌ Hallu ratée (pas de doute) = 0 point
+      </div>
+    </div>
+  </div>
+
+  <audio id="bootSound" preload="auto" playsinline>
+    <source src="Gameboy.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Popup custom pour les notifications -->
+  <div id="notifPopup" class="notifPopup hidden">
+    <div class="notifPopupContent">
+      <h2>🔔 Ne manquez pas votre défi quotidien !</h2>
+      <p>Recevez un rappel chaque jour pour déjouer à nouveau l'IA et relever votre défi IQAI Test.</p>
+      <button id="notifAccept" class="btnPrimary">Oui, je relève le défi tous les jours !</button>
+      <button id="notifDecline" class="btnSecondary">Plus tard</button>
+    </div>
+  </div>
+
+<script>
+  // ---------- TITLE ----------
+  const colors=["#FF4136","#FFDC00","#2ECC40","#0074D9","#FF851B","#B10DC9"];
+  const titleContainer=document.getElementById("title");
+  const parts=["IQAI","Test"];
+
+  let cursorSepEl=null;
+  let cursorTimeoutId=null;
+  let hasShownCursor=false;
+
+  function clearTitle(){
+    titleContainer.innerHTML="";
+    cursorSepEl=null;
+    hasShownCursor=false;
+    if(cursorTimeoutId){clearTimeout(cursorTimeoutId);cursorTimeoutId=null;}
+  }
+  function showCursorBlink(){
+    if(hasShownCursor) return;
+    if(cursorSepEl){
+      cursorSepEl.classList.add("cursor-on");
+      hasShownCursor=true;
+    }
+  }
+  function animateTitle({ letterDelayMs=140, initialDelayMs=80 }={}){
+    clearTitle();
+
+    const spans=[];
+    let colorIndex=0;
+
+    function addColoredText(text){
+      text.split("").forEach((c,i)=>{
+        const s=document.createElement("span");
+        s.textContent=c;
+        s.style.opacity="0";
+        s.style.transform="scale(0.85)";
+        s.style.transition="opacity 180ms ease, transform 180ms ease";
+        s.style.color=colors[(colorIndex+i)%colors.length];
+        spans.push(s);
+        titleContainer.appendChild(s);
+      });
+      colorIndex+=text.length;
+    }
+
+    addColoredText(parts[0]);
+
+    cursorSepEl=document.createElement("span");
+    cursorSepEl.className="title-sep";
+    cursorSepEl.textContent="|";
+    titleContainer.appendChild(cursorSepEl);
+
+    addColoredText(parts[1]);
+
+    spans.forEach((s,i)=>{
+      setTimeout(()=>{
+        s.style.opacity="1";
+        s.style.transform="scale(1)";
+      }, initialDelayMs + (i*letterDelayMs));
+    });
+
+    return initialDelayMs + (spans.length*letterDelayMs) + 220;
+  }
+
+  // ---------- STATE ----------
+  const API_URL="https://iqai-backend.vercel.app/api/quiz";
+  let questions=[];
+  let current=0;
+  let score=0;
+  let vigilance=0;
+  let userAnswers=[];
+
+  const QUESTION_TIME=30;
+  let timeLeft=QUESTION_TIME;
+  let timerId=null;
+
+  // ---------- DOM ----------
+  const questionContainer=document.getElementById('questionContainer');
+  const optionsContainer=document.getElementById('optionsContainer');
+  const nextBtn=document.getElementById('nextBtn');
+  const doubtBtn=document.getElementById('doubtBtn');
+  const quizDiv=document.getElementById('quiz');
+  const resultDiv=document.getElementById('result');
+
+  const scoreDetails=document.getElementById('scoreDetails');
+  const feedbackDisplay=document.getElementById('feedbackDisplay');
+  const gamesPlayedDisplay=document.getElementById('gamesPlayedDisplay');
+
+  const shareBtn=document.getElementById('shareBtn');
+  const restartBtn=document.getElementById('restartBtn');
+  const reviewContainer=document.getElementById('reviewContainer');
+  const errorContainer=document.getElementById('errorContainer');
+
+  const timerDisplay=document.getElementById("timerDisplay");
+
+  const startScreen=document.getElementById("startScreen");
+  const startBtn=document.getElementById("startBtn");
+  const gameContainer=document.getElementById("gameContainer");
+  const bootSound=document.getElementById("bootSound");
+
+  let gamesPlayed=parseInt(localStorage.getItem("gamesPlayed")||"0",10);
+
+  // ---------- COOLDOWN MINUIT À MINUIT ----------
+  function checkCooldown(){
+    const lastPlayed=localStorage.getItem("lastPlayedDate");
+    if(!lastPlayed) return true;
+    
+    const lastDate=new Date(lastPlayed);
+    const now=new Date();
+    
+    // Vérifier si on est un jour différent
+    const lastDay = lastDate.toDateString();
+    const nowDay = now.toDateString();
+    
+    return lastDay !== nowDay;
+  }
+
+  function setLastPlayed(){
+    localStorage.setItem("lastPlayedDate", new Date().toISOString());
+  }
+
+  function getNextPlayTime(){
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    return tomorrow;
+  }
+
+  // ---------- HELPERS ----------
+  function showError(msg){
+    errorContainer.classList.remove('hidden');
+    errorContainer.className="errorBox";
+    errorContainer.textContent=msg;
+  }
+  function clearError(){
+    errorContainer.classList.add('hidden');
+    errorContainer.className="";
+    errorContainer.textContent="";
+  }
+
+  function normalizeQuiz(raw){
+    if(!Array.isArray(raw)) return null;
+    const arr=raw.slice(0,10).map(x=>({
+      q:String(x.q??""),
+      options:Array.isArray(x.options)?x.options.map(String).slice(0,4):[],
+      answer:String(x.answer??""),
+      explanation:String(x.explanation??""),
+      kind:String(x.kind??"safe")
+    })).filter(x=>x.q && x.options.length===4 && x.answer);
+    return (arr.length===10)?arr:null;
+  }
+
+  async function fetchWithTimeout(url, options={}, ms=30000){
+    const controller=new AbortController();
+    const id=setTimeout(()=>controller.abort(), ms);
+    try{
+      return await fetch(url,{...options, signal:controller.signal});
+    } finally {
+      clearTimeout(id);
+    }
+  }
+
+  async function loadQuestions(){
+    // 1. On récupère les IDs déjà joués
+    const playedIds = JSON.parse(localStorage.getItem('playedIds') || '[]');
+    
+    const opts = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store",
+      // On envoie 'playedIds' pour que le backend (api/quiz.js) le reçoive bien
+      body: JSON.stringify({ playedIds }) 
+    };
+
+    let res;
+    try {
+      res = await fetchWithTimeout(API_URL, opts, 30000);
+    } catch(e) {
+      res = await fetchWithTimeout(API_URL, opts, 35000);
+    }
+
+    if(!res || !res.ok) throw new Error("Le backend ne répond pas (HTTP "+(res?res.status:"—")+").");
+
+    const raw = await res.json();
+    const quiz = normalizeQuiz(raw);
+    
+    if(!quiz) throw new Error("Quiz invalide.");
+    
+    questions = quiz;
+    
+    // Note : On ne sauvegarde pas encore les IDs ici ! 
+    // On attend la fin de la partie (dans showResult) pour être sûr 
+    // que le joueur a bien vu les questions.
+}
+
+  // ---------- TIMER ----------
+  function stopTimer(){
+    if(timerId){clearInterval(timerId);timerId=null;}
+  }
+  function startTimer(){
+    stopTimer();
+    timeLeft=QUESTION_TIME;
+    timerDisplay.classList.remove("hidden");
+    timerDisplay.textContent=`⏱ ${timeLeft}`;
+    timerDisplay.classList.remove("timer-urgent");
+
+    timerId=setInterval(()=>{
+      timeLeft--;
+      timerDisplay.textContent=`⏱ ${timeLeft}`;
+
+      if(timeLeft<=10) timerDisplay.classList.add("timer-urgent");
+      else timerDisplay.classList.remove("timer-urgent");
+
+      if(timeLeft<=0){
+        stopTimer();
+        advanceQuestion();
+      }
+    },1000);
+  }
+
+  // ---------- QUIZ UI ----------
+  function showQuestion(){
+    clearError();
+
+    const qObj=questions[current];
+    questionContainer.innerHTML=`<div class="question">${current+1}. ${qObj.q}</div>`;
+    optionsContainer.innerHTML='';
+
+    nextBtn.disabled = (userAnswers[current] == null);
+
+    doubtBtn.classList.remove("hidden");
+    doubtBtn.textContent="🤔 J'ai un doute";
+    doubtBtn.disabled=false;
+
+    qObj.options.forEach(opt=>{
+      const btn=document.createElement('button');
+      btn.textContent=opt;
+
+      if(userAnswers[current]===opt) btn.classList.add('selected');
+
+      btn.onclick=()=>{
+        userAnswers[current]=opt;
+        Array.from(optionsContainer.children).forEach(b=>{
+          b.classList.toggle('selected', b.textContent===opt);
+        });
+        nextBtn.disabled=false;
+      };
+
+      optionsContainer.appendChild(btn);
+    });
+
+    startTimer();
+  }
+
+function advanceQuestion(){
+    const qObj = questions[current];
+    const selected = userAnswers[current];
+    const isDoubt = (selected === "__DOUBT__");
+
+    // LOGIQUE DE POINTS :
+    if (qObj.kind === "halu") {
+        // Point seulement si on a cliqué sur le doute
+        if (isDoubt) vigilance += 1; 
+        // Sinon (réponse choisie), c'est 0 point d'office
+    } else {
+        // Question Safe : Point seulement si la réponse est exacte (et pas doute)
+        if (!isDoubt && selected === qObj.answer) score += 1;
+    }
+
+    current++;
+
+    if(current < questions.length){
+        showQuestion();
+    } else {
+        stopTimer();
+        timerDisplay.classList.add("hidden");
+        setLastPlayed();
+        showResult();
+    }
+}
+
+  nextBtn.onclick=()=>{
+    stopTimer();
+    advanceQuestion();
+  };
+
+  doubtBtn.onclick=()=>{
+    doubtBtn.disabled=true;
+    userAnswers[current]="__DOUBT__";
+    stopTimer();
+    advanceQuestion();
+  };
+
+  function showResult(){
+    quizDiv.classList.add('hidden');
+    resultDiv.classList.remove('hidden');
+
+    gamesPlayed++;
+    localStorage.setItem("gamesPlayed", String(gamesPlayed));
+    const playedIds = JSON.parse(localStorage.getItem('playedIds') || '[]');
+    const currentIds = questions.map(q => q.id || q.q); 
+    const updatedIds = [...new Set([...playedIds, ...currentIds])].slice(-200); 
+    localStorage.setItem('playedIds', JSON.stringify(updatedIds));
+
+    const totalHalu = questions.filter(q=>q.kind==="halu").length;
+    const totalSafe = questions.length - totalHalu;
+    const scoreTotal = score + vigilance;
+    const scoreMax = questions.length;
+
+    // ========== TOKENS EN HAUT ==========
+    const tokenContainer=document.getElementById('tokenContainer');
+    const tokenImage=document.getElementById('tokenImage');
+    const tokenCanvas=document.getElementById('tokenCanvas');
+
+    tokenContainer.classList.remove('hidden');
+    tokenImage.classList.add('hidden');
+    tokenImage.src = "";
+    tokenCanvas.classList.add('hidden');
+    
+    const ctx0 = tokenCanvas.getContext('2d');
+    ctx0.clearRect(0, 0, tokenCanvas.width, tokenCanvas.height);
+
+    if (scoreTotal < 6) {
+      tokenCanvas.classList.remove('hidden');
+
+      const cssW = Math.min(500, tokenContainer.clientWidth - 20);
+      const w = cssW;
+      const h = Math.round(w * 0.48);
+
+      const dpr = window.devicePixelRatio || 1;
+      tokenCanvas.style.width = w + "px";
+      tokenCanvas.style.height = h + "px";
+      tokenCanvas.width = Math.round(w * dpr);
+      tokenCanvas.height = Math.round(h * dpr);
+
+      const ctx = tokenCanvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+
+      // Fond rouge/orange dégradé
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, "#ff6b6b");
+      grad.addColorStop(1, "#ff8787");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.fillStyle = "#1f2a30";
+      ctx.textAlign = "center";
+
+      ctx.font = "bold 24px 'Press Start 2P'";
+      ctx.fillText("⚠️ AI BRAINWASHED ⚠️", w / 2, Math.round(h * 0.32));
+
+      ctx.font = "24px 'Press Start 2P'";
+      ctx.fillText(`${scoreTotal}/${scoreMax}`, w / 2, Math.round(h * 0.58));
+
+      ctx.font = "16px Inter";
+      ctx.fillText("Reviens demain 💪", w / 2, Math.round(h * 0.80));
+
+    } else if (scoreTotal < 10) {
+      tokenCanvas.classList.remove('hidden');
+
+      const cssW = Math.min(500, tokenContainer.clientWidth - 20);
+      const w = cssW;
+      const h = Math.round(w * 0.48);
+
+      const dpr = window.devicePixelRatio || 1;
+      tokenCanvas.style.width = w + "px";
+      tokenCanvas.style.height = h + "px";
+      tokenCanvas.width = Math.round(w * dpr);
+      tokenCanvas.height = Math.round(h * dpr);
+
+      const ctx = tokenCanvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, "#4facfe");
+      grad.addColorStop(1, "#00f2fe");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.fillStyle = "#1a1a1a";
+      ctx.textAlign = "center";
+
+      ctx.font = "bold 32px 'Press Start 2P'";
+      ctx.fillText("I QUIT AI 🚪", w / 2, Math.round(h * 0.38));
+
+      ctx.font = "24px 'Press Start 2P'";
+      ctx.fillText(`${scoreTotal}/${scoreMax}`, w / 2, Math.round(h * 0.62));
+
+      ctx.font = "16px Inter";
+      ctx.fillText("Keep going! 💪", w / 2, Math.round(h * 0.82));
+
+    } else {
+      tokenCanvas.classList.remove('hidden');
+
+      const cssW = Math.min(500, tokenContainer.clientWidth - 20);
+      const w = cssW;
+      const h = Math.round(w * 0.48);
+
+      const dpr = window.devicePixelRatio || 1;
+      tokenCanvas.style.width = w + "px";
+      tokenCanvas.style.height = h + "px";
+      tokenCanvas.width = Math.round(w * dpr);
+      tokenCanvas.height = Math.round(h * dpr);
+
+      const ctx = tokenCanvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, "#f7d24c");
+      grad.addColorStop(1, "#ff9f1a");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.fillStyle = "#1f2a30";
+      ctx.textAlign = "center";
+
+      ctx.font = "bold 26px 'Press Start 2P'";
+      ctx.fillText("🏆 CERTIFIED 🏆", w / 2, Math.round(h * 0.30));
+
+      ctx.font = "bold 22px 'Press Start 2P'";
+      ctx.fillText("SAFE BRAIN", w / 2, Math.round(h * 0.50));
+
+      ctx.font = "20px 'Press Start 2P'";
+      ctx.fillText(`${scoreTotal}/${scoreMax}`, w / 2, Math.round(h * 0.68));
+
+      ctx.font = "14px Inter";
+      ctx.fillText(`Parties: ${gamesPlayed}`, w / 2, Math.round(h * 0.84));
+    }
+
+    // ========== DÉTAILS DU SCORE (seulement pour canvas, pas pour l'image) ==========
+    if (scoreTotal >= 6) {
+      scoreDetails.innerHTML = `
+        <div style="font-size:1em; margin-bottom:6px;">
+          📚 Questions classiques : <strong>${score} / ${totalSafe}</strong>
+        </div>
+        <div style="font-size:1em;">
+          🚨 Hallus détectées : <strong>${vigilance} / ${totalHalu}</strong>
+        </div>
+      `;
+    }
+
+    feedbackDisplay.textContent =
+      scoreTotal >= 8 ? "Très solide. Reviens demain." :
+      scoreTotal >= 5 ? "Bien joué, continue." :
+      "Courage. Reviens demain.";
+
+    gamesPlayedDisplay.textContent=`Nombre de parties jouées : ${gamesPlayed}`;
+
+    doubtBtn.classList.add("hidden");
+
+    // ========== POPUP CUSTOM 2 SECONDES APRÈS ==========
+    setTimeout(() => {
+      if (window.showNotifPopup) {
+        window.showNotifPopup();
+      }
+    }, 2000);
+
+    // ========== BOUTONS ==========
+    restartBtn.onclick=()=>{ 
+      const canPlay=checkCooldown();
+      if(!canPlay){
+        const nextTime=getNextPlayTime();
+        const now = new Date();
+        const diff = nextTime - now;
+        const hours=Math.floor(diff/(1000*60*60));
+        const minutes=Math.floor((diff%(1000*60*60))/(1000*60));
+        alert(`⏰ Tu as déjà joué aujourd'hui ! Reviens à minuit (dans ${hours}h ${minutes}min)`);
+        return;
+      }
+      location.reload();
+    };
+
+    shareBtn.textContent = "📤 Partager sur LinkedIn";
+    shareBtn.onclick=()=>{
+      const text = `🧠 IQAI Test — Score: ${scoreTotal}/${scoreMax} (${score} safe + ${vigilance} hallus). Défi quotidien ! À toi de jouer : `;
+      const url="https://www.linkedin.com/sharing/share-offsite/?url=" +
+        encodeURIComponent(window.location.href) +
+        "&summary=" + encodeURIComponent(text);
+      window.open(url,'_blank');
+    };
+
+    // ========== REVIEW ==========
+    reviewContainer.innerHTML = "<h3>Review des questions</h3>";
+
+    questions.forEach((q, i) => {
+      const user = userAnswers[i];
+      const isDoubt = (user === "__DOUBT__");
+      const isCorrectSafe = (q.kind === "safe" && user === q.answer);
+      const isCorrectHalu = (q.kind === "halu" && isDoubt);
+
+      let statusHTML = "";
+      let itemClass = "";
+
+      if (q.kind === "halu") {
+        if (isCorrectHalu) {
+          itemClass = "ok";
+          statusHTML = `<div class="haluBanner">✅ <strong>BIEN JOUÉ :</strong> Tu es resté vigilant, c'était une hallucination. (+1 pt)</div>`;
+        } else {
+          itemClass = "bad";
+          statusHTML = `<div class="haluBanner" style="background:rgba(255,60,120,0.15); border-color:#a8164a; color:#a8164a;">❌ <strong>BERNÉ PAR L'IA :</strong> Tu as répondu à une fausse information. (0 pt)</div>`;
+        }
+      } else {
+        if (isCorrectSafe) {
+          itemClass = "ok";
+          statusHTML = `<div style="color:#1f7a3f; font-weight:700; margin-top:8px;">✅ Bonne réponse ! (+1 pt)</div>`;
+        } else if (isDoubt) {
+          itemClass = "bad";
+          statusHTML = `<div style="color:#a8164a; font-weight:700; margin-top:8px;">❌ <strong>DOMMAGE :</strong> Tu as douté d'une info pourtant vraie. (0 pt)</div>`;
+        } else {
+          itemClass = "bad";
+          statusHTML = `<div style="color:#a8164a; font-weight:700; margin-top:8px;">❌ Mauvaise réponse. (0 pt)</div>`;
+        }
+      }
+
+      const div = document.createElement('div');
+      div.className = "reviewItem";
+      div.innerHTML = `
+        <strong>Q${i+1}:</strong> ${q.q}<br>
+        <strong>Ta réponse :</strong> <span class="answerTag ${isCorrectSafe || isCorrectHalu ? 'ok' : 'bad'}">${isDoubt ? "🤔 J'ai un doute" : (user || "Temps écoulé")}</span><br>
+        <strong>Vérité :</strong> ${q.kind === "halu" ? "Incohérence IA" : q.answer}<br>
+        <div style="margin-top:5px; font-size:0.9em; opacity:0.8;"><em>Note : ${q.explanation}</em></div>
+        ${statusHTML}
+      `;
+      reviewContainer.appendChild(div);
+    });
+    loadLeaderboard();
+}
+  // ---------- START / RESTART ----------
+  async function startGame(){
+    // Vérifier cooldown
+    if(!checkCooldown()){
+      const nextTime=getNextPlayTime();
+      const now = new Date();
+      const diff = nextTime - now;
+      const hours=Math.floor(diff/(1000*60*60));
+      const minutes=Math.floor((diff%(1000*60*60))/(1000*60));
+      
+      quizDiv.innerHTML=`
+        <div class="cooldownMessage">
+          <h2>⏰ Reviens demain !</h2>
+          <p>Tu as déjà joué aujourd'hui.<br>
+          Prochaine partie à <strong>minuit</strong> (dans ${hours}h ${minutes}min)</p>
+          <button onclick="location.reload()" style="margin-top:16px; padding:10px 20px; background:#263238; color:#fff; border:none; border-radius:10px; cursor:pointer; font-weight:900;">🔄 Rafraîchir</button>
+        </div>
+      `;
+      return;
+    }
+
+    clearError();
+
+    resultDiv.classList.add('hidden');
+    quizDiv.classList.remove('hidden');
+    reviewContainer.innerHTML="";
+
+    current=0;
+    score=0;
+    vigilance=0;
+    userAnswers=new Array(10).fill(null);
+
+    nextBtn.disabled=true;
+    optionsContainer.innerHTML="";
+    questionContainer.innerHTML=`<div class="question">Chargement du quiz...</div>`;
+
+    doubtBtn.classList.add("hidden");
+    doubtBtn.disabled=false;
+
+    try{
+      await loadQuestions();
+      showQuestion();
+    }catch(e){
+      stopTimer();
+      timerDisplay.classList.add("hidden");
+      showError("Erreur de chargement du quiz. ("+(e?.message||e)+")");
+      questionContainer.innerHTML='<div class="question">Impossible de charger le quiz.</div>';
+      nextBtn.disabled=true;
+    }
+  }
+
+  restartBtn.onclick=async()=>{ await startGame(); };
+
+  // ---------- START SCREEN ----------
+  startBtn.onclick=()=>{
+    startScreen.classList.add("hidden");
+    gameContainer.classList.remove("hidden");
+
+    const titleMs=animateTitle({ letterDelayMs: 140, initialDelayMs: 80 });
+    cursorTimeoutId=setTimeout(()=>showCursorBlink(), titleMs + 120);
+
+    try{
+      bootSound.pause();
+      bootSound.currentTime=0;
+      bootSound.load();
+
+      const p=bootSound.play();
+      if(p && typeof p.catch==="function"){
+        p.catch(()=>{});
+      }
+
+      bootSound.onended=()=>showCursorBlink();
+    }catch(e){}
+
+    startGame();
+  };
+
+  // ========== POPUP CUSTOM NOTIFICATIONS ==========
+  const notifPopup = document.getElementById('notifPopup');
+  const notifAccept = document.getElementById('notifAccept');
+  const notifDecline = document.getElementById('notifDecline');
+
+  function showNotifPopup() {
+    // Ne montrer que si OneSignal est dispo et pas encore autorisé
+    if (window.OneSignal) {
+      OneSignalDeferred.push(async function(OneSignal) {
+        try {
+          const isPushSupported = await OneSignal.Notifications.isPushSupported();
+          if (isPushSupported) {
+            const permission = await OneSignal.Notifications.permission;
+            if (!permission) {
+              notifPopup.classList.remove('hidden');
+            }
+          }
+        } catch(e) {
+          console.log('OneSignal check error:', e);
+        }
+      });
+    }
+  }
+
+  notifAccept.onclick = async () => {
+    notifPopup.classList.add('hidden');
+    // Déclencher le popup natif OneSignal
+    if (window.OneSignal) {
+      OneSignalDeferred.push(async function(OneSignal) {
+        try {
+          await OneSignal.Slidedown.promptPush();
+        } catch(e) {
+          console.log('OneSignal prompt error:', e);
+        }
+      });
+    }
+  };
+
+  notifDecline.onclick = () => {
+    notifPopup.classList.add('hidden');
+  };
+
+  // Exposer la fonction globalement pour l'appeler après le quiz
+  window.showNotifPopup = showNotifPopup;
+  // ==========================================
+//      FONCTIONS POUR LE CLASSEMENT (RANKING)
+// ==========================================
+
+// 1. Charger et afficher le Top 3
+async function loadLeaderboard() {
+    const list = document.getElementById('leaderboardList');
+    if (!list) return;
+
+    try {
+        const res = await fetch('/api/leaderboard');
+        const top3 = await res.json();
+
+        if (!top3 || top3.length === 0) {
+            list.innerHTML = "<p style='font-size:0.9em; color:#888; font-style:italic;'>Personne n'a encore bravé l'IA aujourd'hui. Sois le premier !</p>";
+        } else {
+            list.innerHTML = top3.map((p, i) => `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding: 10px 0; border-bottom: 1px solid #eee;">
+                    <span style="font-size: 1.05em;">
+                        ${i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'} 
+                        <strong>${p.pseudo}</strong>
+                    </span>
+                    <span style="background: #263238; color: white; padding: 3px 10px; border-radius: 6px; font-weight: bold; font-family: sans-serif;">
+                        ${p.score} pts
+                    </span>
+                </div>
+            `).join('');
+        }
+    } catch (err) {
+        console.error("Erreur ranking:", err);
+        list.innerHTML = "<p style='color:#a8164a; font-size:0.9em;'>Le classement est temporairement indisponible.</p>";
+    }
+}
+
+// 2. Envoyer le score du joueur
+async function submitScore() {
+    const pseudoInput = document.getElementById('playerPseudo');
+    const pseudo = pseudoInput.value.trim();
+    
+    if (!pseudo) {
+        alert("Hé ! Il nous faut un petit nom pour le podium !");
+        return;
+    }
+
+    if (pseudo.length < 2) {
+        alert("Ton pseudo est un peu court, non ? (2 caractères min)");
+        return;
+    }
+
+    // On récupère le score total calculé dans showResult
+    const finalScore = score + vigilance;
+
+    try {
+        const response = await fetch('/api/leaderboard', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pseudo: pseudo, score: finalScore }) 
+        });
+
+        if (response.ok) {
+            // Si c'est bon, on cache la zone de saisie et on rafraîchit le podium
+            document.getElementById('pseudoInputArea').style.display = 'none';
+            await loadLeaderboard();
+        } else {
+            alert("Petit souci technique lors de l'envoi du score.");
+        }
+    } catch (err) {
+        console.error(err);
+        alert("Impossible de joindre le serveur pour enregistrer ton score.");
+    }
+}
+</script>
+</body>
+</html>
