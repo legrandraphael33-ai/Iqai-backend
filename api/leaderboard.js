@@ -1,30 +1,39 @@
-const { kv } = require('@vercel/kv');
+import { createClient } from 'redis';
 
-module.exports = async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    if (req.method === "OPTIONS") return res.status(200).end();
+export default async function handler(req, res) {
+  const client = createClient({
+    url: process.env.REDIS_URL
+  });
 
-    try {
-        if (req.method === 'POST') {
-            const { pseudo, score } = req.body;
-            if (!pseudo) return res.status(400).json({ error: "Pseudo requis" });
-            
-            // On enregistre le score global (Somme score + vigilance)
-            await kv.zadd('leaderboard', { score: parseInt(score), member: pseudo });
-            return res.status(200).json({ success: true });
-        }
+  client.on('error', (err) => console.error('Erreur Client Redis:', err));
 
-        if (req.method === 'GET') {
-            const rawData = await kv.zrange('leaderboard', 0, 2, { rev: true, withScores: true });
-            const formatted = [];
-            for (let i = 0; i < rawData.length; i += 2) {
-                formatted.push({ pseudo: rawData[i], score: rawData[i + 1] });
-            }
-            return res.status(200).json(formatted);
-        }
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
+  try {
+    await client.connect();
+
+    // LECTURE DU CLASSEMENT
+    if (req.method === 'GET') {
+      const data = await client.get('leaderboard');
+      const scores = data ? JSON.parse(data) : [];
+      return res.status(200).json(scores.slice(0, 3));
     }
-};
+
+    // ENVOI D'UN SCORE
+    if (req.method === 'POST') {
+      const { pseudo, score } = req.body;
+      const data = await client.get('leaderboard');
+      let scores = data ? JSON.parse(data) : [];
+
+      scores.push({ pseudo, score, date: new Date().toISOString() });
+      scores.sort((a, b) => b.score - a.score);
+      scores = scores.slice(0, 10); // On garde le top 10 en mémoire
+
+      await client.set('leaderboard', JSON.stringify(scores));
+      return res.status(200).json({ success: true });
+    }
+  } catch (error) {
+    console.error("Erreur API:", error);
+    return res.status(500).json({ error: "Erreur serveur leaderboard" });
+  } finally {
+    if (client.isOpen) await client.quit();
+  }
+}
