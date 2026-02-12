@@ -3897,6 +3897,182 @@
     "options": ["Londres", "Pékin", "Athènes", "Rio"],
     "answer": "Londres",
     "explanation": "La ville les organisait pour la troisième fois."
+  },
+    [
+  {
+    "q": "Quel pays a remporté la Coupe du monde de football 1998 ?",
+    "category": "Sport - Football",
+    "options": ["France", "Brésil", "Italie", "Allemagne"],
+    "answer": "France",
+    "explanation": "La France a gagné 3-0 contre le Brésil au Stade de France."
+  },
+  {
+    "q": "Quelle équipe a réalisé le triplé Ligue des champions, championnat, coupe nationale en 2009 sous Pep Guardiola ?",
+    "category": "Sport - Football",
+    "options": ["FC Barcelone", "Manchester United", "Inter Milan", "Real Madrid"],
+    "answer": "FC Barcelone",
+    "explanation": "Le Barça de Guardiola est considéré comme l’une des meilleures équipes de l’histoire."
+  },
+  {
+    "q": "Quel sprinteur détient le record du monde du 100 m depuis 2009 ?",
+    "category": "Sport - Athlétisme",
+    "options": ["Usain Bolt", "Tyson Gay", "Yohan Blake", "Justin Gatlin"],
+    "answer": "Usain Bolt",
+    "explanation": "Il a couru en 9,58 secondes à Berlin."
+  },
+  {
+    "q": "Lors de quels Jeux olympiques Nadia Comăneci a-t-elle obtenu le premier 10 parfait en gymnastique ?",
+    "category": "Sport - Jeux olympiques",
+    "options": ["Montréal 1976", "Munich 1972", "Moscou 1980", "Los Angeles 1984"],
+    "answer": "Montréal 1976",
+    "explanation": "Sa performance a marqué l’histoire de la gymnastique."
+  },
+  {
+    "q": "Quelle équipe NBA a signé une saison record de 72 victoires en 1995-1996 ?",
+    "category": "Sport - Basketball",
+    "options": ["Chicago Bulls", "Los Angeles Lakers", "Boston Celtics", "Detroit Pistons"],
+    "answer": "Chicago Bulls",
+    "explanation": "Menés par Michael Jordan, ils ont dominé la ligue."
+  },
+  {
+    "q": "Quel pays a organisé la Coupe du monde de rugby 2007 ?",
+    "category": "Sport - Rugby",
+    "options": ["France", "Angleterre", "Nouvelle-Zélande", "Australie"],
+    "answer": "France",
+    "explanation": "La finale s’est jouée au Stade de France."
+  },
+  {
+    "q": "Quel boxeur a remporté le combat « Rumble in the Jungle » en 1974 ?",
+    "category": "Sport - Boxe",
+    "options": ["Muhammad Ali", "George Foreman", "Joe Frazier", "Sonny Liston"],
+    "answer": "Muhammad Ali",
+    "explanation": "Ali a surpris Foreman avec la tactique du rope-a-dope."
+  },
+  {
+    "q": "Quelle tennismane a remporté 23 titres du Grand Chelem en simple à l’ère Open ?",
+    "category": "Sport - Tennis",
+    "options": ["Serena Williams", "Steffi Graf", "Martina Navratilova", "Chris Evert"],
+    "answer": "Serena Williams",
+    "explanation": "Elle détient le record dans l’ère moderne."
+  },
+  {
+    "q": "Quel nageur a remporté 8 médailles d’or aux Jeux olympiques de Pékin 2008 ?",
+    "category": "Sport - Natation",
+    "options": ["Michael Phelps", "Ryan Lochte", "Ian Thorpe", "Mark Spitz"],
+    "answer": "Michael Phelps",
+    "explanation": "Un exploit inédit dans l’histoire olympique."
+  },
+  {
+    "q": "Quelle équipe a réussi le comeback historique contre les Falcons lors du Super Bowl LI ?",
+    "category": "Sport - Football américain",
+    "options": ["New England Patriots", "Dallas Cowboys", "Kansas City Chiefs", "Green Bay Packers"],
+    "answer": "New England Patriots",
+    "explanation": "Ils sont revenus de 28-3 pour gagner en prolongation."
+  },
+  {
+    "q": "Quel pilote de F1 a remporté son 7e titre mondial en 2020, égalant le record de Schumacher ?",
+    "category": "Sport - Formule 1",
+    "options": ["Lewis Hamilton", "Sebastian Vettel", "Fernando Alonso", "Kimi Räikkönen"],
+    "answer": "Lewis Hamilton",
+    "explanation": "Il a dominé la saison avec Mercedes."
+  },
+  {
+    "q": "Quelle équipe de football a réalisé la « Remontada » face au PSG en 2017 ?",
+    "category": "Sport - Football",
+    "options": ["FC Barcelone", "Real Madrid", "Bayern Munich", "Chelsea"],
+    "answer": "FC Barcelone",
+    "explanation": "Victoire 6-1 après une défaite 4-0 à l’aller."
+  },
+  {
+    "q": "Quel pays a remporté la Coupe du monde 2014 à domicile du Brésil ?",
+    "category": "Sport - Football",
+    "options": ["Allemagne", "Argentine", "Espagne", "Pays-Bas"],
+    "answer": "Allemagne",
+    "explanation": "Mario Götze a marqué en finale."
+  },
+  {
+    "q": "Quelle marathonienne kényane a battu le record du monde féminin en 2019 à Chicago ?",
+    "category": "Sport - Athlétisme",
+    "options": ["Brigid Kosgei", "Paula Radcliffe", "Mary Keitany", "Tirunesh Dibaba"],
+    "answer": "Brigid Kosgei",
+    "explanation": "Elle a amélioré un record vieux de 16 ans."
+  },
+  {
+    "q": "Quel club a remporté la première Ligue des champions de l’histoire en 1956 ?",
+    "category": "Sport - Football",
+    "options": ["Real Madrid", "AC Milan", "Benfica", "Reims"],
+    "answer": "Real Madrid",
+    "explanation": "Le club a ensuite dominé les premières éditions."
+  },
+  {
+    "q": "Quel skieur a dominé les Jeux olympiques d’hiver 1968 avec trois médailles d’or ?",
+    "category": "Sport - Sports d'hiver",
+    "options": ["Jean-Claude Killy", "Hermann Maier", "Bode Miller", "Alberto Tomba"],
+    "answer": "Jean-Claude Killy",
+    "explanation": "Il est devenu une icône du ski alpin."
+  },
+  {
+    "q": "Quelle équipe a mis fin à la malédiction des Chicago Cubs en 2016 ?",
+    "category": "Sport - Baseball",
+    "options": ["Chicago Cubs", "Cleveland Indians", "Boston Red Sox", "LA Dodgers"],
+    "answer": "Chicago Cubs",
+    "explanation": "Ils n’avaient plus gagné depuis 1908."
+  },
+  {
+    "q": "Quel cycliste a remporté le Tour de France 1989 pour 8 secondes seulement ?",
+    "category": "Sport - Cyclisme",
+    "options": ["Greg LeMond", "Laurent Fignon", "Miguel Indurain", "Bernard Hinault"],
+    "answer": "Greg LeMond",
+    "explanation": "C’est le plus petit écart de l’histoire."
+  },
+  {
+    "q": "Quel pays a surpris le monde en remportant l’Euro 2004 ?",
+    "category": "Sport - Football",
+    "options": ["Grèce", "Portugal", "France", "Italie"],
+    "answer": "Grèce",
+    "explanation": "Une des plus grandes surprises du football."
+  },
+  {
+    "q": "Quelle patineuse artistique française a été championne olympique en 1992 ?",
+    "category": "Sport - Sports d'hiver",
+    "options": ["Surya Bonaly", "Sarah Abitbol", "Laetitia Hubert", "Aucune, c’est Kristi Yamaguchi"],
+    "answer": "Aucune, c’est Kristi Yamaguchi",
+    "explanation": "La patineuse américaine a remporté l’or à Albertville."
+  },
+  {
+    "q": "Quel club anglais a réalisé un triplé historique en 1999 avec un but dans le temps additionnel en finale ?",
+    "category": "Sport - Football",
+    "options": ["Manchester United", "Arsenal", "Liverpool", "Chelsea"],
+    "answer": "Manchester United",
+    "explanation": "Deux buts tardifs contre le Bayern Munich."
+  },
+  {
+    "q": "Quel joueur de basket est surnommé « King James » ?",
+    "category": "Sport - Basketball",
+    "options": ["LeBron James", "Kobe Bryant", "Kevin Durant", "Stephen Curry"],
+    "answer": "LeBron James",
+    "explanation": "Il est considéré comme l’un des plus grands joueurs."
+  },
+  {
+    "q": "Quelle sélection a remporté le premier Mondial de rugby en 1987 ?",
+    "category": "Sport - Rugby",
+    "options": ["Nouvelle-Zélande", "Australie", "Angleterre", "France"],
+    "answer": "Nouvelle-Zélande",
+    "explanation": "Les All Blacks ont battu la France en finale."
+  },
+  {
+    "q": "Quel golfeur a dominé le début des années 2000 avec le « Tiger Slam » ?",
+    "category": "Sport - Golf",
+    "options": ["Tiger Woods", "Phil Mickelson", "Rory McIlroy", "Ernie Els"],
+    "answer": "Tiger Woods",
+    "explanation": "Il détenait simultanément les quatre majeurs."
+  },
+  {
+    "q": "Quelle ville a accueilli les Jeux olympiques d’été 2012 ?",
+    "category": "Sport - Jeux olympiques",
+    "options": ["Londres", "Pékin", "Athènes", "Rio"],
+    "answer": "Londres",
+    "explanation": "La ville les organisait pour la troisième fois."
   }
   ]
 }
