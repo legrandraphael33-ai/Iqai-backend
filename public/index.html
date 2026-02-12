@@ -286,19 +286,31 @@
     color: #a8164a;
   }
 
-  #doubtBtn{
-    margin-top:10px;
-    width:100%;
-    padding:12px;
-    border-radius:12px;
-    border:2px dashed rgba(255,143,0,0.8);
-    background:#fff3e0;
-    font-weight:900;
-    cursor:pointer;
+ #doubtBtn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 15px; /* Un peu plus haut pour plus de visibilité */
+    border-radius: 12px;
+    border: none;
+    background: #ffff00; /* Jaune électrique */
+    color: #000; /* Texte noir pour un max de contraste */
+    font-weight: 900;
+    font-size: 1.1em;
+    cursor: pointer;
     font-family: var(--body-font);
+    box-shadow: 0 4px 0 #d4d400; /* Effet de profondeur */
+    transition: all 0.1s;
+    text-transform: uppercase;
   }
-  #doubtBtn:active{transform: translateY(1px);}
-  #doubtBtn:disabled{opacity:0.55;cursor:not-allowed;}
+  #doubtBtn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #d4d400;
+  }
+  #doubtBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(1);
+  }
 
   .cooldownMessage{
     text-align:center;
@@ -413,7 +425,7 @@
       <div class="options" id="optionsContainer"></div>
 
       <button id="nextBtn" disabled>Suivant</button>
-      <button id="doubtBtn" class="hidden">🤔 J'ai un doute</button>
+      <button id="doubtBtn" class="hidden">IA BULLSHIT 💩</button>
 
       <div id="errorContainer" class="hidden"></div>
     </div>
@@ -708,7 +720,7 @@
     nextBtn.disabled = (userAnswers[current] == null);
 
     doubtBtn.classList.remove("hidden");
-    doubtBtn.textContent="🤔 J'ai un doute";
+    doubtBtn.textContent="IA BULLSHIT 💩";
     doubtBtn.disabled=false;
 
     qObj.options.forEach(opt=>{
@@ -998,7 +1010,7 @@ function advanceQuestion(){
       div.className = "reviewItem";
       div.innerHTML = `
         <strong>Q${i+1}:</strong> ${q.q}<br>
-        <strong>Ta réponse :</strong> <span class="answerTag ${isCorrectSafe || isCorrectHalu ? 'ok' : 'bad'}">${isDoubt ? "🤔 J'ai un doute" : (user || "Temps écoulé")}</span><br>
+        <strong>Ta réponse :</strong> <span class="answerTag ${isCorrectSafe || isCorrectHalu ? 'ok' : 'bad'}">${isDoubt ? "IA BULLSHIT 💩" : (user || "Temps écoulé")}</span><br>
         <strong>Vérité :</strong> ${q.kind === "halu" ? "Incohérence IA" : q.answer}<br>
         <div style="margin-top:5px; font-size:0.9em; opacity:0.8;"><em>Note : ${q.explanation}</em></div>
         ${statusHTML}
