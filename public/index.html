@@ -1220,10 +1220,7 @@ notifAccept.onclick = async () => {
 
   // On attache la fonction à l'objet window pour être sûr que le onclick="submitScore()" du HTML la trouve
   window.submitScore = submitScore;
-  // Cette ligne relance l'animation du titre au chargement de la page
-  window.onload = () => {
-      animateTitle({ letterDelayMs: 140, initialDelayMs: 80 });
-  };
+  
 </script>
 </body>
 </html>
