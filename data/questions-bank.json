@@ -3681,6 +3681,713 @@
     "options": ["Gorille", "Oran-outan", "Bonobo", "Chimpanzé"],
     "answer": "Chimpanzé",
     "explanation": "Nous partageons environ 98,8 % de notre ADN avec les chimpanzés et les bonobos."
+  },
+    {
+    "q": "Quel philosophe affirmait que « tout ce que je sais, c’est que je ne sais rien » ?",
+    "category": "Philosophie antique",
+    "options": ["Socrate", "Platon", "Aristote", "Épicure"],
+    "answer": "Socrate",
+    "explanation": "Cette formule résume l’humilité intellectuelle de Socrate et sa méthode fondée sur le questionnement."
+  },
+  {
+    "q": "Quelle école philosophique cherchait l’ataraxie, c’est-à-dire la tranquillité de l’âme ?",
+    "category": "Philosophie antique",
+    "options": ["Stoïcisme", "Épicurisme", "Cynisme", "Scepticisme"],
+    "answer": "Épicurisme",
+    "explanation": "Les épicuriens visaient une paix intérieure obtenue par la modération des désirs."
+  },
+  {
+    "q": "Qui est le maître d’Aristote ?",
+    "category": "Philosophie antique",
+    "options": ["Socrate", "Platon", "Parménide", "Héraclite"],
+    "answer": "Platon",
+    "explanation": "Aristote a étudié pendant environ vingt ans à l’Académie fondée par Platon."
+  },
+  {
+    "q": "Dans quel ouvrage trouve-t-on l’allégorie de la caverne ?",
+    "category": "Philosophie antique",
+    "options": ["La République", "Le Banquet", "Phédon", "Les Lois"],
+    "answer": "La République",
+    "explanation": "Cette allégorie illustre la difficulté d’accéder à la connaissance véritable."
+  },
+  {
+    "q": "Quel philosophe vivait dans un tonneau selon la tradition ?",
+    "category": "Philosophie antique",
+    "options": ["Diogène", "Zénon", "Épicure", "Démocrite"],
+    "answer": "Diogène",
+    "explanation": "Diogène de Sinope incarnait le cynisme en rejetant les conventions sociales."
+  },
+  {
+    "q": "Quelle école recommandait de vivre conformément à la nature et d’accepter le destin ?",
+    "category": "Philosophie antique",
+    "options": ["Stoïcisme", "Épicurisme", "Sophisme", "Platonisme"],
+    "answer": "Stoïcisme",
+    "explanation": "Les stoïciens prônaient la maîtrise de soi et l’acceptation de ce qui ne dépend pas de nous."
+  },
+  {
+    "q": "Quel présocratique pensait que tout est en perpétuel changement ?",
+    "category": "Philosophie antique",
+    "options": ["Héraclite", "Parménide", "Anaximandre", "Empédocle"],
+    "answer": "Héraclite",
+    "explanation": "Il affirmait qu’on ne se baigne jamais deux fois dans le même fleuve."
+  },
+  {
+    "q": "Qui identifiait le bonheur à la recherche mesurée du plaisir ?",
+    "category": "Philosophie antique",
+    "options": ["Épicure", "Socrate", "Platon", "Plotin"],
+    "answer": "Épicure",
+    "explanation": "Le plaisir, pour Épicure, signifiait surtout l’absence de souffrance."
+  },
+  {
+    "q": "Quelle discipline Socrate pratiquait-il principalement dans les rues d’Athènes ?",
+    "category": "Philosophie antique",
+    "options": ["Le dialogue philosophique", "La rhétorique judiciaire", "La poésie", "La politique active"],
+    "answer": "Le dialogue philosophique",
+    "explanation": "Sa méthode consistait à interroger ses interlocuteurs pour faire émerger la vérité."
+  },
+  {
+    "q": "Quel philosophe est associé au « juste milieu » ?",
+    "category": "Philosophie antique",
+    "options": ["Aristote", "Platon", "Épicure", "Diogène"],
+    "answer": "Aristote",
+    "explanation": "Pour Aristote, la vertu se situe entre deux excès."
+  },
+  {
+    "q": "Quel théologien a écrit *Les Confessions* ?",
+    "category": "Théologie",
+    "options": ["Saint Augustin", "Thomas d’Aquin", "Tertullien", "Origène"],
+    "answer": "Saint Augustin",
+    "explanation": "Ce texte mêle autobiographie et réflexion spirituelle."
+  },
+  {
+    "q": "Dans quelle religion trouve-t-on le concept de nirvana ?",
+    "category": "Religions",
+    "options": ["Bouddhisme", "Hindouisme", "Islam", "Judaïsme"],
+    "answer": "Bouddhisme",
+    "explanation": "Le nirvana désigne l’extinction du désir et de la souffrance."
+  },
+  {
+    "q": "Comment appelle-t-on l’étude rationnelle de Dieu ?",
+    "category": "Théologie",
+    "options": ["Théologie", "Ontologie", "Cosmologie", "Herméneutique"],
+    "answer": "Théologie",
+    "explanation": "Elle cherche à comprendre la nature et les attributs du divin."
+  },
+  {
+    "q": "Quel penseur médiéval a tenté de concilier foi chrétienne et philosophie aristotélicienne ?",
+    "category": "Philosophie médiévale",
+    "options": ["Thomas d’Aquin", "Abélard", "Duns Scot", "Guillaume d’Ockham"],
+    "answer": "Thomas d’Aquin",
+    "explanation": "Il a intégré Aristote dans la doctrine chrétienne."
+  },
+  {
+    "q": "Dans quelle tradition apparaît la notion de karma ?",
+    "category": "Religions",
+    "options": ["Hindouisme", "Christianisme", "Islam", "Sikhisme"],
+    "answer": "Hindouisme",
+    "explanation": "Le karma relie les actions aux conséquences dans les vies futures."
+  },
+  {
+    "q": "Quel livre est considéré comme sacré dans l’islam ?",
+    "category": "Religions",
+    "options": ["Coran", "Torah", "Vedas", "Tripitaka"],
+    "answer": "Coran",
+    "explanation": "Les musulmans le considèrent comme la parole révélée de Dieu."
+  },
+  {
+    "q": "Comment nomme-t-on la croyance selon laquelle Dieu a créé le monde mais n’intervient plus ?",
+    "category": "Philosophie religieuse",
+    "options": ["Déisme", "Théisme", "Panthéisme", "Agnosticisme"],
+    "answer": "Déisme",
+    "explanation": "Cette vision était populaire chez certains penseurs des Lumières."
+  },
+  {
+    "q": "Quel patriarche biblique est prêt à sacrifier son fils ?",
+    "category": "Bible",
+    "options": ["Abraham", "Jacob", "Moïse", "Isaac"],
+    "answer": "Abraham",
+    "explanation": "Cet épisode symbolise la foi absolue."
+  },
+  {
+    "q": "Quelle branche du christianisme reconnaît l’autorité du pape ?",
+    "category": "Religions",
+    "options": ["Catholicisme", "Orthodoxie", "Protestantisme", "Anglicanisme"],
+    "answer": "Catholicisme",
+    "explanation": "Le pape est l’évêque de Rome et chef spirituel des catholiques."
+  },
+  {
+    "q": "Quel terme désigne la défense argumentée de la foi ?",
+    "category": "Théologie",
+    "options": ["Apologétique", "Exégèse", "Liturgie", "Mystique"],
+    "answer": "Apologétique",
+    "explanation": "Elle vise à justifier rationnellement les croyances religieuses."
+  },
+
+  {
+    "q": "Quel philosophe a formulé le « Je pense, donc je suis » ?",
+    "category": "Philosophie moderne",
+    "options": ["Descartes", "Spinoza", "Leibniz", "Locke"],
+    "answer": "Descartes",
+    "explanation": "Le cogito sert de fondement certain à la connaissance."
+  },
+  {
+    "q": "Quelle méthode ce penseur propose-t-il pour atteindre la certitude ?",
+    "category": "Philosophie moderne",
+    "options": ["Le doute méthodique", "L’induction", "La dialectique", "La phénoménologie"],
+    "answer": "Le doute méthodique",
+    "explanation": "Il consiste à remettre en question toutes les croyances incertaines."
+  },
+  {
+    "q": "Qui a écrit *Le Léviathan* ?",
+    "category": "Philosophie politique",
+    "options": ["Thomas Hobbes", "John Locke", "Rousseau", "Montesquieu"],
+    "answer": "Thomas Hobbes",
+    "explanation": "Il y défend la nécessité d’un pouvoir souverain fort."
+  },
+  {
+    "q": "Quel philosophe voit l’état de nature comme une guerre de tous contre tous ?",
+    "category": "Philosophie politique",
+    "options": ["Hobbes", "Locke", "Rousseau", "Kant"],
+    "answer": "Hobbes",
+    "explanation": "Sans autorité, la vie serait « solitaire, pauvre, brutale et courte »."
+  },
+  {
+    "q": "Qui affirme que l’homme naît bon mais est corrompu par la société ?",
+    "category": "Philosophie",
+    "options": ["Rousseau", "Voltaire", "Diderot", "Hume"],
+    "answer": "Rousseau",
+    "explanation": "Il critique les effets moraux de la civilisation."
+  },
+    {
+    "q": "Quel philosophe empiriste compare l’esprit à une « table rase » ?",
+    "category": "Philosophie moderne",
+    "options": ["John Locke", "David Hume", "Descartes", "Leibniz"],
+    "answer": "John Locke",
+    "explanation": "Locke soutient que l’esprit humain est vierge à la naissance et que la connaissance vient de l’expérience."
+  },
+  {
+    "q": "Qui distingue les jugements analytiques et synthétiques ?",
+    "category": "Philosophie moderne",
+    "options": ["Immanuel Kant", "Hegel", "Spinoza", "Berkeley"],
+    "answer": "Immanuel Kant",
+    "explanation": "Kant développe cette distinction dans sa théorie de la connaissance."
+  },
+  {
+    "q": "Quel philosophe parle d’« impératif catégorique » ?",
+    "category": "Philosophie morale",
+    "options": ["Kant", "Nietzsche", "Aristote", "Bentham"],
+    "answer": "Kant",
+    "explanation": "L’impératif catégorique commande d’agir selon une maxime que l’on voudrait universelle."
+  },
+  {
+    "q": "Dans quel pays Baruch Spinoza a-t-il vécu principalement ?",
+    "category": "Philosophie moderne",
+    "options": ["Pays-Bas", "Allemagne", "France", "Portugal"],
+    "answer": "Pays-Bas",
+    "explanation": "Spinoza a vécu au XVIIe siècle dans la République néerlandaise."
+  },
+  {
+    "q": "Comment appelle-t-on la doctrine selon laquelle tout est matière ?",
+    "category": "Métaphysique",
+    "options": ["Matérialisme", "Idéalisme", "Dualisme", "Spiritualisme"],
+    "answer": "Matérialisme",
+    "explanation": "Le matérialisme affirme que seule la réalité matérielle existe."
+  },
+  {
+    "q": "Quel terme désigne la recherche du bonheur comme but moral ?",
+    "category": "Éthique",
+    "options": ["Eudémonisme", "Stoïcisme", "Ascétisme", "Déterminisme"],
+    "answer": "Eudémonisme",
+    "explanation": "Du grec eudaimonia, il place le bonheur au centre de la morale."
+  },
+  {
+    "q": "Qu’est-ce que le relativisme moral ?",
+    "category": "Éthique",
+    "options": [
+      "L’idée que les valeurs dépendent des cultures ou des individus",
+      "La croyance en une morale universelle",
+      "Le rejet de toute morale",
+      "La soumission à la loi religieuse"
+    ],
+    "answer": "L’idée que les valeurs dépendent des cultures ou des individus",
+    "explanation": "Le relativisme nie l’existence de normes morales absolues."
+  },
+  {
+    "q": "Comment nomme-t-on la théorie selon laquelle nos sens sont la principale source de connaissance ?",
+    "category": "Épistémologie",
+    "options": ["Empirisme", "Rationalisme", "Idéalisme", "Scepticisme"],
+    "answer": "Empirisme",
+    "explanation": "Les empiristes soutiennent que l’expérience fonde le savoir."
+  },
+  {
+    "q": "Quel concept désigne la liberté radicale chez les existentialistes ?",
+    "category": "Philosophie contemporaine",
+    "options": ["Liberté ontologique", "Grâce divine", "Déterminisme naturel", "Fatalisme"],
+    "answer": "Liberté ontologique",
+    "explanation": "Chez Sartre notamment, l’homme est condamné à être libre."
+  },
+  {
+    "q": "Que signifie le mot grec « philosophia » ?",
+    "category": "Notions fondamentales",
+    "options": ["Amour de la sagesse", "Science de la nature", "Recherche du pouvoir", "Art du discours"],
+    "answer": "Amour de la sagesse",
+    "explanation": "Philo signifie amour et sophia sagesse."
+  },
+  {
+    "q": "Quelle notion s’oppose au déterminisme ?",
+    "category": "Métaphysique",
+    "options": ["Libre arbitre", "Matérialisme", "Nihilisme", "Relativisme"],
+    "answer": "Libre arbitre",
+    "explanation": "Le libre arbitre suppose que nos choix ne sont pas entièrement causés."
+  },
+  {
+    "q": "Comment appelle-t-on une contradiction interne dans un raisonnement ?",
+    "category": "Logique",
+    "options": ["Paradoxe", "Syllogisme", "Axiome", "Postulat"],
+    "answer": "Paradoxe",
+    "explanation": "Un paradoxe met en évidence une incohérence apparente ou réelle."
+  },
+  {
+    "q": "Quel terme désigne la croyance en plusieurs dieux ?",
+    "category": "Religions",
+    "options": ["Polythéisme", "Monothéisme", "Athéisme", "Déisme"],
+    "answer": "Polythéisme",
+    "explanation": "De nombreuses religions antiques étaient polythéistes."
+  },
+  {
+    "q": "Comment appelle-t-on l’absence de croyance en Dieu ?",
+    "category": "Philosophie religieuse",
+    "options": ["Athéisme", "Agnosticisme", "Déisme", "Panthéisme"],
+    "answer": "Athéisme",
+    "explanation": "L’athéisme rejette l’existence de toute divinité."
+  },
+  {
+    "q": "Quel philosophe déclare que « Dieu est mort » ?",
+    "category": "Philosophie contemporaine",
+    "options": ["Friedrich Nietzsche", "Heidegger", "Kierkegaard", "Marx"],
+    "answer": "Friedrich Nietzsche",
+    "explanation": "Cette formule critique le déclin des valeurs religieuses traditionnelles."
+  },
+  {
+    "q": "À quel courant appartient principalement Nietzsche ?",
+    "category": "Philosophie",
+    "options": ["Nihilisme", "Positivisme", "Structuralisme", "Empirisme"],
+    "answer": "Nihilisme",
+    "explanation": "Il analyse la perte de sens des valeurs, même s’il cherche à la dépasser."
+  },
+  {
+    "q": "Qui a écrit *L’Être et le Néant* ?",
+    "category": "Philosophie contemporaine",
+    "options": ["Jean-Paul Sartre", "Albert Camus", "Merleau-Ponty", "Levinas"],
+    "answer": "Jean-Paul Sartre",
+    "explanation": "Cet ouvrage majeur expose l’existentialisme sartrien."
+  },
+  {
+    "q": "Quel philosophe est associé à l’absurde et au mythe de Sisyphe ?",
+    "category": "Philosophie",
+    "options": ["Albert Camus", "Sartre", "Nietzsche", "Bergson"],
+    "answer": "Albert Camus",
+    "explanation": "Il voit l’absurde comme le décalage entre notre quête de sens et le silence du monde."
+  },
+  {
+    "q": "Qui analyse les mécanismes du pouvoir et de la surveillance sociale ?",
+    "category": "Philosophie contemporaine",
+    "options": ["Michel Foucault", "Pierre Bourdieu", "Gilles Deleuze", "Paul Ricœur"],
+    "answer": "Michel Foucault",
+    "explanation": "Il étudie notamment la discipline et le contrôle social."
+  },
+  {
+    "q": "Quel penseur parle de « déconstruction » ?",
+    "category": "Philosophie contemporaine",
+    "options": ["Jacques Derrida", "Foucault", "Habermas", "Rawls"],
+    "answer": "Jacques Derrida",
+    "explanation": "La déconstruction analyse les présupposés des textes et des concepts."
+  },
+  {
+    "q": "Quelle philosophe a étudié la banalité du mal ?",
+    "category": "Philosophie politique",
+    "options": ["Hannah Arendt", "Simone Weil", "Simone de Beauvoir", "Judith Butler"],
+    "answer": "Hannah Arendt",
+    "explanation": "Elle développe cette idée lors du procès Eichmann."
+  },
+  {
+    "q": "Quel courant insiste sur l’expérience vécue ?",
+    "category": "Philosophie",
+    "options": ["Phénoménologie", "Stoïcisme", "Néoplatonisme", "Utilitarisme"],
+    "answer": "Phénoménologie",
+    "explanation": "Ce courant étudie la manière dont les choses apparaissent à la conscience."
+  },
+  {
+    "q": "Qui a popularisé l’expression « l’enfer, c’est les autres » ?",
+    "category": "Philosophie",
+    "options": ["Jean-Paul Sartre", "Camus", "Beauvoir", "Heidegger"],
+    "answer": "Jean-Paul Sartre",
+    "explanation": "La phrase provient de sa pièce *Huis clos*."
+  },
+  {
+    "q": "Quel philosophe critique la morale traditionnelle au nom de la volonté de puissance ?",
+    "category": "Philosophie",
+    "options": ["Nietzsche", "Kant", "Hegel", "Locke"],
+    "answer": "Nietzsche",
+    "explanation": "Il remet en cause les valeurs morales héritées."
+  },
+  {
+    "q": "Comment appelle-t-on une société sans État ?",
+    "category": "Philosophie politique",
+    "options": ["Anarchie", "Monarchie", "Oligarchie", "Technocratie"],
+    "answer": "Anarchie",
+    "explanation": "Le terme ne signifie pas nécessairement chaos mais absence de pouvoir central."
+  },
+  {
+    "q": "Quel philosophe est associé à l’utilitarisme classique ?",
+    "category": "Philosophie morale",
+    "options": ["Jeremy Bentham", "Kant", "Aristote", "Descartes"],
+    "answer": "Jeremy Bentham",
+    "explanation": "Bentham fonde l’utilitarisme sur le principe du plus grand bonheur pour le plus grand nombre."
+  },
+  {
+    "q": "Que faut-il maximiser selon l’utilitarisme ?",
+    "category": "Philosophie morale",
+    "options": ["Le bonheur", "La vertu", "La liberté", "La foi"],
+    "answer": "Le bonheur",
+    "explanation": "Une action est jugée morale si elle augmente le bien-être global."
+  },
+  {
+    "q": "Quel concept désigne la séparation des pouvoirs ?",
+    "category": "Philosophie politique",
+    "options": ["Checks and balances", "Contrat social", "Souveraineté populaire", "Centralisme"],
+    "answer": "Checks and balances",
+    "explanation": "Ce principe vise à éviter la concentration du pouvoir en le répartissant."
+  },
+  {
+    "q": "Qui a théorisé le « voile d’ignorance » ?",
+    "category": "Philosophie politique",
+    "options": ["John Rawls", "Nozick", "Hobbes", "Mill"],
+    "answer": "John Rawls",
+    "explanation": "Il propose d’imaginer des règles justes sans connaître sa position sociale future."
+  },
+  {
+    "q": "Comment appelle-t-on le pouvoir exercé par le peuple ?",
+    "category": "Politique",
+    "options": ["Démocratie", "Aristocratie", "Théocratie", "Autocratie"],
+    "answer": "Démocratie",
+    "explanation": "Le mot vient du grec demos (peuple) et kratos (pouvoir)."
+  },
+  {
+    "q": "Quel terme désigne une autorité fondée sur la tradition ?",
+    "category": "Sociologie politique",
+    "options": ["Autorité traditionnelle", "Autorité charismatique", "Autorité légale-rationnelle", "Autorité populaire"],
+    "answer": "Autorité traditionnelle",
+    "explanation": "Max Weber distingue ce type d’autorité basé sur les coutumes."
+  },
+  {
+    "q": "Comment nomme-t-on une loi morale valable en toutes circonstances ?",
+    "category": "Éthique",
+    "options": ["Principe universel", "Convention sociale", "Dogme", "Opinion"],
+    "answer": "Principe universel",
+    "explanation": "Une morale universaliste s’applique indépendamment des contextes."
+  },
+  {
+    "q": "Quel philosophe antique liait politique et recherche du bien commun ?",
+    "category": "Philosophie antique",
+    "options": ["Aristote", "Épicure", "Diogène", "Pyrrhon"],
+    "answer": "Aristote",
+    "explanation": "Il voit la cité comme nécessaire à l’accomplissement humain."
+  },
+  {
+    "q": "Quel courant valorise avant tout la liberté individuelle face à l’État ?",
+    "category": "Philosophie politique",
+    "options": ["Libéralisme", "Collectivisme", "Absolutisme", "Féodalisme"],
+    "answer": "Libéralisme",
+    "explanation": "Il défend les droits individuels et limite le pouvoir étatique."
+  },
+  {
+    "q": "Quelle branche de la philosophie étudie l’être en tant qu’être ?",
+    "category": "Métaphysique",
+    "options": ["Ontologie", "Éthique", "Esthétique", "Logique"],
+    "answer": "Ontologie",
+    "explanation": "L’ontologie interroge ce que signifie exister."
+  },
+  {
+    "q": "Comment appelle-t-on l’idée que l’esprit et le corps sont distincts ?",
+    "category": "Métaphysique",
+    "options": ["Dualisme", "Monisme", "Matérialisme", "Empirisme"],
+    "answer": "Dualisme",
+    "explanation": "Descartes est l’un des défenseurs célèbres de cette position."
+  },
+  {
+    "q": "Quel philosophe défend un monisme identifiant Dieu et la nature ?",
+    "category": "Philosophie moderne",
+    "options": ["Spinoza", "Kant", "Hume", "Pascal"],
+    "answer": "Spinoza",
+    "explanation": "Sa formule Deus sive Natura signifie « Dieu ou la Nature »."
+  },
+  {
+    "q": "Que signifie « transcendant » en philosophie ?",
+    "category": "Notions philosophiques",
+    "options": ["Qui dépasse l’expérience ordinaire", "Qui est purement matériel", "Qui dépend des sens", "Qui est démontré scientifiquement"],
+    "answer": "Qui dépasse l’expérience ordinaire",
+    "explanation": "Le transcendant renvoie à ce qui excède le monde sensible."
+  },
+  {
+    "q": "Comment appelle-t-on ce qui peut être connu par l’expérience ?",
+    "category": "Épistémologie",
+    "options": ["Empirique", "Transcendantal", "Innatif", "Dialectique"],
+    "answer": "Empirique",
+    "explanation": "Une connaissance empirique repose sur l’observation."
+  },
+  {
+    "q": "Quel problème interroge l’existence du mal malgré celle d’un Dieu bon ?",
+    "category": "Philosophie religieuse",
+    "options": ["La théodicée", "Le solipsisme", "Le scepticisme", "Le panenthéisme"],
+    "answer": "La théodicée",
+    "explanation": "Elle cherche à justifier la bonté divine face au mal."
+  },
+  {
+    "q": "Comment nomme-t-on l’idée que tout a une cause ?",
+    "category": "Métaphysique",
+    "options": ["Causalité", "Finalisme", "Contingence", "Relativisme"],
+    "answer": "Causalité",
+    "explanation": "Le principe de causalité structure la pensée scientifique et philosophique."
+  },
+  {
+    "q": "Quel concept désigne la réalité telle qu’elle apparaît ?",
+    "category": "Philosophie",
+    "options": ["Phénomène", "Noumène", "Substance", "Essence"],
+    "answer": "Phénomène",
+    "explanation": "Chez Kant, le phénomène est ce que nous percevons."
+  },
+  {
+    "q": "Comment appelle-t-on ce qui existe indépendamment de l’esprit ?",
+    "category": "Métaphysique",
+    "options": ["Réalité objective", "Illusion", "Représentation", "Interprétation"],
+    "answer": "Réalité objective",
+    "explanation": "Elle ne dépend pas de la perception individuelle."
+  },
+  {
+    "q": "Quel terme désigne l’étude philosophique du temps et de l’espace ?",
+    "category": "Métaphysique",
+    "options": ["Cosmologie", "Téléologie", "Sémiologie", "Déontologie"],
+    "answer": "Cosmologie",
+    "explanation": "Elle interroge la structure fondamentale de l’univers."
+  },
+  {
+    "q": "Quelle réforme religieuse du XVIe siècle bouleverse l’Europe ?",
+    "category": "Histoire religieuse",
+    "options": ["La Réforme protestante", "Le Grand Schisme", "La Contre-Réforme", "L’Inquisition"],
+    "answer": "La Réforme protestante",
+    "explanation": "Elle entraîne une profonde division du christianisme."
+  },
+  {
+    "q": "Qui est l’un des principaux initiateurs de cette réforme ?",
+    "category": "Histoire religieuse",
+    "options": ["Martin Luther", "Thomas More", "Ignace de Loyola", "Érasme"],
+    "answer": "Martin Luther",
+    "explanation": "Ses 95 thèses critiquaient notamment les indulgences."
+  },
+  {
+    "q": "Comment appelle-t-on la coexistence de plusieurs religions dans une société ?",
+    "category": "Sociologie religieuse",
+    "options": ["Pluralisme religieux", "Syncrétisme", "Hérésie", "Schisme"],
+    "answer": "Pluralisme religieux",
+    "explanation": "Il implique la reconnaissance de diverses traditions."
+  },
+  {
+    "q": "Quel principe politique impose la neutralité religieuse de l’État en France ?",
+    "category": "Politique",
+    "options": ["Laïcité", "Sécularisation", "Fédéralisme", "Concordat"],
+    "answer": "Laïcité",
+    "explanation": "Elle garantit la liberté de conscience."
+  },
+  {
+    "q": "Quelle fête chrétienne célèbre la résurrection de Jésus ?",
+    "category": "Religions",
+    "options": ["Pâques", "Noël", "Pentecôte", "Assomption"],
+    "answer": "Pâques",
+    "explanation": "C’est la fête centrale du calendrier chrétien."
+  },
+  {
+    "q": "Quel jour est sacré dans le judaïsme ?",
+    "category": "Religions",
+    "options": ["Le sabbat", "Le dimanche", "Le vendredi", "Le solstice"],
+    "answer": "Le sabbat",
+    "explanation": "Il commence le vendredi soir et est consacré au repos."
+  },
+      {
+    "q": "Quel pays a remporté la Coupe du monde de football 1998 ?",
+    "category": "Sport - Football",
+    "options": ["France", "Brésil", "Italie", "Allemagne"],
+    "answer": "France",
+    "explanation": "La France a gagné 3-0 contre le Brésil au Stade de France."
+  },
+  {
+    "q": "Quelle équipe a réalisé le triplé Ligue des champions, championnat, coupe nationale en 2009 sous Pep Guardiola ?",
+    "category": "Sport - Football",
+    "options": ["FC Barcelone", "Manchester United", "Inter Milan", "Real Madrid"],
+    "answer": "FC Barcelone",
+    "explanation": "Le Barça de Guardiola est considéré comme l’une des meilleures équipes de l’histoire."
+  },
+  {
+    "q": "Quel sprinteur détient le record du monde du 100 m depuis 2009 ?",
+    "category": "Sport - Athlétisme",
+    "options": ["Usain Bolt", "Tyson Gay", "Yohan Blake", "Justin Gatlin"],
+    "answer": "Usain Bolt",
+    "explanation": "Il a couru en 9,58 secondes à Berlin."
+  },
+  {
+    "q": "Lors de quels Jeux olympiques Nadia Comăneci a-t-elle obtenu le premier 10 parfait en gymnastique ?",
+    "category": "Sport - Jeux olympiques",
+    "options": ["Montréal 1976", "Munich 1972", "Moscou 1980", "Los Angeles 1984"],
+    "answer": "Montréal 1976",
+    "explanation": "Sa performance a marqué l’histoire de la gymnastique."
+  },
+  {
+    "q": "Quelle équipe NBA a signé une saison record de 72 victoires en 1995-1996 ?",
+    "category": "Sport - Basketball",
+    "options": ["Chicago Bulls", "Los Angeles Lakers", "Boston Celtics", "Detroit Pistons"],
+    "answer": "Chicago Bulls",
+    "explanation": "Menés par Michael Jordan, ils ont dominé la ligue."
+  },
+  {
+    "q": "Quel pays a organisé la Coupe du monde de rugby 2007 ?",
+    "category": "Sport - Rugby",
+    "options": ["France", "Angleterre", "Nouvelle-Zélande", "Australie"],
+    "answer": "France",
+    "explanation": "La finale s’est jouée au Stade de France."
+  },
+  {
+    "q": "Quel boxeur a remporté le combat « Rumble in the Jungle » en 1974 ?",
+    "category": "Sport - Boxe",
+    "options": ["Muhammad Ali", "George Foreman", "Joe Frazier", "Sonny Liston"],
+    "answer": "Muhammad Ali",
+    "explanation": "Ali a surpris Foreman avec la tactique du rope-a-dope."
+  },
+  {
+    "q": "Quelle tennismane a remporté 23 titres du Grand Chelem en simple à l’ère Open ?",
+    "category": "Sport - Tennis",
+    "options": ["Serena Williams", "Steffi Graf", "Martina Navratilova", "Chris Evert"],
+    "answer": "Serena Williams",
+    "explanation": "Elle détient le record dans l’ère moderne."
+  },
+  {
+    "q": "Quel nageur a remporté 8 médailles d’or aux Jeux olympiques de Pékin 2008 ?",
+    "category": "Sport - Natation",
+    "options": ["Michael Phelps", "Ryan Lochte", "Ian Thorpe", "Mark Spitz"],
+    "answer": "Michael Phelps",
+    "explanation": "Un exploit inédit dans l’histoire olympique."
+  },
+  {
+    "q": "Quelle équipe a réussi le comeback historique contre les Falcons lors du Super Bowl LI ?",
+    "category": "Sport - Football américain",
+    "options": ["New England Patriots", "Dallas Cowboys", "Kansas City Chiefs", "Green Bay Packers"],
+    "answer": "New England Patriots",
+    "explanation": "Ils sont revenus de 28-3 pour gagner en prolongation."
+  },
+  {
+    "q": "Quel pilote de F1 a remporté son 7e titre mondial en 2020, égalant le record de Schumacher ?",
+    "category": "Sport - Formule 1",
+    "options": ["Lewis Hamilton", "Sebastian Vettel", "Fernando Alonso", "Kimi Räikkönen"],
+    "answer": "Lewis Hamilton",
+    "explanation": "Il a dominé la saison avec Mercedes."
+  },
+  {
+    "q": "Quelle équipe de football a réalisé la « Remontada » face au PSG en 2017 ?",
+    "category": "Sport - Football",
+    "options": ["FC Barcelone", "Real Madrid", "Bayern Munich", "Chelsea"],
+    "answer": "FC Barcelone",
+    "explanation": "Victoire 6-1 après une défaite 4-0 à l’aller."
+  },
+  {
+    "q": "Quel pays a remporté la Coupe du monde 2014 à domicile du Brésil ?",
+    "category": "Sport - Football",
+    "options": ["Allemagne", "Argentine", "Espagne", "Pays-Bas"],
+    "answer": "Allemagne",
+    "explanation": "Mario Götze a marqué en finale."
+  },
+  {
+    "q": "Quelle marathonienne kényane a battu le record du monde féminin en 2019 à Chicago ?",
+    "category": "Sport - Athlétisme",
+    "options": ["Brigid Kosgei", "Paula Radcliffe", "Mary Keitany", "Tirunesh Dibaba"],
+    "answer": "Brigid Kosgei",
+    "explanation": "Elle a amélioré un record vieux de 16 ans."
+  },
+  {
+    "q": "Quel club a remporté la première Ligue des champions de l’histoire en 1956 ?",
+    "category": "Sport - Football",
+    "options": ["Real Madrid", "AC Milan", "Benfica", "Reims"],
+    "answer": "Real Madrid",
+    "explanation": "Le club a ensuite dominé les premières éditions."
+  },
+  {
+    "q": "Quel skieur a dominé les Jeux olympiques d’hiver 1968 avec trois médailles d’or ?",
+    "category": "Sport - Sports d'hiver",
+    "options": ["Jean-Claude Killy", "Hermann Maier", "Bode Miller", "Alberto Tomba"],
+    "answer": "Jean-Claude Killy",
+    "explanation": "Il est devenu une icône du ski alpin."
+  },
+  {
+    "q": "Quelle équipe a mis fin à la malédiction des Chicago Cubs en 2016 ?",
+    "category": "Sport - Baseball",
+    "options": ["Chicago Cubs", "Cleveland Indians", "Boston Red Sox", "LA Dodgers"],
+    "answer": "Chicago Cubs",
+    "explanation": "Ils n’avaient plus gagné depuis 1908."
+  },
+  {
+    "q": "Quel cycliste a remporté le Tour de France 1989 pour 8 secondes seulement ?",
+    "category": "Sport - Cyclisme",
+    "options": ["Greg LeMond", "Laurent Fignon", "Miguel Indurain", "Bernard Hinault"],
+    "answer": "Greg LeMond",
+    "explanation": "C’est le plus petit écart de l’histoire."
+  },
+  {
+    "q": "Quel pays a surpris le monde en remportant l’Euro 2004 ?",
+    "category": "Sport - Football",
+    "options": ["Grèce", "Portugal", "France", "Italie"],
+    "answer": "Grèce",
+    "explanation": "Une des plus grandes surprises du football."
+  },
+  {
+    "q": "Quelle patineuse artistique française a été championne olympique en 1992 ?",
+    "category": "Sport - Sports d'hiver",
+    "options": ["Surya Bonaly", "Sarah Abitbol", "Laetitia Hubert", "Aucune, c’est Kristi Yamaguchi"],
+    "answer": "Aucune, c’est Kristi Yamaguchi",
+    "explanation": "La patineuse américaine a remporté l’or à Albertville."
+  },
+  {
+    "q": "Quel club anglais a réalisé un triplé historique en 1999 avec un but dans le temps additionnel en finale ?",
+    "category": "Sport - Football",
+    "options": ["Manchester United", "Arsenal", "Liverpool", "Chelsea"],
+    "answer": "Manchester United",
+    "explanation": "Deux buts tardifs contre le Bayern Munich."
+  },
+  {
+    "q": "Quel joueur de basket est surnommé « King James » ?",
+    "category": "Sport - Basketball",
+    "options": ["LeBron James", "Kobe Bryant", "Kevin Durant", "Stephen Curry"],
+    "answer": "LeBron James",
+    "explanation": "Il est considéré comme l’un des plus grands joueurs."
+  },
+  {
+    "q": "Quelle sélection a remporté le premier Mondial de rugby en 1987 ?",
+    "category": "Sport - Rugby",
+    "options": ["Nouvelle-Zélande", "Australie", "Angleterre", "France"],
+    "answer": "Nouvelle-Zélande",
+    "explanation": "Les All Blacks ont battu la France en finale."
+  },
+  {
+    "q": "Quel golfeur a dominé le début des années 2000 avec le « Tiger Slam » ?",
+    "category": "Sport - Golf",
+    "options": ["Tiger Woods", "Phil Mickelson", "Rory McIlroy", "Ernie Els"],
+    "answer": "Tiger Woods",
+    "explanation": "Il détenait simultanément les quatre majeurs."
+  },
+  {
+    "q": "Quelle ville a accueilli les Jeux olympiques d’été 2012 ?",
+    "category": "Sport - Jeux olympiques",
+    "options": ["Londres", "Pékin", "Athènes", "Rio"],
+    "answer": "Londres",
+    "explanation": "La ville les organisait pour la troisième fois."
   }
+
   ]
 }
