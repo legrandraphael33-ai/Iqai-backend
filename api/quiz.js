@@ -19,9 +19,13 @@ module.exports = async (req, res) => {
         const questionsData = JSON.parse(fs.readFileSync(questionsPath, 'utf-8'));
         const QUESTIONS_BANK = questionsData.questions;
 
-        // 3. Sélectionner 8 questions au hasard
-        const shuffled = [...QUESTIONS_BANK].sort(() => 0.5 - Math.random());
-        const safe8 = shuffled.slice(0, 8).map(q => ({ ...q, kind: "safe" }));
+        // 3. Sélectionner 8 questions au hasard (L'algorithme de brassage réel)
+        const allQuestions = [...QUESTIONS_BANK];
+        for (let i = allQuestions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]];
+        }
+        const safe8 = allQuestions.slice(0, 8).map(q => ({ ...q, kind: "safe" }));
 
         // 4. Générer 2 hallucinations avec OpenAI
         const completion = await openai.chat.completions.create({
@@ -39,8 +43,14 @@ module.exports = async (req, res) => {
                         .slice(0, 2)
                         .map(q => ({ ...q, kind: "halu" }));
 
-        // 5. Fusionner et mélanger le tout (10 questions)
-        const finalQuiz = [...safe8, ...hallu2].sort(() => 0.5 - Math.random());
+        // 5. Fusionner et mélanger le tout (10 questions) proprement
+        const finalQuiz = [...safe8, ...hallu2];
+        
+        // On applique encore le mélange Fisher-Yates sur les 10 questions finales
+        for (let i = finalQuiz.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [finalQuiz[i], finalQuiz[j]] = [finalQuiz[j], finalQuiz[i]];
+        }
 
         return res.status(200).json(finalQuiz);
 
