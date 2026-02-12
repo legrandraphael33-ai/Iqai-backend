@@ -3149,6 +3149,573 @@
       "options": ["100", "125", "150", "250"],
       "answer": "125",
       "explanation": "500 / 2 = 250, et 250 / 2 = 125."
-    }
+    },
+  {
+    "q": "Quelle est la capitale du Liechtenstein ?",
+    "category": "Géographie",
+    "options": ["Zurich", "Vaduz", "Luxembourg", "Bern"],
+    "answer": "Vaduz",
+    "explanation": "Vaduz est le siège du gouvernement du Liechtenstein, une petite principauté située entre la Suisse et l'Autriche."
+  },
+  {
+    "q": "Où est exposée la version originale du tableau 'Bonaparte franchissant le Grand-Saint-Bernard' de David ?",
+    "category": "Art",
+    "options": ["Musée du Louvre", "Château de Malmaison", "Château de Versailles", "Musée d'Orsay"],
+    "answer": "Château de Malmaison",
+    "explanation": "Bien qu'il en existe 5 versions, l'originale commandée par le roi d'Espagne a été installée à la Malmaison, demeure de Joséphine et Napoléon."
+  },
+  {
+    "q": "Quelle est la plus ancienne université au monde encore en activité ?",
+    "category": "Histoire",
+    "options": ["Oxford", "La Sorbonne", "Al Quaraouiyine (Maroc)", "Bologne"],
+    "answer": "Al Quaraouiyine (Maroc)",
+    "explanation": "Fondée en 859 à Fès, elle est reconnue par l'UNESCO et le Guinness des records comme la plus ancienne institution d'enseignement encore en activité."
+  },
+  {
+    "q": "Quelle est la fonction principale d'un 'Pare-feu' (Firewall) ?",
+    "category": "Technologie",
+    "options": ["Accélérer la connexion", "Bloquer les accès non autorisés", "Nettoyer le disque dur", "Refroidir le processeur"],
+    "answer": "Bloquer les accès non autorisés",
+    "explanation": "Le pare-feu surveille et contrôle le trafic réseau entrant et sortant selon des règles de sécurité."
+  },
+  {
+    "q": "Que signifie le 'Cloud Computing' ?",
+    "category": "Technologie",
+    "options": ["Calculer la météo", "Stocker des données sur internet", "Utiliser un ordinateur sans écran", "Un type de processeur"],
+    "answer": "Stocker des données sur internet",
+    "explanation": "C'est l'accès à des services informatiques (serveurs, stockage) via Internet plutôt que sur un disque local."
+  },
+  {
+    "q": "Lequel de ces mots est un synonyme de 'Éphémère' ?",
+    "category": "Français",
+    "options": ["Éternel", "Durable", "Passager", "Résistant"],
+    "answer": "Passager",
+    "explanation": "Ce qui est éphémère ne dure que très peu de temps."
+  },
+  {
+    "q": "Comment écrit-on correctement ce nombre ?",
+    "category": "Français",
+    "options": ["Quatre-vingt-dix", "Quatre-vingts-dix", "Quatre-vingt-dits", "Quatre-vins-dix"],
+    "answer": "Quatre-vingt-dix",
+    "explanation": "'Vingt' ne prend un 's' que s'il est multiplié et qu'il n'est pas suivi d'un autre chiffre."
+  },
+  {
+    "q": "Quel pays a offert la Statue de la Liberté aux États-Unis ?",
+    "category": "Histoire",
+    "options": ["Le Royaume-Uni", "L'Italie", "La France", "L'Espagne"],
+    "answer": "La France",
+    "explanation": "Elle a été offerte pour célébrer le centenaire de la Déclaration d'indépendance américaine."
+  },
+  {
+    "q": "Qui est considéré comme l'inventeur du Web (WWW) ?",
+    "category": "Culture Web",
+    "options": ["Bill Gates", "Tim Berners-Lee", "Steve Jobs", "Mark Zuckerberg"],
+    "answer": "Tim Berners-Lee",
+    "explanation": "Il a inventé le World Wide Web en 1989 alors qu'il travaillait au CERN."
+  },
+  {
+    "q": "Que signifie l'acronyme 'IA' ?",
+    "category": "Technologie",
+    "options": ["Informatique Avancée", "Intelligence Artificielle", "Internet Automatisé", "Interface Aléatoire"],
+    "answer": "Intelligence Artificielle",
+    "explanation": "L'IA désigne les systèmes capables de simuler l'intelligence humaine."
+  },
+  {
+    "q": "En programmation, qu'est-ce qu'une 'boucle' ?",
+    "category": "Informatique",
+    "options": ["Une erreur critique", "Un code qui se répète", "Un type de clavier", "Une connexion internet"],
+    "answer": "Un code qui se répète",
+    "explanation": "Une boucle permet d'exécuter plusieurs fois un bloc d'instructions tant qu'une condition est remplie."
+  },
+  {
+    "q": "Quel est le plus grand mammifère terrestre ?",
+    "category": "Nature",
+    "options": ["Le Rhinocéros", "L'Éléphant d'Afrique", "La Girafe", "L'Hippopotame"],
+    "answer": "L'Éléphant d'Afrique",
+    "explanation": "L'éléphant d'Afrique peut peser jusqu'à 6 tonnes."
+  },
+  {
+    "q": "Quel langage est souvent utilisé pour l'IA et la Data Science ?",
+    "category": "Technologie",
+    "options": ["HTML", "CSS", "Python", "PHP"],
+    "answer": "Python",
+    "explanation": "Python est plébiscité pour sa simplicité et ses puissantes bibliothèques de calcul."
+  },
+  {
+    "q": "Quel monument célèbre se trouve sur la place de l'Étoile à Paris ?",
+    "category": "Culture G",
+    "options": ["La Tour Eiffel", "L'Arc de Triomphe", "Le Louvre", "Le Panthéon"],
+    "answer": "L'Arc de Triomphe",
+    "explanation": "Napoléon Ier en a ordonné la construction en 1806 après la bataille d'Austerlitz."
+  },
+  {
+    "q": "Que signifie l'extension '.pdf' ?",
+    "category": "Technologie",
+    "options": ["Portable Document Format", "Page Digital File", "Printable Data File", "Personal Document Folder"],
+    "answer": "Portable Document Format",
+    "explanation": "C'est un format de fichier créé par Adobe pour préserver la mise en forme des documents."
+  },
+  {
+    "q": "Quelle est la principale source d'énergie d'une voiture électrique ?",
+    "category": "Science",
+    "options": ["L'hydrogène", "Le lithium", "Le charbon", "Le gaz"],
+    "answer": "Le lithium",
+    "explanation": "La plupart des voitures électriques actuelles utilisent des batteries lithium-ion."
+  },
+  {
+    "q": "Lequel de ces éléments n'est pas un périphérique de sortie ?",
+    "category": "Informatique",
+    "options": ["L'écran", "L'imprimante", "Le clavier", "Les haut-parleurs"],
+    "answer": "Le clavier",
+    "explanation": "Le clavier est un périphérique d'entrée car il envoie des informations à l'ordinateur."
+  },
+  {
+    "q": "Quelle est la capitale du Japon ?",
+    "category": "Géographie",
+    "options": ["Séoul", "Kyoto", "Tokyo", "Pékin"],
+    "answer": "Tokyo",
+    "explanation": "Tokyo est la ville la plus peuplée du Japon et son centre politique."
+  },
+  {
+    "q": "Comment appelle-t-on le 'cerveau' d'une IA capable de générer du texte ?",
+    "category": "IA",
+    "options": ["Un algorithme simple", "Un LLM (Large Language Model)", "Un tableur", "Une base de données"],
+    "answer": "Un LLM (Large Language Model)",
+    "explanation": "Un LLM est un modèle de langage entraîné sur de vastes quantités de données textuelles."
+  },
+  {
+    "q": "Quel est le résultat de 10 % de 200 ?",
+    "category": "Maths",
+    "options": ["10", "20", "2", "200"],
+    "answer": "20",
+    "explanation": "Pour calculer 10 %, on divise le nombre par 10."
+  },
+  {
+    "q": "Quel est le navigateur web par défaut sur iPhone ?",
+    "category": "Technologie",
+    "options": ["Chrome", "Edge", "Safari", "Firefox"],
+    "answer": "Safari",
+    "explanation": "Safari est le navigateur développé par Apple pour ses appareils."
+  },
+  {
+    "q": "Dans quel pays sont nés les Jeux Olympiques ?",
+    "category": "Histoire",
+    "options": ["La France", "L'Italie", "La Grèce", "L'Égypte"],
+    "answer": "La Grèce",
+    "explanation": "Les premiers JO ont eu lieu à Olympie en 776 avant J.-C."
+  },
+  {
+    "q": "Quelle est la langue la plus parlée au monde (natifs + non-natifs) ?",
+    "category": "Culture G",
+    "options": ["Le Mandarin", "L'Espagnol", "L'Anglais", "Le Français"],
+    "answer": "L'Anglais",
+    "explanation": "Grâce à son usage international, l'Anglais dépasse le Mandarin en nombre total de locuteurs."
+  },
+  {
+    "q": "Quel symbole utilise-t-on pour un hashtag sur les réseaux ?",
+    "category": "Culture Web",
+    "options": ["@", "$", "#", "&"],
+    "answer": "#",
+    "explanation": "Le hashtag (#) permet de regrouper des contenus autour d'un même thème."
+  },
+  {
+    "q": "Quel organe consomme le plus d'énergie dans le corps humain ?",
+    "category": "Science",
+    "options": ["Le cœur", "Le cerveau", "Le foie", "Les muscles"],
+    "answer": "Le cerveau",
+    "explanation": "Bien qu'il ne pèse que 2% du poids total, le cerveau utilise environ 20% de l'énergie du corps."
+  },
+    {
+    "q": "Quel est le titre exact du célèbre tableau de David montrant Napoléon sur un cheval cabré ?",
+    "category": "Art",
+    "options": ["Napoléon à Austerlitz", "Bonaparte franchissant le Grand-Saint-Bernard", "L'Empereur des Alpes", "Le Sacre de Napoléon"],
+    "answer": "Bonaparte franchissant le Grand-Saint-Bernard",
+    "explanation": "Peint par Jacques-Louis David entre 1800 et 1803, il existe en cinq versions quasi identiques."
+  },
+  {
+    "q": "En informatique, que signifie l'acronyme 'URL' ?",
+    "category": "Technologie",
+    "options": ["Universal Remote Link", "Uniform Resource Locator", "User Register Log", "Unified Redirection Line"],
+    "answer": "Uniform Resource Locator",
+    "explanation": "C'est l'adresse unique qui permet d'identifier une ressource (page web, image) sur Internet."
+  },
+  {
+    "q": "Quel est le nom de la première cryptomonnaie créée en 2009 ?",
+    "category": "Économie",
+    "options": ["Ethereum", "Ripple", "Bitcoin", "Litecoin"],
+    "answer": "Bitcoin",
+    "explanation": "Le Bitcoin a été lancé par une personne ou un groupe sous le pseudonyme de Satoshi Nakamoto."
+  },
+{
+    "q": "Lequel de ces acronymes désigne un format de compression audio sans perte ?",
+    "category": "Technologie",
+    "options": ["MP3", "WAV", "FLAC", "AAC"],
+    "answer": "FLAC",
+    "explanation": "FLAC signifie 'Free Lossless Audio Codec'. Contrairement au MP3, il ne supprime aucune donnée sonore."
+  },
+    {
+    "q": "Quelle particule élémentaire a une charge électrique négative ?",
+    "category": "Science",
+    "options": ["Le Proton", "Le Neutron", "L'Électron", "Le Quack"],
+    "answer": "L'Électron",
+    "explanation": "Les électrons orbitent autour du noyau de l'atome, qui lui est composé de protons (+) et de neutrons (neutres)."
+  },
+  {
+    "q": "Comment appelle-t-on le fait de tester une version A et une version B d'une page web ?",
+    "category": "Web Marketing",
+    "options": ["Le Beta Testing", "L'A/B Testing", "Le Cross Testing", "Le Split Debug"],
+    "answer": "L'A/B Testing",
+    "explanation": "Cela permet de comparer deux versions pour voir laquelle obtient les meilleurs résultats (clics, ventes)."
+  },
+    {
+    "q": "Que signifie 'Open Source' pour un logiciel ?",
+    "category": "Informatique",
+    "options": ["Il est gratuit", "Son code est public et modifiable", "Il fonctionne sans internet", "Il est créé par Google"],
+    "answer": "Son code est public et modifiable",
+    "explanation": "Un logiciel libre permet à n'importe qui d'étudier, modifier et distribuer son code source."
+  },
+  {
+    "q": "Quelle est la vitesse de la lumière (environ) ?",
+    "category": "Science",
+    "options": ["300 000 km/h", "300 000 km/s", "1 000 000 km/s", "150 000 km/s"],
+    "answer": "300 000 km/s",
+    "explanation": "La lumière voyage à exactement 299 792 458 mètres par seconde dans le vide."
+  },
+  {
+    "q": "Quel est le nom du fondateur de la société Space X ?",
+    "category": "Technologie",
+    "options": ["Jeff Bezos", "Richard Branson", "Elon Musk", "Bill Gates"],
+    "answer": "Elon Musk",
+    "explanation": "Musk a fondé SpaceX en 2002 avec l'objectif de réduire les coûts du transport spatial."
+  },
+  {
+    "q": "Quel gaz est le plus présent dans l'atmosphère terrestre ?",
+    "category": "Science",
+    "options": ["Oxygène", "Dioxyde de carbone", "Azote", "Argon"],
+    "answer": "Azote",
+    "explanation": "L'air que nous respirons contient environ 78 % d'azote et 21 % d'oxygène."
+  },
+  {
+    "q": "Dans quel langage de programmation le mot-clé 'console.log()' est-il utilisé ?",
+    "category": "Informatique",
+    "options": ["Python", "JavaScript", "PHP", "Ruby"],
+    "answer": "JavaScript",
+    "explanation": "C'est la commande standard pour afficher des informations dans la console du navigateur."
+  },
+    {
+    "q": "Quel est le nom du petit robot de la NASA qui a atterri sur Mars en 2021 ?",
+    "category": "Espace",
+    "options": ["Curiosity", "Opportunity", "Perseverance", "Spirit"],
+    "answer": "Perseverance",
+    "explanation": "Sa mission principale est de chercher des traces de vie ancienne sur la planète rouge."
+  },
+  {
+    "q": "Que signifie l'acronyme 'SaaS' ?",
+    "category": "Business Tech",
+    "options": ["System as a Service", "Software as a Service", "Security and a Service", "Storage as a System"],
+    "answer": "Software as a Service",
+    "explanation": "C'est un modèle où les logiciels sont hébergés sur le Cloud et accessibles via un abonnement."
+  },
+    {
+    "q": "Quel est le nom du premier navigateur web de l'histoire (grand public) ?",
+    "category": "Culture Web",
+    "options": ["Internet Explorer", "Netscape Navigator", "Mosaic", "Opera"],
+    "answer": "Mosaic",
+    "explanation": "Lancé en 1993, Mosaic a été le premier à afficher des images intégrées au texte."
+  },
+  {
+    "q": "Combien de cœurs possède une pieuvre ?",
+    "category": "Nature",
+    "options": ["1", "2", "3", "4"],
+    "answer": "3",
+    "explanation": "Elle a deux cœurs branchiaux pour le sang vers les branchies et un cœur systémique pour le reste du corps."
+  },
+  {
+    "q": "Quel métal est le meilleur conducteur d'électricité ?",
+    "category": "Science",
+    "options": ["Or", "Cuivre", "Argent", "Aluminium"],
+    "answer": "Argent",
+    "explanation": "L'argent est le meilleur conducteur, mais on utilise le cuivre car il est beaucoup moins cher."
+  },
+  {
+    "q": "Que signifie le 'R' dans l'acronyme 'RAM' ?",
+    "category": "Informatique",
+    "options": ["Read", "Random", "Rapid", "Reset"],
+    "answer": "Random",
+    "explanation": "RAM signifie 'Random Access Memory' (Mémoire à accès aléatoire)."
+  },
+  {
+    "q": "Qui a peint 'Guernica' ?",
+    "category": "Art",
+    "options": ["Salvador Dalí", "Joan Miró", "Pablo Picasso", "Henri Matisse"],
+    "answer": "Pablo Picasso",
+    "explanation": "Cette œuvre dénonce le bombardement de la ville de Guernica pendant la guerre civile espagnole."
+  },
+    {
+    "q": "Lequel n'est PAS un langage de programmation ?",
+    "category": "Informatique",
+    "options": ["Ruby", "C#", "JSON", "Rust"],
+    "answer": "JSON",
+    "explanation": "JSON est un format de stockage et d'échange de données, pas un langage de programmation."
+  },
+  {
+    "q": "Quel célèbre peintre a volontairement coupé une partie de son oreille ?",
+    "category": "Art",
+    "options": ["Salvador Dalí", "Vincent van Gogh", "Paul Gauguin", "Edvard Munch"],
+    "answer": "Vincent van Gogh",
+    "explanation": "Il s'est mutilé l'oreille gauche en 1888 à Arles, après une dispute avec Gauguin."
+  },
+  {
+    "q": "Quelle est la monnaie utilisée au Royaume-Uni ?",
+    "category": "Culture G",
+    "options": ["Euro", "Dollar", "Livre Sterling", "Franc"],
+    "answer": "Livre Sterling",
+    "explanation": "Bien qu'il ait fait partie de l'UE, le Royaume-Uni n'a jamais adopté l'Euro."
+  },
+  {
+    "q": "Que signifie l'acronyme 'PDF' ?",
+    "category": "Technologie",
+    "options": ["Portable Document Format", "Personal Data File", "Public Digital Folder", "Printable Document File"],
+    "answer": "Portable Document Format",
+    "explanation": "Ce format permet de visualiser un document de la même manière sur n'importe quel appareil."
+  },
+  {
+    "q": "Qui a réalisé le film 'Jurassic Park' en 1993 ?",
+    "category": "Cinéma",
+    "options": ["James Cameron", "Steven Spielberg", "George Lucas", "Christopher Nolan"],
+    "answer": "Steven Spielberg",
+    "explanation": "Le film a révolutionné les effets spéciaux avec l'utilisation des premiers dinosaures en images de synthèse."
+  },
+    {
+    "q": "Dans 'Star Wars', quel est le vrai nom de Dark Vador ?",
+    "category": "Cinéma",
+    "options": ["Luke Skywalker", "Anakin Skywalker", "Obi-Wan Kenobi", "Sheev Palpatine"],
+    "answer": "Anakin Skywalker",
+    "explanation": "Anakin bascule du côté obscur pour devenir l'apprenti de l'Empereur Palpatine."
+  },
+  {
+    "q": "Lequel de ces réseaux sociaux est limité à des messages courts (initialement 140 caractères) ?",
+    "category": "Culture Web",
+    "options": ["Facebook", "Instagram", "X (Twitter)", "LinkedIn"],
+    "answer": "X (Twitter)",
+    "explanation": "Initialement limité à 140, puis 280 caractères, le réseau a été racheté et renommé X par Elon Musk."
+  },
+  {
+    "q": "Quel est l'inventeur de l'imprimerie en Europe ?",
+    "category": "Histoire",
+    "options": ["Léonard de Vinci", "Johannes Gutenberg", "Nicolas Tesla", "Galilée"],
+    "answer": "Johannes Gutenberg",
+    "explanation": "Son invention vers 1440 a permis la diffusion massive du savoir à travers l'Europe."
+  },
+  {
+    "q": "Que signifie le terme 'Phishing' ?",
+    "category": "Cybersécurité",
+    "options": ["Un jeu de pêche", "Une tentative d'escroquerie par email", "Un virus qui détruit les fichiers", "Une mise à jour système"],
+    "answer": "Une tentative d'escroquerie par email",
+    "explanation": "Le pirate se fait passer pour une entité de confiance pour voler vos identifiants ou vos données bancaires."
+  },
+  {
+    "q": "Quel animal est connu pour pouvoir changer de couleur pour se camoufler ?",
+    "category": "Nature",
+    "options": ["Le Caméléon", "L'Iguane", "Le Gecko", "La Salamandre"],
+    "answer": "Le Caméléon",
+    "explanation": "Le changement de couleur est dû à des cellules spécialisées appelées chromatophores."
+  },
+  {
+    "q": "Combien de planètes composent notre système solaire ?",
+    "category": "Science",
+    "options": ["7", "8", "9", "10"],
+    "answer": "8",
+    "explanation": "Depuis 2006, Pluton n'est plus considérée comme une planète mais comme une planète naine."
+  },
+  {
+    "q": "Quelle est l'unité de mesure de la fréquence électrique ?",
+    "category": "Science",
+    "options": ["Volt", "Watt", "Hertz", "Ampère"],
+    "answer": "Hertz",
+    "explanation": "Le Hertz (Hz) mesure le nombre d'oscillations par seconde d'un phénomène périodique."
+  },
+  {
+    "q": "Qui est le créateur du personnage de Sherlock Holmes ?",
+    "category": "Littérature",
+    "options": ["Agatha Christie", "Arthur Conan Doyle", "Edgar Allan Poe", "Maurice Leblanc"],
+    "answer": "Arthur Conan Doyle",
+    "explanation": "Le célèbre détective résidait au 221B Baker Street à Londres."
+  },
+  {
+    "q": "Quel est le composant d'un ordinateur qui stocke les données à long terme ?",
+    "category": "Technologie",
+    "options": ["RAM", "Processeur", "Disque Dur / SSD", "Carte Mère"],
+    "answer": "Disque Dur / SSD",
+    "explanation": "Contrairement à la RAM, les données sur un SSD restent enregistrées même quand l'appareil est éteint."
+  },
+    {
+    "q": "Quel compositeur est l'auteur de 'La Neuvième Symphonie' (Hymne à la Joie) ?",
+    "category": "Musique",
+    "options": ["Bach", "Vivaldi", "Beethoven", "Chopin"],
+    "answer": "Beethoven",
+    "explanation": "Beethoven était presque totalement sourd lorsqu'il a composé cette œuvre magistrale."
+  },
+  {
+    "q": "Que signifie 'HTTP 404' lors de la navigation sur le Web ?",
+    "category": "Technologie",
+    "options": ["Accès interdit", "Serveur surchargé", "Page non trouvée", "Erreur de paiement"],
+    "answer": "Page non trouvée",
+    "explanation": "C'est le code d'erreur standard indiquant que le serveur n'a pas trouvé la ressource demandée."
+  },
+    {
+    "q": "Quel est le nom du premier satellite artificiel envoyé dans l'espace en 1957 ?",
+    "category": "Espace",
+    "options": ["Apollo 11", "Spoutnik 1", "Voyager 1", "Hubble"],
+    "answer": "Spoutnik 1",
+    "explanation": "Lancé par l'URSS, Spoutnik 1 a marqué le début de l'ère spatiale."
+  },
+  {
+    "q": "Que signifie l'acronyme 'VPN' ?",
+    "category": "Technologie",
+    "options": ["Virtual Private Network", "Variable Protocol Node", "Visual Path Navigation", "Verified Private Network"],
+    "answer": "Virtual Private Network",
+    "explanation": "Un VPN crée un tunnel sécurisé entre votre appareil et Internet pour protéger votre confidentialité."
+  },
+  {
+    "q": "Dans le film 'Inception', quel objet Cobb utilise-t-il comme totem ?",
+    "category": "Cinéma",
+    "options": ["Un dé", "Une pièce", "Une toupie", "Une clé"],
+    "answer": "Une toupie",
+    "explanation": "Si la toupie tourne indéfiniment, cela signifie qu'il est encore dans un rêve."
+  },
+  {
+    "q": "Lequel de ces éléments chimiques est le plus abondant dans l'univers ?",
+    "category": "Science",
+    "options": ["Oxygène", "Hélium", "Carbone", "Hydrogène"],
+    "answer": "Hydrogène",
+    "explanation": "L'hydrogène constitue environ 75 % de la masse élémentaire de l'univers."
+  },
+  {
+    "q": "Qui a fondé l'entreprise Amazon ?",
+    "category": "Business",
+    "options": ["Elon Musk", "Jeff Bezos", "Steve Jobs", "Larry Page"],
+    "answer": "Jeff Bezos",
+    "explanation": "Amazon a débuté en 1994 comme une simple librairie en ligne dans le garage de Bezos."
+  },
+  {
+    "q": "Quelle est la capitale de l'Islande ?",
+    "category": "Géographie",
+    "options": ["Oslo", "Reykjavik", "Stockholm", "Helsinki"],
+    "answer": "Reykjavik",
+    "explanation": "C'est la capitale la plus septentrionale du monde pour un État souverain."
+  },
+    {
+    "q": "Lequel de ces pays n'est pas membre de l'Union Européenne ?",
+    "category": "Géographie",
+    "options": ["Pologne", "Norvège", "Irlande", "Grèce"],
+    "answer": "Norvège",
+    "explanation": "La Norvège a refusé par référendum à deux reprises l'adhésion à l'Union Européenne."
+  },
+    {
+    "q": "Quelle entreprise a développé le système d'exploitation Android ?",
+    "category": "Technologie",
+    "options": ["Apple", "Microsoft", "Google", "Samsung"],
+    "answer": "Google",
+    "explanation": "Android a été racheté par Google en 2005 et est devenu le système mobile le plus utilisé au monde."
+  },
+    {
+    "q": "Quel est le plus petit pays du monde ?",
+    "category": "Géographie",
+    "options": ["Monaco", "Saint-Marin", "Le Vatican", "Malte"],
+    "answer": "Le Vatican",
+    "explanation": "Avec une superficie d'environ 0,44 km², c'est un État souverain enclavé dans la ville de Rome."
+  },
+  {
+    "q": "Quel est le résultat de la racine carrée de 144 ?",
+    "category": "Maths",
+    "options": ["10", "11", "12", "14"],
+    "answer": "12",
+    "explanation": "12 multiplié par 12 donne exactement 144."
+  },
+  {
+    "q": "Dans quelle ville se trouve le siège de l'ONU ?",
+    "category": "Culture G",
+    "options": ["Genève", "Washington", "New York", "Bruxelles"],
+    "answer": "New York",
+    "explanation": "Le complexe se trouve sur les rives de l'East River à Manhattan."
+  },
+  {
+    "q": "Qui a inventé l'ampoule électrique (brevet commercial) ?",
+    "category": "Histoire",
+    "options": ["Thomas Edison", "Nikola Tesla", "Benjamin Franklin", "Alexander Bell"],
+    "answer": "Thomas Edison",
+    "explanation": "Edison a perfectionné et commercialisé l'ampoule à incandescence en 1879."
+  },
+  {
+    "q": "Quelle est la couleur du sang des pieuvres ?",
+    "category": "Nature",
+    "options": ["Rouge", "Vert", "Bleu", "Transparent"],
+    "answer": "Bleu",
+    "explanation": "Leur sang utilise l'hémocyanine à base de cuivre pour transporter l'oxygène, ce qui lui donne cette couleur."
+  },
+    {
+    "q": "Quel est le nom du fondateur de Microsoft ?",
+    "category": "Business Tech",
+    "options": ["Steve Jobs", "Bill Gates", "Larry Ellison", "Michael Dell"],
+    "answer": "Bill Gates",
+    "explanation": "Gates a co-fondé Microsoft avec Paul Allen en 1975."
+  },
+  {
+    "q": "Que signifie l'extension de fichier '.iso' ?",
+    "category": "Technologie",
+    "options": ["Image disque", "Fichier texte", "Format audio", "Script compressé"],
+    "answer": "Image disque",
+    "explanation": "C'est une archive contenant la copie conforme de l'intégralité d'un disque (CD, DVD, etc.)."
+  },
+  {
+    "q": "Quelle est la distance approximative Terre-Lune ?",
+    "category": "Espace",
+    "options": ["150 000 km", "384 000 km", "1 000 000 km", "50 000 km"],
+    "answer": "384 000 km",
+    "explanation": "Cette distance varie légèrement car l'orbite de la Lune n'est pas parfaitement circulaire."
+  },
+  {
+    "q": "Dans quel sport utilise-t-on un 'palet' ?",
+    "category": "Sport",
+    "options": ["Handball", "Hockey sur glace", "Curling", "Lacrosse"],
+    "answer": "Hockey sur glace",
+    "explanation": "Le palet (ou puck) est fabriqué en caoutchouc vulcanisé."
+  },
+  {
+    "q": "Qui a peint 'La Nuit étoilée' ?",
+    "category": "Art",
+    "options": ["Claude Monet", "Vincent van Gogh", "Paul Cézanne", "Henri Matisse"],
+    "answer": "Vincent van Gogh",
+    "explanation": "Il l'a peinte depuis sa chambre à l'asile de Saint-Rémy-de-Provence en 1889."
+  },
+    {
+    "q": "Comment s'appelle le 'père' de l'informatique moderne ?",
+    "category": "Histoire",
+    "options": ["Alan Turing", "Charles Babbage", "Bill Gates", "Isaac Newton"],
+    "answer": "Alan Turing",
+    "explanation": "Pendant la Seconde Guerre mondiale, il a brisé le code Enigma des nazis."
+  },
+    {
+    "q": "Que signifie l'acronyme 'IoT' ?",
+    "category": "Technologie",
+    "options": ["Internet of Things", "Input Output Task", "Internal Online Tool", "Integrated Operating Tech"],
+    "answer": "Internet of Things",
+    "explanation": "C'est l'Internet des objets, qui connecte des appareils du quotidien au réseau."
+  },
+    {
+    "q": "Lequel de ces films a remporté le plus d'Oscars de l'histoire (11) ?",
+    "category": "Cinéma",
+    "options": ["Titanic", "Avatar", "Star Wars", "Le Parrain"],
+    "answer": "Titanic",
+    "explanation": "Il partage ce record avec 'Ben-Hur' et 'Le Seigneur des anneaux : Le Retour du roi'."
+  },
+    {
+    "q": "Quel animal est le plus proche génétiquement de l'être humain ?",
+    "category": "Nature",
+    "options": ["Gorille", "Oran-outan", "Bonobo", "Chimpanzé"],
+    "answer": "Chimpanzé",
+    "explanation": "Nous partageons environ 98,8 % de notre ADN avec les chimpanzés et les bonobos."
+  }
   ]
 }
