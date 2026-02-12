@@ -286,19 +286,31 @@
     color: #a8164a;
   }
 
-  #doubtBtn{
-    margin-top:10px;
-    width:100%;
-    padding:12px;
-    border-radius:12px;
-    border:2px dashed rgba(255,143,0,0.8);
-    background:#fff3e0;
-    font-weight:900;
-    cursor:pointer;
+ #doubtBtn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 15px; /* Un peu plus haut pour plus de visibilité */
+    border-radius: 12px;
+    border: none;
+    background: #ffff00; /* Jaune électrique */
+    color: #000; /* Texte noir pour un max de contraste */
+    font-weight: 900;
+    font-size: 1.1em;
+    cursor: pointer;
     font-family: var(--body-font);
+    box-shadow: 0 4px 0 #d4d400; /* Effet de profondeur */
+    transition: all 0.1s;
+    text-transform: uppercase;
   }
-  #doubtBtn:active{transform: translateY(1px);}
-  #doubtBtn:disabled{opacity:0.55;cursor:not-allowed;}
+  #doubtBtn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #d4d400;
+  }
+  #doubtBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(1);
+  }
 
   .cooldownMessage{
     text-align:center;
@@ -413,7 +425,7 @@
       <div class="options" id="optionsContainer"></div>
 
       <button id="nextBtn" disabled>Suivant</button>
-      <button id="doubtBtn" class="hidden">🤔 J'ai un doute</button>
+      <button id="doubtBtn" class="hidden">IA BULLSHIT 💩</button>
 
       <div id="errorContainer" class="hidden"></div>
     </div>
@@ -708,7 +720,7 @@
     nextBtn.disabled = (userAnswers[current] == null);
 
     doubtBtn.classList.remove("hidden");
-    doubtBtn.textContent="🤔 J'ai un doute";
+    doubtBtn.textContent="IA BULLSHIT 💩";
     doubtBtn.disabled=false;
 
     qObj.options.forEach(opt=>{
@@ -998,7 +1010,7 @@ function advanceQuestion(){
       div.className = "reviewItem";
       div.innerHTML = `
         <strong>Q${i+1}:</strong> ${q.q}<br>
-        <strong>Ta réponse :</strong> <span class="answerTag ${isCorrectSafe || isCorrectHalu ? 'ok' : 'bad'}">${isDoubt ? "🤔 J'ai un doute" : (user || "Temps écoulé")}</span><br>
+        <strong>Ta réponse :</strong> <span class="answerTag ${isCorrectSafe || isCorrectHalu ? 'ok' : 'bad'}">${isDoubt ? "IA BULLSHIT 💩" : (user || "Temps écoulé")}</span><br>
         <strong>Vérité :</strong> ${q.kind === "halu" ? "Incohérence IA" : q.answer}<br>
         <div style="margin-top:5px; font-size:0.9em; opacity:0.8;"><em>Note : ${q.explanation}</em></div>
         ${statusHTML}
@@ -1108,19 +1120,25 @@ function advanceQuestion(){
     }
   }
 
-  notifAccept.onclick = async () => {
-    notifPopup.classList.add('hidden');
-    // Déclencher le popup natif OneSignal
-    if (window.OneSignal) {
-      OneSignalDeferred.push(async function(OneSignal) {
-        try {
-          await OneSignal.Slidedown.promptPush();
-        } catch(e) {
-          console.log('OneSignal prompt error:', e);
-        }
-      });
-    }
-  };
+notifAccept.onclick = async () => {
+  notifPopup.classList.add('hidden');
+  
+  if (window.OneSignal) {
+    OneSignalDeferred.push(async function(OneSignal) {
+      try {
+        // ON FORCE LE PROMPT NATIF DU NAVIGATEUR
+        await OneSignal.Notifications.requestPermission();
+        
+        // On ajoute un tag pour tes futurs messages automatisés
+        await OneSignal.User.addTag("status", "joueur_actif");
+        
+        console.log("Demande d'autorisation envoyée");
+      } catch(e) {
+        console.log('OneSignal prompt error:', e);
+      }
+    });
+  }
+};
 
   notifDecline.onclick = () => {
     notifPopup.classList.add('hidden');
@@ -1128,77 +1146,84 @@ function advanceQuestion(){
 
   // Exposer la fonction globalement pour l'appeler après le quiz
   window.showNotifPopup = showNotifPopup;
-  // ==========================================
-//      FONCTIONS POUR LE CLASSEMENT (RANKING)
 // ==========================================
+  // FONCTIONS POUR LE CLASSEMENT (RANKING)
+  // ==========================================
 
-// 1. Charger et afficher le Top 3
-async function loadLeaderboard() {
-    const list = document.getElementById('leaderboardList');
-    if (!list) return;
+  // 1. Charger et afficher le Top 3
+  async function loadLeaderboard() {
+      const list = document.getElementById('leaderboardList');
+      if (!list) return;
 
-    try {
-        const res = await fetch('/api/leaderboard');
-        const top3 = await res.json();
+      try {
+          const res = await fetch('/api/leaderboard');
+          const top3 = await res.json();
 
-        if (!top3 || top3.length === 0) {
-            list.innerHTML = "<p style='font-size:0.9em; color:#888; font-style:italic;'>Personne n'a encore bravé l'IA aujourd'hui. Sois le premier !</p>";
-        } else {
-            list.innerHTML = top3.map((p, i) => `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding: 10px 0; border-bottom: 1px solid #eee;">
-                    <span style="font-size: 1.05em;">
-                        ${i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'} 
-                        <strong>${p.pseudo}</strong>
-                    </span>
-                    <span style="background: #263238; color: white; padding: 3px 10px; border-radius: 6px; font-weight: bold; font-family: sans-serif;">
-                        ${p.score} pts
-                    </span>
-                </div>
-            `).join('');
-        }
-    } catch (err) {
-        console.error("Erreur ranking:", err);
-        list.innerHTML = "<p style='color:#a8164a; font-size:0.9em;'>Le classement est temporairement indisponible.</p>";
-    }
-}
+          if (!top3 || top3.length === 0) {
+              list.innerHTML = "<p style='font-size:0.9em; color:#888; font-style:italic;'>Personne n'a encore bravé l'IA aujourd'hui. Sois le premier !</p>";
+          } else {
+              list.innerHTML = top3.map((p, i) => `
+                  <div style="display:flex; justify-content:space-between; align-items:center; padding: 10px 0; border-bottom: 1px solid #eee;">
+                      <span style="font-size: 1.05em;">
+                          ${i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'} 
+                          <strong>${p.pseudo}</strong>
+                      </span>
+                      <span style="background: #263238; color: white; padding: 3px 10px; border-radius: 6px; font-weight: bold; font-family: sans-serif;">
+                          ${p.score} pts
+                      </span>
+                  </div>
+              `).join('');
+          }
+      } catch (err) {
+          console.error("Erreur ranking:", err);
+          list.innerHTML = "<p style='color:#a8164a; font-size:0.9em;'>Le classement est temporairement indisponible.</p>";
+      }
+  }
 
-// 2. Envoyer le score du joueur
-async function submitScore() {
-    const pseudoInput = document.getElementById('playerPseudo');
-    const pseudo = pseudoInput.value.trim();
-    
-    if (!pseudo) {
-        alert("Hé ! Il nous faut un petit nom pour le podium !");
-        return;
-    }
+  // 2. Envoyer le score du joueur
+  async function submitScore() {
+      const pseudoInput = document.getElementById('playerPseudo');
+      const pseudo = pseudoInput.value.trim();
+      
+      if (!pseudo) {
+          alert("Hé ! Il nous faut un petit nom pour le podium !");
+          return;
+      }
 
-    if (pseudo.length < 2) {
-        alert("Ton pseudo est un peu court, non ? (2 caractères min)");
-        return;
-    }
+      if (pseudo.length < 2) {
+          alert("Ton pseudo est un peu court, non ? (2 caractères min)");
+          return;
+      }
 
-    // On récupère le score total calculé dans showResult
-    const finalScore = score + vigilance;
+      // On récupère le score total calculé dans showResult
+      const finalScore = score + vigilance;
 
-    try {
-        const response = await fetch('/api/leaderboard', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ pseudo: pseudo, score: finalScore }) 
-        });
+      try {
+          const response = await fetch('/api/leaderboard', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ pseudo: pseudo, score: finalScore }) 
+          });
 
-        if (response.ok) {
-            // Si c'est bon, on cache la zone de saisie et on rafraîchit le podium
-            document.getElementById('pseudoInputArea').style.display = 'none';
-            await loadLeaderboard();
-        } else {
-            alert("Petit souci technique lors de l'envoi du score.");
-        }
-    } catch (err) {
-        console.error(err);
-        alert("Impossible de joindre le serveur pour enregistrer ton score.");
-    }
-}
+          if (response.ok) {
+              // Si c'est bon, on cache la zone de saisie et on rafraîchit le podium
+              document.getElementById('pseudoInputArea').style.display = 'none';
+              await loadLeaderboard();
+          } else {
+              alert("Petit souci technique lors de l'envoi du score.");
+          }
+      } catch (err) {
+          console.error(err);
+          alert("Impossible de joindre le serveur pour enregistrer ton score.");
+      }
+  }
+
+  // On attache la fonction à l'objet window pour être sûr que le onclick="submitScore()" du HTML la trouve
+  window.submitScore = submitScore;
+  // Cette ligne relance l'animation du titre au chargement de la page
+  window.onload = () => {
+      animateTitle({ letterDelayMs: 140, initialDelayMs: 80 });
+  };
 </script>
 </body>
 </html>

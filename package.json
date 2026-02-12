@@ -2,7 +2,7 @@
   "name": "iqai-backend",
   "version": "1.0.0",
   "dependencies": {
-    "@vercel/kv": "^1.0.1",
+    "redis": "^4.6.10",
     "openai": "^4.0.0"
   }
 }
