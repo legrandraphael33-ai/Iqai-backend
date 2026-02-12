@@ -169,13 +169,6 @@
       "explanation": "Le carré de 12 est 144."
     },
     {
-      "q": "Quel organe permet aux poissons de respirer sous l'eau ?",
-      "category": "Sciences",
-      "options": ["Poumons", "Branchies", "Écailles", "Nageoires"],
-      "answer": "Branchies",
-      "explanation": "Les branchies extraient l'oxygène dissous dans l'eau."
-    },
-    {
       "q": "Quel écrivain a créé le détective Hercule Poirot ?",
       "category": "Littérature",
       "options": ["Arthur Conan Doyle", "Agatha Christie", "Maurice Leblanc", "Gaston Leroux"],
@@ -554,13 +547,6 @@
       "explanation": "Le symbole est £."
     },
     {
-      "q": "Quel est le pluriel du mot 'travail' ?",
-      "category": "Français",
-      "options": ["Travails", "Travaux", "Travailles", "Travaux ou Travails"],
-      "answer": "Travaux",
-      "explanation": "Le pluriel de travail est travaux, sauf pour les 'travails' d'un maréchal-ferrant."
-    },
-    {
       "q": "Combien font 11 x 11 ?",
       "category": "Mathématiques",
       "options": ["111", "121", "131", "141"],
@@ -631,13 +617,6 @@
       "explanation": "Rome est la capitale de l'Italie depuis 1871."
     },
     {
-      "q": "Quelle figure de style utilise une partie pour désigner le tout ?",
-      "category": "Français",
-      "options": ["La métonymie", "La synecdoque", "La métaphore", "La personnification"],
-      "answer": "La synecdoque",
-      "explanation": "Exemple : 'Vivre sous le même toit' (le toit pour la maison)."
-    },
-    {
       "q": "Quel est le plus grand pays du monde par sa superficie ?",
       "category": "Géographie",
       "options": ["Canada", "États-Unis", "Chine", "Russie"],
@@ -671,13 +650,6 @@
       "options": ["Rousseau", "Voltaire", "Diderot", "Montesquieu"],
       "answer": "Voltaire",
       "explanation": "Ce conte philosophique a été publié en 1759."
-    },
-    {
-      "q": "Quelle est la capitale du Portugal ?",
-      "category": "Géographie",
-      "options": ["Madrid", "Porto", "Lisbonne", "Faro"],
-      "answer": "Lisbonne",
-      "explanation": "Lisbonne est l'une des plus anciennes villes d'Europe."
     },
     {
       "q": "Quel est le résultat de 4 x 4 x 4 ?",
@@ -741,13 +713,6 @@
       "options": ["L'allitération", "L'assonance", "La rime", "L'onomatopée"],
       "answer": "L'assonance",
       "explanation": "L'assonance est la répétition d'une voyelle (ex: 'Tout m'afflige et me nuit et me vient à l'encontre')."
-    },
-    {
-      "q": "Quel est l'élément le plus abondant dans l'univers ?",
-      "category": "Sciences",
-      "options": ["L'oxygène", "L'hydrogène", "L'hélium", "Le carbone"],
-      "answer": "L'hydrogène",
-      "explanation": "L'hydrogène constitue environ 75 % de la masse élémentaire de l'univers."
     },
     {
       "q": "Qui a écrit 'Le Malade imaginaire' ?",
@@ -1366,13 +1331,6 @@
       "explanation": "Mexico est construite sur l'ancienne cité aztèque de Tenochtitlán."
     },
     {
-      "q": "Combien font 12 x 12 ?",
-      "category": "Mathématiques",
-      "options": ["124", "134", "144", "154"],
-      "answer": "144",
-      "explanation": "12 x 12 = 144."
-    },
-    {
       "q": "Qui a peint 'La Liberté guidant le peuple' ?",
       "category": "Arts",
       "options": ["Géricault", "Delacroix", "Ingres", "Courbet"],
@@ -1462,13 +1420,6 @@
       "options": ["Lac Tanganyika", "Lac Malawi", "Lac Victoria", "Lac Tchad"],
       "answer": "Lac Victoria",
       "explanation": "Le lac Victoria est la source principale du Nil blanc."
-    },
-    {
-      "q": "Qui a peint 'Guernica' ?",
-      "category": "Arts",
-      "options": ["Salvador Dalí", "Joan Miró", "Pablo Picasso", "Diego Velázquez"],
-      "answer": "Pablo Picasso",
-      "explanation": "Cette œuvre dénonce le bombardement de la ville de Guernica pendant la guerre d'Espagne."
     },
     {
       "q": "Combien font 1000 - 245 ?",
@@ -1632,13 +1583,6 @@
       "explanation": "9 x 10 = 90, 9 x 2 = 18. 90 + 18 = 108."
     },
     {
-      "q": "Quel est le pluriel du mot 'Festival' ?",
-      "category": "Français",
-      "options": ["Festivaux", "Festivals", "Festivales", "Festivaux ou Festivals"],
-      "answer": "Festivals",
-      "explanation": "Contrairement à 'travail' ou 'bal', festival prend un 's'."
-    },
-    {
       "q": "Quelle est la capitale du Chili ?",
       "category": "Géographie",
       "options": ["Valparaíso", "Santiago", "Concepción", "La Paz"],
@@ -1679,13 +1623,6 @@
       "options": ["Ca", "Co", "C", "Cr"],
       "answer": "C",
       "explanation": "Le carbone est la base de toute la chimie organique."
-    },
-    {
-      "q": "Quelle est la capitale du Portugal ?",
-      "category": "Géographie",
-      "options": ["Porto", "Lisbonne", "Faro", "Coimbra"],
-      "answer": "Lisbonne",
-      "explanation": "Lisbonne est l'une des plus vieilles villes du monde, bien plus vieille que Londres ou Rome."
     },
     {
       "q": "Combien font 19 + 19 + 19 ?",
@@ -1877,13 +1814,6 @@
       "explanation": "L'onomatopée permet de transcrire phonétiquement un son."
     },
     {
-      "q": "Qui a peint 'Le Cri' ?",
-      "category": "Arts",
-      "options": ["Edvard Munch", "Gustav Klimt", "Vassily Kandinsky", "Marc Chagall"],
-      "answer": "Edvard Munch",
-      "explanation": "L'artiste norvégien a créé plusieurs versions de cette œuvre."
-    },
-    {
       "q": "Quelle est la capitale de l'Afrique du Sud ?",
       "category": "Géographie",
       "options": ["Johannesbourg", "Le Cap", "Pretoria", "Durban"],
@@ -1996,13 +1926,6 @@
       "explanation": "C'est le premier film en langue étrangère à remporter l'Oscar du meilleur film."
     },
     {
-      "q": "Quelle est la capitale de l'Islande ?",
-      "category": "Géographie",
-      "options": ["Oslo", "Reykjavik", "Helsinki", "Nuuk"],
-      "answer": "Reykjavik",
-      "explanation": "Reykjavik signifie 'baie des fumées' en islandais."
-    },
-    {
       "q": "Combien font 125 / 5 ?",
       "category": "Mathématiques",
       "options": ["15", "20", "25", "30"],
@@ -2022,27 +1945,6 @@
       "options": ["L'or", "Le cuivre", "L'argent", "L'aluminium"],
       "answer": "L'argent",
       "explanation": "L'argent conduit mieux que le cuivre, mais il est beaucoup plus coûteux."
-    },
-    {
-      "q": "Quelle est la capitale du Pérou ?",
-      "category": "Géographie",
-      "options": ["Cusco", "Lima", "Quito", "Arequipa"],
-      "answer": "Lima",
-      "explanation": "Lima a été fondée par le conquistador Francisco Pizarro."
-    },
-    {
-      "q": "Combien font 6 x 14 ?",
-      "category": "Mathématiques",
-      "options": ["74", "84", "94", "64"],
-      "answer": "84",
-      "explanation": "6 x 10 = 60, 6 x 4 = 24. 60 + 24 = 84."
-    },
-    {
-      "q": "Quelle figure de style utilise une exagération volontaire ? (ex: 'Je meurs de faim')",
-      "category": "Français",
-      "options": ["La litote", "L'hyperbole", "La périphrase", "La métonymie"],
-      "answer": "L'hyperbole",
-      "explanation": "L'hyperbole sert à frapper les esprits par l'excès."
     },
     {
       "q": "Dans quel film de Disney rencontre-t-on le personnage de Simba ?",
@@ -2071,13 +1973,6 @@
       "options": ["Dostoïevski", "Tolstoï", "Tchekhov", "Pouchkine"],
       "answer": "Tolstoï",
       "explanation": "Ce roman monumental traite de l'histoire de la Russie face à Napoléon."
-    },
-    {
-      "q": "Quelle est la capitale du Vietnam ?",
-      "category": "Géographie",
-      "options": ["Hanoï", "Saïgon", "Hô Chi Minh-Ville", "Huê"],
-      "answer": "Hanoï",
-      "explanation": "Hanoï est la capitale depuis la réunification du pays en 1976."
     },
     {
       "q": "Quel groupe de rock britannique a sorti l'album 'The Dark Side of the Moon' en 1973 ?",
@@ -2220,13 +2115,6 @@
       "explanation": "Sorti en 1975, il est considéré comme le premier 'blockbuster' de l'été."
     },
     {
-      "q": "Quelle est la capitale de l'Iran ?",
-      "category": "Géographie",
-      "options": ["Bagdad", "Téhéran", "Riyad", "Damas"],
-      "answer": "Téhéran",
-      "explanation": "Téhéran se situe au pied des montagnes de l'Elbourz."
-    },
-    {
       "q": "Combien font 13 x 13 ?",
       "category": "Mathématiques",
       "options": ["159", "169", "179", "189"],
@@ -2260,13 +2148,6 @@
       "options": ["20", "30", "40", "50"],
       "answer": "30",
       "explanation": "90 / 3 = 30, donc 900 / 30 = 30."
-    },
-    {
-      "q": "Quelle figure de style consiste à donner à un mot un sens très fort par une exagération ? (ex: 'Un géant' pour un homme grand)",
-      "category": "Français",
-      "options": ["La métaphore", "L'hyperbole", "L'euphémisme", "La litote"],
-      "answer": "L'hyperbole",
-      "explanation": "L'hyperbole accentue la réalité pour marquer l'esprit."
     },
     {
       "q": "Quel réseau social a été créé par Mark Zuckerberg en 2004 ?",
@@ -2304,13 +2185,6 @@
       "explanation": "C'est l'un des rares groupes de l'Eurovision à être devenu une légende mondiale."
     },
     {
-      "q": "Quelle est la capitale de la Malaisie ?",
-      "category": "Géographie",
-      "options": ["Singapour", "Jakarta", "Kuala Lumpur", "Manille"],
-      "answer": "Kuala Lumpur",
-      "explanation": "Elle abrite les tours Petronas, autrefois les plus hautes du monde."
-    },
-    {
       "q": "Combien font 6 x 17 ?",
       "category": "Mathématiques",
       "options": ["92", "102", "112", "122"],
@@ -2318,25 +2192,11 @@
       "explanation": "6 x 10 = 60, 6 x 7 = 42. 60 + 42 = 102."
     },
     {
-      "q": "Quelle figure de style réunit deux mots de sens opposés dans un même groupe ? (ex: 'Un silence assourdissant')",
-      "category": "Français",
-      "options": ["L'antithèse", "L'oxymore", "Le paradoxe", "Le pléonasme"],
-      "answer": "L'oxymore",
-      "explanation": "L'oxymore crée un effet de surprise ou d'absurdité poétique."
-    },
-    {
       "q": "Quel réalisateur a créé la saga 'Star Wars' ?",
       "category": "Cinéma",
       "options": ["Steven Spielberg", "George Lucas", "James Cameron", "Francis Ford Coppola"],
       "answer": "George Lucas",
       "explanation": "Le premier film est sorti en 1977."
-    },
-    {
-      "q": "Quelle est la capitale de l'Islande ?",
-      "category": "Géographie",
-      "options": ["Oslo", "Reykjavik", "Copenhague", "Helsinki"],
-      "answer": "Reykjavik",
-      "explanation": "C'est la capitale la plus au nord de la planète."
     },
     {
       "q": "Combien font 250 / 5 ?",
@@ -2528,25 +2388,11 @@
       "explanation": "25 x 4 = 100, donc 25 x 8 = 200."
     },
     {
-      "q": "Quelle figure de style consiste à prêter des traits humains à un objet ? (ex: 'Le vent hurle')",
-      "category": "Français",
-      "options": ["L'allégorie", "La personnification", "La métaphore", "La litote"],
-      "answer": "La personnification",
-      "explanation": "La personnification donne vie à ce qui est inanimé."
-    },
-    {
       "q": "Quel réseau social est limité à l'origine à 140 caractères ?",
       "category": "Culture Pop",
       "options": ["Instagram", "Twitter (X)", "Snapchat", "LinkedIn"],
       "answer": "Twitter (X)",
       "explanation": "La limite est passée à 280 caractères en 2017 avant de nombreux changements sous X."
-    },
-    {
-      "q": "Quelle est la capitale de la Suède ?",
-      "category": "Géographie",
-      "options": ["Oslo", "Copenhague", "Stockholm", "Helsinki"],
-      "answer": "Stockholm",
-      "explanation": "La ville est construite sur quatorze îles reliées par 57 ponts."
     },
     {
       "q": "Combien font 600 / 15 ?",
@@ -2598,20 +2444,6 @@
       "explanation": "Steve Jobs a présenté l'iPhone comme trois appareils en un."
     },
     {
-      "q": "Quelle est la capitale de la Thaïlande ?",
-      "category": "Géographie",
-      "options": ["Phuket", "Chiang Mai", "Bangkok", "Pattaya"],
-      "answer": "Bangkok",
-      "explanation": "Son nom cérémonial est l'un des plus longs noms de ville au monde."
-    },
-    {
-      "q": "Combien font 9 x 13 ?",
-      "category": "Mathématiques",
-      "options": ["107", "117", "127", "137"],
-      "answer": "117",
-      "explanation": "10 x 9 = 90, 3 x 9 = 27. 90 + 27 = 117."
-    },
-    {
       "q": "Quel est le pluriel du mot 'Aïeul' (au sens des ancêtres) ?",
       "category": "Français",
       "options": ["Aïeuls", "Aïeux", "Aïeulses", "Aïeulx"],
@@ -2624,13 +2456,6 @@
       "options": ["Hercule Poirot", "Arsène Lupin", "Sherlock Holmes", "Commissaire Maigret"],
       "answer": "Sherlock Holmes",
       "explanation": "C'est l'adresse de sa pension tenue par Mme Hudson."
-    },
-    {
-      "q": "Quelle est la capitale de l'Espagne ?",
-      "category": "Géographie",
-      "options": ["Barcelone", "Séville", "Madrid", "Valence"],
-      "answer": "Madrid",
-      "explanation": "Madrid est située au centre géographique de la péninsule ibérique."
     },
     {
       "q": "Combien font 150 + 150 + 75 ?",
@@ -2654,20 +2479,6 @@
       "explanation": "Le rat s'appelle Rémy et le restaurant 'Chez Gusteau'."
     },
     {
-      "q": "Quelle est la capitale du Canada ?",
-      "category": "Géographie",
-      "options": ["Toronto", "Montréal", "Ottawa", "Vancouver"],
-      "answer": "Ottawa",
-      "explanation": "Elle a été choisie par la reine Victoria pour sa position stratégique."
-    },
-    {
-      "q": "Combien font 11 x 11 ?",
-      "category": "Mathématiques",
-      "options": ["111", "121", "131", "141"],
-      "answer": "121",
-      "explanation": "11 x 11 = 121."
-    },
-    {
       "q": "Quel est le pluriel du mot 'Bleu' ?",
       "category": "Français",
       "options": ["Bleus", "Bleux", "Bleues", "Bleu"],
@@ -2680,13 +2491,6 @@
       "options": ["James Cameron", "Steven Spielberg", "Ridley Scott", "George Lucas"],
       "answer": "Steven Spielberg",
       "explanation": "Le film de 1993 a révolutionné l'usage des effets spéciaux numériques."
-    },
-    {
-      "q": "Quelle est la capitale de la Corée du Sud ?",
-      "category": "Géographie",
-      "options": ["Pékin", "Tokyo", "Séoul", "Pyongyang"],
-      "answer": "Séoul",
-      "explanation": "Séoul est l'une des villes les plus connectées au monde."
     },
     {
       "q": "Combien font 80 / 5 ?",
@@ -2710,39 +2514,11 @@
       "explanation": "Prince était un multi-instrumentiste de génie, capable de jouer de 27 instruments."
     },
     {
-      "q": "Quelle est la capitale de l'Autriche ?",
-      "category": "Géographie",
-      "options": ["Berlin", "Prague", "Vienne", "Bratislava"],
-      "answer": "Vienne",
-      "explanation": "Vienne est mondialement connue pour ses bals et son opéra."
-    },
-    {
-      "q": "Combien font 12 x 12 ?",
-      "category": "Mathématiques",
-      "options": ["142", "144", "146", "148"],
-      "answer": "144",
-      "explanation": "12 x 12 = 144."
-    },
-    {
-      "q": "Quel auteur a écrit 'Les Misérables' ?",
-      "category": "Littérature",
-      "options": ["Gustave Flaubert", "Victor Hugo", "Émile Zola", "Honoré de Balzac"],
-      "answer": "Victor Hugo",
-      "explanation": "Ce roman suit le destin de Jean Valjean de 1815 à 1832."
-    },
-    {
       "q": "Dans quel univers de fiction trouve-t-on les super-héros Iron Man et Thor ?",
       "category": "Culture Pop",
       "options": ["DC Comics", "Marvel", "Dark Horse", "Image Comics"],
       "answer": "Marvel",
       "explanation": "Ils font partie de l'équipe des Avengers."
-    },
-    {
-      "q": "Quelle est la capitale de l'Irlande ?",
-      "category": "Géographie",
-      "options": ["Belfast", "Dublin", "Cork", "Galway"],
-      "answer": "Dublin",
-      "explanation": "Dublin est située sur l'embouchure de la rivière Liffey."
     },
     {
       "q": "Combien font 45 x 2 ?",
@@ -2752,25 +2528,11 @@
       "explanation": "Le double de 45 est 90."
     },
     {
-      "q": "Quelle figure de style crée un contraste frappant en juxtaposant deux termes contraires ?",
-      "category": "Français",
-      "options": ["L'oxymore", "L'antithèse", "L'hyperbole", "La litote"],
-      "answer": "L'antithèse",
-      "explanation": "L'antithèse oppose deux idées au sein d'une même phrase."
-    },
-    {
       "q": "Qui est le créateur du réseau social 'X' (anciennement Twitter) ?",
       "category": "Culture Pop",
       "options": ["Mark Zuckerberg", "Jack Dorsey", "Jeff Bezos", "Bill Gates"],
       "answer": "Jack Dorsey",
       "explanation": "Jack Dorsey a envoyé le tout premier tweet en mars 2006."
-    },
-    {
-      "q": "Quelle est la capitale de la Pologne ?",
-      "category": "Géographie",
-      "options": ["Cracovie", "Varsovie", "Gdansk", "Poznań"],
-      "answer": "Varsovie",
-      "explanation": "Varsovie a été presque entièrement reconstruite après la Seconde Guerre mondiale."
     },
     {
       "q": "Combien font 1000 - 1 ?",
@@ -2794,39 +2556,11 @@
       "explanation": "16 x 3 = 48 (30 + 18)."
     },
     {
-      "q": "Quelle est la capitale de l'Argentine ?",
-      "category": "Géographie",
-      "options": ["Santiago", "Lima", "Buenos Aires", "Bogotá"],
-      "answer": "Buenos Aires",
-      "explanation": "C'est l'une des plus grandes villes d'Amérique du Sud, située sur la rive sud du Río de la Plata."
-    },
-    {
-      "q": "Quelle figure de style est utilisée ici : 'Le roi des forêts' pour désigner le cerf ?",
-      "category": "Français",
-      "options": ["Une métaphore", "Une périphrase", "Une hyperbole", "Une litote"],
-      "answer": "Une périphrase",
-      "explanation": "La périphrase remplace un mot par une expression qui le définit. Ici, le 'roi des forêts' désigne traditionnellement le cerf."
-    },
-    {
-      "q": "Quelle planète est la plus proche du Soleil ?",
-      "category": "Sciences",
-      "options": ["Vénus", "Terre", "Mars", "Mercure"],
-      "answer": "Mercure",
-      "explanation": "Mercure est la plus petite planète du système solaire et la plus proche de l'étoile."
-    },
-    {
       "q": "Quel groupe a chanté 'Bohemian Rhapsody' ?",
       "category": "Culture Pop",
       "options": ["The Rolling Stones", "Queen", "Led Zeppelin", "The Who"],
       "answer": "Queen",
       "explanation": "Sortie en 1975, cette chanson est célèbre pour sa structure inhabituelle mêlant rock et opéra."
-    },
-    {
-      "q": "Combien font 140 / 7 ?",
-      "category": "Mathématiques",
-      "options": ["15", "20", "25", "30"],
-      "answer": "20",
-      "explanation": "14 / 7 = 2, donc 140 / 7 = 20."
     },
     {
       "q": "Quelle est la fonction principale des globules rouges dans le sang ?",
@@ -2841,13 +2575,6 @@
       "options": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
       "answer": "Rio de Janeiro",
       "explanation": "La statue domine la ville du haut du mont Corcovado."
-    },
-    {
-      "q": "Quel est le pluriel du mot 'Hibou' ?",
-      "category": "Français",
-      "options": ["Hibous", "Hiboux", "Hibou", "Hiboux ou Hibous"],
-      "answer": "Hiboux",
-      "explanation": "C'est une des sept exceptions des mots en -ou qui prennent un -x au pluriel."
     },
     {
       "q": "Quelle force attire les objets vers le centre de la Terre ?",
@@ -2878,20 +2605,6 @@
       "explanation": "Les branchies sont des organes respiratoires filtrant l'oxygène dissous dans l'eau."
     },
     {
-      "q": "Quelle est la capitale de l'Égypte ?",
-      "category": "Géographie",
-      "options": ["Alexandrie", "Louxor", "Le Caire", "Gizeh"],
-      "answer": "Le Caire",
-      "explanation": "Le Caire est la ville la plus peuplée d'Afrique et du monde arabe."
-    },
-    {
-      "q": "Quel poète français a écrit 'Les Fleurs du Mal' ?",
-      "category": "Français",
-      "options": ["Arthur Rimbaud", "Charles Baudelaire", "Paul Verlaine", "Victor Hugo"],
-      "answer": "Charles Baudelaire",
-      "explanation": "Publié en 1857, ce recueil est un pilier de la poésie moderne."
-    },
-    {
       "q": "Quelle est l'étoile la plus proche de la Terre ?",
       "category": "Sciences",
       "options": ["Sirius", "Proxima du Centaure", "Le Soleil", "L'étoile Polaire"],
@@ -2918,13 +2631,6 @@
       "options": ["Azote", "Hydrogène", "Oxygène", "Dioxyde de carbone"],
       "answer": "Oxygène",
       "explanation": "Le dioxygène (O2) est indispensable à la survie de la plupart des êtres vivants."
-    },
-    {
-      "q": "Quelle est la capitale de la Hongrie ?",
-      "category": "Géographie",
-      "options": ["Bratislava", "Budapest", "Prague", "Vienne"],
-      "answer": "Budapest",
-      "explanation": "La ville est traversée par le Danube et célèbre pour ses bains thermaux."
     },
     {
       "q": "Quel est le participe passé du verbe 'Lire' ?",
@@ -2955,13 +2661,6 @@
       "explanation": "Diviser par 10 revient à décaler la virgule d'un rang vers la gauche."
     },
     {
-      "q": "Quel peintre néerlandais a réalisé 'La Nuit étoilée' ?",
-      "category": "Culture Pop",
-      "options": ["Rembrandt", "Vincent van Gogh", "Johannes Vermeer", "Piet Mondrian"],
-      "answer": "Vincent van Gogh",
-      "explanation": "Cette œuvre post-impressionniste est l'une des plus célèbres au monde."
-    },
-    {
       "q": "Quelle est la capitale de la Russie ?",
       "category": "Géographie",
       "options": ["Saint-Pétersbourg", "Moscou", "Vladivostok", "Novossibirsk"],
@@ -2976,39 +2675,11 @@
       "explanation": "Elle permet aux végétaux de transformer l'eau et le CO2 en glucose grâce à la lumière."
     },
     {
-      "q": "Combien font 15 x 4 ?",
-      "category": "Mathématiques",
-      "options": ["45", "50", "60", "75"],
-      "answer": "60",
-      "explanation": "15 x 4 = 60."
-    },
-    {
-      "q": "Qui est l'auteur de la saga littéraire 'Harry Potter' ?",
-      "category": "Culture Pop",
-      "options": ["Stephenie Meyer", "J.K. Rowling", "Suzanne Collins", "George R.R. Martin"],
-      "answer": "J.K. Rowling",
-      "explanation": "La série comporte sept romans publiés entre 1997 et 2007."
-    },
-    {
-      "q": "Quelle est la capitale du Maroc ?",
-      "category": "Géographie",
-      "options": ["Casablanca", "Marrakech", "Rabat", "Fès"],
-      "answer": "Rabat",
-      "explanation": "Rabat est la capitale politique et le siège du gouvernement marocain."
-    },
-    {
       "q": "Quel métal lourd est connu pour être liquide à température ambiante ?",
       "category": "Sciences",
       "options": ["Le plomb", "L'étain", "Le mercure", "Le zinc"],
       "answer": "Le mercure",
       "explanation": "Le mercure (symbole Hg) a un point de fusion de -38,8°C."
-    },
-    {
-      "q": "Quel est le contraire (antonyme) du mot 'Éphémère' ?",
-      "category": "Français",
-      "options": ["Bref", "Fugace", "Durable", "Provisoire"],
-      "answer": "Durable",
-      "explanation": "Ce qui est éphémère ne dure qu'un instant ; ce qui est durable s'inscrit dans le temps."
     },
     {
       "q": "Combien font 40 x 5 ?",
@@ -3039,20 +2710,6 @@
       "explanation": "Cette formule établit l'équivalence entre la masse et l'énergie."
     },
     {
-      "q": "Quelle est la capitale de la Finlande ?",
-      "category": "Géographie",
-      "options": ["Oslo", "Stockholm", "Helsinki", "Tallinn"],
-      "answer": "Helsinki",
-      "explanation": "Helsinki est la ville la plus au nord de l'Union européenne."
-    },
-    {
-      "q": "Quelle figure de style exagère la réalité pour produire un effet fort ?",
-      "category": "Français",
-      "options": ["La litote", "L'hyperbole", "L'euphémisme", "L'allégorie"],
-      "answer": "L'hyperbole",
-      "explanation": "Exemple : 'C'est un géant !' pour désigner une personne simplement grande."
-    },
-    {
       "q": "Combien font 100 - 37 ?",
       "category": "Mathématiques",
       "options": ["53", "63", "73", "83"],
@@ -3065,41 +2722,6 @@
       "options": ["Au Pakistan", "En Inde", "En Iran", "En Turquie"],
       "answer": "En Inde",
       "explanation": "C'est un mausolée construit par l'empereur moghol Shah Jahan à Agra."
-    },
-    {
-      "q": "Quelle planète du système solaire est célèbre pour ses grands anneaux ?",
-      "category": "Sciences",
-      "options": ["Mars", "Jupiter", "Saturne", "Neptune"],
-      "answer": "Saturne",
-      "explanation": "Ses anneaux sont composés de particules de glace et de poussière."
-    },
-    {
-      "q": "Quel instrument de musique est muni d'un clavier de 88 touches ?",
-      "category": "Culture Pop",
-      "options": ["L'orgue", "Le clavecin", "Le piano", "L'accordéon"],
-      "answer": "Le piano",
-      "explanation": "Le piano moderne possède généralement 52 touches blanches et 36 touches noires."
-    },
-    {
-      "q": "Quel est le pluriel du mot 'Bail' ?",
-      "category": "Français",
-      "options": ["Bails", "Baux", "Bailles", "Baux ou Bails"],
-      "answer": "Baux",
-      "explanation": "On dit 'un bail' mais 'des baux' commerciaux."
-    },
-    {
-      "q": "Combien font 12 x 12 ?",
-      "category": "Mathématiques",
-      "options": ["122", "134", "144", "154"],
-      "answer": "144",
-      "explanation": "12 x 12 = 144."
-    },
-    {
-      "q": "Quelle est la capitale du Portugal ?",
-      "category": "Géographie",
-      "options": ["Madrid", "Lisbonne", "Porto", "Faro"],
-      "answer": "Lisbonne",
-      "explanation": "Lisbonne est située sur l'embouchure du fleuve Tage."
     },
     {
       "q": "Quelle molécule contient le code génétique des êtres vivants ?",
@@ -3151,25 +2773,11 @@
     "explanation": "C'est l'accès à des services informatiques (serveurs, stockage) via Internet plutôt que sur un disque local."
   },
   {
-    "q": "Lequel de ces mots est un synonyme de 'Éphémère' ?",
-    "category": "Français",
-    "options": ["Éternel", "Durable", "Passager", "Résistant"],
-    "answer": "Passager",
-    "explanation": "Ce qui est éphémère ne dure que très peu de temps."
-  },
-  {
     "q": "Comment écrit-on correctement ce nombre ?",
     "category": "Français",
     "options": ["Quatre-vingt-dix", "Quatre-vingts-dix", "Quatre-vingt-dits", "Quatre-vins-dix"],
     "answer": "Quatre-vingt-dix",
     "explanation": "'Vingt' ne prend un 's' que s'il est multiplié et qu'il n'est pas suivi d'un autre chiffre."
-  },
-  {
-    "q": "Quel pays a offert la Statue de la Liberté aux États-Unis ?",
-    "category": "Histoire",
-    "options": ["Le Royaume-Uni", "L'Italie", "La France", "L'Espagne"],
-    "answer": "La France",
-    "explanation": "Elle a été offerte pour célébrer le centenaire de la Déclaration d'indépendance américaine."
   },
   {
     "q": "Qui est considéré comme l'inventeur du Web (WWW) ?",
@@ -3193,13 +2801,6 @@
     "explanation": "Une boucle permet d'exécuter plusieurs fois un bloc d'instructions tant qu'une condition est remplie."
   },
   {
-    "q": "Quel est le plus grand mammifère terrestre ?",
-    "category": "Nature",
-    "options": ["Le Rhinocéros", "L'Éléphant d'Afrique", "La Girafe", "L'Hippopotame"],
-    "answer": "L'Éléphant d'Afrique",
-    "explanation": "L'éléphant d'Afrique peut peser jusqu'à 6 tonnes."
-  },
-  {
     "q": "Quel langage est souvent utilisé pour l'IA et la Data Science ?",
     "category": "Technologie",
     "options": ["HTML", "CSS", "Python", "PHP"],
@@ -3214,13 +2815,6 @@
     "explanation": "Napoléon Ier en a ordonné la construction en 1806 après la bataille d'Austerlitz."
   },
   {
-    "q": "Que signifie l'extension '.pdf' ?",
-    "category": "Technologie",
-    "options": ["Portable Document Format", "Page Digital File", "Printable Data File", "Personal Document Folder"],
-    "answer": "Portable Document Format",
-    "explanation": "C'est un format de fichier créé par Adobe pour préserver la mise en forme des documents."
-  },
-  {
     "q": "Quelle est la principale source d'énergie d'une voiture électrique ?",
     "category": "Science",
     "options": ["L'hydrogène", "Le lithium", "Le charbon", "Le gaz"],
@@ -3233,13 +2827,6 @@
     "options": ["L'écran", "L'imprimante", "Le clavier", "Les haut-parleurs"],
     "answer": "Le clavier",
     "explanation": "Le clavier est un périphérique d'entrée car il envoie des informations à l'ordinateur."
-  },
-  {
-    "q": "Quelle est la capitale du Japon ?",
-    "category": "Géographie",
-    "options": ["Séoul", "Kyoto", "Tokyo", "Pékin"],
-    "answer": "Tokyo",
-    "explanation": "Tokyo est la ville la plus peuplée du Japon et son centre politique."
   },
   {
     "q": "Comment appelle-t-on le 'cerveau' d'une IA capable de générer du texte ?",
@@ -3282,13 +2869,6 @@
     "options": ["@", "$", "#", "&"],
     "answer": "#",
     "explanation": "Le hashtag (#) permet de regrouper des contenus autour d'un même thème."
-  },
-  {
-    "q": "Quel organe consomme le plus d'énergie dans le corps humain ?",
-    "category": "Science",
-    "options": ["Le cœur", "Le cerveau", "Le foie", "Les muscles"],
-    "answer": "Le cerveau",
-    "explanation": "Bien qu'il ne pèse que 2% du poids total, le cerveau utilise environ 20% de l'énergie du corps."
   },
     {
     "q": "Quel est le titre exact du célèbre tableau de David montrant Napoléon sur un cheval cabré ?",
@@ -3340,25 +2920,11 @@
     "explanation": "Un logiciel libre permet à n'importe qui d'étudier, modifier et distribuer son code source."
   },
   {
-    "q": "Quelle est la vitesse de la lumière (environ) ?",
-    "category": "Science",
-    "options": ["300 000 km/h", "300 000 km/s", "1 000 000 km/s", "150 000 km/s"],
-    "answer": "300 000 km/s",
-    "explanation": "La lumière voyage à exactement 299 792 458 mètres par seconde dans le vide."
-  },
-  {
     "q": "Quel est le nom du fondateur de la société Space X ?",
     "category": "Technologie",
     "options": ["Jeff Bezos", "Richard Branson", "Elon Musk", "Bill Gates"],
     "answer": "Elon Musk",
     "explanation": "Musk a fondé SpaceX en 2002 avec l'objectif de réduire les coûts du transport spatial."
-  },
-  {
-    "q": "Quel gaz est le plus présent dans l'atmosphère terrestre ?",
-    "category": "Science",
-    "options": ["Oxygène", "Dioxyde de carbone", "Azote", "Argon"],
-    "answer": "Azote",
-    "explanation": "L'air que nous respirons contient environ 78 % d'azote et 21 % d'oxygène."
   },
   {
     "q": "Dans quel langage de programmation le mot-clé 'console.log()' est-il utilisé ?",
@@ -3396,13 +2962,6 @@
     "explanation": "Elle a deux cœurs branchiaux pour le sang vers les branchies et un cœur systémique pour le reste du corps."
   },
   {
-    "q": "Quel métal est le meilleur conducteur d'électricité ?",
-    "category": "Science",
-    "options": ["Or", "Cuivre", "Argent", "Aluminium"],
-    "answer": "Argent",
-    "explanation": "L'argent est le meilleur conducteur, mais on utilise le cuivre car il est beaucoup moins cher."
-  },
-  {
     "q": "Que signifie le 'R' dans l'acronyme 'RAM' ?",
     "category": "Informatique",
     "options": ["Read", "Random", "Rapid", "Reset"],
@@ -3431,25 +2990,11 @@
     "explanation": "Il s'est mutilé l'oreille gauche en 1888 à Arles, après une dispute avec Gauguin."
   },
   {
-    "q": "Quelle est la monnaie utilisée au Royaume-Uni ?",
-    "category": "Culture G",
-    "options": ["Euro", "Dollar", "Livre Sterling", "Franc"],
-    "answer": "Livre Sterling",
-    "explanation": "Bien qu'il ait fait partie de l'UE, le Royaume-Uni n'a jamais adopté l'Euro."
-  },
-  {
     "q": "Que signifie l'acronyme 'PDF' ?",
     "category": "Technologie",
     "options": ["Portable Document Format", "Personal Data File", "Public Digital Folder", "Printable Document File"],
     "answer": "Portable Document Format",
     "explanation": "Ce format permet de visualiser un document de la même manière sur n'importe quel appareil."
-  },
-  {
-    "q": "Qui a réalisé le film 'Jurassic Park' en 1993 ?",
-    "category": "Cinéma",
-    "options": ["James Cameron", "Steven Spielberg", "George Lucas", "Christopher Nolan"],
-    "answer": "Steven Spielberg",
-    "explanation": "Le film a révolutionné les effets spéciaux avec l'utilisation des premiers dinosaures en images de synthèse."
   },
     {
     "q": "Dans 'Star Wars', quel est le vrai nom de Dark Vador ?",
@@ -3464,13 +3009,6 @@
     "options": ["Facebook", "Instagram", "X (Twitter)", "LinkedIn"],
     "answer": "X (Twitter)",
     "explanation": "Initialement limité à 140, puis 280 caractères, le réseau a été racheté et renommé X par Elon Musk."
-  },
-  {
-    "q": "Quel est l'inventeur de l'imprimerie en Europe ?",
-    "category": "Histoire",
-    "options": ["Léonard de Vinci", "Johannes Gutenberg", "Nicolas Tesla", "Galilée"],
-    "answer": "Johannes Gutenberg",
-    "explanation": "Son invention vers 1440 a permis la diffusion massive du savoir à travers l'Europe."
   },
   {
     "q": "Que signifie le terme 'Phishing' ?",
@@ -3499,13 +3037,6 @@
     "options": ["Volt", "Watt", "Hertz", "Ampère"],
     "answer": "Hertz",
     "explanation": "Le Hertz (Hz) mesure le nombre d'oscillations par seconde d'un phénomène périodique."
-  },
-  {
-    "q": "Qui est le créateur du personnage de Sherlock Holmes ?",
-    "category": "Littérature",
-    "options": ["Agatha Christie", "Arthur Conan Doyle", "Edgar Allan Poe", "Maurice Leblanc"],
-    "answer": "Arthur Conan Doyle",
-    "explanation": "Le célèbre détective résidait au 221B Baker Street à Londres."
   },
   {
     "q": "Quel est le composant d'un ordinateur qui stocke les données à long terme ?",
@@ -3563,13 +3094,6 @@
     "answer": "Jeff Bezos",
     "explanation": "Amazon a débuté en 1994 comme une simple librairie en ligne dans le garage de Bezos."
   },
-  {
-    "q": "Quelle est la capitale de l'Islande ?",
-    "category": "Géographie",
-    "options": ["Oslo", "Reykjavik", "Stockholm", "Helsinki"],
-    "answer": "Reykjavik",
-    "explanation": "C'est la capitale la plus septentrionale du monde pour un État souverain."
-  },
     {
     "q": "Lequel de ces pays n'est pas membre de l'Union Européenne ?",
     "category": "Géographie",
@@ -3583,13 +3107,6 @@
     "options": ["Apple", "Microsoft", "Google", "Samsung"],
     "answer": "Google",
     "explanation": "Android a été racheté par Google en 2005 et est devenu le système mobile le plus utilisé au monde."
-  },
-    {
-    "q": "Quel est le plus petit pays du monde ?",
-    "category": "Géographie",
-    "options": ["Monaco", "Saint-Marin", "Le Vatican", "Malte"],
-    "answer": "Le Vatican",
-    "explanation": "Avec une superficie d'environ 0,44 km², c'est un État souverain enclavé dans la ville de Rome."
   },
   {
     "q": "Quel est le résultat de la racine carrée de 144 ?",
@@ -3646,13 +3163,6 @@
     "options": ["Handball", "Hockey sur glace", "Curling", "Lacrosse"],
     "answer": "Hockey sur glace",
     "explanation": "Le palet (ou puck) est fabriqué en caoutchouc vulcanisé."
-  },
-  {
-    "q": "Qui a peint 'La Nuit étoilée' ?",
-    "category": "Art",
-    "options": ["Claude Monet", "Vincent van Gogh", "Paul Cézanne", "Henri Matisse"],
-    "answer": "Vincent van Gogh",
-    "explanation": "Il l'a peinte depuis sa chambre à l'asile de Saint-Rémy-de-Provence en 1889."
   },
     {
     "q": "Comment s'appelle le 'père' de l'informatique moderne ?",
@@ -4388,6 +3898,5 @@
     "answer": "Londres",
     "explanation": "La ville les organisait pour la troisième fois."
   }
-
   ]
 }
