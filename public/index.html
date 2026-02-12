@@ -1120,19 +1120,25 @@ function advanceQuestion(){
     }
   }
 
-  notifAccept.onclick = async () => {
-    notifPopup.classList.add('hidden');
-    // Déclencher le popup natif OneSignal
-    if (window.OneSignal) {
-      OneSignalDeferred.push(async function(OneSignal) {
-        try {
-          await OneSignal.Slidedown.promptPush();
-        } catch(e) {
-          console.log('OneSignal prompt error:', e);
-        }
-      });
-    }
-  };
+notifAccept.onclick = async () => {
+  notifPopup.classList.add('hidden');
+  
+  if (window.OneSignal) {
+    OneSignalDeferred.push(async function(OneSignal) {
+      try {
+        // ON FORCE LE PROMPT NATIF DU NAVIGATEUR
+        await OneSignal.Notifications.requestPermission();
+        
+        // On ajoute un tag pour tes futurs messages automatisés
+        await OneSignal.User.addTag("status", "joueur_actif");
+        
+        console.log("Demande d'autorisation envoyée");
+      } catch(e) {
+        console.log('OneSignal prompt error:', e);
+      }
+    });
+  }
+};
 
   notifDecline.onclick = () => {
     notifPopup.classList.add('hidden');
