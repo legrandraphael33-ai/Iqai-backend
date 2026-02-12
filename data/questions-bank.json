@@ -309,13 +309,6 @@
       "explanation": "150 moins 60 égale 90, moins 5 égale 85."
     },
     {
-      "q": "Quelle figure de style consiste à répéter un mot ou un groupe de mots en début de phrase ?",
-      "category": "Français",
-      "options": ["L'allitération", "L'anaphore", "La métaphore", "Le pléonasme"],
-      "answer": "L'anaphore",
-      "explanation": "L'anaphore rythme la phrase et insiste sur une idée."
-    },
-    {
       "q": "Quel pays a offert la Statue de la Liberté aux États-Unis ?",
       "category": "Histoire",
       "options": ["L'Angleterre", "La France", "L'Espagne", "L'Italie"],
@@ -1065,13 +1058,6 @@
       "explanation": "13 x 2 = 26, et 26 x 2 = 52."
     },
     {
-      "q": "Quelle est la capitale de l'Australie ?",
-      "category": "Géographie",
-      "options": ["Sydney", "Melbourne", "Canberra", "Perth"],
-      "answer": "Canberra",
-      "explanation": "Canberra a été choisie comme compromis entre Sydney et Melbourne en 1908."
-    },
-    {
       "q": "Quel organe produit l'insuline dans le corps humain ?",
       "category": "Sciences",
       "options": ["Le foie", "Le pancréas", "Les reins", "La rate"],
@@ -1455,13 +1441,6 @@
       "options": ["Christophe Colomb", "Vasco de Gama", "Fernand de Magellan", "Jacques Cartier"],
       "answer": "Fernand de Magellan",
       "explanation": "Bien qu'il soit mort en route, son expédition a bouclé le premier tour du monde en 1522."
-    },
-    {
-      "q": "Quelle est la capitale de l'Australie ?",
-      "category": "Géographie",
-      "options": ["Sydney", "Melbourne", "Canberra", "Perth"],
-      "answer": "Canberra",
-      "explanation": "C'est une ville planifiée, choisie comme capitale pour clore la rivalité entre Sydney et Melbourne."
     },
     {
       "q": "Combien font 7 x 14 ?",
@@ -2983,13 +2962,6 @@
       "explanation": "Cette œuvre post-impressionniste est l'une des plus célèbres au monde."
     },
     {
-      "q": "Quel est le pluriel du mot 'Chacal' ?",
-      "category": "Français",
-      "options": ["Chacaux", "Chacals", "Chacal", "Chacale"],
-      "answer": "Chacals",
-      "explanation": "Chacal fait partie des exceptions en -al qui prennent un -s (bal, cal, carnaval, chacal, festival, récital, régal)."
-    },
-    {
       "q": "Quelle est la capitale de la Russie ?",
       "category": "Géographie",
       "options": ["Saint-Pétersbourg", "Moscou", "Vladivostok", "Novossibirsk"],
@@ -3142,13 +3114,6 @@
       "options": ["Steven Spielberg", "George Lucas", "James Cameron", "Christopher Nolan"],
       "answer": "James Cameron",
       "explanation": "James Cameron est aussi le réalisateur de 'Titanic' et 'Terminator'."
-    },
-    {
-      "q": "Combien font 500 / 4 ?",
-      "category": "Mathématiques",
-      "options": ["100", "125", "150", "250"],
-      "answer": "125",
-      "explanation": "500 / 2 = 250, et 250 / 2 = 125."
     },
   {
     "q": "Quelle est la capitale du Liechtenstein ?",
