@@ -632,6 +632,7 @@
   function normalizeQuiz(raw){
     if(!Array.isArray(raw)) return null;
     const arr=raw.slice(0,10).map(x=>({
+      id: x.id,
       q:String(x.q??""),
       options:Array.isArray(x.options)?x.options.map(String).slice(0,4):[],
       answer:String(x.answer??""),
