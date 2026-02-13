@@ -3898,181 +3898,1380 @@
     "answer": "Londres",
     "explanation": "La ville les organisait pour la troisième fois."
   },
-    [
-  {
-    "q": "Quel pays a remporté la Coupe du monde de football 1998 ?",
-    "category": "Sport - Football",
-    "options": ["France", "Brésil", "Italie", "Allemagne"],
-    "answer": "France",
-    "explanation": "La France a gagné 3-0 contre le Brésil au Stade de France."
-  },
-  {
-    "q": "Quelle équipe a réalisé le triplé Ligue des champions, championnat, coupe nationale en 2009 sous Pep Guardiola ?",
-    "category": "Sport - Football",
-    "options": ["FC Barcelone", "Manchester United", "Inter Milan", "Real Madrid"],
-    "answer": "FC Barcelone",
-    "explanation": "Le Barça de Guardiola est considéré comme l’une des meilleures équipes de l’histoire."
-  },
-  {
-    "q": "Quel sprinteur détient le record du monde du 100 m depuis 2009 ?",
-    "category": "Sport - Athlétisme",
-    "options": ["Usain Bolt", "Tyson Gay", "Yohan Blake", "Justin Gatlin"],
-    "answer": "Usain Bolt",
-    "explanation": "Il a couru en 9,58 secondes à Berlin."
-  },
-  {
-    "q": "Lors de quels Jeux olympiques Nadia Comăneci a-t-elle obtenu le premier 10 parfait en gymnastique ?",
-    "category": "Sport - Jeux olympiques",
-    "options": ["Montréal 1976", "Munich 1972", "Moscou 1980", "Los Angeles 1984"],
-    "answer": "Montréal 1976",
-    "explanation": "Sa performance a marqué l’histoire de la gymnastique."
-  },
-  {
-    "q": "Quelle équipe NBA a signé une saison record de 72 victoires en 1995-1996 ?",
-    "category": "Sport - Basketball",
-    "options": ["Chicago Bulls", "Los Angeles Lakers", "Boston Celtics", "Detroit Pistons"],
-    "answer": "Chicago Bulls",
-    "explanation": "Menés par Michael Jordan, ils ont dominé la ligue."
-  },
-  {
-    "q": "Quel pays a organisé la Coupe du monde de rugby 2007 ?",
-    "category": "Sport - Rugby",
-    "options": ["France", "Angleterre", "Nouvelle-Zélande", "Australie"],
-    "answer": "France",
-    "explanation": "La finale s’est jouée au Stade de France."
-  },
-  {
-    "q": "Quel boxeur a remporté le combat « Rumble in the Jungle » en 1974 ?",
-    "category": "Sport - Boxe",
-    "options": ["Muhammad Ali", "George Foreman", "Joe Frazier", "Sonny Liston"],
-    "answer": "Muhammad Ali",
-    "explanation": "Ali a surpris Foreman avec la tactique du rope-a-dope."
-  },
-  {
-    "q": "Quelle tennismane a remporté 23 titres du Grand Chelem en simple à l’ère Open ?",
+    {
+    "q": "Quel joueur de tennis a remporté le plus de titres du Grand Chelem masculin en simple ?",
     "category": "Sport - Tennis",
-    "options": ["Serena Williams", "Steffi Graf", "Martina Navratilova", "Chris Evert"],
-    "answer": "Serena Williams",
-    "explanation": "Elle détient le record dans l’ère moderne."
+    "options": [
+      "Roger Federer",
+      "Rafael Nadal",
+      "Novak Djokovic",
+      "Pete Sampras"
+    ],
+    "answer": "Novak Djokovic",
+    "explanation": "Djokovic détient le record avec 24 titres du Grand Chelem en simple."
   },
   {
-    "q": "Quel nageur a remporté 8 médailles d’or aux Jeux olympiques de Pékin 2008 ?",
-    "category": "Sport - Natation",
-    "options": ["Michael Phelps", "Ryan Lochte", "Ian Thorpe", "Mark Spitz"],
-    "answer": "Michael Phelps",
-    "explanation": "Un exploit inédit dans l’histoire olympique."
+    "q": "Dans quel sport utilise-t-on un volant (ou shuttlecock) ?",
+    "category": "Sport",
+    "options": [
+      "Tennis de table",
+      "Badminton",
+      "Squash",
+      "Padel"
+    ],
+    "answer": "Badminton",
+    "explanation": "Le volant est composé de plumes d'oie fixées sur une base en liège."
   },
   {
-    "q": "Quelle équipe a réussi le comeback historique contre les Falcons lors du Super Bowl LI ?",
-    "category": "Sport - Football américain",
-    "options": ["New England Patriots", "Dallas Cowboys", "Kansas City Chiefs", "Green Bay Packers"],
-    "answer": "New England Patriots",
-    "explanation": "Ils sont revenus de 28-3 pour gagner en prolongation."
+    "q": "Quelle nation domine historiquement le cricket mondial ?",
+    "category": "Sport - Cricket",
+    "options": [
+      "Angleterre",
+      "Australie",
+      "Inde",
+      "Pakistan"
+    ],
+    "answer": "Australie",
+    "explanation": "L'Australie détient le record de victoires en Coupe du monde de cricket avec 6 titres."
   },
   {
-    "q": "Quel pilote de F1 a remporté son 7e titre mondial en 2020, égalant le record de Schumacher ?",
-    "category": "Sport - Formule 1",
-    "options": ["Lewis Hamilton", "Sebastian Vettel", "Fernando Alonso", "Kimi Räikkönen"],
-    "answer": "Lewis Hamilton",
-    "explanation": "Il a dominé la saison avec Mercedes."
-  },
-  {
-    "q": "Quelle équipe de football a réalisé la « Remontada » face au PSG en 2017 ?",
+    "q": "Quel footballeur brésilien est le seul à avoir remporté trois Coupes du monde ?",
     "category": "Sport - Football",
-    "options": ["FC Barcelone", "Real Madrid", "Bayern Munich", "Chelsea"],
-    "answer": "FC Barcelone",
-    "explanation": "Victoire 6-1 après une défaite 4-0 à l’aller."
+    "options": [
+      "Ronaldo",
+      "Pelé",
+      "Ronaldinho",
+      "Zico"
+    ],
+    "answer": "Pelé",
+    "explanation": "Il a gagné les Coupes du monde 1958, 1962 et 1970."
   },
   {
-    "q": "Quel pays a remporté la Coupe du monde 2014 à domicile du Brésil ?",
-    "category": "Sport - Football",
-    "options": ["Allemagne", "Argentine", "Espagne", "Pays-Bas"],
-    "answer": "Allemagne",
-    "explanation": "Mario Götze a marqué en finale."
+    "q": "Combien de joueurs composent une équipe de volleyball sur le terrain ?",
+    "category": "Sport - Volleyball",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "answer": "6",
+    "explanation": "Six joueurs par équipe se répartissent sur le terrain avec des rotations."
   },
   {
-    "q": "Quelle marathonienne kényane a battu le record du monde féminin en 2019 à Chicago ?",
+    "q": "Quel pays a inventé le judo ?",
+    "category": "Sport - Arts martiaux",
+    "options": [
+      "Chine",
+      "Corée du Sud",
+      "Japon",
+      "Thaïlande"
+    ],
+    "answer": "Japon",
+    "explanation": "Le judo a été créé par Jigorō Kanō en 1882 à Tokyo."
+  },
+  {
+    "q": "Quelle est la distance d'un marathon ?",
     "category": "Sport - Athlétisme",
-    "options": ["Brigid Kosgei", "Paula Radcliffe", "Mary Keitany", "Tirunesh Dibaba"],
-    "answer": "Brigid Kosgei",
-    "explanation": "Elle a amélioré un record vieux de 16 ans."
+    "options": [
+      "21,1 km",
+      "40 km",
+      "42,195 km",
+      "45 km"
+    ],
+    "answer": "42,195 km",
+    "explanation": "Cette distance précise a été fixée lors des Jeux olympiques de Londres en 1908."
   },
   {
-    "q": "Quel club a remporté la première Ligue des champions de l’histoire en 1956 ?",
-    "category": "Sport - Football",
-    "options": ["Real Madrid", "AC Milan", "Benfica", "Reims"],
-    "answer": "Real Madrid",
-    "explanation": "Le club a ensuite dominé les premières éditions."
+    "q": "Quel sport se pratique sur un tatami ?",
+    "category": "Sport - Arts martiaux",
+    "options": [
+      "Escrime",
+      "Judo",
+      "Haltérophilie",
+      "Lutte gréco-romaine"
+    ],
+    "answer": "Judo",
+    "explanation": "Le tatami est un tapis qui amortit les chutes lors des projections."
   },
   {
-    "q": "Quel skieur a dominé les Jeux olympiques d’hiver 1968 avec trois médailles d’or ?",
-    "category": "Sport - Sports d'hiver",
-    "options": ["Jean-Claude Killy", "Hermann Maier", "Bode Miller", "Alberto Tomba"],
-    "answer": "Jean-Claude Killy",
-    "explanation": "Il est devenu une icône du ski alpin."
-  },
-  {
-    "q": "Quelle équipe a mis fin à la malédiction des Chicago Cubs en 2016 ?",
-    "category": "Sport - Baseball",
-    "options": ["Chicago Cubs", "Cleveland Indians", "Boston Red Sox", "LA Dodgers"],
-    "answer": "Chicago Cubs",
-    "explanation": "Ils n’avaient plus gagné depuis 1908."
-  },
-  {
-    "q": "Quel cycliste a remporté le Tour de France 1989 pour 8 secondes seulement ?",
-    "category": "Sport - Cyclisme",
-    "options": ["Greg LeMond", "Laurent Fignon", "Miguel Indurain", "Bernard Hinault"],
-    "answer": "Greg LeMond",
-    "explanation": "C’est le plus petit écart de l’histoire."
-  },
-  {
-    "q": "Quel pays a surpris le monde en remportant l’Euro 2004 ?",
-    "category": "Sport - Football",
-    "options": ["Grèce", "Portugal", "France", "Italie"],
-    "answer": "Grèce",
-    "explanation": "Une des plus grandes surprises du football."
-  },
-  {
-    "q": "Quelle patineuse artistique française a été championne olympique en 1992 ?",
-    "category": "Sport - Sports d'hiver",
-    "options": ["Surya Bonaly", "Sarah Abitbol", "Laetitia Hubert", "Aucune, c’est Kristi Yamaguchi"],
-    "answer": "Aucune, c’est Kristi Yamaguchi",
-    "explanation": "La patineuse américaine a remporté l’or à Albertville."
-  },
-  {
-    "q": "Quel club anglais a réalisé un triplé historique en 1999 avec un but dans le temps additionnel en finale ?",
-    "category": "Sport - Football",
-    "options": ["Manchester United", "Arsenal", "Liverpool", "Chelsea"],
-    "answer": "Manchester United",
-    "explanation": "Deux buts tardifs contre le Bayern Munich."
-  },
-  {
-    "q": "Quel joueur de basket est surnommé « King James » ?",
-    "category": "Sport - Basketball",
-    "options": ["LeBron James", "Kobe Bryant", "Kevin Durant", "Stephen Curry"],
-    "answer": "LeBron James",
-    "explanation": "Il est considéré comme l’un des plus grands joueurs."
-  },
-  {
-    "q": "Quelle sélection a remporté le premier Mondial de rugby en 1987 ?",
+    "q": "Dans quel sport parle-t-on de « try » pour marquer des points ?",
     "category": "Sport - Rugby",
-    "options": ["Nouvelle-Zélande", "Australie", "Angleterre", "France"],
-    "answer": "Nouvelle-Zélande",
-    "explanation": "Les All Blacks ont battu la France en finale."
+    "options": [
+      "Football américain",
+      "Rugby",
+      "Cricket",
+      "Hockey"
+    ],
+    "answer": "Rugby",
+    "explanation": "Un essai (try) vaut 5 points et peut être suivi d'une transformation."
   },
   {
-    "q": "Quel golfeur a dominé le début des années 2000 avec le « Tiger Slam » ?",
-    "category": "Sport - Golf",
-    "options": ["Tiger Woods", "Phil Mickelson", "Rory McIlroy", "Ernie Els"],
-    "answer": "Tiger Woods",
-    "explanation": "Il détenait simultanément les quatre majeurs."
-  },
-  {
-    "q": "Quelle ville a accueilli les Jeux olympiques d’été 2012 ?",
+    "q": "Quel pays a accueilli les premiers Jeux olympiques modernes en 1896 ?",
     "category": "Sport - Jeux olympiques",
-    "options": ["Londres", "Pékin", "Athènes", "Rio"],
+    "options": [
+      "France",
+      "Grèce",
+      "Angleterre",
+      "Italie"
+    ],
+    "answer": "Grèce",
+    "explanation": "Les premiers JO modernes se sont tenus à Athènes, à l'initiative de Pierre de Coubertin."
+  },
+  {
+    "q": "Combien de temps dure un match de football réglementaire (hors prolongations) ?",
+    "category": "Sport - Football",
+    "options": [
+      "80 minutes",
+      "90 minutes",
+      "100 minutes",
+      "120 minutes"
+    ],
+    "answer": "90 minutes",
+    "explanation": "Deux mi-temps de 45 minutes, auxquelles s'ajoute le temps additionnel."
+  },
+  {
+    "q": "Quel sport combine natation, cyclisme et course à pied ?",
+    "category": "Sport",
+    "options": [
+      "Décathlon",
+      "Triathlon",
+      "Pentathlon",
+      "Biathlon"
+    ],
+    "answer": "Triathlon",
+    "explanation": "Le triathlon olympique comprend 1,5 km de nage, 40 km de vélo et 10 km de course."
+  },
+  {
+    "q": "Dans quel sport utilise-t-on une crosse pour attraper et lancer une balle ?",
+    "category": "Sport",
+    "options": [
+      "Hockey sur gazon",
+      "Lacrosse",
+      "Polo",
+      "Cricket"
+    ],
+    "answer": "Lacrosse",
+    "explanation": "Ce sport d'origine amérindienne est très populaire en Amérique du Nord."
+  },
+  {
+    "q": "Quelle ville accueillera les Jeux olympiques d'été 2028 ?",
+    "category": "Sport - Jeux olympiques",
+    "options": [
+      "Paris",
+      "Los Angeles",
+      "Brisbane",
+      "Tokyo"
+    ],
+    "answer": "Los Angeles",
+    "explanation": "Ce sera la troisième fois que Los Angeles accueille les JO d'été."
+  },
+  {
+    "q": "Quel handballeur français est considéré comme le meilleur joueur de l'histoire de ce sport ?",
+    "category": "Sport - Handball",
+    "options": [
+      "Thierry Omeyer",
+      "Nikola Karabatić",
+      "Daniel Narcisse",
+      "Luc Abalo"
+    ],
+    "answer": "Nikola Karabatić",
+    "explanation": "Triple champion olympique et multiple champion du monde et d'Europe."
+  },
+  {
+    "q": "Combien de sets faut-il gagner pour remporter un match de tennis masculin en Grand Chelem ?",
+    "category": "Sport - Tennis",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "answer": "3",
+    "explanation": "Les matchs se jouent au meilleur des 5 sets, il faut donc en gagner 3."
+  },
+  {
+    "q": "Quel sport d'hiver combine ski de fond et tir à la carabine ?",
+    "category": "Sport - Sports d'hiver",
+    "options": [
+      "Biathlon",
+      "Combiné nordique",
+      "Skeleton",
+      "Ski acrobatique"
+    ],
+    "answer": "Biathlon",
+    "explanation": "Les athlètes alternent entre les phases de ski et les séances de tir."
+  },
+  {
+    "q": "Quelle équipe de football a remporté le plus de Ligues des champions ?",
+    "category": "Sport - Football",
+    "options": [
+      "AC Milan",
+      "FC Barcelone",
+      "Real Madrid",
+      "Liverpool"
+    ],
+    "answer": "Real Madrid",
+    "explanation": "Le Real Madrid détient le record avec 15 titres en Ligue des champions."
+  },
+  {
+    "q": "Quel sport se joue avec un fleuret, une épée ou un sabre ?",
+    "category": "Sport",
+    "options": [
+      "Escrime",
+      "Kendo",
+      "Boxe",
+      "Taekwondo"
+    ],
+    "answer": "Escrime",
+    "explanation": "Ces trois armes ont chacune des règles différentes pour toucher l'adversaire."
+  },
+  {
+    "q": "Dans quel pays le baseball est-il considéré comme le sport national ?",
+    "category": "Sport - Baseball",
+    "options": [
+      "Canada",
+      "Japon",
+      "Cuba",
+      "États-Unis"
+    ],
+    "answer": "États-Unis",
+    "explanation": "Le baseball est surnommé 'America's pastime' (le passe-temps de l'Amérique)."
+  },
+  {
+    "q": "Quel athlète éthiopien a remporté le marathon olympique pieds nus en 1960 ?",
+    "category": "Sport - Athlétisme",
+    "options": [
+      "Haile Gebrselassie",
+      "Abebe Bikila",
+      "Kenenisa Bekele",
+      "Mo Farah"
+    ],
+    "answer": "Abebe Bikila",
+    "explanation": "Il a couru pieds nus dans les rues de Rome et a remporté l'or olympique."
+  },
+  {
+    "q": "Combien de joueurs composent une équipe de rugby à XV sur le terrain ?",
+    "category": "Sport - Rugby",
+    "options": [
+      "13",
+      "14",
+      "15",
+      "16"
+    ],
+    "answer": "15",
+    "explanation": "Le XV est la forme la plus répandue du rugby, d'où son nom."
+  },
+  {
+    "q": "Quel Français a remporté la Coupe Davis en tant que capitaine en 2017 ?",
+    "category": "Sport - Tennis",
+    "options": [
+      "Guy Forget",
+      "Yannick Noah",
+      "Henri Leconte",
+      "Cédric Pioline"
+    ],
+    "answer": "Yannick Noah",
+    "explanation": "Noah a mené l'équipe de France à la victoire en tant que capitaine en 2017, après 1991 et 1996."
+  },
+  {
+    "q": "Quel sport collectif se joue dans une piscine avec un ballon ?",
+    "category": "Sport",
+    "options": [
+      "Natation synchronisée",
+      "Water-polo",
+      "Plongeon",
+      "Surf"
+    ],
+    "answer": "Water-polo",
+    "explanation": "Deux équipes de 7 joueurs s'affrontent pour marquer dans le but adverse."
+  },
+  {
+    "q": "Quelle légende du basketball a porté le numéro 23 aux Chicago Bulls ?",
+    "category": "Sport - Basketball",
+    "options": [
+      "Scottie Pippen",
+      "Magic Johnson",
+      "Michael Jordan",
+      "Larry Bird"
+    ],
+    "answer": "Michael Jordan",
+    "explanation": "Il est souvent considéré comme le plus grand joueur de basketball de tous les temps."
+  },
+    {
+    "q": "Quel architecte a conçu la Sagrada Família à Barcelone ?",
+    "category": "Architecture",
+    "options": [
+      "Le Corbusier",
+      "Antoni Gaudí",
+      "Oscar Niemeyer",
+      "Frank Lloyd Wright"
+    ],
+    "answer": "Antoni Gaudí",
+    "explanation": "Commencée en 1882, la basilique est toujours en construction et mêle Art nouveau et gothique."
+  },
+  {
+    "q": "Comment appelle-t-on le style architectural caractérisé par des arcs-boutants et des vitraux ?",
+    "category": "Architecture",
+    "options": [
+      "Roman",
+      "Gothique",
+      "Baroque",
+      "Renaissance"
+    ],
+    "answer": "Gothique",
+    "explanation": "Le gothique (XIIe-XVIe siècle) a permis de construire des cathédrales plus hautes et lumineuses."
+  },
+  {
+    "q": "Quel architecte franco-suisse est célèbre pour la Cité Radieuse à Marseille ?",
+    "category": "Architecture",
+    "options": [
+      "Le Corbusier",
+      "Jean Nouvel",
+      "Renzo Piano",
+      "Gustave Eiffel"
+    ],
+    "answer": "Le Corbusier",
+    "explanation": "Pionnier du mouvement moderne, il a théorisé l'habitat collectif vertical."
+  },
+  {
+    "q": "Quel type de colonne grecque est le plus simple, sans ornement au chapiteau ?",
+    "category": "Architecture",
+    "options": [
+      "Ionique",
+      "Corinthien",
+      "Dorique",
+      "Toscan"
+    ],
+    "answer": "Dorique",
+    "explanation": "L'ordre dorique est le plus ancien et le plus dépouillé des trois ordres grecs."
+  },
+  {
+    "q": "Dans quelle ville se trouve l'Opéra conçu par Jørn Utzon, en forme de voiles ?",
+    "category": "Architecture",
+    "options": [
+      "Oslo",
+      "Copenhague",
+      "Sydney",
+      "Auckland"
+    ],
+    "answer": "Sydney",
+    "explanation": "L'Opéra de Sydney, inauguré en 1973, est classé au patrimoine mondial de l'UNESCO."
+  },
+  {
+    "q": "Quel monument parisien a été construit pour l'Exposition universelle de 1889 ?",
+    "category": "Architecture",
+    "options": [
+      "Le Grand Palais",
+      "La Tour Eiffel",
+      "Le Sacré-Cœur",
+      "L'Arc de Triomphe"
+    ],
+    "answer": "La Tour Eiffel",
+    "explanation": "Prévue pour être temporaire, elle devait être démontée après 20 ans."
+  },
+  {
+    "q": "Comment appelle-t-on une demi-coupole qui prolonge une voûte ?",
+    "category": "Architecture",
+    "options": [
+      "Abside",
+      "Narthex",
+      "Transept",
+      "Nef"
+    ],
+    "answer": "Abside",
+    "explanation": "L'abside se trouve généralement à l'extrémité est d'une église."
+  },
+  {
+    "q": "Quel architecte a dessiné le musée Guggenheim de Bilbao ?",
+    "category": "Architecture",
+    "options": [
+      "Frank Gehry",
+      "Zaha Hadid",
+      "Norman Foster",
+      "Tadao Ando"
+    ],
+    "answer": "Frank Gehry",
+    "explanation": "Inauguré en 1997, ses formes ondulantes en titane ont relancé l'économie de la ville."
+  },
+  {
+    "q": "Quel style architectural utilise des coupoles, des mosaïques dorées et des plans en croix grecque ?",
+    "category": "Architecture",
+    "options": [
+      "Gothique",
+      "Byzantin",
+      "Art déco",
+      "Brutalisme"
+    ],
+    "answer": "Byzantin",
+    "explanation": "Sainte-Sophie à Istanbul est l'exemple le plus célèbre de l'architecture byzantine."
+  },
+  {
+    "q": "Quelle architecte irakienne, première femme lauréate du prix Pritzker, est connue pour ses formes fluides ?",
+    "category": "Architecture",
+    "options": [
+      "Kazuyo Sejima",
+      "Zaha Hadid",
+      "Jeanne Gang",
+      "Odile Decq"
+    ],
+    "answer": "Zaha Hadid",
+    "explanation": "Elle a reçu le Pritzker en 2004 et a conçu notamment le Centre Heydar-Aliyev à Bakou."
+  },
+  {
+    "q": "Comment appelle-t-on le courant architectural des années 1950-70 utilisant le béton brut ?",
+    "category": "Architecture",
+    "options": [
+      "Art nouveau",
+      "Brutalisme",
+      "Minimalisme",
+      "Déconstructivisme"
+    ],
+    "answer": "Brutalisme",
+    "explanation": "Le terme vient du français 'béton brut', popularisé par Le Corbusier."
+  },
+  {
+    "q": "Quel architecte japonais a reçu le Pritzker 2024 et est connu pour ses structures en bois ?",
+    "category": "Architecture",
+    "options": [
+      "Tadao Ando",
+      "Kengo Kuma",
+      "Shigeru Ban",
+      "Riken Yamamoto"
+    ],
+    "answer": "Riken Yamamoto",
+    "explanation": "Il est reconnu pour ses espaces qui favorisent les liens entre vie privée et communauté."
+  },
+  {
+    "q": "Quel est le plus grand amphithéâtre romain jamais construit ?",
+    "category": "Architecture",
+    "options": [
+      "Le Colisée de Rome",
+      "L'Arène de Nîmes",
+      "L'Arène de Vérone",
+      "Le Théâtre d'Épidaure"
+    ],
+    "answer": "Le Colisée de Rome",
+    "explanation": "Inauguré en 80 après J.-C., il pouvait accueillir environ 50 000 spectateurs."
+  },
+  {
+    "q": "Quel élément architectural en forme de demi-cercle surmonte une porte ou une fenêtre ?",
+    "category": "Architecture",
+    "options": [
+      "Un linteau",
+      "Un arc",
+      "Un fronton",
+      "Une corniche"
+    ],
+    "answer": "Un arc",
+    "explanation": "L'arc est une structure courbe qui répartit le poids de part et d'autre de l'ouverture."
+  },
+  {
+    "q": "Quel gratte-ciel de Dubaï est le plus haut bâtiment du monde ?",
+    "category": "Architecture",
+    "options": [
+      "Shanghai Tower",
+      "Burj Khalifa",
+      "One World Trade Center",
+      "Taipei 101"
+    ],
+    "answer": "Burj Khalifa",
+    "explanation": "Avec ses 828 mètres et 163 étages, il détient ce record depuis 2010."
+  },
+  {
+    "q": "Quel mouvement artistique et architectural du début du XXe siècle privilégie les lignes courbes inspirées de la nature ?",
+    "category": "Architecture",
+    "options": [
+      "Art déco",
+      "Art nouveau",
+      "Bauhaus",
+      "Constructivisme"
+    ],
+    "answer": "Art nouveau",
+    "explanation": "On le retrouve dans les bouches de métro de Guimard à Paris ou les immeubles de Victor Horta à Bruxelles."
+  },
+  {
+    "q": "Quelle école allemande fondée en 1919 a révolutionné le design et l'architecture ?",
+    "category": "Architecture",
+    "options": [
+      "Bauhaus",
+      "De Stijl",
+      "Arts & Crafts",
+      "École de Chicago"
+    ],
+    "answer": "Bauhaus",
+    "explanation": "Fondée par Walter Gropius à Weimar, elle prônait l'union de l'art et de l'industrie."
+  },
+  {
+    "q": "Comment appelle-t-on la partie d'une église qui forme un plan en croix latine ?",
+    "category": "Architecture",
+    "options": [
+      "Le chœur",
+      "Le transept",
+      "Le déambulatoire",
+      "Le narthex"
+    ],
+    "answer": "Le transept",
+    "explanation": "Le transept est le bras perpendiculaire à la nef qui donne à l'église sa forme de croix."
+  },
+  {
+    "q": "Quel architecte a conçu la pyramide en verre du Louvre ?",
+    "category": "Architecture",
+    "options": [
+      "Jean Nouvel",
+      "Ieoh Ming Pei",
+      "Renzo Piano",
+      "Norman Foster"
+    ],
+    "answer": "Ieoh Ming Pei",
+    "explanation": "Inaugurée en 1989, la pyramide a d'abord été très controversée avant de devenir emblématique."
+  },
+  {
+    "q": "Quel matériau de construction les Romains ont-ils inventé, ancêtre du béton moderne ?",
+    "category": "Architecture",
+    "options": [
+      "Le torchis",
+      "L'opus caementicium",
+      "Le pisé",
+      "Le stuc"
+    ],
+    "answer": "L'opus caementicium",
+    "explanation": "Ce béton romain à base de chaux et de pouzzolane a permis de construire le Panthéon."
+  },
+  {
+    "q": "Quel bâtiment new-yorkais de style Art déco est surmonté d'une flèche en acier inoxydable ?",
+    "category": "Architecture",
+    "options": [
+      "Empire State Building",
+      "Chrysler Building",
+      "Flatiron Building",
+      "Rockefeller Center"
+    ],
+    "answer": "Chrysler Building",
+    "explanation": "Achevé en 1930, il est célèbre pour sa couronne d'arcs en acier et ses gargouilles en forme d'aigles."
+  },
+  {
+    "q": "Quel type de voûte en forme de berceau est caractéristique de l'architecture romane ?",
+    "category": "Architecture",
+    "options": [
+      "Voûte d'ogives",
+      "Voûte en berceau",
+      "Coupole",
+      "Voûte d'arêtes"
+    ],
+    "answer": "Voûte en berceau",
+    "explanation": "C'est une voûte semi-cylindrique qui exerce une poussée continue sur les murs porteurs."
+  },
+  {
+    "q": "Quel architecte brésilien a conçu les principaux bâtiments de Brasília ?",
+    "category": "Architecture",
+    "options": [
+      "Oscar Niemeyer",
+      "Lúcio Costa",
+      "Paulo Mendes da Rocha",
+      "Roberto Burle Marx"
+    ],
+    "answer": "Oscar Niemeyer",
+    "explanation": "Ses formes courbes en béton blanc sont devenues la signature de la capitale brésilienne."
+  },
+  {
+    "q": "Comment appelle-t-on un bâtiment dont la façade est entièrement vitrée, sans murs porteurs visibles ?",
+    "category": "Architecture",
+    "options": [
+      "Mur-rideau",
+      "Mur pignon",
+      "Mur de refend",
+      "Mur bahut"
+    ],
+    "answer": "Mur-rideau",
+    "explanation": "Popularisé par le mouvement moderne, il permet de séparer la structure de l'enveloppe du bâtiment."
+  },
+  {
+    "q": "Quel monument indien en marbre blanc est considéré comme un chef-d'œuvre de l'architecture moghole ?",
+    "category": "Architecture",
+    "options": [
+      "Le Fort Rouge",
+      "Le Taj Mahal",
+      "Le Palais des Vents",
+      "La Porte de l'Inde"
+    ],
+    "answer": "Le Taj Mahal",
+    "explanation": "Construit entre 1631 et 1653 par l'empereur Shah Jahan en mémoire de son épouse."
+  },
+    {
+    "q": "En quelle année l'Allemagne nazie a-t-elle envahi la Pologne, déclenchant la Seconde Guerre mondiale ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "1937",
+      "1938",
+      "1939",
+      "1940"
+    ],
+    "answer": "1939",
+    "explanation": "L'invasion du 1er septembre 1939 a poussé la France et le Royaume-Uni à déclarer la guerre à l'Allemagne."
+  },
+  {
+    "q": "Quel nom porte l'évacuation massive de soldats alliés en mai-juin 1940 sur les plages du nord de la France ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Opération Barbarossa",
+      "Opération Dynamo",
+      "Opération Overlord",
+      "Opération Market Garden"
+    ],
+    "answer": "Opération Dynamo",
+    "explanation": "Plus de 338 000 soldats ont été évacués de Dunkerque vers l'Angleterre."
+  },
+  {
+    "q": "Quel maréchal français a signé l'armistice avec l'Allemagne en juin 1940 ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Charles de Gaulle",
+      "Philippe Pétain",
+      "Jean Moulin",
+      "Henri Giraud"
+    ],
+    "answer": "Philippe Pétain",
+    "explanation": "Il a ensuite dirigé le régime de Vichy, collaborant avec l'occupant nazi."
+  },
+  {
+    "q": "Depuis quelle ville le général de Gaulle a-t-il lancé son appel du 18 juin 1940 ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Paris",
+      "Alger",
+      "Londres",
+      "Brazzaville"
+    ],
     "answer": "Londres",
-    "explanation": "La ville les organisait pour la troisième fois."
-  }
+    "explanation": "Il a appelé les Français à poursuivre le combat via les ondes de la BBC."
+  },
+  {
+    "q": "Quel nom de code désigne l'invasion de l'URSS par l'Allemagne en juin 1941 ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Opération Overlord",
+      "Opération Barbarossa",
+      "Opération Torch",
+      "Opération Citadelle"
+    ],
+    "answer": "Opération Barbarossa",
+    "explanation": "Lancée le 22 juin 1941, c'est la plus grande opération militaire de l'histoire."
+  },
+  {
+    "q": "Quelle base navale américaine a été attaquée par le Japon le 7 décembre 1941 ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Midway",
+      "Guam",
+      "Pearl Harbor",
+      "Wake Island"
+    ],
+    "answer": "Pearl Harbor",
+    "explanation": "Cette attaque surprise a provoqué l'entrée en guerre des États-Unis."
+  },
+  {
+    "q": "Quelle bataille de 1942-1943 est considérée comme le tournant de la guerre sur le front Est ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Bataille de Moscou",
+      "Bataille de Stalingrad",
+      "Bataille de Koursk",
+      "Siège de Leningrad"
+    ],
+    "answer": "Bataille de Stalingrad",
+    "explanation": "La capitulation de la 6e armée allemande a marqué le début du recul nazi à l'Est."
+  },
+  {
+    "q": "Quel général américain commandait les forces alliées lors du débarquement en Normandie ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Patton",
+      "MacArthur",
+      "Eisenhower",
+      "Bradley"
+    ],
+    "answer": "Eisenhower",
+    "explanation": "Dwight Eisenhower était le commandant suprême des forces alliées en Europe."
+  },
+  {
+    "q": "Quel jour est surnommé le 'D-Day', date du débarquement en Normandie ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "6 mai 1944",
+      "6 juin 1944",
+      "6 juillet 1944",
+      "6 août 1944"
+    ],
+    "answer": "6 juin 1944",
+    "explanation": "C'est la plus grande opération amphibie de l'histoire militaire."
+  },
+  {
+    "q": "Sur quelles plages les troupes américaines ont-elles débarqué le 6 juin 1944 ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Gold et Sword",
+      "Juno et Gold",
+      "Omaha et Utah",
+      "Sword et Juno"
+    ],
+    "answer": "Omaha et Utah",
+    "explanation": "Omaha Beach a été le secteur le plus meurtrier du débarquement."
+  },
+  {
+    "q": "Comment s'appelle le résistant français qui a unifié les mouvements de Résistance avant d'être arrêté en 1943 ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Pierre Brossolette",
+      "Jean Moulin",
+      "Henri Frenay",
+      "Lucie Aubrac"
+    ],
+    "answer": "Jean Moulin",
+    "explanation": "Arrêté à Caluire, il est mort sous la torture sans avoir parlé."
+  },
+  {
+    "q": "Quel camp de concentration et d'extermination nazi, situé en Pologne, est devenu le symbole de la Shoah ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Dachau",
+      "Treblinka",
+      "Auschwitz-Birkenau",
+      "Buchenwald"
+    ],
+    "answer": "Auschwitz-Birkenau",
+    "explanation": "Plus d'un million de personnes, principalement des Juifs, y ont été assassinées."
+  },
+  {
+    "q": "Quel nom porte la conférence de février 1945 réunissant Roosevelt, Churchill et Staline ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Conférence de Potsdam",
+      "Conférence de Téhéran",
+      "Conférence de Yalta",
+      "Conférence de Casablanca"
+    ],
+    "answer": "Conférence de Yalta",
+    "explanation": "Les trois dirigeants y ont discuté du sort de l'Europe d'après-guerre."
+  },
+  {
+    "q": "Quelle ville allemande a été le théâtre d'un bombardement massif allié en février 1945, provoquant un débat moral ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Berlin",
+      "Hambourg",
+      "Dresde",
+      "Cologne"
+    ],
+    "answer": "Dresde",
+    "explanation": "Le bombardement a détruit une grande partie de la ville historique et causé des dizaines de milliers de morts civils."
+  },
+  {
+    "q": "Quelle bataille navale de juin 1942 a marqué le tournant de la guerre dans le Pacifique ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Bataille de Midway",
+      "Bataille de la mer de Corail",
+      "Bataille de Guadalcanal",
+      "Bataille d'Iwo Jima"
+    ],
+    "answer": "Bataille de Midway",
+    "explanation": "La marine américaine a coulé quatre porte-avions japonais, renversant le rapport de force."
+  },
+  {
+    "q": "Sur quelle ville japonaise la première bombe atomique a-t-elle été larguée le 6 août 1945 ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Nagasaki",
+      "Hiroshima",
+      "Tokyo",
+      "Osaka"
+    ],
+    "answer": "Hiroshima",
+    "explanation": "La bombe 'Little Boy' a tué environ 80 000 personnes instantanément."
+  },
+  {
+    "q": "Quelle ville a été frappée par la seconde bombe atomique trois jours après Hiroshima ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Kyoto",
+      "Kobe",
+      "Nagasaki",
+      "Yokohama"
+    ],
+    "answer": "Nagasaki",
+    "explanation": "La bombe 'Fat Man' a poussé le Japon à capituler le 15 août 1945."
+  },
+  {
+    "q": "Comment appelle-t-on la politique d'extermination des Juifs d'Europe par les nazis ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "La Shoah",
+      "Le Blitzkrieg",
+      "L'Anschluss",
+      "Le Lebensraum"
+    ],
+    "answer": "La Shoah",
+    "explanation": "Environ six millions de Juifs ont été assassinés entre 1941 et 1945."
+  },
+  {
+    "q": "Quel pays a été le premier à être annexé par Hitler en 1938, sans combat ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Tchécoslovaquie",
+      "Pologne",
+      "Autriche",
+      "Danemark"
+    ],
+    "answer": "Autriche",
+    "explanation": "L'Anschluss a rattaché l'Autriche au IIIe Reich en mars 1938."
+  },
+  {
+    "q": "Quel nom porte la ligne de fortifications françaises censée protéger la frontière avec l'Allemagne ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Ligne Siegfried",
+      "Ligne Maginot",
+      "Ligne Gustave",
+      "Mur de l'Atlantique"
+    ],
+    "answer": "Ligne Maginot",
+    "explanation": "Les Allemands l'ont contournée en passant par la Belgique et les Ardennes en 1940."
+  },
+  {
+    "q": "Quel événement du 25 août 1944 marque un tournant symbolique pour la France ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Le débarquement de Provence",
+      "La libération de Paris",
+      "L'armistice",
+      "La capitulation allemande"
+    ],
+    "answer": "La libération de Paris",
+    "explanation": "La 2e division blindée du général Leclerc est entrée dans Paris avec l'aide de la Résistance."
+  },
+  {
+    "q": "Quel pacte de non-agression signé en 1939 a surpris le monde en alliant l'Allemagne nazie et l'URSS ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Pacte d'Acier",
+      "Pacte Molotov-Ribbentrop",
+      "Accords de Munich",
+      "Pacte tripartite"
+    ],
+    "answer": "Pacte Molotov-Ribbentrop",
+    "explanation": "Ce pacte contenait un protocole secret de partage de la Pologne et des pays baltes."
+  },
+  {
+    "q": "Quel procès historique a jugé les dirigeants nazis pour crimes de guerre et crimes contre l'humanité ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Procès de Tokyo",
+      "Procès de La Haye",
+      "Procès de Nuremberg",
+      "Procès de Moscou"
+    ],
+    "answer": "Procès de Nuremberg",
+    "explanation": "Tenu de 1945 à 1946, il a établi des précédents majeurs en droit international."
+  },
+  {
+    "q": "Quelle offensive allemande surprise dans les Ardennes en décembre 1944 a failli percer les lignes alliées ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Opération Barbarossa",
+      "Bataille des Ardennes",
+      "Opération Market Garden",
+      "Bataille de Koursk"
+    ],
+    "answer": "Bataille des Ardennes",
+    "explanation": "C'est la dernière grande offensive allemande à l'Ouest, finalement repoussée en janvier 1945."
+  },
+  {
+    "q": "Quel pays a subi un siège de près de 900 jours par les forces allemandes entre 1941 et 1944 ?",
+    "category": "Histoire - WW2",
+    "options": [
+      "Moscou",
+      "Varsovie",
+      "Leningrad",
+      "Kiev"
+    ],
+    "answer": "Leningrad",
+    "explanation": "Le siège de Leningrad (aujourd'hui Saint-Pétersbourg) a causé plus d'un million de morts civils, principalement par la famine."
+  },
+  {
+    "q": "Quel général est devenu Empereur des Français en 1804 ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["Louis-Philippe", "Napoléon Bonaparte", "Charles X", "Napoléon III"],
+    "answer": "Napoléon Bonaparte",
+    "explanation": "Il s'est couronné lui-même lors d'une cérémonie à Notre-Dame de Paris."
+  },
+  {
+    "q": "Quelle bataille de 1815 a mis fin définitivement au règne de Napoléon ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["Austerlitz", "Trafalgar", "Waterloo", "Iéna"],
+    "answer": "Waterloo",
+    "explanation": "Vaincu par les armées britanniques et prussiennes en Belgique, Napoléon a été exilé à Sainte-Hélène."
+  },
+  {
+    "q": "Quel congrès de 1814-1815 a redessiné la carte de l'Europe après les guerres napoléoniennes ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["Congrès de Paris", "Congrès de Berlin", "Congrès de Vienne", "Congrès de Versailles"],
+    "answer": "Congrès de Vienne",
+    "explanation": "Les grandes puissances européennes y ont rétabli un équilibre des forces et restauré les monarchies."
+  },
+  {
+    "q": "Quelle révolution parisienne de juillet 1830 a renversé Charles X ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["La Commune", "Les Trois Glorieuses", "La Révolution de 1848", "Le coup d'État de 1851"],
+    "answer": "Les Trois Glorieuses",
+    "explanation": "Trois journées d'insurrection (27, 28, 29 juillet) ont porté Louis-Philippe au pouvoir."
+  },
+  {
+    "q": "Dans quel pays la reine Victoria a-t-elle régné pendant plus de 63 ans ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["France", "Espagne", "Royaume-Uni", "Pays-Bas"],
+    "answer": "Royaume-Uni",
+    "explanation": "Son règne (1837-1901) a donné son nom à l'ère victorienne, apogée de l'Empire britannique."
+  },
+  {
+    "q": "Quelle invention de Samuel Morse a révolutionné les communications à distance en 1837 ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["Le téléphone", "Le télégraphe électrique", "La radio", "Le fax"],
+    "answer": "Le télégraphe électrique",
+    "explanation": "Le code Morse permettait de transmettre des messages par impulsions électriques."
+  },
+  {
+    "q": "Quel événement de février 1848 a proclamé la IIe République en France ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["Un coup d'État militaire", "Une révolution populaire", "Un référendum", "Une abdication volontaire"],
+    "answer": "Une révolution populaire",
+    "explanation": "Le roi Louis-Philippe a abdiqué face aux barricades parisiennes."
+  },
+  {
+    "q": "Quel mouvement européen de 1848 est surnommé le 'Printemps des peuples' ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["Les guerres napoléoniennes", "Les révolutions libérales et nationales", "La colonisation de l'Afrique", "L'unification allemande"],
+    "answer": "Les révolutions libérales et nationales",
+    "explanation": "Des soulèvements ont éclaté dans toute l'Europe pour réclamer libertés et indépendances nationales."
+  },
+  {
+    "q": "Quelle ruée a attiré des milliers de chercheurs en Californie en 1849 ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["La ruée vers le pétrole", "La ruée vers l'argent", "La ruée vers l'or", "La ruée vers les terres"],
+    "answer": "La ruée vers l'or",
+    "explanation": "La découverte d'or à Sutter's Mill a provoqué une migration massive vers l'Ouest américain."
+  },
+  {
+    "q": "Quelle guerre civile américaine (1861-1865) a notamment conduit à l'abolition de l'esclavage ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["La guerre d'Indépendance", "La guerre de Sécession", "La guerre hispano-américaine", "La guerre du Mexique"],
+    "answer": "La guerre de Sécession",
+    "explanation": "Elle a opposé les États du Nord (Union) aux États du Sud (Confédération)."
+  },
+  {
+    "q": "Quel président américain a été assassiné en 1865 après avoir aboli l'esclavage ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["George Washington", "Thomas Jefferson", "Abraham Lincoln", "Theodore Roosevelt"],
+    "answer": "Abraham Lincoln",
+    "explanation": "Il a été assassiné au théâtre Ford par John Wilkes Booth."
+  },
+  {
+    "q": "Quel canal, inauguré en 1869, relie la mer Méditerranée à la mer Rouge ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["Canal de Panama", "Canal de Suez", "Canal de Corinthe", "Canal de Kiel"],
+    "answer": "Canal de Suez",
+    "explanation": "Conçu par Ferdinand de Lesseps, il a considérablement raccourci la route maritime vers l'Asie."
+  },
+  {
+    "q": "Quel homme d'État a unifié l'Italie dans les années 1860 ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["Garibaldi", "Cavour", "Mazzini", "Victor-Emmanuel II"],
+    "answer": "Cavour",
+    "explanation": "Le comte de Cavour, Premier ministre du Piémont-Sardaigne, a orchestré diplomatiquement l'unification."
+  },
+  {
+    "q": "Quel chancelier prussien surnommé le 'Chancelier de fer' a unifié l'Allemagne en 1871 ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["Guillaume Ier", "Otto von Bismarck", "Helmuth von Moltke", "Friedrich Engels"],
+    "answer": "Otto von Bismarck",
+    "explanation": "Il a provoqué trois guerres successives pour forger l'unité allemande."
+  },
+  {
+    "q": "Quelle guerre perdue par la France en 1870-1871 a conduit à la chute du Second Empire ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["Guerre de Crimée", "Guerre franco-prussienne", "Guerre d'Italie", "Guerre des Boers"],
+    "answer": "Guerre franco-prussienne",
+    "explanation": "La défaite de Sedan a entraîné la capture de Napoléon III et la proclamation de la IIIe République."
+  },
+  {
+    "q": "Quel soulèvement parisien de 1871 a instauré un gouvernement révolutionnaire pendant deux mois ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["La Terreur", "Les Trois Glorieuses", "La Commune de Paris", "La Fronde"],
+    "answer": "La Commune de Paris",
+    "explanation": "Écrasée lors de la 'Semaine sanglante', elle reste un symbole du mouvement ouvrier."
+  },
+  {
+    "q": "Quelle invention de Thomas Edison en 1879 a transformé le quotidien ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["Le téléphone", "L'ampoule électrique", "Le phonographe", "La machine à écrire"],
+    "answer": "L'ampoule électrique",
+    "explanation": "Edison a perfectionné et commercialisé l'ampoule à incandescence."
+  },
+  {
+    "q": "Quel scientifique a publié 'L'Origine des espèces' en 1859 ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["Louis Pasteur", "Charles Darwin", "Gregor Mendel", "Alfred Wallace"],
+    "answer": "Charles Darwin",
+    "explanation": "Sa théorie de l'évolution par sélection naturelle a bouleversé les sciences."
+  },
+  {
+    "q": "Quel procédé de Louis Pasteur a permis de conserver les aliments en tuant les microbes ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["La stérilisation", "La pasteurisation", "La fermentation", "La lyophilisation"],
+    "answer": "La pasteurisation",
+    "explanation": "Mise au point dans les années 1860, elle consiste à chauffer un liquide puis à le refroidir rapidement."
+  },
+  {
+    "q": "Quel pays européen a colonisé le Congo à titre personnel au XIXe siècle ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["France", "Belgique", "Royaume-Uni", "Portugal"],
+    "answer": "Belgique",
+    "explanation": "Le roi Léopold II a possédé le Congo comme propriété privée avant de le céder à l'État belge en 1908."
+  },
+  {
+    "q": "Quelle conférence de 1884-1885 a organisé le partage de l'Afrique entre puissances européennes ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["Conférence de Vienne", "Conférence de Berlin", "Conférence de Paris", "Conférence de Londres"],
+    "answer": "Conférence de Berlin",
+    "explanation": "Les frontières coloniales y ont été tracées sans consulter les populations africaines."
+  },
+  {
+    "q": "Quelle affaire judiciaire française de 1894 a divisé le pays autour d'un officier juif accusé à tort d'espionnage ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["L'affaire Calas", "L'affaire Dreyfus", "L'affaire Panama", "L'affaire Boulanger"],
+    "answer": "L'affaire Dreyfus",
+    "explanation": "Émile Zola a publié 'J'accuse...!' pour défendre le capitaine Dreyfus, finalement réhabilité."
+  },
+  {
+    "q": "Quel empire asiatique a été contraint de s'ouvrir au commerce occidental en 1854 sous la menace de navires américains ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["La Chine", "Le Japon", "La Corée", "Le Siam"],
+    "answer": "Le Japon",
+    "explanation": "Le commodore Perry a forcé le Japon à signer des traités commerciaux, mettant fin à son isolement."
+  },
+  {
+    "q": "Quelle période de modernisation rapide du Japon débute en 1868 ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["L'ère Edo", "L'ère Meiji", "L'ère Taishō", "L'ère Shōwa"],
+    "answer": "L'ère Meiji",
+    "explanation": "Le Japon s'est industrialisé et occidentalisé en quelques décennies."
+  },
+  {
+    "q": "Quel moyen de transport révolutionnaire a connu son essor au XIXe siècle grâce à la machine à vapeur ?",
+    "category": "Histoire - XIXe siècle",
+    "options": ["L'automobile", "L'avion", "Le chemin de fer", "Le dirigeable"],
+    "answer": "Le chemin de fer",
+    "explanation": "La première ligne de passagers au monde a ouvert entre Liverpool et Manchester en 1830."
+  },
+    {
+    "q": "Quels attentats du 11 septembre 2001 ont frappé les États-Unis ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Des explosions dans le métro",
+      "Des détournements d'avions contre des bâtiments",
+      "Un attentat à la voiture piégée",
+      "Une attaque chimique"
+    ],
+    "answer": "Des détournements d'avions contre des bâtiments",
+    "explanation": "Quatre avions ont été détournés par Al-Qaïda, dont deux ont frappé les tours du World Trade Center à New York."
+  },
+  {
+    "q": "Quel pays les États-Unis ont-ils envahi en 2003 en invoquant la présence d'armes de destruction massive ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Afghanistan",
+      "Iran",
+      "Irak",
+      "Syrie"
+    ],
+    "answer": "Irak",
+    "explanation": "Aucune arme de destruction massive n'a finalement été trouvée. Saddam Hussein a été renversé."
+  },
+  {
+    "q": "Quel tsunami dévastateur a frappé l'océan Indien le 26 décembre 2004 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Tsunami du Japon",
+      "Tsunami de Sumatra",
+      "Tsunami du Chili",
+      "Tsunami de Haïti"
+    ],
+    "answer": "Tsunami de Sumatra",
+    "explanation": "Provoqué par un séisme de magnitude 9,1, il a causé plus de 230 000 morts dans 14 pays."
+  },
+  {
+    "q": "Quel réseau social lancé en 2004 a atteint plus de 2 milliards d'utilisateurs ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Twitter",
+      "Instagram",
+      "Facebook",
+      "YouTube"
+    ],
+    "answer": "Facebook",
+    "explanation": "Créé par Mark Zuckerberg dans sa chambre à Harvard, il est devenu le plus grand réseau social mondial."
+  },
+  {
+    "q": "Quel ouragan a dévasté la Nouvelle-Orléans en août 2005 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Ouragan Sandy",
+      "Ouragan Katrina",
+      "Ouragan Irma",
+      "Ouragan Harvey"
+    ],
+    "answer": "Ouragan Katrina",
+    "explanation": "La rupture des digues a inondé 80 % de la ville, causant plus de 1 800 morts."
+  },
+  {
+    "q": "Quel appareil révolutionnaire Apple a-t-il lancé en 2007 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "L'iPad",
+      "L'iPod",
+      "L'iPhone",
+      "L'Apple Watch"
+    ],
+    "answer": "L'iPhone",
+    "explanation": "Il a transformé l'industrie de la téléphonie et inauguré l'ère du smartphone moderne."
+  },
+  {
+    "q": "Quelle crise financière mondiale a éclaté en 2008 après la faillite de Lehman Brothers ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "La crise de la dette européenne",
+      "La crise des subprimes",
+      "La bulle Internet",
+      "La crise pétrolière"
+    ],
+    "answer": "La crise des subprimes",
+    "explanation": "L'effondrement du marché immobilier américain a provoqué une récession mondiale."
+  },
+  {
+    "q": "Quel homme politique est devenu le premier président noir des États-Unis en 2008 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Colin Powell",
+      "Barack Obama",
+      "Jesse Jackson",
+      "Cory Booker"
+    ],
+    "answer": "Barack Obama",
+    "explanation": "Il a été réélu en 2012 et a exercé deux mandats jusqu'en 2017."
+  },
+  {
+    "q": "Quel séisme suivi d'un tsunami a provoqué la catastrophe nucléaire de Fukushima en 2011 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Séisme de Kobe",
+      "Séisme de Tōhoku",
+      "Séisme de Kumamoto",
+      "Séisme d'Osaka"
+    ],
+    "answer": "Séisme de Tōhoku",
+    "explanation": "Le séisme de magnitude 9,0 et le tsunami ont causé la fusion de trois réacteurs de la centrale."
+  },
+  {
+    "q": "Quel mouvement de révoltes populaires a secoué le monde arabe à partir de 2010-2011 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Le Printemps des peuples",
+      "Le Printemps arabe",
+      "La Révolution verte",
+      "Le Mouvement des Indignés"
+    ],
+    "answer": "Le Printemps arabe",
+    "explanation": "Parti de Tunisie, le mouvement s'est étendu à l'Égypte, la Libye, la Syrie et d'autres pays."
+  },
+  {
+    "q": "Quel dirigeant tunisien a été renversé en janvier 2011, déclenchant le Printemps arabe ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Hosni Moubarak",
+      "Bachar el-Assad",
+      "Zine el-Abidine Ben Ali",
+      "Mouammar Kadhafi"
+    ],
+    "answer": "Zine el-Abidine Ben Ali",
+    "explanation": "Il a fui le pays après 23 ans de pouvoir, suite à la révolution de jasmin."
+  },
+  {
+    "q": "Dans quel pays le chef d'Al-Qaïda Oussama ben Laden a-t-il été tué en 2011 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Afghanistan",
+      "Irak",
+      "Pakistan",
+      "Yémen"
+    ],
+    "answer": "Pakistan",
+    "explanation": "Une opération spéciale américaine l'a localisé à Abbottabad."
+  },
+  {
+    "q": "Quel accord international sur le climat a été signé en 2015 par 196 pays ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Protocole de Kyoto",
+      "Accord de Paris",
+      "Accord de Copenhague",
+      "Pacte de Glasgow"
+    ],
+    "answer": "Accord de Paris",
+    "explanation": "Il vise à limiter le réchauffement climatique à 1,5°C par rapport à l'ère préindustrielle."
+  },
+  {
+    "q": "Quelle série d'attentats a frappé Paris le 13 novembre 2015 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "L'attentat de Charlie Hebdo",
+      "Les attentats du Bataclan et des terrasses",
+      "L'attentat de Nice",
+      "L'attentat de Strasbourg"
+    ],
+    "answer": "Les attentats du Bataclan et des terrasses",
+    "explanation": "130 personnes ont été tuées dans des attaques coordonnées revendiquées par Daech."
+  },
+  {
+    "q": "Quel référendum britannique de 2016 a décidé la sortie du Royaume-Uni de l'Union européenne ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Le Frexit",
+      "Le Brexit",
+      "Le Grexit",
+      "Le Nexit"
+    ],
+    "answer": "Le Brexit",
+    "explanation": "Le 'Leave' l'a emporté à 51,9 %. La sortie effective a eu lieu le 31 janvier 2020."
+  },
+  {
+    "q": "Quel milliardaire américain a été élu président des États-Unis en novembre 2016 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Elon Musk",
+      "Michael Bloomberg",
+      "Donald Trump",
+      "Jeff Bezos"
+    ],
+    "answer": "Donald Trump",
+    "explanation": "Sa victoire surprise face à Hillary Clinton a bouleversé la politique américaine."
+  },
+  {
+    "q": "Quel mouvement mondial contre les violences sexuelles a émergé en 2017 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Black Lives Matter",
+      "#MeToo",
+      "Fridays for Future",
+      "Occupy Wall Street"
+    ],
+    "answer": "#MeToo",
+    "explanation": "Déclenché par l'affaire Harvey Weinstein, il a libéré la parole des victimes dans le monde entier."
+  },
+  {
+    "q": "Quelle jeune militante suédoise a lancé le mouvement 'Fridays for Future' pour le climat en 2018 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Malala Yousafzai",
+      "Greta Thunberg",
+      "Emma González",
+      "Vanessa Nakate"
+    ],
+    "answer": "Greta Thunberg",
+    "explanation": "Sa grève scolaire devant le Parlement suédois a inspiré des millions de jeunes dans le monde."
+  },
+  {
+    "q": "Quelle pandémie mondiale a débuté fin 2019 et paralysé la planète en 2020 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Grippe H1N1",
+      "Ebola",
+      "Covid-19",
+      "SRAS"
+    ],
+    "answer": "Covid-19",
+    "explanation": "Le virus SARS-CoV-2, apparu à Wuhan en Chine, a causé des millions de morts et des confinements mondiaux."
+  },
+  {
+    "q": "Quel mouvement antiraciste a pris une ampleur mondiale après la mort de George Floyd en mai 2020 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Occupy Wall Street",
+      "#MeToo",
+      "Black Lives Matter",
+      "Extinction Rebellion"
+    ],
+    "answer": "Black Lives Matter",
+    "explanation": "Des manifestations massives ont eu lieu dans des dizaines de pays pour dénoncer les violences policières."
+  },
+  {
+    "q": "Quel événement au Capitole américain a choqué le monde le 6 janvier 2021 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Une fusillade",
+      "Un incendie",
+      "Une insurrection de partisans de Trump",
+      "Un attentat terroriste"
+    ],
+    "answer": "Une insurrection de partisans de Trump",
+    "explanation": "Des milliers de manifestants ont envahi le Capitole pour tenter d'empêcher la certification de la victoire de Biden."
+  },
+  {
+    "q": "Quel pays a envahi l'Ukraine en février 2022 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Biélorussie",
+      "Chine",
+      "Russie",
+      "Iran"
+    ],
+    "answer": "Russie",
+    "explanation": "Vladimir Poutine a ordonné une invasion à grande échelle, provoquant la plus grande guerre en Europe depuis 1945."
+  },
+  {
+    "q": "Quel outil d'intelligence artificielle conversationnelle a été lancé par OpenAI en novembre 2022 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Alexa",
+      "Siri",
+      "ChatGPT",
+      "Google Bard"
+    ],
+    "answer": "ChatGPT",
+    "explanation": "Il a atteint 100 millions d'utilisateurs en deux mois, un record dans l'histoire des technologies."
+  },
+  {
+    "q": "Quelle reine, plus long règne de l'histoire britannique, est décédée en septembre 2022 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Reine Victoria",
+      "Reine Élisabeth II",
+      "Reine Mary",
+      "Reine Anne"
+    ],
+    "answer": "Reine Élisabeth II",
+    "explanation": "Elle a régné pendant 70 ans. Son fils Charles III lui a succédé."
+  },
+  {
+    "q": "Quelle ville a accueilli les Jeux olympiques d'été 2024 ?",
+    "category": "Histoire - XXIe siècle",
+    "options": [
+      "Tokyo",
+      "Los Angeles",
+      "Paris",
+      "Brisbane"
+    ],
+    "answer": "Paris",
+    "explanation": "Paris a accueilli les JO pour la troisième fois, cent ans après l'édition de 1924."
+  }    
   ]
 }
