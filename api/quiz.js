@@ -19,13 +19,25 @@ module.exports = async (req, res) => {
         const questionsData = JSON.parse(fs.readFileSync(questionsPath, 'utf-8'));
         const QUESTIONS_BANK = questionsData.questions;
 
-        // 3. Sélectionner 8 questions au hasard (L'algorithme de brassage réel)
-        const allQuestions = [...QUESTIONS_BANK];
-        for (let i = allQuestions.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [allQuestions[i], allQuestions[j]] = [allQuestions[j], allQuestions[i]];
+        // 3. Sélectionner 8 questions au hasard (avec FILTRAGE)
+        const playedIds = req.body.playedIds || []; // On récupère les IDs envoyés par le front
+        
+        // On crée une liste de questions filtrées (uniquement celles non jouées)
+        let filteredQuestions = QUESTIONS_BANK.filter(q => !playedIds.includes(q.id));
+
+        // Sécurité : Si le joueur a tout vu ou s'il reste moins de 8 questions, on réinitialise
+        if (filteredQuestions.length < 8) {
+            filteredQuestions = [...QUESTIONS_BANK];
         }
-        const safe8 = allQuestions.slice(0, 8).map(q => ({ ...q, kind: "safe" }));
+
+        // Maintenant on mélange SEULEMENT les questions filtrées
+        for (let i = filteredQuestions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [filteredQuestions[i], filteredQuestions[j]] = [filteredQuestions[j], filteredQuestions[i]];
+        }
+        
+        // On prend les 8 premières
+        const safe8 = filteredQuestions.slice(0, 8).map(q => ({ ...q, kind: "safe" }));
 
         // 4. Générer 2 hallucinations avec OpenAI
         const completion = await openai.chat.completions.create({
