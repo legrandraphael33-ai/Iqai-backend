@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
         const playedIds = req.body.playedIds || []; // On récupère les IDs envoyés par le front
         
         // On crée une liste de questions filtrées (uniquement celles non jouées)
-        let filteredQuestions = QUESTIONS_BANK.filter(q => !playedIds.includes(q.id));
+        let filteredQuestions = QUESTIONS_BANK.filter(q => !playedIds.map(Number).includes(Number(q.id)));
 
         // Sécurité : Si le joueur a tout vu ou s'il reste moins de 8 questions, on réinitialise
         if (filteredQuestions.length < 8) {
