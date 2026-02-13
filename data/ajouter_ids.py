@@ -1,8 +1,8 @@
 import json
 
 # Chemin vers ton fichier (adapte si besoin)
-INPUT_FILE = "quiz_questions.json"
-OUTPUT_FILE = "quiz_questions_with_ids.json"
+INPUT_FILE = "questions-bank.json"
+OUTPUT_FILE = "questions-bank-final.json"
 
 # Charger le fichier
 with open(INPUT_FILE, "r", encoding="utf-8") as f:
