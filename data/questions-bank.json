@@ -3538,13 +3538,13 @@
     },
     {
       "id": 273,
-      "q": "Quel est le pluriel du mot 'Lando' ?",
+      "q": "Qu'est ce qu'un marsouin ?",
       "category": "Français",
       "options": [
-        "Landos",
-        "Landox",
-        "Landaux",
-        "Landoux"
+        "Un plat typique alsacien",
+        "Un surnom donné aux soldats d'infanterie",
+        "Une petite crevette",
+        "Un cousin du pingouin"
       ],
       "answer": "Landos",
       "explanation": "Le landau (poussette) prend un -x, mais le lando (véhicule) prend un -s."
