@@ -789,7 +789,7 @@ function advanceQuestion(){
     gamesPlayed++;
     localStorage.setItem("gamesPlayed", String(gamesPlayed));
     const playedIds = JSON.parse(localStorage.getItem('playedIds') || '[]');
-    const currentIds = questions.filter(q => q.id).map(q => q.id); 
+    const currentIds = questions.map(q => q.id).filter(id => id != null);
     const updatedIds = [...new Set([...playedIds, ...currentIds])].slice(-1000);
     localStorage.setItem('playedIds', JSON.stringify(updatedIds));
 
