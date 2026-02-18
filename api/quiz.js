@@ -19,9 +19,25 @@ module.exports = async (req, res) => {
         const questionsData = JSON.parse(fs.readFileSync(questionsPath, 'utf-8'));
         const QUESTIONS_BANK = questionsData.questions;
 
-        // 3. Sélectionner 8 questions au hasard
-        const shuffled = [...QUESTIONS_BANK].sort(() => 0.5 - Math.random());
-        const safe8 = shuffled.slice(0, 8).map(q => ({ ...q, kind: "safe" }));
+        // 3. Sélectionner 8 questions au hasard (avec FILTRAGE)
+        const playedIds = req.body.playedIds || []; // On récupère les IDs envoyés par le front
+        
+        // On crée une liste de questions filtrées (uniquement celles non jouées)
+        let filteredQuestions = QUESTIONS_BANK.filter(q => !playedIds.map(Number).includes(Number(q.id)));
+
+        // Sécurité : Si le joueur a tout vu ou s'il reste moins de 8 questions, on réinitialise
+        if (filteredQuestions.length < 8) {
+            filteredQuestions = [...QUESTIONS_BANK];
+        }
+
+        // Maintenant on mélange SEULEMENT les questions filtrées
+        for (let i = filteredQuestions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [filteredQuestions[i], filteredQuestions[j]] = [filteredQuestions[j], filteredQuestions[i]];
+        }
+        
+        // On prend les 8 premières
+        const safe8 = filteredQuestions.slice(0, 8).map(q => ({ ...q, kind: "safe" }));
 
         // 4. Générer 2 hallucinations avec OpenAI
         const completion = await openai.chat.completions.create({
@@ -39,8 +55,14 @@ module.exports = async (req, res) => {
                         .slice(0, 2)
                         .map(q => ({ ...q, kind: "halu" }));
 
-        // 5. Fusionner et mélanger le tout (10 questions)
-        const finalQuiz = [...safe8, ...hallu2].sort(() => 0.5 - Math.random());
+        // 5. Fusionner et mélanger le tout (10 questions) proprement
+        const finalQuiz = [...safe8, ...hallu2];
+        
+        // On applique encore le mélange Fisher-Yates sur les 10 questions finales
+        for (let i = finalQuiz.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [finalQuiz[i], finalQuiz[j]] = [finalQuiz[j], finalQuiz[i]];
+        }
 
         return res.status(200).json(finalQuiz);
 
