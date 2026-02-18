@@ -8,13 +8,17 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<!-- OneSignal Push Notifications -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
   window.OneSignalDeferred = window.OneSignalDeferred || [];
   OneSignalDeferred.push(async function(OneSignal) {
     await OneSignal.init({
       appId: "dc73bf96-dbcf-4498-ab4d-5639c66b16ea",
+      safari_web_id: "web.onesignal.auto.10309993-875c-4384-934c-26792f444f2b", // Optionnel : à vérifier sur ton dash
+      notifyButton: {
+        enable: true, // Ça affiche la petite cloche de rappel en bas
+      },
+      allowLocalhostAsSecureOrigin: true,
     });
   });
 </script>
@@ -1110,7 +1114,7 @@ function advanceQuestion(){
           const isPushSupported = await OneSignal.Notifications.isPushSupported();
           if (isPushSupported) {
             const permission = await OneSignal.Notifications.permission;
-            if (!permission) {
+            if (permission !== "granted") { ... }
               notifPopup.classList.remove('hidden');
             }
           }
