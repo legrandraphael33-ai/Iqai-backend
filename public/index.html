@@ -1101,54 +1101,59 @@ function advanceQuestion(){
     startGame();
   };
 
-  // ========== POPUP CUSTOM NOTIFICATIONS ==========
-  const notifPopup = document.getElementById('notifPopup');
-  const notifAccept = document.getElementById('notifAccept');
-  const notifDecline = document.getElementById('notifDecline');
+ // ========== POPUP CUSTOM NOTIFICATIONS ==========
 
-  function showNotifPopup() {
-    // Ne montrer que si OneSignal est dispo et pas encore autorisé
-    if (window.OneSignal) {
-      OneSignalDeferred.push(async function(OneSignal) {
-        try {
-          const isPushSupported = await OneSignal.Notifications.isPushSupported();
-          if (isPushSupported) {
-            const permission = await OneSignal.Notifications.permission;
-            if (permission !== "granted") { ... }
-              notifPopup.classList.remove('hidden');
+function showNotifPopup() {
+    if (window.OneSignalDeferred) {
+        OneSignalDeferred.push(async function(OneSignal) {
+            try {
+                const isPushSupported = await OneSignal.Notifications.isPushSupported();
+                if (isPushSupported) {
+                    const permission = OneSignal.Notifications.permission;
+                    // On ne montre la popup que si l'utilisateur n'a pas encore décidé
+                    if (permission !== "granted") {
+                        const notifPopup = document.getElementById('notifPopup');
+                        if (notifPopup) {
+                            notifPopup.classList.remove('hidden');
+                        }
+                    }
+                }
+            } catch(e) {
+                console.error('OneSignal check error:', e);
             }
-          }
-        } catch(e) {
-          console.log('OneSignal check error:', e);
-        }
-      });
+        });
     }
-  }
+}
 
-notifAccept.onclick = async () => {
-  notifPopup.classList.add('hidden');
-  
-  if (window.OneSignal) {
-    OneSignalDeferred.push(async function(OneSignal) {
-      try {
-        // ON FORCE LE PROMPT NATIF DU NAVIGATEUR
-        await OneSignal.Notifications.requestPermission();
-        
-        // On ajoute un tag pour tes futurs messages automatisés
-        await OneSignal.User.addTag("status", "joueur_actif");
-        
-        console.log("Demande d'autorisation envoyée");
-      } catch(e) {
-        console.log('OneSignal prompt error:', e);
-      }
-    });
-  }
-};
+// On attend que le DOM soit chargé pour lier les boutons et éviter les erreurs "null"
+document.addEventListener('DOMContentLoaded', () => {
+    const notifPopup = document.getElementById('notifPopup');
+    const notifAccept = document.getElementById('notifAccept');
+    const notifDecline = document.getElementById('notifDecline');
 
-  notifDecline.onclick = () => {
-    notifPopup.classList.add('hidden');
-  };
+    if (notifAccept && notifPopup) {
+        notifAccept.onclick = async () => {
+            notifPopup.classList.add('hidden');
+            if (window.OneSignalDeferred) {
+                OneSignalDeferred.push(async function(OneSignal) {
+                    try {
+                        await OneSignal.Notifications.requestPermission();
+                        await OneSignal.User.addTag("status", "joueur_actif");
+                        console.log("Demande d'autorisation envoyée et tag ajouté");
+                    } catch(e) {
+                        console.error('OneSignal prompt error:', e);
+                    }
+                });
+            }
+        };
+    }
 
+    if (notifDecline && notifPopup) {
+        notifDecline.onclick = () => {
+            notifPopup.classList.add('hidden');
+        };
+    }
+});
   // Exposer la fonction globalement pour l'appeler après le quiz
   window.showNotifPopup = showNotifPopup;
 // ==========================================
