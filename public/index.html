@@ -803,10 +803,10 @@ function advanceQuestion(){
     const scoreTotal = score + vigilance;
     const scoreMax = questions.length;
 
-    // ========== TOKENS EN HAUT ==========
-    const tokenContainer=document.getElementById('tokenContainer');
-    const tokenImage=document.getElementById('tokenImage');
-    const tokenCanvas=document.getElementById('tokenCanvas');
+  // ========== TOKENS EN HAUT ==========
+    const tokenContainer = document.getElementById('tokenContainer');
+    const tokenImage = document.getElementById('tokenImage');
+    const tokenCanvas = document.getElementById('tokenCanvas');
 
     tokenContainer.classList.remove('hidden');
     tokenImage.classList.add('hidden');
@@ -843,10 +843,12 @@ function advanceQuestion(){
       ctx.fillStyle = "#1f2a30";
       ctx.textAlign = "center";
 
-      ctx.font = "bold 24px 'Press Start 2P'";
+      // --- TAILLE DYNAMIQUE POUR MOBILE ---
+      let fSize = Math.min(22, Math.floor(w * 0.045)); 
+      ctx.font = `bold ${fSize}px 'Press Start 2P'`;
       ctx.fillText("⚠️ AI BRAINWASHED ⚠️", w / 2, Math.round(h * 0.32));
 
-      ctx.font = "24px 'Press Start 2P'";
+      ctx.font = `${fSize}px 'Press Start 2P'`;
       ctx.fillText(`${scoreTotal}/${scoreMax}`, w / 2, Math.round(h * 0.58));
 
       ctx.font = "16px Inter";
@@ -878,10 +880,12 @@ function advanceQuestion(){
       ctx.fillStyle = "#1a1a1a";
       ctx.textAlign = "center";
 
-      ctx.font = "bold 32px 'Press Start 2P'";
+      // --- TAILLE DYNAMIQUE POUR MOBILE ---
+      let fSize = Math.min(30, Math.floor(w * 0.07));
+      ctx.font = `bold ${fSize}px 'Press Start 2P'`;
       ctx.fillText("I QUIT AI 🚪", w / 2, Math.round(h * 0.38));
 
-      ctx.font = "24px 'Press Start 2P'";
+      ctx.font = `${Math.floor(fSize * 0.8)}px 'Press Start 2P'`;
       ctx.fillText(`${scoreTotal}/${scoreMax}`, w / 2, Math.round(h * 0.62));
 
       ctx.font = "16px Inter";
@@ -913,13 +917,15 @@ function advanceQuestion(){
       ctx.fillStyle = "#1f2a30";
       ctx.textAlign = "center";
 
-      ctx.font = "bold 26px 'Press Start 2P'";
+      // --- TAILLE DYNAMIQUE POUR MOBILE ---
+      let fSize = Math.min(26, Math.floor(w * 0.06));
+      ctx.font = `bold ${fSize}px 'Press Start 2P'`;
       ctx.fillText("🏆 CERTIFIED 🏆", w / 2, Math.round(h * 0.30));
 
-      ctx.font = "bold 22px 'Press Start 2P'";
+      ctx.font = `bold ${Math.floor(fSize * 0.85)}px 'Press Start 2P'`;
       ctx.fillText("SAFE BRAIN", w / 2, Math.round(h * 0.50));
 
-      ctx.font = "20px 'Press Start 2P'";
+      ctx.font = `${Math.floor(fSize * 0.75)}px 'Press Start 2P'`;
       ctx.fillText(`${scoreTotal}/${scoreMax}`, w / 2, Math.round(h * 0.68));
 
       ctx.font = "14px Inter";
