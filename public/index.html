@@ -1085,6 +1085,7 @@ function advanceQuestion(){
 
   // ---------- START SCREEN ----------
   startBtn.onclick=()=>{
+    window.quizStartTime = Date.now(); // ⏱️ AJOUT ICI : On lance le top chrono du jeu complet
     startScreen.classList.add("hidden");
     gameContainer.classList.remove("hidden");
 
@@ -1196,10 +1197,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   }
 
-  // 2. Envoyer le score du joueur
+ // 2. Envoyer le score du joueur
   async function submitScore() {
       const pseudoInput = document.getElementById('playerPseudo');
-      const pseudo = pseudoInput.value.trim();
+      const pseudo = pseudoInput ? pseudoInput.value.trim() : "";
       
       if (!pseudo) {
           alert("Hé ! Il nous faut un petit nom pour le podium !");
@@ -1211,30 +1212,44 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
       }
 
-      // On récupère le score total calculé dans showResult
-      const finalScore = score + vigilance;
+      // CALCUL DU TEMPS : On vérifie que window.quizStartTime existe, sinon on met 0
+      const now = Date.now();
+      const startTime = window.quizStartTime || now; 
+      const timeTaken = Math.floor((now - startTime) / 1000);
+
+      // Ton calcul de score (assure-toi que les variables 'score' et 'vigilance' sont accessibles)
+      const finalScore = (typeof score !== 'undefined' ? score : 0) + (typeof vigilance !== 'undefined' ? vigilance : 0);
 
       try {
           const response = await fetch('/api/leaderboard', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ pseudo: pseudo, score: finalScore }) 
+              body: JSON.stringify({ 
+                  pseudo: pseudo, 
+                  score: finalScore,
+                  timeTaken: timeTaken // Envoyé à l'API Redis corrigée
+              }) 
           });
 
           if (response.ok) {
-              // Si c'est bon, on cache la zone de saisie et on rafraîchit le podium
-              document.getElementById('pseudoInputArea').style.display = 'none';
-              await loadLeaderboard();
+              // Cache la zone de saisie
+              const inputArea = document.getElementById('pseudoInputArea');
+              if (inputArea) inputArea.style.display = 'none';
+              
+              // Recharge le podium (assure-toi que cette fonction existe)
+              if (typeof loadLeaderboard === 'function') {
+                  await loadLeaderboard();
+              }
           } else {
               alert("Petit souci technique lors de l'envoi du score.");
           }
       } catch (err) {
-          console.error(err);
-          alert("Impossible de joindre le serveur pour enregistrer ton score.");
+          console.error("Erreur Submit:", err);
+          alert("Impossible de joindre le serveur.");
       }
   }
 
-  // On attache la fonction à l'objet window pour être sûr que le onclick="submitScore()" du HTML la trouve
+  // INDISPENSABLE : On expose la fonction au bouton HTML
   window.submitScore = submitScore;
   
 </script>
