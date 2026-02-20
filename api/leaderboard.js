@@ -7,27 +7,53 @@ export default async function handler(req, res) {
 
   client.on('error', (err) => console.error('Erreur Client Redis:', err));
 
+  // On génère une clé unique pour aujourd'hui (ex: leaderboard_2026-02-20)
+  const today = new Date().toISOString().split('T')[0];
+  const leaderboardKey = `leaderboard_${today}`;
+
   try {
     await client.connect();
 
-    // LECTURE DU CLASSEMENT
+    // LECTURE DU CLASSEMENT DU JOUR
     if (req.method === 'GET') {
-      const data = await client.get('leaderboard');
-      const scores = data ? JSON.parse(data) : [];
+      const data = await client.get(leaderboardKey);
+      let scores = data ? JSON.parse(data) : [];
+      
+      // On renvoie le top 3 d'aujourd'hui
       return res.status(200).json(scores.slice(0, 3));
     }
 
     // ENVOI D'UN SCORE
     if (req.method === 'POST') {
-      const { pseudo, score } = req.body;
-      const data = await client.get('leaderboard');
+      const { pseudo, score, timeTaken } = req.body; // On récupère aussi le temps
+      const data = await client.get(leaderboardKey);
       let scores = data ? JSON.parse(data) : [];
 
-      scores.push({ pseudo, score, date: new Date().toISOString() });
-      scores.sort((a, b) => b.score - a.score);
-      scores = scores.slice(0, 10); // On garde le top 10 en mémoire
+      // On ajoute le nouveau score avec le temps
+      scores.push({ 
+        pseudo, 
+        score: parseInt(score), 
+        timeTaken: parseInt(timeTaken) || 999, // Temps par défaut si absent
+        date: new Date().toISOString() 
+      });
 
-      await client.set('leaderboard', JSON.stringify(scores));
+      // TRI : 
+      // 1. Le score le plus haut (b.score - a.score)
+      // 2. SI ÉGALITÉ : Le temps le plus court (a.timeTaken - b.timeTaken)
+      scores.sort((a, b) => {
+        if (b.score !== a.score) {
+          return b.score - a.score;
+        }
+        return a.timeTaken - b.timeTaken;
+      });
+
+      // On garde le top 10 du jour
+      scores = scores.slice(0, 10);
+
+      await client.set(leaderboardKey, JSON.stringify(scores), {
+        EX: 172800 // Expire après 48h pour ne pas encombrer Redis inutilement
+      });
+
       return res.status(200).json({ success: true });
     }
   } catch (error) {
