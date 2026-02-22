@@ -355,6 +355,10 @@
       <div class="rule"><span>✅</span><span>Bonne réponse → <strong>+1 point</strong> &nbsp;|&nbsp; Mauvaise réponse → <strong>0 point</strong></span></div>
       <div class="rule"><span>🏆</span><span>Atteignez <strong>7/10 minimum</strong> pour valider votre formation</span></div>
     </div>
+    <div style="margin-bottom:16px;">
+      <label style="display:block;font-size:0.8em;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Votre prénom</label>
+      <input id="nameInput" type="text" placeholder="Ex : Sophie" maxlength="50" style="width:100%;padding:13px 16px;border:1.5px solid var(--border2);border-radius:11px;font-family:var(--body-font);font-size:0.95em;color:var(--text);background:var(--surface2);outline:none;transition:border-color 0.15s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border2)'">
+    </div>
     <button id="startBtn">▶ Démarrer la formation</button>
   </div>
 
@@ -383,6 +387,7 @@
       <div id="scoreDetails"></div>
       <div id="reviewContainer"></div>
       <button id="restartBtn">↩ Recommencer la formation</button>
+      <a href="/dashboard.html" style="display:block;text-align:center;margin-top:10px;padding:12px;border-radius:11px;border:1.5px solid var(--border2);background:var(--surface2);color:var(--muted);font-weight:600;font-size:0.88em;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)'">📊 Voir le dashboard formation</a>
     </div>
   </div>
 
@@ -396,6 +401,7 @@
   // ── STATE ───────────────────────────────────────────────
   let questions = [], current = 0, score = 0, userAnswers = [];
   let timeLeft = QUESTION_TIME, timerId = null;
+  let startTime = null, participantName = "";
 
   // ── DOM ─────────────────────────────────────────────────
   const situationContainer = document.getElementById('situationContainer');
@@ -604,6 +610,25 @@ Réponds UNIQUEMENT avec un JSON valide, sans balise markdown, sans explication.
   function showResult() {
     quizDiv.classList.add('hidden'); resultDiv.classList.remove('hidden');
 
+    // Calcul durée
+    const duration = startTime ? Math.round((Date.now() - startTime) / 1000) : 0;
+
+    // Collecte des erreurs par thème (on utilise la situation comme thème)
+    const errors = questions.map((q, i) => {
+      const user = userAnswers[i];
+      if (user !== q.answer) {
+        return { theme: q.situation.split('.')[0].slice(0, 60), userAnswer: user || "Temps écoulé", correctAnswer: q.answer };
+      }
+      return null;
+    }).filter(Boolean);
+
+    // Envoi à Redis
+    fetch('/api/save-result', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: participantName, score, total: questions.length, duration, errors })
+    }).catch(e => console.warn("Sauvegarde résultat échouée :", e));
+
     const scoreMax = questions.length;
     const validated = (score >= 7);
 
@@ -716,6 +741,14 @@ Réponds UNIQUEMENT avec un JSON valide, sans balise markdown, sans explication.
   }
 
   startBtn.onclick = () => {
+    const nameVal = document.getElementById('nameInput').value.trim();
+    if (!nameVal) {
+      document.getElementById('nameInput').style.borderColor = 'var(--danger)';
+      document.getElementById('nameInput').focus();
+      return;
+    }
+    participantName = nameVal;
+    startTime = Date.now();
     startScreen.classList.add("hidden");
     gameContainer.classList.remove("hidden");
     startGame();
