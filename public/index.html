@@ -354,20 +354,21 @@
   }
 
   /* ── ACTION BUTTONS ────────────────────────── */
-  #nextBtn {
+ #nextBtn {
     width: 100%; padding: 14px; margin-top: 10px;
-    border: 1.5px solid var(--border2);
+    border: none;
     border-radius: 11px;
-    background: var(--surface2);
-    color: var(--text);
+    background: var(--accent);
+    color: #fff;
     cursor: pointer;
     font-weight: 700;
     font-family: var(--body-font);
     font-size: 0.94em;
-    transition: background 0.15s, border-color 0.15s;
+    box-shadow: 0 3px 14px rgba(29,111,229,0.28);
+    transition: filter 0.15s, box-shadow 0.15s;
   }
-  #nextBtn:not(:disabled):hover { background: #e8eef8; border-color: var(--accent); }
-  #nextBtn:disabled { opacity: 0.32; cursor: not-allowed; }
+  #nextBtn:not(:disabled):hover { filter: brightness(1.08); box-shadow: 0 4px 20px rgba(29,111,229,0.38); }
+  #nextBtn:disabled { opacity: 0.32; cursor: not-allowed; background: var(--muted); box-shadow: none; }
 
   #doubtBtn {
     width: 100%; padding: 15px; margin-top: 10px;
