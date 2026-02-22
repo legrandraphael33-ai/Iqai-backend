@@ -101,9 +101,9 @@ Réponds UNIQUEMENT avec un JSON valide, sans balise markdown, sans explication.
             };
         }).filter(x => x.q && x.options.length === 4 && x.answer && x.options.includes(x.answer));
 
-        if (questions.length < 10) {
-            throw new Error("Format invalide : certaines bonnes réponses ne correspondent pas aux options.");
-        }
+        if (questions.length < 5) {
+    throw new Error("Pas assez de questions valides générées.");
+}
 
         return res.status(200).json(questions);
 
