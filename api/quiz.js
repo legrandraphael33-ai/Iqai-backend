@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
 
     try {
         const completion = await openai.chat.completions.create({
-            model: "gpt-4o",
+            model: "gpt-4o-mini",
             temperature: 0.85,
             max_tokens: 3500,
             messages: [
