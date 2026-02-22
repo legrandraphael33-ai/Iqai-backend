@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandra AI × Emil Frey — Dashboard Formation</title>
+<link rel="icon" href="data:,">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #eef2f9; --surface: #ffffff; --surface2: #f4f7fc;
+    --border: rgba(29,111,229,0.10); --border2: rgba(29,111,229,0.18);
+    --text: #0f1f3d; --muted: #5e718a;
+    --accent: #1d6fe5; --accent2: #00b899;
+    --success: #16a34a; --danger: #dc2626;
+    --body-font: 'DM Sans', system-ui, sans-serif;
+    --mono-font: 'DM Mono', monospace;
+  }
+  body {
+    min-height: 100vh; background: var(--bg);
+    font-family: var(--body-font); color: var(--text);
+    padding: 36px 20px 60px; position: relative;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 0%, rgba(29,111,229,0.10) 0%, transparent 70%),
+      linear-gradient(rgba(29,111,229,0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(29,111,229,0.055) 1px, transparent 1px);
+    background-size: auto, 44px 44px, 44px 44px;
+    pointer-events: none;
+  }
+
+  .page { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* HEADER */
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 32px; flex-wrap: wrap; gap: 16px;
+  }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .header-left img { height: 40px; width: auto; }
+  .header-title h1 { font-size: 1.2em; font-weight: 800; color: var(--text); }
+  .header-title p { font-size: 0.8em; color: var(--muted); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 2px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(29,111,229,0.09); border: 1px solid rgba(29,111,229,0.22);
+    border-radius: 999px; padding: 5px 14px 5px 9px;
+    font-size: 0.73em; font-weight: 700; color: var(--accent);
+    letter-spacing: 0.6px; text-transform: uppercase;
+  }
+  .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); animation: pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.7);} }
+
+  /* KPI CARDS */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+  .kpi-card {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 16px; padding: 20px 18px;
+    box-shadow: 0 4px 20px rgba(29,111,229,0.07);
+    position: relative; overflow: hidden;
+  }
+  .kpi-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .kpi-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
+  .kpi-value { font-family: var(--mono-font); font-size: 2em; font-weight: 500; color: var(--accent); line-height: 1; }
+  .kpi-sub { font-size: 0.78em; color: var(--muted); margin-top: 4px; }
+
+  /* CHARTS GRID */
+  .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .chart-card {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 16px; padding: 22px;
+    box-shadow: 0 4px 20px rgba(29,111,229,0.07);
+  }
+  .chart-card.full { grid-column: span 2; }
+  .chart-title {
+    font-size: 0.78em; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--muted); margin-bottom: 18px;
+  }
+  .chart-wrap { position: relative; height: 220px; }
+
+  /* TABLE */
+  .table-card {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 16px; padding: 22px;
+    box-shadow: 0 4px 20px rgba(29,111,229,0.07);
+    margin-bottom: 16px;
+  }
+  .table-title { font-size: 0.78em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+  thead th { text-align: left; padding: 8px 12px; color: var(--muted); font-weight: 700; font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid var(--border2); }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td { padding: 11px 12px; color: var(--text); }
+  .score-pill {
+    display: inline-block; padding: 2px 10px; border-radius: 999px;
+    font-family: var(--mono-font); font-size: 0.88em; font-weight: 500;
+  }
+  .score-pill.good { background: rgba(22,163,74,0.1); color: var(--success); border: 1px solid rgba(22,163,74,0.25); }
+  .score-pill.bad  { background: rgba(220,38,38,0.08); color: var(--danger); border: 1px solid rgba(220,38,38,0.2); }
+
+  /* LOADING */
+  .loading { text-align: center; padding: 60px; color: var(--muted); font-size: 0.95em; }
+
+  /* REFRESH */
+  .refresh-btn {
+    padding: 9px 18px; border: 1.5px solid var(--border2); border-radius: 10px;
+    background: var(--surface); color: var(--text); cursor: pointer;
+    font-weight: 600; font-family: var(--body-font); font-size: 0.85em;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .refresh-btn:hover { border-color: var(--accent); background: rgba(29,111,229,0.04); }
+
+  @media (max-width: 700px) {
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .charts-grid { grid-template-columns: 1fr; }
+    .chart-card.full { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-left">
+      <img src="/SandraAI.webp" alt="Sandra AI">
+      <div class="header-title">
+        <h1>Dashboard Formation</h1>
+        <p>Emil Frey × Sandra AI</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="badge"><span class="dot"></span>Live</div>
+      <button class="refresh-btn" onclick="loadData()">↺ Actualiser</button>
+    </div>
+  </div>
+
+  <div id="content">
+    <div class="loading">Chargement des données…</div>
+  </div>
+
+</div>
+
+<script>
+  let chartInstances = {};
+
+  function destroyCharts() {
+    Object.values(chartInstances).forEach(c => c.destroy());
+    chartInstances = {};
+  }
+
+  function formatDuration(sec) {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return m > 0 ? `${m}m ${s}s` : `${s}s`;
+  }
+
+  function formatDate(iso) {
+    const d = new Date(iso);
+    return d.toLocaleDateString('fr-FR', { day:'2-digit', month:'2-digit', year:'2-digit' }) + ' ' +
+           d.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+  }
+
+  async function loadData() {
+    document.getElementById('content').innerHTML = '<div class="loading">Chargement des données…</div>';
+    destroyCharts();
+
+    try {
+      const res = await fetch('/api/save-result');
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const results = await res.json();
+
+      if (!results.length) {
+        document.getElementById('content').innerHTML = '<div class="loading">Aucune donnée disponible pour l\'instant.</div>';
+        return;
+      }
+
+      renderDashboard(results);
+    } catch(e) {
+      document.getElementById('content').innerHTML = `<div class="loading">Erreur de chargement : ${e.message}</div>`;
+    }
+  }
+
+  function renderDashboard(results) {
+    // ── KPIs ──
+    const total = results.length;
+    const avgScore = (results.reduce((s, r) => s + r.score, 0) / total).toFixed(1);
+    const avgDuration = Math.round(results.reduce((s, r) => s + r.duration, 0) / total);
+    const validated = results.filter(r => r.score >= 7).length;
+    const validatedPct = Math.round((validated / total) * 100);
+
+    // ── Erreurs par thème ──
+    const themeCounts = {};
+    results.forEach(r => {
+      (r.errors || []).forEach(e => {
+        const theme = e.theme || "Autre";
+        themeCounts[theme] = (themeCounts[theme] || 0) + 1;
+      });
+    });
+    const themesSorted = Object.entries(themeCounts).sort((a, b) => b[1] - a[1]);
+
+    // ── Scores dans le temps ──
+    const byDate = {};
+    results.forEach(r => {
+      const d = r.date.split('T')[0];
+      if (!byDate[d]) byDate[d] = [];
+      byDate[d].push(r.score);
+    });
+    const dateLabels = Object.keys(byDate).sort();
+    const avgByDate = dateLabels.map(d => {
+      const arr = byDate[d];
+      return (arr.reduce((a, b) => a + b, 0) / arr.length).toFixed(1);
+    });
+
+    // ── Distribution des scores ──
+    const scoreDist = Array(11).fill(0);
+    results.forEach(r => scoreDist[Math.min(r.score, 10)]++);
+
+    // ── HTML ──
+    document.getElementById('content').innerHTML = `
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Participants</div>
+          <div class="kpi-value">${total}</div>
+          <div class="kpi-sub">sessions complétées</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Score moyen</div>
+          <div class="kpi-value">${avgScore}<span style="font-size:0.5em;color:var(--muted)">/10</span></div>
+          <div class="kpi-sub">sur l'ensemble des sessions</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Taux de validation</div>
+          <div class="kpi-value">${validatedPct}<span style="font-size:0.5em;color:var(--muted)">%</span></div>
+          <div class="kpi-sub">${validated} validés sur ${total}</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Temps moyen</div>
+          <div class="kpi-value" style="font-size:1.4em;">${formatDuration(avgDuration)}</div>
+          <div class="kpi-sub">par session</div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">📈 Score moyen par jour</div>
+          <div class="chart-wrap"><canvas id="chartProgression"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">📊 Distribution des scores</div>
+          <div class="chart-wrap"><canvas id="chartDistribution"></canvas></div>
+        </div>
+        <div class="chart-card full">
+          <div class="chart-title">❌ Erreurs les plus fréquentes par thème</div>
+          <div class="chart-wrap"><canvas id="chartThemes"></canvas></div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-title">📋 Détail des participants</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Participant</th>
+              <th>Score</th>
+              <th>Temps</th>
+              <th>Statut</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${results.slice().reverse().map(r => `
+              <tr>
+                <td><strong>${r.name}</strong></td>
+                <td><span class="score-pill ${r.score >= 7 ? 'good' : 'bad'}">${r.score}/${r.total}</span></td>
+                <td>${formatDuration(r.duration)}</td>
+                <td>${r.score >= 7 ? '✅ Validé' : '❌ Non validé'}</td>
+                <td style="color:var(--muted);font-size:0.85em;">${formatDate(r.date)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+
+    // ── Graphique progression ──
+    const ctxP = document.getElementById('chartProgression').getContext('2d');
+    chartInstances.progression = new Chart(ctxP, {
+      type: 'line',
+      data: {
+        labels: dateLabels,
+        datasets: [{
+          label: 'Score moyen',
+          data: avgByDate,
+          borderColor: '#1d6fe5',
+          backgroundColor: 'rgba(29,111,229,0.08)',
+          borderWidth: 2.5,
+          tension: 0.4,
+          fill: true,
+          pointBackgroundColor: '#1d6fe5',
+          pointRadius: 5
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { min: 0, max: 10, grid: { color: 'rgba(29,111,229,0.06)' }, ticks: { color: '#5e718a', font: { family: 'DM Mono' } } },
+          x: { grid: { display: false }, ticks: { color: '#5e718a' } }
+        }
+      }
+    });
+
+    // ── Graphique distribution ──
+    const ctxD = document.getElementById('chartDistribution').getContext('2d');
+    chartInstances.distribution = new Chart(ctxD, {
+      type: 'bar',
+      data: {
+        labels: scoreDist.map((_, i) => `${i}/10`),
+        datasets: [{
+          data: scoreDist,
+          backgroundColor: scoreDist.map((_, i) => i >= 7 ? 'rgba(22,163,74,0.7)' : 'rgba(29,111,229,0.5)'),
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, grid: { color: 'rgba(29,111,229,0.06)' }, ticks: { color: '#5e718a', stepSize: 1 } },
+          x: { grid: { display: false }, ticks: { color: '#5e718a', font: { size: 10 } } }
+        }
+      }
+    });
+
+    // ── Graphique thèmes ──
+    if (themesSorted.length > 0) {
+      const ctxT = document.getElementById('chartThemes').getContext('2d');
+      chartInstances.themes = new Chart(ctxT, {
+        type: 'bar',
+        data: {
+          labels: themesSorted.map(t => t[0]),
+          datasets: [{
+            data: themesSorted.map(t => t[1]),
+            backgroundColor: 'rgba(220,38,38,0.6)',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { beginAtZero: true, grid: { color: 'rgba(29,111,229,0.06)' }, ticks: { color: '#5e718a', stepSize: 1 } },
+            y: { grid: { display: false }, ticks: { color: '#5e718a' } }
+          }
+        }
+      });
+    } else {
+      document.getElementById('chartThemes').parentElement.innerHTML = '<div style="text-align:center;color:var(--muted);padding:40px;font-size:0.9em;">Pas encore d\'erreurs enregistrées</div>';
+    }
+  }
+
+  loadData();
+</script>
+</body>
+</html>
