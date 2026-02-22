@@ -389,7 +389,7 @@
 <script>
   // ── CONFIG ──────────────────────────────────────────────
   // Remplace par ta vraie clé OpenAI (ou via backend)
-  const OPENAI_API_KEY = "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"; // ← à renseigner dans le repo (variable d'env ou backend)
+  const OPENAI_API_KEY = ""; // ← à renseigner dans le repo (variable d'env ou backend)
   const QUESTION_TIME = 40;
   const TOTAL_Q = 10;
 
@@ -506,14 +506,23 @@ Réponds UNIQUEMENT avec un JSON valide, sans balise markdown, sans explication.
       throw new Error("Pas assez de questions générées.");
     }
 
-    questions = parsed.slice(0, TOTAL_Q).map((x, i) => ({
-      id: i,
-      situation: String(x.situation ?? ""),
-      q: String(x.q ?? ""),
-      options: Array.isArray(x.options) ? x.options.map(String).slice(0, 4) : [],
-      answer: String(x.answer ?? ""),
-      explanation: String(x.explanation ?? "")
-    })).filter(x => x.q && x.options.length === 4 && x.answer);
+    questions = parsed.slice(0, TOTAL_Q).map((x, i) => {
+      const answer = String(x.answer ?? "");
+      let options = Array.isArray(x.options) ? x.options.map(String).slice(0, 4) : [];
+      // Mélange aléatoire des options (Fisher-Yates)
+      for (let j = options.length - 1; j > 0; j--) {
+        const k = Math.floor(Math.random() * (j + 1));
+        [options[j], options[k]] = [options[k], options[j]];
+      }
+      return {
+        id: i,
+        situation: String(x.situation ?? ""),
+        q: String(x.q ?? ""),
+        options,
+        answer,
+        explanation: String(x.explanation ?? "")
+      };
+    }).filter(x => x.q && x.options.length === 4 && x.answer);
 
     if (questions.length < TOTAL_Q) throw new Error("Format de quiz invalide.");
   }
