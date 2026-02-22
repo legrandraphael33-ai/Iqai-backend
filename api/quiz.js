@@ -3,19 +3,16 @@ const OpenAI = require('openai');
 const fs = require('fs');
 const path = require('path');
 module.exports = async (req, res) => {
-    // 1. Autoriser le front-end
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     if (req.method === "OPTIONS") return res.status(200).end();
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     try {
-        // 2. Charger les questions depuis le fichier JSON
         const questionsPath = path.join(process.cwd(), 'data', 'questions-bank.json');
         const questionsData = JSON.parse(fs.readFileSync(questionsPath, 'utf-8'));
         const QUESTIONS_BANK = questionsData.questions;
 
-        // 3. Sélectionner 8 questions au hasard (avec FILTRAGE)
         const playedIds = req.body.playedIds || [];
         let filteredQuestions = QUESTIONS_BANK.filter(q => !playedIds.map(Number).includes(Number(q.id)));
         if (filteredQuestions.length < 8) {
@@ -27,7 +24,6 @@ module.exports = async (req, res) => {
         }
         const safe8 = filteredQuestions.slice(0, 8).map(q => ({ ...q, kind: "safe" }));
 
-        // 4. Générer 2 hallucinations avec OpenAI
         const completion = await openai.chat.completions.create({
             model: "gpt-4o-mini",
             messages: [
@@ -52,7 +48,7 @@ Type 2 — ERREUR SUBTILE (nécessite de relire attentivement) :
 - Définition presque juste avec un mot clé erroné (ex: "amortissement = constatation de la perte de valeur d'une créance" au lieu d'immobilisation)
 - Inversion subtile de sens dans une formule
 
-FORMAT DE RÉPONSE JSON :
+FORMAT DE RÉPONSE JSON STRICT :
 {
   "questions": [
     {
@@ -71,19 +67,25 @@ FORMAT DE RÉPONSE JSON :
 Question 1 : erreur de Type 1 (grossière, visible rapidement)
 Question 2 : erreur de Type 2 (subtile, nécessite attention)
 
+OBLIGATOIRE : Chaque question doit avoir EXACTEMENT 4 options dans le tableau "options", ni plus ni moins.
 Assure-toi que les 4 options sont toutes factuellement incorrectes.`
                 }
             ],
             response_format: { type: "json_object" }
         });
 
-        // 5. Récupérer les hallus
+        // Récupérer les hallus avec sécurité sur le format
         const aiResponse = JSON.parse(completion.choices[0].message.content);
-        const hallu2 = (aiResponse.questions || aiResponse.hallucinations || Object.values(aiResponse)[0])
-                        .slice(0, 2)
-                        .map(q => ({ ...q, kind: "halu" }));
+        const rawHallus = (aiResponse.questions || aiResponse.hallucinations || Object.values(aiResponse)[0]);
 
-        // 6. Fusionner et mélanger (10 questions finales)
+        const hallu2 = rawHallus.slice(0, 2).map(q => {
+            let options = Array.isArray(q.options) ? q.options.map(String) : [];
+            // Filet de sécurité : on force exactement 4 options quoi qu'il arrive
+            while (options.length < 4) options.push("Option non valide");
+            options = options.slice(0, 4);
+            return { ...q, options, kind: "halu" };
+        });
+
         const finalQuiz = [...safe8, ...hallu2];
         for (let i = finalQuiz.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
