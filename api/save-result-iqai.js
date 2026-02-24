@@ -12,49 +12,47 @@ module.exports = async function handler(req, res) {
     try {
         await client.connect();
 
-        if (req.method === 'POST') {
-            const { name, score, total, vigilance, totalHalu, duration, haluDetections, date } = req.body;
-            if (!name || score == null || !total) {
-                return res.status(400).json({ error: "Données manquantes" });
-            }
-
-            const entry = {
-                name: String(name).slice(0, 50),
-                score: Number(score),
-                total: Number(total),
-                vigilance: Number(vigilance || 0),
-                totalHalu: Number(totalHalu || 0),
-                duration: Number(duration || 0),
-                haluDetections: Array.isArray(haluDetections) ? haluDetections : [],
-                date: date || new Date().toISOString()
-            };
-
-            await client.lPush("iqai:results", JSON.stringify(entry));
-            return res.status(200).json({ ok: true });
+       if (req.method === 'POST') {
+    if (req.body.action === 'delete') {
+        const { mode, indexes } = req.body;
+        if (mode === 'all') {
+            await client.del("iqai:results");
+            return res.status(200).json({ ok: true, deleted: 'all' });
         }
-
-        if (req.method === 'GET') {
+        if (mode === 'indexes' && Array.isArray(indexes)) {
             const raw = await client.lRange("iqai:results", 0, -1);
-            const results = raw.map(r => JSON.parse(r));
-            return res.status(200).json(results);
+            const toKeep = raw.filter((_, i) => !indexes.includes(i));
+            await client.del("iqai:results");
+            for (let i = toKeep.length - 1; i >= 0; i--) {
+                await client.rPush("iqai:results", toKeep[i]);
+            }
+            return res.status(200).json({ ok: true, deleted: indexes.length });
         }
-if (req.method === 'POST' && req.body.action === 'delete') {
-  const { mode, indexes } = req.body;
-  if (mode === 'all') {
-    await client.del("iqai:results");
-    return res.status(200).json({ ok: true, deleted: 'all' });
-  }
-  if (mode === 'indexes' && Array.isArray(indexes)) {
-    const raw = await client.lRange("iqai:results", 0, -1);
-    const toKeep = raw.filter((_, i) => !indexes.includes(i));
-    await client.del("iqai:results");
-    for (let i = toKeep.length - 1; i >= 0; i--) {
-      await client.rPush("iqai:results", toKeep[i]);
+        return res.status(400).json({ error: "Paramètres invalides" });
     }
-    return res.status(200).json({ ok: true, deleted: indexes.length });
-  }
-  return res.status(400).json({ error: "Paramètres invalides" });
+    const { name, score, total, vigilance, totalHalu, duration, haluDetections, date } = req.body;
+    if (!name || score == null || !total) {
+        return res.status(400).json({ error: "Données manquantes" });
+    }
+    const entry = {
+        name: String(name).slice(0, 50),
+        score: Number(score),
+        total: Number(total),
+        vigilance: Number(vigilance || 0),
+        totalHalu: Number(totalHalu || 0),
+        duration: Number(duration || 0),
+        haluDetections: Array.isArray(haluDetections) ? haluDetections : [],
+        date: date || new Date().toISOString()
+    };
+    await client.lPush("iqai:results", JSON.stringify(entry));
+    return res.status(200).json({ ok: true });
 }
+if (req.method === 'GET') {
+    const raw = await client.lRange("iqai:results", 0, -1);
+    const results = raw.map(r => JSON.parse(r));
+    return res.status(200).json(results);
+}
+
     } catch (e) {
         console.error("Erreur save-result-iqai:", e);
         return res.status(500).json({ error: "Erreur serveur", details: e.message });
