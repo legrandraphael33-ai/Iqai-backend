@@ -3,762 +3,350 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sandra AI × Emil Frey — Formation Intégration</title>
+<title>IQAI Test — AI Vigilance Platform</title>
 <link rel="icon" href="data:,">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "dc73bf96-dbcf-4498-ab4d-5639c66b16ea",
+      safari_web_id: "web.onesignal.auto.10309993-875c-4384-934c-26792f444f2b",
+      notifyButton: { enable: true },
+      allowLocalhostAsSecureOrigin: true,
+    });
+  });
+</script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg:       #eef2f9;
-    --surface:  #ffffff;
-    --surface2: #f4f7fc;
-    --border:   rgba(29,111,229,0.10);
-    --border2:  rgba(29,111,229,0.18);
-    --text:     #0f1f3d;
-    --muted:    #5e718a;
-    --accent:   #1d6fe5;
-    --accent2:  #00b899;
-    --danger:   #dc2626;
-    --success:  #16a34a;
+    --bg: #eef2f9; --surface: #ffffff; --surface2: #f4f7fc;
+    --border: rgba(29,111,229,0.10); --border2: rgba(29,111,229,0.18);
+    --text: #0f1f3d; --muted: #5e718a;
+    --accent: #1d6fe5; --accent2: #00b899;
+    --danger: #dc2626; --success: #16a34a;
     --body-font: 'DM Sans', system-ui, sans-serif;
     --mono-font: 'DM Mono', monospace;
   }
-
-  body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background: var(--bg);
-    padding: 36px 16px 56px;
-    font-family: var(--body-font);
-    color: var(--text);
-    position: relative;
-  }
-
-  body::before {
-    content: '';
-    position: fixed; inset: 0; z-index: 0;
-    background:
-      radial-gradient(ellipse 70% 55% at 50% 0%, rgba(29,111,229,0.10) 0%, transparent 70%),
-      linear-gradient(rgba(29,111,229,0.055) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(29,111,229,0.055) 1px, transparent 1px);
-    background-size: auto, 44px 44px, 44px 44px;
-    pointer-events: none;
-  }
-
-  /* ── HEADER ── */
-  .site-header {
-    width: 100%; max-width: 600px;
-    display: flex; flex-direction: column; align-items: center;
-    margin-bottom: 28px; position: relative; z-index: 1;
-  }
-  .live-badge {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: rgba(29,111,229,0.09);
-    border: 1px solid rgba(29,111,229,0.22);
-    border-radius: 999px; padding: 5px 14px 5px 9px;
-    margin-bottom: 18px;
-    font-size: 0.73em; font-weight: 700;
-    color: var(--accent); letter-spacing: 0.6px; text-transform: uppercase;
-  }
-  .live-badge .dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--accent2);
-    animation: pulse 2.2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%,100% { opacity:1; transform:scale(1); }
-    50%      { opacity:0.4; transform:scale(0.7); }
-  }
-  .logo-wrap {
-    display: flex; flex-direction: column; align-items: center; margin-bottom: 10px;
-  }
-  .logo-wrap img { height: 52px; width: auto; object-fit: contain; }
-  .tagline {
-    font-size: 0.83em; font-weight: 600; color: var(--muted);
-    letter-spacing: 1.2px; text-transform: uppercase; text-align: center;
-  }
-
-  /* ── CARD ── */
-  .container {
-    max-width: 580px; width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 20px; padding: 30px;
-    box-shadow:
-      0 1px 0 rgba(255,255,255,0.9) inset,
-      0 4px 6px rgba(29,111,229,0.04),
-      0 24px 56px rgba(29,111,229,0.10);
-    position: relative; z-index: 1;
-  }
-  .section-label {
-    font-size: 0.72em; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1.2px;
-    color: var(--accent); margin-bottom: 10px;
-  }
-
-  /* ── START SCREEN ── */
-  #startScreen .intro-text {
-    text-align: center; margin-bottom: 26px; padding-bottom: 22px;
-    border-bottom: 1px solid var(--border);
-  }
-  #startScreen .intro-text h2 {
-    font-size: 1.15em; font-weight: 800; margin-bottom: 10px;
-    color: var(--text); line-height: 1.35;
-  }
-  #startScreen .intro-text p {
-    font-size: 0.9em; color: var(--muted); line-height: 1.65;
-  }
-  .stat-row {
-    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 22px;
-  }
-  .stat-cell {
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 12px; padding: 16px 10px; text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .stat-cell::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:3px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    border-radius: 12px 12px 0 0;
-  }
-  .stat-cell .stat-val {
-    font-family: var(--mono-font); font-size: 1.35em; font-weight: 500;
-    color: var(--accent); display: block; margin-bottom: 5px;
-  }
+  body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background: var(--bg); padding: 36px 16px 56px; font-family: var(--body-font); color: var(--text); position: relative; }
+  body::before { content: ''; position: fixed; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 55% at 50% 0%, rgba(29,111,229,0.10) 0%, transparent 70%), linear-gradient(rgba(29,111,229,0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(29,111,229,0.055) 1px, transparent 1px); background-size: auto, 44px 44px, 44px 44px; pointer-events: none; }
+  .site-header { width: 100%; max-width: 600px; display: flex; flex-direction: column; align-items: center; margin-bottom: 28px; position: relative; z-index: 1; }
+  .live-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(29,111,229,0.09); border: 1px solid rgba(29,111,229,0.22); border-radius: 999px; padding: 5px 14px 5px 9px; margin-bottom: 18px; font-size: 0.73em; font-weight: 700; color: var(--accent); letter-spacing: 0.6px; text-transform: uppercase; }
+  .live-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); animation: pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.7);} }
+  .logo-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .logo-title { font-family: var(--mono-font); font-size: clamp(1.5em, 4vw, 2.2em); font-weight: 500; letter-spacing: -0.5px; color: var(--text); display: flex; align-items: center; }
+  .title-iqai { color: var(--accent); font-weight: 700; }
+  .title-arrow { color: var(--muted); margin: 0 10px; font-weight: 400; }
+  .title-test { color: var(--text); font-weight: 500; }
+  .title-cursor { color: var(--accent2); font-weight: 400; margin-left: 3px; animation: cursorBlink 1.1s steps(1,end) infinite; }
+  @keyframes cursorBlink { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
+  .tagline { font-size: 0.83em; font-weight: 600; color: var(--muted); letter-spacing: 1.2px; text-transform: uppercase; text-align: center; }
+  .container { max-width: 580px; width: 100%; background: var(--surface); border: 1px solid var(--border2); border-radius: 20px; padding: 30px; box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 4px 6px rgba(29,111,229,0.04), 0 24px 56px rgba(29,111,229,0.10); position: relative; z-index: 1; }
+  .section-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--accent); margin-bottom: 10px; }
+  #startScreen .intro-text { text-align: center; margin-bottom: 26px; padding-bottom: 22px; border-bottom: 1px solid var(--border); }
+  #startScreen .intro-text h2 { font-size: 1.15em; font-weight: 800; margin-bottom: 10px; color: var(--text); line-height: 1.35; }
+  #startScreen .intro-text p { font-size: 0.9em; color: var(--muted); line-height: 1.65; }
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .stat-cell { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 16px 10px; text-align: center; position: relative; overflow: hidden; }
+  .stat-cell::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 12px 12px 0 0; }
+  .stat-cell .stat-val { font-family: var(--mono-font); font-size: 1.35em; font-weight: 500; color: var(--accent); display: block; margin-bottom: 5px; }
   .stat-cell .stat-lbl { font-size: 0.71em; font-weight: 600; color: var(--muted); line-height: 1.3; }
-
-  .rules-block {
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 14px; padding: 18px; margin-bottom: 26px;
-    font-size: 0.88em; color: var(--muted);
-  }
-  .rules-block .rule {
-    display: flex; align-items: flex-start; gap: 10px;
-    padding: 7px 0; border-bottom: 1px solid var(--border); line-height: 1.5;
-  }
+  .rules-block { background: var(--surface2); border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-bottom: 26px; font-size: 0.88em; color: var(--muted); }
+  .rules-block .rule { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border); line-height: 1.5; }
   .rules-block .rule:last-child { border-bottom: none; padding-bottom: 0; }
   .rules-block .rule:first-child { padding-top: 0; }
   .rules-block strong { color: var(--text); }
-
-  #startBtn {
-    width: 100%; padding: 17px; font-size: 1em; font-weight: 700;
-    border: none; border-radius: 13px;
-    background: linear-gradient(135deg, #1d6fe5 0%, #1558c0 100%);
-    color: #fff; cursor: pointer;
-    transition: filter 0.15s, transform 0.1s, box-shadow 0.15s;
-    font-family: var(--body-font); letter-spacing: 0.3px;
-    box-shadow: 0 4px 20px rgba(29,111,229,0.35), 0 1px 0 rgba(255,255,255,0.15) inset;
-  }
-  #startBtn:hover  { filter: brightness(1.08); box-shadow: 0 6px 28px rgba(29,111,229,0.45); }
-  #startBtn:active { transform: translateY(1px); }
-
-  /* ── QUIZ ── */
+  .name-field { margin-bottom: 16px; }
+  .name-field label { display: block; font-size: 0.8em; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .name-field input { width: 100%; padding: 13px 16px; border: 1.5px solid var(--border2); border-radius: 11px; font-family: var(--mono-font); font-size: 0.95em; color: var(--text); background: var(--surface2); outline: none; transition: border-color 0.15s; }
+  .name-field input:focus { border-color: var(--accent); }
+  #startBtn { width: 100%; padding: 17px; font-size: 1em; font-weight: 700; border: none; border-radius: 13px; background: linear-gradient(135deg, #1d6fe5 0%, #1558c0 100%); color: #fff; cursor: pointer; transition: filter 0.15s, transform 0.1s, box-shadow 0.15s; font-family: var(--body-font); letter-spacing: 0.3px; box-shadow: 0 4px 20px rgba(29,111,229,0.35), 0 1px 0 rgba(255,255,255,0.15) inset; }
+  #startBtn:hover { filter: brightness(1.08); } #startBtn:active { transform: translateY(1px); }
   .progress-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
   .progress-track { flex: 1; height: 5px; background: var(--border2); border-radius: 99px; overflow: hidden; }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    border-radius: 99px; transition: width 0.4s cubic-bezier(.4,0,.2,1); width: 0%;
-  }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 99px; transition: width 0.4s cubic-bezier(.4,0,.2,1); width: 0%; }
   .progress-label { font-family: var(--mono-font); font-size: 0.78em; color: var(--muted); white-space: nowrap; }
-
   #timerLine { display: flex; justify-content: flex-end; margin-bottom: 6px; }
-  #timerDisplay {
-    font-family: var(--mono-font); font-size: 0.8em; color: var(--muted);
-    background: var(--surface2); border: 1px solid var(--border);
-    padding: 4px 13px; border-radius: 999px;
-    transition: color 0.3s, border-color 0.3s, background 0.3s;
-  }
-  #timerDisplay.timer-urgent {
-    color: var(--danger); border-color: rgba(220,38,38,0.3); background: rgba(220,38,38,0.05);
-  }
-
-  /* Contexte mise en situation */
-  .situation-box {
-    background: rgba(29,111,229,0.04);
-    border: 1px solid rgba(29,111,229,0.18);
-    border-radius: 12px; padding: 14px 16px; margin-bottom: 16px;
-    font-size: 0.86em; line-height: 1.6; color: var(--text);
-    position: relative;
-  }
-  .situation-box::before {
-    content: 'MISE EN SITUATION';
-    display: block;
-    font-size: 0.68em; font-weight: 700; letter-spacing: 1.1px;
-    color: var(--accent); margin-bottom: 7px;
-    font-family: var(--mono-font);
-  }
-
-  .q-num {
-    font-family: var(--mono-font); color: var(--accent); font-size: 0.74em;
-    display: block; margin-bottom: 8px; letter-spacing: 0.4px;
-  }
-  .question {
-    font-size: 1.05em; font-weight: 700; line-height: 1.5;
-    margin-bottom: 20px; color: var(--text);
-  }
-
-  .options button {
-    display: flex; align-items: center; gap: 13px;
-    width: 100%; padding: 14px 16px; margin-bottom: 9px;
-    border: 1.5px solid var(--border2); border-radius: 11px;
-    background: var(--surface2); color: var(--text); cursor: pointer;
-    font-weight: 500; font-family: var(--body-font); font-size: 0.94em;
-    text-align: left;
-    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
-  }
-  .options button:hover {
-    border-color: var(--accent); background: rgba(29,111,229,0.04);
-    box-shadow: 0 2px 12px rgba(29,111,229,0.08);
-  }
-  .options button.selected {
-    border-color: var(--accent); background: rgba(29,111,229,0.07);
-    box-shadow: 0 2px 12px rgba(29,111,229,0.12);
-  }
-  .opt-check {
-    width: 21px; height: 21px; border-radius: 7px;
-    border: 1.5px solid rgba(29,111,229,0.25);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; font-size: 0.78em; font-weight: 900;
-    transition: border-color 0.15s, background 0.15s; color: transparent;
-  }
-  .options button.selected .opt-check {
-    border-color: var(--accent); background: var(--accent); color: #fff;
-  }
-
-  #nextBtn {
-    width: 100%; padding: 14px; margin-top: 10px;
-    border: none; border-radius: 11px;
-    background: var(--accent); color: #fff; cursor: pointer;
-    font-weight: 700; font-family: var(--body-font); font-size: 0.94em;
-    box-shadow: 0 3px 14px rgba(29,111,229,0.28);
-    transition: filter 0.15s, box-shadow 0.15s;
-  }
+  #timerDisplay { font-family: var(--mono-font); font-size: 0.8em; color: var(--muted); background: var(--surface2); border: 1px solid var(--border); padding: 4px 13px; border-radius: 999px; transition: color 0.3s, border-color 0.3s, background 0.3s; }
+  #timerDisplay.timer-urgent { color: var(--danger); border-color: rgba(220,38,38,0.3); background: rgba(220,38,38,0.05); }
+  .q-num { font-family: var(--mono-font); color: var(--accent); font-size: 0.74em; display: block; margin-bottom: 8px; letter-spacing: 0.4px; }
+  .question { font-size: 1.05em; font-weight: 700; line-height: 1.5; margin-bottom: 20px; color: var(--text); }
+  .options button { display: flex; align-items: center; gap: 13px; width: 100%; padding: 14px 16px; margin-bottom: 9px; border: 1.5px solid var(--border2); border-radius: 11px; background: var(--surface2); color: var(--text); cursor: pointer; font-weight: 500; font-family: var(--body-font); font-size: 0.94em; text-align: left; transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; }
+  .options button:hover { border-color: var(--accent); background: rgba(29,111,229,0.04); box-shadow: 0 2px 12px rgba(29,111,229,0.08); }
+  .options button.selected { border-color: var(--accent); background: rgba(29,111,229,0.07); box-shadow: 0 2px 12px rgba(29,111,229,0.12); }
+  .opt-check { width: 21px; height: 21px; border-radius: 7px; border: 1.5px solid rgba(29,111,229,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.78em; font-weight: 900; transition: border-color 0.15s, background 0.15s; color: transparent; }
+  .options button.selected .opt-check { border-color: var(--accent); background: var(--accent); color: #fff; }
+  #nextBtn { width: 100%; padding: 14px; margin-top: 10px; border: none; border-radius: 11px; background: var(--accent); color: #fff; cursor: pointer; font-weight: 700; font-family: var(--body-font); font-size: 0.94em; box-shadow: 0 3px 14px rgba(29,111,229,0.28); transition: filter 0.15s, box-shadow 0.15s; }
   #nextBtn:not(:disabled):hover { filter: brightness(1.08); box-shadow: 0 4px 20px rgba(29,111,229,0.38); }
   #nextBtn:disabled { opacity: 0.32; cursor: not-allowed; background: var(--muted); box-shadow: none; }
-
-  .errorBox {
-    margin-top:10px; padding:12px; border-radius:10px;
-    background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2);
-    color:var(--danger); font-weight:600; font-size:0.9em;
-  }
-
-  /* ── RESULT ── */
-  #tokenContainer {
-    width:100%; margin: 0 auto 22px; border-radius: 14px; overflow: hidden;
-    border: 1px solid var(--border2); box-shadow: 0 6px 28px rgba(0,0,0,0.10);
-  }
+  #doubtBtn { width: 100%; padding: 15px; margin-top: 10px; border-radius: 11px; border: 1.5px solid rgba(220,38,38,0.35); background: rgba(220,38,38,0.04); color: var(--danger); font-weight: 700; font-size: 0.92em; cursor: pointer; font-family: var(--body-font); transition: background 0.15s, border-color 0.15s, box-shadow 0.15s; }
+  #doubtBtn:hover:not(:disabled) { background: rgba(220,38,38,0.09); border-color: var(--danger); box-shadow: 0 2px 12px rgba(220,38,38,0.12); }
+  #doubtBtn:disabled { opacity: 0.32; cursor: not-allowed; }
+  .errorBox { margin-top:10px; padding:12px; border-radius:10px; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); color:var(--danger); font-weight:600; font-size:0.9em; }
+  #tokenContainer { width:100%; margin:0 auto 22px; border-radius:14px; overflow:hidden; border:1px solid var(--border2); box-shadow:0 6px 28px rgba(0,0,0,0.10); }
   #tokenCanvas { display:block; width:100%; height:auto; }
-
-  .validation-badge {
-    display: flex; align-items: center; gap: 14px;
-    padding: 18px 20px; border-radius: 14px; margin-bottom: 20px; border: 1.5px solid;
-  }
-  .validation-badge.validated { background: rgba(22,163,74,0.05); border-color: rgba(22,163,74,0.25); }
-  .validation-badge.not-validated { background: rgba(220,38,38,0.05); border-color: rgba(220,38,38,0.22); }
-  .vb-icon { font-size: 1.6em; }
-  .vb-body { }
-  .vb-title { font-size: 1em; font-weight: 800; margin-bottom: 3px; }
-  .vb-sub { font-size: 0.84em; color: var(--muted); line-height: 1.4; }
-
-  #scoreDetails {
-    display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px;
-  }
-  .score-card {
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 12px; padding: 16px; text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .score-card::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:3px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-  }
-  .score-card .sc-val { font-family: var(--mono-font); font-size: 1.7em; font-weight: 500; color: var(--accent); display: block; margin-bottom: 4px; }
-  .score-card .sc-lbl { font-size: 0.77em; font-weight:600; color: var(--muted); }
-
-  #reviewContainer { margin-top: 22px; }
-  #reviewContainer h3 {
-    font-size: 0.78em; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 1.1px; color: var(--muted); margin-bottom: 12px;
-  }
-  .reviewItem {
-    padding: 14px 16px; border: 1px solid var(--border);
-    border-radius: 12px; margin-bottom: 9px;
-    background: var(--surface2); line-height: 1.55;
-    font-size: 0.88em; color: var(--text);
-  }
-  .reviewItem .situation-mini {
-    font-size: 0.82em; color: var(--muted); margin-bottom: 6px;
-    padding: 6px 10px; background: rgba(29,111,229,0.04);
-    border-left: 2px solid var(--accent); border-radius: 0 6px 6px 0;
-  }
-  .answerTag {
-    display:inline-block; padding:2px 9px; border-radius:6px;
-    font-weight:600; font-size:0.9em;
-  }
+  .validation-badge { display:flex; align-items:center; gap:14px; padding:18px 20px; border-radius:14px; margin-bottom:20px; border:1.5px solid; }
+  .validation-badge.validated { background:rgba(22,163,74,0.05); border-color:rgba(22,163,74,0.25); }
+  .validation-badge.not-validated { background:rgba(220,38,38,0.05); border-color:rgba(220,38,38,0.22); }
+  .vb-icon { font-size:1.6em; flex-shrink:0; } .vb-body { flex:1; }
+  .vb-title { font-size:1em; font-weight:800; margin-bottom:3px; }
+  .validation-badge.validated .vb-title { color:var(--success); }
+  .validation-badge.not-validated .vb-title { color:var(--danger); }
+  .vb-sub { font-size:0.83em; color:var(--muted); line-height:1.45; }
+  #scoreDetails { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
+  .score-card { background:var(--surface2); border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center; position:relative; overflow:hidden; }
+  .score-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
+  .score-card .sc-val { font-family:var(--mono-font); font-size:1.7em; font-weight:500; color:var(--accent); display:block; margin-bottom:4px; }
+  .score-card .sc-lbl { font-size:0.77em; font-weight:600; color:var(--muted); }
+  #howItWorks { margin-top:16px; padding:16px; background:var(--surface2); border:1px solid var(--border); border-radius:12px; font-size:0.84em; line-height:1.85; color:var(--muted); }
+  #howItWorks strong { color:var(--text); font-weight:700; display:block; margin-bottom:5px; }
+  #reviewContainer { margin-top:22px; }
+  #reviewContainer h3 { font-size:0.78em; font-weight:700; text-transform:uppercase; letter-spacing:1.1px; color:var(--muted); margin-bottom:12px; }
+  .reviewItem { padding:14px 16px; border:1px solid var(--border); border-radius:12px; margin-bottom:9px; background:var(--surface2); line-height:1.55; font-size:0.88em; color:var(--text); }
+  .haluBanner { margin-top:8px; padding:8px 12px; border-radius:8px; font-weight:600; font-size:0.88em; line-height:1.4; background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.2); color:var(--danger); }
+  .haluBanner.ok { background:rgba(22,163,74,0.06); border-color:rgba(22,163,74,0.2); color:var(--success); }
+  .answerTag { display:inline-block; padding:2px 9px; border-radius:6px; font-weight:600; font-size:0.9em; }
   .answerTag.ok  { background:rgba(22,163,74,0.09); border:1px solid rgba(22,163,74,0.25); color:var(--success); }
   .answerTag.bad { background:rgba(220,38,38,0.09); border:1px solid rgba(220,38,38,0.22); color:var(--danger); }
 
-  #restartBtn {
-    width: 100%; padding: 14px; margin-top: 18px;
-    border: 1.5px solid var(--border2); border-radius: 11px;
-    background: var(--surface2); color: var(--text); cursor: pointer;
-    font-weight: 600; font-family: var(--body-font); font-size: 0.93em;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  #restartBtn:hover { border-color: var(--accent); background: rgba(29,111,229,0.04); }
+  /* ── BOUTONS RÉSULTAT ── */
+  .result-actions { margin-top: 22px; display: flex; flex-direction: column; gap: 10px; }
+  .btn-restart { width: 100%; padding: 14px; border: none; border-radius: 11px; background: var(--accent); color: #fff; cursor: pointer; font-weight: 700; font-family: var(--body-font); font-size: 0.94em; box-shadow: 0 3px 14px rgba(29,111,229,0.28); transition: filter 0.15s; }
+  .btn-restart:hover { filter: brightness(1.08); }
+  .btn-dashboard { display: block; text-align: center; padding: 13px; border-radius: 11px; border: 1.5px solid var(--border2); background: var(--surface2); color: var(--muted); font-weight: 600; font-size: 0.88em; text-decoration: none; transition: border-color 0.15s, color 0.15s; }
+  .btn-dashboard:hover { border-color: var(--accent); color: var(--accent); }
 
+  .notifPopup { position:fixed; inset:0; background:rgba(15,31,61,0.55); display:flex; align-items:center; justify-content:center; z-index:9999; padding:20px; backdrop-filter:blur(5px); }
+  .notifPopup.hidden { display:none; }
+  .notifPopupContent { background:var(--surface); border:1px solid var(--border2); border-radius:20px; padding:32px; max-width:420px; width:100%; text-align:center; box-shadow:0 24px 64px rgba(0,0,0,0.15); animation:popupSlide 0.3s ease; }
+  @keyframes popupSlide { from{transform:translateY(-20px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+  .notifPopup h2 { font-size:1.1em; font-weight:800; margin-bottom:10px; color:var(--text); }
+  .notifPopup p  { font-size:0.9em; line-height:1.6; color:var(--muted); margin-bottom:22px; }
+  .notifPopup .btnPrimary { width:100%; padding:13px; border:none; border-radius:11px; background:var(--accent); color:#fff; font-weight:700; font-size:0.95em; cursor:pointer; margin-bottom:10px; font-family:var(--body-font); transition:filter 0.15s; }
+  .notifPopup .btnPrimary:hover { filter:brightness(1.08); }
+  .notifPopup .btnSecondary { background:none; border:none; color:var(--muted); font-size:0.85em; cursor:pointer; padding:8px; font-family:var(--body-font); }
+  .notifPopup .btnSecondary:hover { color:var(--text); }
   .hidden { display: none; }
-
-  @media (max-width: 420px) {
-    .logo-wrap img { height: 40px; }
-    .stat-row { grid-template-columns: 1fr 1fr; }
-    .stat-row .stat-cell:last-child { grid-column: span 2; }
-  }
+  @media (max-width: 420px) { .logo-title { font-size: 1.3em; } .stat-row { grid-template-columns: 1fr 1fr; } .stat-row .stat-cell:last-child { grid-column: span 2; } }
 </style>
 </head>
-
 <body>
 
   <div class="site-header">
-    <div class="live-badge">
-      <span class="dot"></span>
-      Formation Intégration
-    </div>
+    <div class="live-badge"><span class="dot"></span>AI Vigilance Platform</div>
     <div class="logo-wrap">
-      <img src="/SandraAI.webp" alt="Sandra AI">
+      <div class="logo-title">
+        <span class="title-iqai">IQAI</span>
+        <span class="title-arrow">&gt;</span>
+        <span class="title-test">Test</span>
+        <span class="title-cursor">_</span>
+      </div>
     </div>
-    <p class="tagline">Emil Frey × Sandra AI — Formation équipes</p>
+    <p class="tagline">Votre formation de vigilance IA</p>
   </div>
 
-  <!-- START SCREEN -->
   <div id="startScreen" class="container">
     <div class="intro-text">
-      <p class="section-label">À propos de cette formation</p>
-      <h2>Maîtrisez Sandra AI dans vos situations du quotidien</h2>
-      <p>Cette session vous soumet 10 mises en situation réelles inspirées de votre activité en concession. Pour chaque scénario, choisissez la meilleure façon d'exploiter les informations remontées par Sandra AI.</p>
+      <p class="section-label">À propos de cette évaluation</p>
+      <h2>Mesurez la capacité de vos équipes à détecter les erreurs de l'IA</h2>
+      <p>Cette session comprend 10 questions générées par intelligence artificielle. Certaines sont exactes, d'autres contiennent des erreurs délibérées. Votre mission : distinguer l'information fiable des hallucinations.</p>
     </div>
     <div class="stat-row">
-      <div class="stat-cell"><span class="stat-val">10</span><span class="stat-lbl">Mises en situation</span></div>
-      <div class="stat-cell"><span class="stat-val">40s</span><span class="stat-lbl">Temps par question</span></div>
+      <div class="stat-cell"><span class="stat-val">10</span><span class="stat-lbl">Questions par session</span></div>
+      <div class="stat-cell"><span class="stat-val">30s</span><span class="stat-lbl">Temps par question</span></div>
       <div class="stat-cell"><span class="stat-val">7/10</span><span class="stat-lbl">Seuil de validation</span></div>
     </div>
     <div class="rules-block">
-      <p class="section-label" style="margin-bottom:14px;">Comment ça marche</p>
-      <div class="rule"><span>📋</span><span>Chaque question présente un contexte d'appel géré par Sandra AI et les données qu'elle a captées</span></div>
-      <div class="rule"><span>🎯</span><span>Choisissez parmi 4 options la <strong>meilleure réaction</strong> pour exploiter ces informations</span></div>
-      <div class="rule"><span>✅</span><span>Bonne réponse → <strong>+1 point</strong> &nbsp;|&nbsp; Mauvaise réponse → <strong>0 point</strong></span></div>
-      <div class="rule"><span>🏆</span><span>Atteignez <strong>7/10 minimum</strong> pour valider votre formation</span></div>
+      <p class="section-label" style="margin-bottom:14px;">Règles de scoring</p>
+      <div class="rule"><span>✅</span><span>Réponse correcte à une question fiable → <strong>+1 point</strong></span></div>
+      <div class="rule"><span>✅</span><span>Erreur IA identifiée via "Signaler une anomalie" → <strong>+1 point</strong></span></div>
+      <div class="rule"><span>❌</span><span>Réponse incorrecte ou erreur IA non détectée → <strong>0 point</strong></span></div>
     </div>
-    <div style="margin-bottom:16px;">
-      <label style="display:block;font-size:0.8em;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Votre prénom</label>
-      <input id="nameInput" type="text" placeholder="Ex : Sophie" maxlength="50" style="width:100%;padding:13px 16px;border:1.5px solid var(--border2);border-radius:11px;font-family:var(--body-font);font-size:0.95em;color:var(--text);background:var(--surface2);outline:none;transition:border-color 0.15s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border2)'">
+    <div class="name-field">
+      <label>Votre prénom</label>
+      <input id="nameInput" type="text" placeholder="Ex : Sophie" maxlength="50">
     </div>
-    <button id="startBtn">▶ Démarrer la formation</button>
+    <button id="startBtn">▶ Lancer l'évaluation</button>
   </div>
 
-  <!-- GAME -->
   <div class="container hidden" id="gameContainer">
     <div id="quiz">
       <div class="progress-wrap">
         <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
         <div class="progress-label" id="progressLabel">0 / 10</div>
       </div>
-      <div id="timerLine">
-        <div id="timerDisplay" class="hidden">⏱ 40</div>
-      </div>
-      <div id="situationContainer"></div>
+      <div id="timerLine"><div id="timerDisplay" class="hidden">⏱ 30</div></div>
       <div id="questionContainer"></div>
       <div class="options" id="optionsContainer"></div>
-      <button id="nextBtn" disabled>Valider →</button>
+      <button id="nextBtn" disabled>Suivant →</button>
+      <button id="doubtBtn" class="hidden">⚠️ Signaler une anomalie IA</button>
       <div id="errorContainer" class="hidden"></div>
     </div>
 
     <div id="result" class="hidden">
-      <div id="tokenContainer" class="hidden">
-        <canvas id="tokenCanvas" width="500" height="250"></canvas>
-      </div>
+      <div id="tokenContainer" class="hidden"><canvas id="tokenCanvas" width="500" height="250"></canvas></div>
       <div id="validationBadge"></div>
       <div id="scoreDetails"></div>
+      <div id="howItWorks">
+        <strong>📊 Détail du calcul</strong>
+        ✅ Bonne réponse (question fiable) = +1 pt &nbsp;|&nbsp; ✅ Anomalie IA détectée = +1 pt<br>
+        ❌ Réponse incorrecte = 0 pt &nbsp;|&nbsp; ❌ Anomalie IA non détectée = 0 pt
+      </div>
       <div id="reviewContainer"></div>
-      <button id="restartBtn">↩ Recommencer la formation</button>
-      <a href="/dashboard.html" style="display:block;text-align:center;margin-top:10px;padding:12px;border-radius:11px;border:1.5px solid var(--border2);background:var(--surface2);color:var(--muted);font-weight:600;font-size:0.88em;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)'">📊 Voir le dashboard formation</a>
+      <div class="result-actions">
+        <button class="btn-restart" onclick="location.reload()">↩ Recommencer l'évaluation</button>
+        <a href="/dashboard-iqai.html" class="btn-dashboard">📊 Voir le dashboard formation</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="notifPopup" class="notifPopup hidden">
+    <div class="notifPopupContent">
+      <h2>🔔 Rappel quotidien</h2>
+      <p>Activez les notifications pour recevoir un rappel chaque jour et maintenir votre niveau de vigilance IA.</p>
+      <button id="notifAccept" class="btnPrimary">Activer les rappels</button>
+      <button id="notifDecline" class="btnSecondary">Plus tard</button>
     </div>
   </div>
 
 <script>
-  // ── CONFIG ──────────────────────────────────────────────
-  // Remplace par ta vraie clé OpenAI (ou via backend)
-  const OPENAI_API_KEY = ""; // ← à renseigner dans le repo (variable d'env ou backend)
-  const QUESTION_TIME = 40;
-  const TOTAL_Q = 10;
+  const API_URL = "/api/quiz";
+  let questions=[], current=0, score=0, vigilance=0, userAnswers=[];
+  let participantName="", startTime=null;
+  const QUESTION_TIME = 30;
+  let timeLeft=QUESTION_TIME, timerId=null;
+  let questionStartTimes=[];
 
-  // ── STATE ───────────────────────────────────────────────
-  let questions = [], current = 0, score = 0, userAnswers = [];
-  let timeLeft = QUESTION_TIME, timerId = null;
-  let startTime = null, participantName = "";
+  const questionContainer = document.getElementById('questionContainer');
+  const optionsContainer  = document.getElementById('optionsContainer');
+  const nextBtn           = document.getElementById('nextBtn');
+  const doubtBtn          = document.getElementById('doubtBtn');
+  const quizDiv           = document.getElementById('quiz');
+  const resultDiv         = document.getElementById('result');
+  const scoreDetails      = document.getElementById('scoreDetails');
+  const reviewContainer   = document.getElementById('reviewContainer');
+  const errorContainer    = document.getElementById('errorContainer');
+  const timerDisplay      = document.getElementById("timerDisplay");
+  const startScreen       = document.getElementById("startScreen");
+  const startBtn          = document.getElementById("startBtn");
+  const gameContainer     = document.getElementById("gameContainer");
+  const progressFill      = document.getElementById("progressFill");
+  const progressLabel     = document.getElementById("progressLabel");
 
-  // ── DOM ─────────────────────────────────────────────────
-  const situationContainer = document.getElementById('situationContainer');
-  const questionContainer  = document.getElementById('questionContainer');
-  const optionsContainer   = document.getElementById('optionsContainer');
-  const nextBtn            = document.getElementById('nextBtn');
-  const quizDiv            = document.getElementById('quiz');
-  const resultDiv          = document.getElementById('result');
-  const scoreDetails       = document.getElementById('scoreDetails');
-  const reviewContainer    = document.getElementById('reviewContainer');
-  const errorContainer     = document.getElementById('errorContainer');
-  const timerDisplay       = document.getElementById('timerDisplay');
-  const startScreen        = document.getElementById('startScreen');
-  const startBtn           = document.getElementById('startBtn');
-  const gameContainer      = document.getElementById('gameContainer');
-  const progressFill       = document.getElementById('progressFill');
-  const progressLabel      = document.getElementById('progressLabel');
-  const restartBtn         = document.getElementById('restartBtn');
+  function updateProgress(){ const pct=(current/(questions.length||10))*100; progressFill.style.width=pct+"%"; progressLabel.textContent=current+" / "+(questions.length||10); }
+  function showError(msg){ errorContainer.classList.remove('hidden'); errorContainer.className="errorBox"; errorContainer.textContent=msg; }
+  function clearError(){ errorContainer.classList.add('hidden'); errorContainer.className=""; errorContainer.textContent=""; }
+  function normalizeQuiz(raw){ if(!Array.isArray(raw))return null; const arr=raw.slice(0,10).map(x=>({ id:x.id, q:String(x.q??""), options:Array.isArray(x.options)?x.options.map(String).slice(0,4):[], answer:String(x.answer??""), explanation:String(x.explanation??""), kind:String(x.kind??"safe") })).filter(x=>x.q&&x.options.length===4&&x.answer); return (arr.length===10)?arr:null; }
+  async function fetchWithTimeout(url,options={},ms=30000){ const c=new AbortController(); const id=setTimeout(()=>c.abort(),ms); try{ return await fetch(url,{...options,signal:c.signal}); } finally{ clearTimeout(id); } }
+  async function loadQuestions(){ const playedIds=JSON.parse(localStorage.getItem('playedIds')||'[]'); const opts={ method:"POST", headers:{"Content-Type":"application/json"}, cache:"no-store", body:JSON.stringify({playedIds}) }; let res; try{ res=await fetchWithTimeout(API_URL,opts,30000); } catch(e){ res=await fetchWithTimeout(API_URL,opts,35000); } if(!res||!res.ok) throw new Error("Erreur serveur (HTTP "+(res?res.status:"—")+")"); const raw=await res.json(); const quiz=normalizeQuiz(raw); if(!quiz) throw new Error("Format de quiz invalide."); questions=quiz; }
+  function stopTimer(){ if(timerId){clearInterval(timerId);timerId=null;} }
+  function startTimer(){ stopTimer(); timeLeft=QUESTION_TIME; timerDisplay.classList.remove("hidden"); timerDisplay.textContent=`⏱ ${timeLeft}`; timerDisplay.classList.remove("timer-urgent"); timerId=setInterval(()=>{ timeLeft--; timerDisplay.textContent=`⏱ ${timeLeft}`; if(timeLeft<=10) timerDisplay.classList.add("timer-urgent"); else timerDisplay.classList.remove("timer-urgent"); if(timeLeft<=0){ stopTimer(); advanceQuestion(); } },1000); }
 
-  // ── PROMPT OPENAI ────────────────────────────────────────
-  const SYSTEM_PROMPT = `Tu es un expert en formation pour les équipes des concessions automobiles Emil Frey qui utilisent l'agent IA Sandra AI.
-
-Sandra AI est un agent vocal et messaging qui répond aux appels entrants à la place de la réceptionniste. Elle :
-- Prend les rendez-vous atelier (révision, vidange, changement de pneus, réparation...)
-- Qualifie les demandes commerciales (VN/VO)
-- Capture des données clés sur chaque client et chaque appel
-- S'intègre directement dans le DMS et l'agenda atelier
-- Transfère à un humain quand la situation le demande
-
-Génère exactement 10 questions de formation sous forme de mises en situation réalistes.
-Chaque question doit :
-1. Présenter un CONTEXTE concret (un client appelle, Sandra AI a capté des infos spécifiques)
-2. Poser une QUESTION claire sur la meilleure façon d'agir avec ces informations
-3. Proposer exactement 4 réponses plausibles (A, B, C, D)
-4. Avoir une seule bonne réponse (celle qui exploite le mieux ce que Sandra AI a capté)
-
-Thèmes à couvrir (varie-les) :
-- Rendez-vous atelier (pneus, révision, vidange, réparation)
-- Leads VN/VO (qualification, rappel client)
-- Gestion des abandons d'appel (client n'a pas finalisé son RDV avec Sandra)
-- Transfert vers humain (cas urgent, client mécontent, demande complexe)
-- Exploitation des données clients captées (historique, immatriculation, préférence horaire)
-- Rappels constructeur / cas de rappel qualité
-- Clients électrique/hybride (spécificités)
-
-Réponds UNIQUEMENT avec un JSON valide, sans balise markdown, sans explication. Format exact :
-[
-  {
-    "situation": "Texte du contexte (2-3 phrases max). Ce que Sandra AI a capté ou fait.",
-    "q": "Question posée à l'équipe",
-    "options": ["Option A", "Option B", "Option C", "Option D"],
-    "answer": "Option A",
-    "explanation": "Pourquoi cette réponse est la meilleure (1-2 phrases)"
-  }
-]`;
-
-  // ── CHARGEMENT QUESTIONS ────────────────────────────────
-  async function loadQuestions() {
-    // Appel direct à OpenAI (ou remplacer par un appel à ton backend /api/quiz)
-    const endpoint = OPENAI_API_KEY
-      ? "https://api.openai.com/v1/chat/completions"
-      : "/api/quiz"; // fallback backend
-
-    let raw;
-
-    if (OPENAI_API_KEY) {
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${OPENAI_API_KEY}`
-        },
-        body: JSON.stringify({
-          model: "gpt-4o",
-          temperature: 0.85,
-          max_tokens: 3500,
-          messages: [
-            { role: "system", content: SYSTEM_PROMPT },
-            { role: "user",   content: "Génère 10 nouvelles mises en situation variées pour la formation." }
-          ]
-        })
-      });
-      if (!res.ok) throw new Error("Erreur OpenAI (HTTP " + res.status + ")");
-      const data = await res.json();
-      raw = data.choices?.[0]?.message?.content;
-    } else {
-      // Fallback : appel backend existant (adapté pour renvoyer le bon format)
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        cache: "no-store",
-        body: JSON.stringify({ mode: "formation" })
-      });
-      if (!res.ok) throw new Error("Erreur serveur (HTTP " + res.status + ")");
-      raw = await res.text();
-    }
-
-    // Parse JSON
-    let parsed;
-    try {
-      const clean = raw.replace(/```json|```/g, "").trim();
-      parsed = JSON.parse(clean);
-    } catch(e) {
-      throw new Error("Impossible de parser la réponse de l'IA.");
-    }
-
-    if (!Array.isArray(parsed) || parsed.length < TOTAL_Q) {
-      throw new Error("Pas assez de questions générées.");
-    }
-
-    questions = parsed.slice(0, TOTAL_Q).map((x, i) => {
-      const answer = String(x.answer ?? "");
-      let options = Array.isArray(x.options) ? x.options.map(String).slice(0, 4) : [];
-      // Mélange aléatoire des options (Fisher-Yates)
-      for (let j = options.length - 1; j > 0; j--) {
-        const k = Math.floor(Math.random() * (j + 1));
-        [options[j], options[k]] = [options[k], options[j]];
-      }
-      return {
-        id: i,
-        situation: String(x.situation ?? ""),
-        q: String(x.q ?? ""),
-        options,
-        answer,
-        explanation: String(x.explanation ?? "")
-      };
-    }).filter(x => x.q && x.options.length === 4 && x.answer);
-
-    if (questions.length < TOTAL_Q) throw new Error("Format de quiz invalide.");
-  }
-
-  // ── TIMER ───────────────────────────────────────────────
-  function stopTimer() { if (timerId) { clearInterval(timerId); timerId = null; } }
-  function startTimer() {
-    stopTimer(); timeLeft = QUESTION_TIME;
-    timerDisplay.classList.remove("hidden");
-    timerDisplay.textContent = `⏱ ${timeLeft}`;
-    timerDisplay.classList.remove("timer-urgent");
-    timerId = setInterval(() => {
-      timeLeft--;
-      timerDisplay.textContent = `⏱ ${timeLeft}`;
-      if (timeLeft <= 10) timerDisplay.classList.add("timer-urgent");
-      else timerDisplay.classList.remove("timer-urgent");
-      if (timeLeft <= 0) { stopTimer(); advanceQuestion(); }
-    }, 1000);
-  }
-
-  // ── AFFICHAGE QUESTION ──────────────────────────────────
-  function updateProgress() {
-    const pct = (current / (questions.length || TOTAL_Q)) * 100;
-    progressFill.style.width = pct + "%";
-    progressLabel.textContent = current + " / " + (questions.length || TOTAL_Q);
-  }
-
-  function showQuestion() {
+  function showQuestion(){
     clearError(); updateProgress();
-    const qObj = questions[current];
-
-    // Contexte
-    situationContainer.innerHTML = `<div class="situation-box">${qObj.situation}</div>`;
-
-    // Question
-    questionContainer.innerHTML = `<div class="question"><span class="q-num">Question ${current + 1} sur ${questions.length}</span>${qObj.q}</div>`;
-
-    // Options
-    optionsContainer.innerHTML = '';
-    nextBtn.disabled = (userAnswers[current] == null);
-
-    qObj.options.forEach(opt => {
-      const btn = document.createElement('button');
-      const check = document.createElement('span'); check.className = 'opt-check';
-      btn.appendChild(check);
-      const label = document.createElement('span'); label.textContent = opt;
-      btn.appendChild(label);
-      if (userAnswers[current] === opt) { btn.classList.add('selected'); check.textContent = '✓'; }
-      btn.onclick = () => {
-        userAnswers[current] = opt;
-        Array.from(optionsContainer.children).forEach(b => {
-          const c = b.querySelector('.opt-check');
-          const sel = b.querySelector('span:last-child').textContent === opt;
-          b.classList.toggle('selected', sel); c.textContent = sel ? '✓' : '';
-        });
-        nextBtn.disabled = false;
-      };
+    questionStartTimes[current]=Date.now();
+    const qObj=questions[current];
+    questionContainer.innerHTML=`<div class="question"><span class="q-num">Question ${current+1} sur ${questions.length}</span>${qObj.q}</div>`;
+    optionsContainer.innerHTML='';
+    nextBtn.disabled=(userAnswers[current]==null);
+    doubtBtn.classList.remove("hidden"); doubtBtn.textContent="⚠️ Signaler une anomalie IA"; doubtBtn.disabled=false;
+    qObj.options.forEach(opt=>{
+      const btn=document.createElement('button');
+      const check=document.createElement('span'); check.className='opt-check'; btn.appendChild(check);
+      const label=document.createElement('span'); label.textContent=opt; btn.appendChild(label);
+      if(userAnswers[current]===opt){ btn.classList.add('selected'); check.textContent='✓'; }
+      btn.onclick=()=>{ userAnswers[current]=opt; Array.from(optionsContainer.children).forEach(b=>{ const c=b.querySelector('.opt-check'); const sel=b.querySelector('span:last-child').textContent===opt; b.classList.toggle('selected',sel); c.textContent=sel?'✓':''; }); nextBtn.disabled=false; };
       optionsContainer.appendChild(btn);
     });
-
     startTimer();
   }
 
-  function advanceQuestion() {
-    const qObj = questions[current];
-    const selected = userAnswers[current];
-    if (selected === qObj.answer) score++;
-    current++; updateProgress();
-    if (current < questions.length) {
-      showQuestion();
-    } else {
-      stopTimer(); timerDisplay.classList.add("hidden"); showResult();
-    }
-  }
+  function advanceQuestion(){ const qObj=questions[current]; const selected=userAnswers[current]; const isDoubt=(selected==="__DOUBT__"); if(qObj.kind==="halu"){ if(isDoubt) vigilance+=1; } else { if(!isDoubt && selected===qObj.answer) score+=1; } current++; updateProgress(); if(current<questions.length){ showQuestion(); } else { stopTimer(); timerDisplay.classList.add("hidden"); showResult(); } }
+  nextBtn.onclick=()=>{ stopTimer(); advanceQuestion(); };
+  doubtBtn.onclick=()=>{ doubtBtn.disabled=true; userAnswers[current]="__DOUBT__"; stopTimer(); advanceQuestion(); };
 
-  nextBtn.onclick = () => { stopTimer(); advanceQuestion(); };
-
-  // ── RESULT ──────────────────────────────────────────────
-  function showResult() {
+  function showResult(){
     quizDiv.classList.add('hidden'); resultDiv.classList.remove('hidden');
+    const playedIds=JSON.parse(localStorage.getItem('playedIds')||'[]');
+    const currentIds=questions.map(q=>q.id).filter(id=>id!=null);
+    localStorage.setItem('playedIds', JSON.stringify([...new Set([...playedIds,...currentIds])].slice(-1000)));
+    const totalHalu=questions.filter(q=>q.kind==="halu").length;
+    const totalSafe=questions.length-totalHalu;
+    const scoreTotal=score+vigilance;
+    const scoreMax=questions.length;
+    const validated=(scoreTotal>=7);
+    const duration=startTime?Math.round((Date.now()-startTime)/1000):0;
+    const haluDetections=questions.map((q,i)=>{ if(q.kind!=="halu") return null; const isDoubt=(userAnswers[i]==="__DOUBT__"); const nextTime=questionStartTimes[i+1]||(startTime+duration*1000); const elapsed=Math.round((nextTime-questionStartTimes[i])/1000); return { detected:isDoubt, timeSpent:Math.min(elapsed,QUESTION_TIME) }; }).filter(Boolean);
 
-    // Calcul durée
-    const duration = startTime ? Math.round((Date.now() - startTime) / 1000) : 0;
+    fetch('/api/save-result-iqai', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ name:participantName, score:scoreTotal, total:scoreMax, vigilance, totalHalu, duration, haluDetections, date:new Date().toISOString() }) }).catch(e=>console.warn("Sauvegarde échouée:",e));
 
-    // Collecte des erreurs par thème (on utilise la situation comme thème)
-    const errors = questions.map((q, i) => {
-      const user = userAnswers[i];
-      if (user !== q.answer) {
-        return { theme: q.situation.split('.')[0].slice(0, 60), userAnswer: user || "Temps écoulé", correctAnswer: q.answer };
-      }
-      return null;
-    }).filter(Boolean);
-
-    // Envoi à Redis
-    fetch('/api/save-result', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: participantName, score, total: questions.length, duration, errors })
-    }).catch(e => console.warn("Sauvegarde résultat échouée :", e));
-
-    const scoreMax = questions.length;
-    const validated = (score >= 7);
-
-    // Token canvas
-    const tokenContainer = document.getElementById('tokenContainer');
-    const tokenCanvas    = document.getElementById('tokenCanvas');
+    const tokenContainer=document.getElementById('tokenContainer');
+    const tokenCanvas=document.getElementById('tokenCanvas');
     tokenContainer.classList.remove('hidden');
+    const cssW=Math.min(500,tokenContainer.clientWidth-2); const w=cssW; const h=Math.round(w*0.46); const dpr=window.devicePixelRatio||1;
+    tokenCanvas.style.width=w+"px"; tokenCanvas.style.height=h+"px"; tokenCanvas.width=Math.round(w*dpr); tokenCanvas.height=Math.round(h*dpr);
+    const ctx=tokenCanvas.getContext("2d"); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,w,h);
+    const grad=ctx.createLinearGradient(0,0,w,h);
+    if(validated){ grad.addColorStop(0,"#0f3460"); grad.addColorStop(1,"#0d6e5a"); } else { grad.addColorStop(0,"#6b1a1a"); grad.addColorStop(1,"#7c2d12"); }
+    ctx.fillStyle=grad; ctx.fillRect(0,0,w,h);
+    ctx.strokeStyle='rgba(255,255,255,0.06)'; ctx.lineWidth=1;
+    for(let x=0;x<w;x+=38){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+    for(let y=0;y<h;y+=38){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+    ctx.strokeStyle='rgba(255,255,255,0.12)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(w*0.08,h*0.72); ctx.lineTo(w*0.92,h*0.72); ctx.stroke();
+    ctx.textAlign="center"; let fSize=Math.min(18,Math.floor(w*0.038));
+    ctx.fillStyle="rgba(255,255,255,0.55)"; ctx.font=`500 12px 'DM Mono'`; ctx.fillText("IQAI TEST — AI VIGILANCE PLATFORM", w/2, Math.round(h*0.18));
+    ctx.fillStyle="#ffffff"; ctx.font=`bold ${fSize}px 'DM Sans'`; ctx.fillText(validated?"✅ FORMATION VALIDÉE":"❌ NON VALIDÉE", w/2, Math.round(h*0.42));
+    ctx.font=`bold ${Math.floor(fSize*1.3)}px 'DM Mono'`; ctx.fillText(`${scoreTotal} / ${scoreMax}`, w/2, Math.round(h*0.62));
+    ctx.fillStyle="rgba(255,255,255,0.50)"; ctx.font=`500 11px 'DM Sans'`; ctx.fillText(`Score obtenu — Seuil requis : 7/10`, w/2, Math.round(h*0.84));
 
-    const cssW = Math.min(500, tokenContainer.clientWidth - 2);
-    const w = cssW; const h = Math.round(w * 0.46);
-    const dpr = window.devicePixelRatio || 1;
-    tokenCanvas.style.width = w + "px"; tokenCanvas.style.height = h + "px";
-    tokenCanvas.width = Math.round(w * dpr); tokenCanvas.height = Math.round(h * dpr);
-    const ctx = tokenCanvas.getContext("2d");
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, w, h);
+    const badge=document.getElementById('validationBadge');
+    badge.innerHTML=validated
+      ?`<div class="validation-badge validated"><span class="vb-icon">✅</span><div class="vb-body"><div class="vb-title">Formation validée</div><div class="vb-sub">Score : ${scoreTotal}/${scoreMax} — Seuil de 7/10 atteint.</div></div></div>`
+      :`<div class="validation-badge not-validated"><span class="vb-icon">❌</span><div class="vb-body"><div class="vb-title">Formation non validée</div><div class="vb-sub">Score : ${scoreTotal}/${scoreMax} — Seuil requis : 7/10 minimum.</div></div></div>`;
+    scoreDetails.innerHTML=`<div class="score-card"><span class="sc-val">${score}/${totalSafe}</span><span class="sc-lbl">Questions correctes</span></div><div class="score-card"><span class="sc-val">${vigilance}/${totalHalu}</span><span class="sc-lbl">Anomalies IA détectées</span></div>`;
+    doubtBtn.classList.add("hidden");
+    setTimeout(()=>{ if(window.showNotifPopup) window.showNotifPopup(); }, 2000);
 
-    const grad = ctx.createLinearGradient(0, 0, w, h);
-    if (validated) { grad.addColorStop(0, "#0f3460"); grad.addColorStop(1, "#0d6e5a"); }
-    else           { grad.addColorStop(0, "#6b1a1a"); grad.addColorStop(1, "#7c2d12"); }
-    ctx.fillStyle = grad; ctx.fillRect(0, 0, w, h);
-
-    ctx.strokeStyle = 'rgba(255,255,255,0.06)'; ctx.lineWidth = 1;
-    for (let x = 0; x < w; x += 38) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
-    for (let y = 0; y < h; y += 38) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
-    ctx.strokeStyle = 'rgba(255,255,255,0.12)'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(w * 0.08, h * 0.72); ctx.lineTo(w * 0.92, h * 0.72); ctx.stroke();
-
-    ctx.textAlign = "center";
-    let fSize = Math.min(18, Math.floor(w * 0.038));
-
-    ctx.fillStyle = "rgba(255,255,255,0.55)";
-    ctx.font = `500 12px 'DM Sans'`;
-    ctx.fillText("SANDRA AI × EMIL FREY — FORMATION INTÉGRATION", w / 2, Math.round(h * 0.18));
-
-    ctx.fillStyle = "#ffffff";
-    ctx.font = `bold ${fSize}px 'DM Sans'`;
-    ctx.fillText(validated ? "✅ FORMATION VALIDÉE" : "❌ NON VALIDÉE", w / 2, Math.round(h * 0.42));
-
-    ctx.font = `bold ${Math.floor(fSize * 1.3)}px 'DM Mono'`;
-    ctx.fillText(`${score} / ${scoreMax}`, w / 2, Math.round(h * 0.62));
-
-    ctx.fillStyle = "rgba(255,255,255,0.50)";
-    ctx.font = `500 11px 'DM Sans'`;
-    ctx.fillText(`Score obtenu — Seuil requis : 7/10`, w / 2, Math.round(h * 0.84));
-
-    // Badge
-    const badge = document.getElementById('validationBadge');
-    if (validated) {
-      badge.innerHTML = `<div class="validation-badge validated"><span class="vb-icon">✅</span><div class="vb-body"><div class="vb-title">Formation validée</div><div class="vb-sub">Score : ${score}/${scoreMax} — Vous maîtrisez les bases de l'utilisation de Sandra AI.</div></div></div>`;
-    } else {
-      badge.innerHTML = `<div class="validation-badge not-validated"><span class="vb-icon">❌</span><div class="vb-body"><div class="vb-title">Formation non validée</div><div class="vb-sub">Score : ${score}/${scoreMax} — Score insuffisant. Le seuil requis est de 7/10 minimum.</div></div></div>`;
-    }
-
-    // Score card
-    scoreDetails.innerHTML = `<div class="score-card"><span class="sc-val">${score} / ${scoreMax}</span><span class="sc-lbl">Bonnes réponses</span></div>`;
-
-    // Revue détaillée
-    reviewContainer.innerHTML = '<h3>Revue détaillée des questions</h3>';
-    questions.forEach((q, i) => {
-      const user = userAnswers[i];
-      const ok = (user === q.answer);
-      const statusHTML = ok
-        ? `<div style="color:var(--success);font-weight:600;margin-top:8px;font-size:0.88em;">✅ Bonne réponse — +1 pt</div>`
-        : `<div style="color:var(--danger);font-weight:600;margin-top:8px;font-size:0.88em;">❌ Réponse incorrecte — 0 pt</div>`;
-
-      const div = document.createElement('div'); div.className = "reviewItem";
-      div.innerHTML = `
-        <div class="situation-mini">${q.situation}</div>
-        <strong>Q${i + 1} :</strong> ${q.q}<br>
-        <span style="color:var(--muted);font-size:0.85em;">Votre réponse :</span>
-        <span class="answerTag ${ok ? 'ok' : 'bad'}">${user || "Temps écoulé"}</span><br>
-        <span style="color:var(--muted);font-size:0.85em;">Bonne réponse :</span>
-        <span class="answerTag ok">${q.answer}</span><br>
-        <div style="margin-top:6px;font-size:0.84em;color:var(--muted);font-style:italic;">${q.explanation}</div>
-        ${statusHTML}
-      `;
+    reviewContainer.innerHTML='<h3>Revue détaillée des questions</h3>';
+    questions.forEach((q,i)=>{
+      const user=userAnswers[i]; const isDoubt=(user==="__DOUBT__");
+      const ok=(q.kind==="halu"&&isDoubt)||(q.kind==="safe"&&user===q.answer);
+      let statusHTML="";
+      if(q.kind==="halu"){ statusHTML=isDoubt?`<div class="haluBanner ok">✅ Anomalie correctement identifiée — +1 pt</div>`:`<div class="haluBanner">❌ Contenu erroné non détecté — 0 pt</div>`; }
+      else { if(ok) statusHTML=`<div style="color:var(--success);font-weight:600;margin-top:8px;font-size:0.88em;">✅ Réponse correcte — +1 pt</div>`; else if(isDoubt) statusHTML=`<div style="color:var(--danger);font-weight:600;margin-top:8px;font-size:0.88em;">❌ Signalement injustifié — 0 pt</div>`; else statusHTML=`<div style="color:var(--danger);font-weight:600;margin-top:8px;font-size:0.88em;">❌ Réponse incorrecte — 0 pt</div>`; }
+      const div=document.createElement('div'); div.className="reviewItem";
+      div.innerHTML=`<strong>Q${i+1} :</strong> ${q.q}<br><span style="color:var(--muted);font-size:0.85em;">Votre réponse :</span> <span class="answerTag ${ok?'ok':'bad'}">${isDoubt?"⚠️ Anomalie signalée":(user||"Temps écoulé")}</span><br><span style="color:var(--muted);font-size:0.85em;">Réponse attendue :</span> ${q.kind==="halu"?"Information incorrecte (hallucination IA)":q.answer}<br><div style="margin-top:6px;font-size:0.84em;color:var(--muted);font-style:italic;">${q.explanation}</div>${statusHTML}`;
       reviewContainer.appendChild(div);
     });
   }
 
-  // ── START ───────────────────────────────────────────────
-  function showError(msg) { errorContainer.classList.remove('hidden'); errorContainer.className = "errorBox"; errorContainer.textContent = msg; }
-  function clearError() { errorContainer.classList.add('hidden'); errorContainer.className = ""; errorContainer.textContent = ""; }
-
-  async function startGame() {
-    clearError();
-    resultDiv.classList.add('hidden');
-    quizDiv.classList.remove('hidden');
-    reviewContainer.innerHTML = "";
-
-    current = 0; score = 0;
-    userAnswers = new Array(TOTAL_Q).fill(null);
-    updateProgress();
-    nextBtn.disabled = true;
-    optionsContainer.innerHTML = "";
-    situationContainer.innerHTML = "";
-    questionContainer.innerHTML = `<div class="question" style="color:var(--muted);font-weight:500;">Génération de votre formation en cours…</div>`;
-
-    try {
-      await loadQuestions();
-      showQuestion();
-    } catch(e) {
-      stopTimer();
-      timerDisplay.classList.add("hidden");
-      showError("Erreur : " + (e?.message || e));
-      questionContainer.innerHTML = '<div class="question" style="color:var(--muted);">Impossible de charger la formation. Vérifiez la connexion.</div>';
-      nextBtn.disabled = true;
-    }
+  async function startGame(){
+    clearError(); resultDiv.classList.add('hidden'); quizDiv.classList.remove('hidden'); reviewContainer.innerHTML="";
+    current=0; score=0; vigilance=0; userAnswers=new Array(10).fill(null); questionStartTimes=[];
+    updateProgress(); nextBtn.disabled=true; optionsContainer.innerHTML="";
+    questionContainer.innerHTML=`<div class="question" style="color:var(--muted);font-weight:500;">Génération de votre évaluation en cours…</div>`;
+    doubtBtn.classList.add("hidden"); doubtBtn.disabled=false;
+    try{ await loadQuestions(); showQuestion(); }
+    catch(e){ stopTimer(); timerDisplay.classList.add("hidden"); showError("Erreur : "+(e?.message||e)); questionContainer.innerHTML='<div class="question" style="color:var(--muted);">Impossible de charger l\'évaluation.</div>'; nextBtn.disabled=true; }
   }
 
-  startBtn.onclick = () => {
-    const nameVal = document.getElementById('nameInput').value.trim();
-    if (!nameVal) {
-      document.getElementById('nameInput').style.borderColor = 'var(--danger)';
-      document.getElementById('nameInput').focus();
-      return;
-    }
-    participantName = nameVal;
-    startTime = Date.now();
-    startScreen.classList.add("hidden");
-    gameContainer.classList.remove("hidden");
+  startBtn.onclick=()=>{
+    const nameVal=document.getElementById('nameInput').value.trim();
+    if(!nameVal){ document.getElementById('nameInput').style.borderColor='var(--danger)'; document.getElementById('nameInput').focus(); return; }
+    participantName=nameVal; startTime=Date.now();
+    startScreen.classList.add("hidden"); gameContainer.classList.remove("hidden");
     startGame();
   };
 
-  restartBtn.onclick = () => {
-    resultDiv.classList.add('hidden');
-    quizDiv.classList.remove('hidden');
-    startGame();
-  };
+  function showNotifPopup(){ if(window.OneSignalDeferred){ OneSignalDeferred.push(async function(O){ try{ const sup=await O.Notifications.isPushSupported(); if(sup&&O.Notifications.permission!=="granted"){ document.getElementById('notifPopup').classList.remove('hidden'); } }catch(e){} }); } }
+  window.showNotifPopup=showNotifPopup;
+  document.addEventListener('DOMContentLoaded',()=>{
+    const popup=document.getElementById('notifPopup');
+    document.getElementById('notifAccept').onclick=async()=>{ popup.classList.add('hidden'); if(window.OneSignalDeferred){ OneSignalDeferred.push(async function(O){ try{ await O.Notifications.requestPermission(); await O.User.addTag("status","joueur_actif"); }catch(e){} }); } };
+    document.getElementById('notifDecline').onclick=()=>popup.classList.add('hidden');
+  });
 </script>
 </body>
 </html>
