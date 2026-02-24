@@ -151,7 +151,7 @@
     // Les index dans allResults correspondent aux index dans Redis (lRange 0 -1)
     // Attention : allResults est affiché en ordre inversé dans le tableau mais les index Redis sont dans l'ordre original
     const indexes = Array.from(selectedIndexes);
-    const res = await fetch('/api/delete-result-iqai', {
+    const res = await fetch('/api/save-result-iqai', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ mode: 'indexes', indexes })
     });
@@ -160,7 +160,7 @@
   }
 
   async function deleteAll() {
-    const res = await fetch('/api/delete-result-iqai', {
+    const res = await fetch('/api/save-result-iqai', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ mode: 'all' })
     });
