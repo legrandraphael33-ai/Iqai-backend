@@ -7,7 +7,6 @@
 <link rel="icon" href="data:,">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -19,132 +18,95 @@
     --body-font: 'DM Sans', system-ui, sans-serif;
     --mono-font: 'DM Mono', monospace;
   }
-  body {
-    min-height: 100vh; background: var(--bg);
-    font-family: var(--body-font); color: var(--text);
-    padding: 36px 20px 60px; position: relative;
-  }
-  body::before {
-    content: ''; position: fixed; inset: 0; z-index: 0;
-    background:
-      radial-gradient(ellipse 70% 55% at 50% 0%, rgba(29,111,229,0.10) 0%, transparent 70%),
-      linear-gradient(rgba(29,111,229,0.055) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(29,111,229,0.055) 1px, transparent 1px);
-    background-size: auto, 44px 44px, 44px 44px;
-    pointer-events: none;
-  }
-
+  body { min-height: 100vh; background: var(--bg); font-family: var(--body-font); color: var(--text); padding: 36px 20px 60px; position: relative; }
+  body::before { content: ''; position: fixed; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 55% at 50% 0%, rgba(29,111,229,0.10) 0%, transparent 70%), linear-gradient(rgba(29,111,229,0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(29,111,229,0.055) 1px, transparent 1px); background-size: auto, 44px 44px, 44px 44px; pointer-events: none; }
   .page { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
 
   /* HEADER */
-  .header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 32px; flex-wrap: wrap; gap: 16px;
-  }
-  .header-left { display: flex; align-items: center; gap: 14px; }
-  .header-logo {
-    font-family: var(--mono-font); font-size: 1.3em; font-weight: 500;
-    display: flex; align-items: center; gap: 0;
-  }
+  .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
+  .header-logo { font-family: var(--mono-font); font-size: 1.3em; font-weight: 500; display: flex; align-items: center; }
   .logo-iqai { color: var(--accent); font-weight: 700; }
   .logo-arrow { color: var(--muted); margin: 0 8px; }
   .logo-test { color: var(--text); }
   .logo-cursor { color: var(--accent2); animation: cursorBlink 1.1s steps(1,end) infinite; margin-left: 2px; }
   @keyframes cursorBlink { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
-
-  .header-title p { font-size: 0.78em; color: var(--muted); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 3px; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: rgba(29,111,229,0.09); border: 1px solid rgba(29,111,229,0.22);
-    border-radius: 999px; padding: 5px 14px 5px 9px;
-    font-size: 0.73em; font-weight: 700; color: var(--accent);
-    letter-spacing: 0.6px; text-transform: uppercase;
-  }
+  .header-sub { font-size: 0.78em; color: var(--muted); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 3px; }
+  .badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(29,111,229,0.09); border: 1px solid rgba(29,111,229,0.22); border-radius: 999px; padding: 5px 14px 5px 9px; font-size: 0.73em; font-weight: 700; color: var(--accent); letter-spacing: 0.6px; text-transform: uppercase; }
   .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); animation: pulse 2.2s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.7);} }
+  .btn { padding: 9px 18px; border-radius: 10px; font-weight: 600; font-family: var(--body-font); font-size: 0.85em; cursor: pointer; transition: all 0.15s; }
+  .btn-outline { border: 1.5px solid var(--border2); background: var(--surface); color: var(--text); }
+  .btn-outline:hover { border-color: var(--accent); background: rgba(29,111,229,0.04); }
+  .btn-danger { border: 1.5px solid rgba(220,38,38,0.3); background: rgba(220,38,38,0.04); color: var(--danger); }
+  .btn-danger:hover { background: rgba(220,38,38,0.09); border-color: var(--danger); }
+  .btn-danger:disabled { opacity: 0.35; cursor: not-allowed; }
 
   /* KPI */
   .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
-  .kpi-card {
-    background: var(--surface); border: 1px solid var(--border2);
-    border-radius: 16px; padding: 20px 18px;
-    box-shadow: 0 4px 20px rgba(29,111,229,0.07);
-    position: relative; overflow: hidden;
-  }
-  .kpi-card::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:3px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-  }
+  .kpi-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 16px; padding: 20px 18px; box-shadow: 0 4px 20px rgba(29,111,229,0.07); position: relative; overflow: hidden; }
+  .kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
   .kpi-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
   .kpi-value { font-family: var(--mono-font); font-size: 2em; font-weight: 500; color: var(--accent); line-height: 1; }
   .kpi-sub { font-size: 0.78em; color: var(--muted); margin-top: 4px; }
 
   /* CHARTS */
   .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  .chart-card {
-    background: var(--surface); border: 1px solid var(--border2);
-    border-radius: 16px; padding: 22px;
-    box-shadow: 0 4px 20px rgba(29,111,229,0.07);
-  }
+  .chart-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 16px; padding: 22px; box-shadow: 0 4px 20px rgba(29,111,229,0.07); }
   .chart-card.full { grid-column: span 2; }
   .chart-title { font-size: 0.78em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 18px; }
   .chart-wrap { position: relative; height: 220px; }
 
   /* TABLE */
-  .table-card {
-    background: var(--surface); border: 1px solid var(--border2);
-    border-radius: 16px; padding: 22px;
-    box-shadow: 0 4px 20px rgba(29,111,229,0.07);
-    margin-bottom: 16px;
-  }
-  .table-title { font-size: 0.78em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 16px; }
+  .table-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 16px; padding: 22px; box-shadow: 0 4px 20px rgba(29,111,229,0.07); margin-bottom: 16px; }
+  .table-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+  .table-title { font-size: 0.78em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+  .table-actions { display: flex; gap: 8px; align-items: center; }
   table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
   thead th { text-align: left; padding: 8px 12px; color: var(--muted); font-weight: 700; font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid var(--border2); }
-  tbody tr { border-bottom: 1px solid var(--border); }
+  thead th.col-check { width: 36px; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
   tbody tr:last-child { border-bottom: none; }
+  tbody tr.selected-row { background: rgba(220,38,38,0.04); }
   tbody td { padding: 11px 12px; color: var(--text); }
-  .pill {
-    display: inline-block; padding: 2px 10px; border-radius: 999px;
-    font-family: var(--mono-font); font-size: 0.85em; font-weight: 500;
-  }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-family: var(--mono-font); font-size: 0.85em; font-weight: 500; }
   .pill.good { background: rgba(22,163,74,0.1); color: var(--success); border: 1px solid rgba(22,163,74,0.25); }
   .pill.bad  { background: rgba(220,38,38,0.08); color: var(--danger); border: 1px solid rgba(220,38,38,0.2); }
   .pill.neutral { background: rgba(29,111,229,0.08); color: var(--accent); border: 1px solid rgba(29,111,229,0.2); }
+  input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--danger); cursor: pointer; }
+
+  /* CONFIRM MODAL */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(15,31,61,0.55); display: flex; align-items: center; justify-content: center; z-index: 9999; padding: 20px; backdrop-filter: blur(5px); }
+  .modal-overlay.hidden { display: none; }
+  .modal { background: var(--surface); border: 1px solid var(--border2); border-radius: 20px; padding: 28px; max-width: 380px; width: 100%; box-shadow: 0 24px 64px rgba(0,0,0,0.15); animation: popIn 0.2s ease; }
+  @keyframes popIn { from{transform:scale(0.95);opacity:0;} to{transform:scale(1);opacity:1;} }
+  .modal h3 { font-size: 1em; font-weight: 800; margin-bottom: 10px; color: var(--text); }
+  .modal p { font-size: 0.88em; color: var(--muted); line-height: 1.6; margin-bottom: 22px; }
+  .modal-btns { display: flex; gap: 10px; }
+  .modal-btns button { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-family: var(--body-font); font-size: 0.9em; cursor: pointer; }
+  .modal-cancel { border: 1.5px solid var(--border2); background: var(--surface2); color: var(--text); }
+  .modal-confirm { border: none; background: var(--danger); color: #fff; }
 
   .loading { text-align: center; padding: 60px; color: var(--muted); font-size: 0.95em; }
-  .refresh-btn {
-    padding: 9px 18px; border: 1.5px solid var(--border2); border-radius: 10px;
-    background: var(--surface); color: var(--text); cursor: pointer;
-    font-weight: 600; font-family: var(--body-font); font-size: 0.85em;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .refresh-btn:hover { border-color: var(--accent); background: rgba(29,111,229,0.04); }
-
-  @media (max-width: 700px) {
-    .kpi-grid { grid-template-columns: 1fr 1fr; }
-    .charts-grid { grid-template-columns: 1fr; }
-    .chart-card.full { grid-column: span 1; }
-  }
+  .hidden { display: none; }
+  @media (max-width: 700px) { .kpi-grid { grid-template-columns: 1fr 1fr; } .charts-grid { grid-template-columns: 1fr; } .chart-card.full { grid-column: span 1; } }
 </style>
 </head>
 <body>
 <div class="page">
 
   <div class="header">
-    <div class="header-left">
-      <div class="header-title">
-        <div class="header-logo">
-          <span class="logo-iqai">IQAI</span>
-          <span class="logo-arrow">&gt;</span>
-          <span class="logo-test">Test</span>
-          <span class="logo-cursor">_</span>
-        </div>
-        <p>Dashboard Formation — AI Vigilance</p>
+    <div>
+      <div class="header-logo">
+        <span class="logo-iqai">IQAI</span>
+        <span class="logo-arrow">&gt;</span>
+        <span class="logo-test">Test</span>
+        <span class="logo-cursor">_</span>
       </div>
+      <div class="header-sub">Dashboard Formation — AI Vigilance</div>
     </div>
-    <div style="display:flex;align-items:center;gap:12px;">
+    <div style="display:flex;align-items:center;gap:10px;">
       <div class="badge"><span class="dot"></span>Live</div>
-      <button class="refresh-btn" onclick="loadData()">↺ Actualiser</button>
+      <button class="btn btn-outline" onclick="loadData()">↺ Actualiser</button>
     </div>
   </div>
 
@@ -154,38 +116,95 @@
 
 </div>
 
+<!-- MODAL CONFIRMATION SUPPRESSION -->
+<div id="modalOverlay" class="modal-overlay hidden">
+  <div class="modal">
+    <h3 id="modalTitle">Confirmer la suppression</h3>
+    <p id="modalText">Cette action est irréversible.</p>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal()">Annuler</button>
+      <button class="modal-confirm" id="modalConfirmBtn">Supprimer</button>
+    </div>
+  </div>
+</div>
+
 <script>
   let chartInstances = {};
+  let allResults = [];
+  let selectedIndexes = new Set();
+  let pendingDeleteAction = null;
 
-  function destroyCharts() {
-    Object.values(chartInstances).forEach(c => c.destroy());
-    chartInstances = {};
+  function destroyCharts() { Object.values(chartInstances).forEach(c => c.destroy()); chartInstances = {}; }
+  function formatDuration(sec) { const m = Math.floor(sec / 60); const s = sec % 60; return m > 0 ? `${m}m ${s}s` : `${s}s`; }
+  function formatDate(iso) { const d = new Date(iso); return d.toLocaleDateString('fr-FR', { day:'2-digit', month:'2-digit', year:'2-digit' }) + ' ' + d.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' }); }
+
+  function openModal(title, text, onConfirm) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalText').textContent = text;
+    document.getElementById('modalConfirmBtn').onclick = () => { closeModal(); onConfirm(); };
+    document.getElementById('modalOverlay').classList.remove('hidden');
+  }
+  function closeModal() { document.getElementById('modalOverlay').classList.add('hidden'); }
+
+  async function deleteSelected() {
+    if (selectedIndexes.size === 0) return;
+    // Les index dans allResults correspondent aux index dans Redis (lRange 0 -1)
+    // Attention : allResults est affiché en ordre inversé dans le tableau mais les index Redis sont dans l'ordre original
+    const indexes = Array.from(selectedIndexes);
+    const res = await fetch('/api/delete-result-iqai', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mode: 'indexes', indexes })
+    });
+    if (res.ok) { selectedIndexes.clear(); loadData(); }
+    else alert("Erreur lors de la suppression.");
   }
 
-  function formatDuration(sec) {
-    const m = Math.floor(sec / 60);
-    const s = sec % 60;
-    return m > 0 ? `${m}m ${s}s` : `${s}s`;
+  async function deleteAll() {
+    const res = await fetch('/api/delete-result-iqai', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mode: 'all' })
+    });
+    if (res.ok) { selectedIndexes.clear(); loadData(); }
+    else alert("Erreur lors de la suppression.");
   }
 
-  function formatDate(iso) {
-    const d = new Date(iso);
-    return d.toLocaleDateString('fr-FR', { day:'2-digit', month:'2-digit', year:'2-digit' }) + ' ' +
-           d.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+  function updateDeleteBtn() {
+    const btn = document.getElementById('btnDeleteSelected');
+    if (btn) btn.disabled = selectedIndexes.size === 0;
+    const label = document.getElementById('deleteSelectedLabel');
+    if (label) label.textContent = selectedIndexes.size > 0 ? `🗑 Supprimer (${selectedIndexes.size})` : '🗑 Supprimer la sélection';
+  }
+
+  function toggleRow(index, checkbox) {
+    if (checkbox.checked) selectedIndexes.add(index);
+    else selectedIndexes.delete(index);
+    const row = document.getElementById(`row-${index}`);
+    if (row) row.classList.toggle('selected-row', checkbox.checked);
+    updateDeleteBtn();
+  }
+
+  function toggleAll(masterCheckbox) {
+    const checkboxes = document.querySelectorAll('.row-checkbox');
+    checkboxes.forEach(cb => {
+      cb.checked = masterCheckbox.checked;
+      const idx = parseInt(cb.dataset.index);
+      if (masterCheckbox.checked) selectedIndexes.add(idx);
+      else selectedIndexes.delete(idx);
+      const row = document.getElementById(`row-${idx}`);
+      if (row) row.classList.toggle('selected-row', masterCheckbox.checked);
+    });
+    updateDeleteBtn();
   }
 
   async function loadData() {
     document.getElementById('content').innerHTML = '<div class="loading">Chargement des données…</div>';
-    destroyCharts();
+    destroyCharts(); selectedIndexes.clear();
     try {
       const res = await fetch('/api/save-result-iqai');
       if (!res.ok) throw new Error("HTTP " + res.status);
-      const results = await res.json();
-      if (!results.length) {
-        document.getElementById('content').innerHTML = '<div class="loading">Aucune donnée disponible pour l\'instant.</div>';
-        return;
-      }
-      renderDashboard(results);
+      allResults = await res.json();
+      if (!allResults.length) { document.getElementById('content').innerHTML = '<div class="loading">Aucune donnée disponible pour l\'instant.</div>'; return; }
+      renderDashboard(allResults);
     } catch(e) {
       document.getElementById('content').innerHTML = `<div class="loading">Erreur de chargement : ${e.message}</div>`;
     }
@@ -193,86 +212,49 @@
 
   function renderDashboard(results) {
     const total = results.length;
-
-    // ── KPI 1 : Nb moyen d'hallus détectées ──
     const avgHaluDetected = (results.reduce((s, r) => s + (r.vigilance || 0), 0) / total).toFixed(1);
-    const avgHaluTotal = (results.reduce((s, r) => s + (r.totalHalu || 0), 0) / total).toFixed(1);
-
-    // ── KPI 2 : Taux de détection global ──
-    const totalDetected = results.reduce((s, r) => s + (r.vigilance || 0), 0);
-    const totalHaluAll  = results.reduce((s, r) => s + (r.totalHalu || 0), 0);
-    const detectionRate = totalHaluAll > 0 ? Math.round((totalDetected / totalHaluAll) * 100) : 0;
-
-    // ── KPI 3 : Temps moyen pour détecter une hallu ──
+    const avgHaluTotal    = (results.reduce((s, r) => s + (r.totalHalu || 0), 0) / total).toFixed(1);
+    const totalDetected   = results.reduce((s, r) => s + (r.vigilance || 0), 0);
+    const totalHaluAll    = results.reduce((s, r) => s + (r.totalHalu || 0), 0);
+    const detectionRate   = totalHaluAll > 0 ? Math.round((totalDetected / totalHaluAll) * 100) : 0;
     let allDetectionTimes = [];
-    results.forEach(r => {
-      (r.haluDetections || []).forEach(h => {
-        if (h.detected && h.timeSpent != null) allDetectionTimes.push(h.timeSpent);
-      });
-    });
-    const avgDetectionTime = allDetectionTimes.length > 0
-      ? (allDetectionTimes.reduce((a, b) => a + b, 0) / allDetectionTimes.length).toFixed(1)
-      : "—";
+    results.forEach(r => { (r.haluDetections || []).forEach(h => { if (h.detected && h.timeSpent != null) allDetectionTimes.push(h.timeSpent); }); });
+    const avgDetectionTime = allDetectionTimes.length > 0 ? (allDetectionTimes.reduce((a, b) => a + b, 0) / allDetectionTimes.length).toFixed(1) : null;
 
-    // ── KPI 4 : Nb participants ──
-    // (total sessions)
-
-    // ── Courbe évolution temps de détection par session ──
     const sessionLabels = results.slice().reverse().map((r, i) => `#${i+1} ${r.name}`);
     const sessionDetectionTimes = results.slice().reverse().map(r => {
       const times = (r.haluDetections || []).filter(h => h.detected && h.timeSpent != null).map(h => h.timeSpent);
       return times.length > 0 ? (times.reduce((a, b) => a + b, 0) / times.length).toFixed(1) : null;
     });
+    const haluPerParticipant = results.slice().reverse().map(r => ({ name: r.name, detected: r.vigilance || 0, total: r.totalHalu || 0 }));
 
-    // ── Hallus détectées par participant ──
-    const haluPerParticipant = results.slice().reverse().map(r => ({
-      name: r.name,
-      detected: r.vigilance || 0,
-      total: r.totalHalu || 0,
-      date: r.date
-    }));
-
-    // ── HTML ──
     document.getElementById('content').innerHTML = `
       <div class="kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-label">Participants</div>
-          <div class="kpi-value">${total}</div>
-          <div class="kpi-sub">sessions complétées</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Hallus détectées / session</div>
-          <div class="kpi-value">${avgHaluDetected}<span style="font-size:0.45em;color:var(--muted)">/${avgHaluTotal}</span></div>
-          <div class="kpi-sub">moyenne sur toutes les sessions</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Taux de détection</div>
-          <div class="kpi-value">${detectionRate}<span style="font-size:0.5em;color:var(--muted)">%</span></div>
-          <div class="kpi-sub">${totalDetected} détectées / ${totalHaluAll} total</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Temps moyen détection</div>
-          <div class="kpi-value" style="font-size:${avgDetectionTime === '—' ? '2em' : '1.5em'};">${avgDetectionTime}${avgDetectionTime !== '—' ? '<span style="font-size:0.4em;color:var(--muted)">s</span>' : ''}</div>
-          <div class="kpi-sub">par hallucination détectée</div>
-        </div>
+        <div class="kpi-card"><div class="kpi-label">Participants</div><div class="kpi-value">${total}</div><div class="kpi-sub">sessions complétées</div></div>
+        <div class="kpi-card"><div class="kpi-label">Hallus détectées / session</div><div class="kpi-value">${avgHaluDetected}<span style="font-size:0.45em;color:var(--muted)">/${avgHaluTotal}</span></div><div class="kpi-sub">moyenne sur toutes les sessions</div></div>
+        <div class="kpi-card"><div class="kpi-label">Taux de détection</div><div class="kpi-value">${detectionRate}<span style="font-size:0.5em;color:var(--muted)">%</span></div><div class="kpi-sub">${totalDetected} détectées / ${totalHaluAll} total</div></div>
+        <div class="kpi-card"><div class="kpi-label">Temps moyen détection</div><div class="kpi-value" style="font-size:${avgDetectionTime ? '1.5em' : '2em'};">${avgDetectionTime ? avgDetectionTime + '<span style="font-size:0.4em;color:var(--muted)">s</span>' : '—'}</div><div class="kpi-sub">par hallucination détectée</div></div>
       </div>
 
       <div class="charts-grid">
-        <div class="chart-card full">
-          <div class="chart-title">⏱ Évolution du temps de détection par session</div>
-          <div class="chart-wrap"><canvas id="chartEvolution"></canvas></div>
-        </div>
-        <div class="chart-card full">
-          <div class="chart-title">🎯 Hallucinations détectées par participant</div>
-          <div class="chart-wrap"><canvas id="chartHaluParticipant"></canvas></div>
-        </div>
+        <div class="chart-card full"><div class="chart-title">⏱ Évolution du temps de détection par session</div><div class="chart-wrap"><canvas id="chartEvolution"></canvas></div></div>
+        <div class="chart-card full"><div class="chart-title">🎯 Hallucinations détectées par participant</div><div class="chart-wrap"><canvas id="chartHaluParticipant"></canvas></div></div>
       </div>
 
       <div class="table-card">
-        <div class="table-title">📋 Détail des sessions</div>
+        <div class="table-header">
+          <div class="table-title">📋 Détail des sessions</div>
+          <div class="table-actions">
+            <button class="btn btn-danger" id="btnDeleteSelected" onclick="confirmDeleteSelected()" disabled>
+              <span id="deleteSelectedLabel">🗑 Supprimer la sélection</span>
+            </button>
+            <button class="btn btn-danger" onclick="confirmDeleteAll()">🗑 Tout effacer</button>
+          </div>
+        </div>
         <table>
           <thead>
             <tr>
+              <th class="col-check"><input type="checkbox" id="checkAll" onchange="toggleAll(this)"></th>
               <th>Participant</th>
               <th>Hallus détectées</th>
               <th>Score total</th>
@@ -281,11 +263,11 @@
             </tr>
           </thead>
           <tbody>
-            ${results.slice().reverse().map(r => {
+            ${results.map((r, i) => {
               const times = (r.haluDetections || []).filter(h => h.detected && h.timeSpent != null).map(h => h.timeSpent);
               const avgT = times.length > 0 ? (times.reduce((a,b)=>a+b,0)/times.length).toFixed(1)+'s' : '—';
-              const detRate = r.totalHalu > 0 ? Math.round((r.vigilance / r.totalHalu) * 100) : 0;
-              return `<tr>
+              return `<tr id="row-${i}">
+                <td><input type="checkbox" class="row-checkbox" data-index="${i}" onchange="toggleRow(${i}, this)"></td>
                 <td><strong>${r.name}</strong></td>
                 <td><span class="pill ${r.vigilance >= r.totalHalu ? 'good' : r.vigilance > 0 ? 'neutral' : 'bad'}">${r.vigilance}/${r.totalHalu}</span></td>
                 <td><span class="pill ${r.score >= 7 ? 'good' : 'bad'}">${r.score}/${r.total}</span></td>
@@ -298,67 +280,38 @@
       </div>
     `;
 
-    // ── Graphique évolution temps détection ──
+    // Graphique évolution
     const ctxE = document.getElementById('chartEvolution').getContext('2d');
     chartInstances.evolution = new Chart(ctxE, {
       type: 'line',
-      data: {
-        labels: sessionLabels,
-        datasets: [{
-          label: 'Temps moyen (s)',
-          data: sessionDetectionTimes,
-          borderColor: '#00b899',
-          backgroundColor: 'rgba(0,184,153,0.08)',
-          borderWidth: 2.5,
-          tension: 0.4,
-          fill: true,
-          pointBackgroundColor: '#00b899',
-          pointRadius: 5,
-          spanGaps: true
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          y: { beginAtZero: true, grid: { color: 'rgba(29,111,229,0.06)' }, ticks: { color: '#5e718a', font: { family: 'DM Mono' }, callback: v => v+'s' } },
-          x: { grid: { display: false }, ticks: { color: '#5e718a', maxRotation: 45, font: { size: 10 } } }
-        }
-      }
+      data: { labels: sessionLabels, datasets: [{ label: 'Temps moyen (s)', data: sessionDetectionTimes, borderColor: '#00b899', backgroundColor: 'rgba(0,184,153,0.08)', borderWidth: 2.5, tension: 0.4, fill: true, pointBackgroundColor: '#00b899', pointRadius: 5, spanGaps: true }] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(29,111,229,0.06)' }, ticks: { color: '#5e718a', font: { family: 'DM Mono' }, callback: v => v+'s' } }, x: { grid: { display: false }, ticks: { color: '#5e718a', maxRotation: 45, font: { size: 10 } } } } }
     });
 
-    // ── Graphique hallus par participant ──
+    // Graphique hallus
     const ctxH = document.getElementById('chartHaluParticipant').getContext('2d');
     chartInstances.halu = new Chart(ctxH, {
       type: 'bar',
-      data: {
-        labels: haluPerParticipant.map(p => p.name),
-        datasets: [
-          {
-            label: 'Détectées',
-            data: haluPerParticipant.map(p => p.detected),
-            backgroundColor: 'rgba(22,163,74,0.7)',
-            borderRadius: 6
-          },
-          {
-            label: 'Manquées',
-            data: haluPerParticipant.map(p => p.total - p.detected),
-            backgroundColor: 'rgba(220,38,38,0.5)',
-            borderRadius: 6
-          }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: {
-          legend: { display: true, labels: { color: '#5e718a', font: { family: 'DM Sans', size: 12 } } }
-        },
-        scales: {
-          x: { stacked: true, grid: { display: false }, ticks: { color: '#5e718a' } },
-          y: { stacked: true, beginAtZero: true, max: Math.max(...haluPerParticipant.map(p => p.total), 2), grid: { color: 'rgba(29,111,229,0.06)' }, ticks: { color: '#5e718a', stepSize: 1 } }
-        }
-      }
+      data: { labels: haluPerParticipant.map(p => p.name), datasets: [ { label: 'Détectées', data: haluPerParticipant.map(p => p.detected), backgroundColor: 'rgba(22,163,74,0.7)', borderRadius: 6 }, { label: 'Manquées', data: haluPerParticipant.map(p => p.total - p.detected), backgroundColor: 'rgba(220,38,38,0.5)', borderRadius: 6 } ] },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, labels: { color: '#5e718a', font: { family: 'DM Sans', size: 12 } } } }, scales: { x: { stacked: true, grid: { display: false }, ticks: { color: '#5e718a' } }, y: { stacked: true, beginAtZero: true, grid: { color: 'rgba(29,111,229,0.06)' }, ticks: { color: '#5e718a', stepSize: 1 } } } }
     });
+  }
+
+  function confirmDeleteSelected() {
+    if (selectedIndexes.size === 0) return;
+    openModal(
+      'Supprimer la sélection',
+      `Vous allez supprimer ${selectedIndexes.size} participant(s). Cette action est irréversible.`,
+      deleteSelected
+    );
+  }
+
+  function confirmDeleteAll() {
+    openModal(
+      'Effacer toutes les données',
+      'Vous allez supprimer toutes les sessions enregistrées. Cette action est irréversible.',
+      deleteAll
+    );
   }
 
   loadData();
