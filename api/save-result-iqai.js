@@ -38,7 +38,7 @@ module.exports = async function handler(req, res) {
             const results = raw.map(r => JSON.parse(r));
             return res.status(200).json(results);
         }
-if (req.method === 'DELETE') {
+if (req.method === 'POST' && req.body.action === 'delete') {
   const { mode, indexes } = req.body;
   if (mode === 'all') {
     await client.del("iqai:results");
