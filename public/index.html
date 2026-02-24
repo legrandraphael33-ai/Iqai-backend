@@ -6,7 +6,7 @@
 <title>IQAI Test — AI Vigilance Platform</title>
 <link rel="icon" href="data:,">
 
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
@@ -36,29 +36,18 @@
     --accent2:  #00b899;
     --danger:   #dc2626;
     --success:  #16a34a;
-
-    --title-font: 'Press Start 2P', monospace;
-    --body-font:  'DM Sans', system-ui, sans-serif;
-    --mono-font:  'DM Mono', monospace;
+    --body-font: 'DM Sans', system-ui, sans-serif;
+    --mono-font: 'DM Mono', monospace;
   }
 
   body {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background: var(--bg);
-    padding: 36px 16px 56px;
-    font-family: var(--body-font);
-    color: var(--text);
-    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    background: var(--bg); padding: 36px 16px 56px;
+    font-family: var(--body-font); color: var(--text); position: relative;
   }
-
-  /* Fond : grille + gradient radial centré */
   body::before {
-    content: '';
-    position: fixed; inset: 0; z-index: 0;
+    content: ''; position: fixed; inset: 0; z-index: 0;
     background:
       radial-gradient(ellipse 70% 55% at 50% 0%, rgba(29,111,229,0.10) 0%, transparent 70%),
       linear-gradient(rgba(29,111,229,0.055) 1px, transparent 1px),
@@ -67,437 +56,221 @@
     pointer-events: none;
   }
 
-  /* ── HEADER ───────────────────────────────── */
+  /* ── HEADER ── */
   .site-header {
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 28px;
-    position: relative;
-    z-index: 1;
+    width: 100%; max-width: 600px;
+    display: flex; flex-direction: column; align-items: center;
+    margin-bottom: 28px; position: relative; z-index: 1;
   }
-
-  /* Pill badge "LIVE" */
   .live-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    background: rgba(29,111,229,0.09);
-    border: 1px solid rgba(29,111,229,0.22);
-    border-radius: 999px;
-    padding: 5px 14px 5px 9px;
-    margin-bottom: 18px;
-    font-family: var(--body-font);
-    font-size: 0.73em;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(29,111,229,0.09); border: 1px solid rgba(29,111,229,0.22);
+    border-radius: 999px; padding: 5px 14px 5px 9px; margin-bottom: 18px;
+    font-size: 0.73em; font-weight: 700; color: var(--accent);
+    letter-spacing: 0.6px; text-transform: uppercase;
   }
   .live-badge .dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--accent2);
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent2);
     animation: pulse 2.2s ease-in-out infinite;
   }
-  @keyframes pulse {
-    0%,100% { opacity:1; transform:scale(1); }
-    50%      { opacity:0.4; transform:scale(0.7); }
-  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.7);} }
 
-  /* Logo IQAI TEST — toujours visible, même avant le start */
-  .logo-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 6px;
-  }
+  .logo-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 6px; }
+
+  /* Titre style coding */
   .logo-title {
-    font-family: var(--title-font);
-    font-size: clamp(1.35em, 3.8vw, 1.9em);
-    line-height: 1.2;
-    text-align: center;
-    letter-spacing: 1px;
+    font-family: var(--mono-font);
+    font-size: clamp(1.5em, 4vw, 2.2em);
+    font-weight: 500;
+    letter-spacing: -0.5px;
     color: var(--text);
+    display: flex; align-items: center; gap: 0;
   }
-  .logo-title span { display: inline-block; }
-  .title-sep { margin: 0 10px; opacity: 0; color: var(--muted); }
-  .title-sep.cursor-on { opacity:1; animation: caretBlink 1.7s steps(1,end) infinite; }
-  @keyframes caretBlink { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
+  .title-iqai { color: var(--accent); font-weight: 700; }
+  .title-arrow { color: var(--muted); margin: 0 10px; font-weight: 400; }
+  .title-test { color: var(--text); font-weight: 500; }
+  .title-cursor {
+    color: var(--accent2); font-weight: 400; margin-left: 3px;
+    animation: cursorBlink 1.1s steps(1,end) infinite;
+  }
+  @keyframes cursorBlink { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
 
   .tagline {
-    font-size: 0.83em;
-    font-weight: 600;
-    color: var(--muted);
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    text-align: center;
+    font-size: 0.83em; font-weight: 600; color: var(--muted);
+    letter-spacing: 1.2px; text-transform: uppercase; text-align: center;
   }
 
-  /* ── CARD ──────────────────────────────────── */
+  /* ── CARD ── */
   .container {
-    max-width: 580px;
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow:
-      0 1px 0 rgba(255,255,255,0.9) inset,
-      0 4px 6px rgba(29,111,229,0.04),
-      0 24px 56px rgba(29,111,229,0.10);
-    position: relative;
-    z-index: 1;
+    max-width: 580px; width: 100%;
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 20px; padding: 30px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 4px 6px rgba(29,111,229,0.04), 0 24px 56px rgba(29,111,229,0.10);
+    position: relative; z-index: 1;
   }
 
-  /* ── START SCREEN ──────────────────────────── */
   .section-label {
-    font-size: 0.72em;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: var(--accent);
-    margin-bottom: 10px;
+    font-size: 0.72em; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.2px; color: var(--accent); margin-bottom: 10px;
   }
 
   #startScreen .intro-text {
-    text-align: center;
-    margin-bottom: 26px;
-    padding-bottom: 22px;
-    border-bottom: 1px solid var(--border);
+    text-align: center; margin-bottom: 26px; padding-bottom: 22px; border-bottom: 1px solid var(--border);
   }
-  #startScreen .intro-text h2 {
-    font-size: 1.15em;
-    font-weight: 800;
-    margin-bottom: 10px;
-    color: var(--text);
-    line-height: 1.35;
-  }
-  #startScreen .intro-text p {
-    font-size: 0.9em;
-    color: var(--muted);
-    line-height: 1.65;
-  }
+  #startScreen .intro-text h2 { font-size: 1.15em; font-weight: 800; margin-bottom: 10px; color: var(--text); line-height: 1.35; }
+  #startScreen .intro-text p  { font-size: 0.9em; color: var(--muted); line-height: 1.65; }
 
-  .stat-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 22px;
-  }
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 22px; }
   .stat-cell {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px 10px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px 10px; text-align: center;
+    position: relative; overflow: hidden;
   }
   .stat-cell::before {
-    content:'';
-    position:absolute; top:0; left:0; right:0; height:3px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    border-radius: 12px 12px 0 0;
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 12px 12px 0 0;
   }
-  .stat-cell .stat-val {
-    font-family: var(--mono-font);
-    font-size: 1.35em;
-    font-weight: 500;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 5px;
-  }
-  .stat-cell .stat-lbl {
-    font-size: 0.71em;
-    font-weight: 600;
-    color: var(--muted);
-    line-height: 1.3;
-  }
+  .stat-cell .stat-val { font-family: var(--mono-font); font-size: 1.35em; font-weight: 500; color: var(--accent); display: block; margin-bottom: 5px; }
+  .stat-cell .stat-lbl { font-size: 0.71em; font-weight: 600; color: var(--muted); line-height: 1.3; }
 
   .rules-block {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px;
-    margin-bottom: 26px;
-    font-size: 0.88em;
-    color: var(--muted);
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px; margin-bottom: 26px;
+    font-size: 0.88em; color: var(--muted);
   }
   .rules-block .rule {
     display: flex; align-items: flex-start; gap: 10px;
-    padding: 7px 0;
-    border-bottom: 1px solid var(--border);
-    line-height: 1.5;
+    padding: 7px 0; border-bottom: 1px solid var(--border); line-height: 1.5;
   }
   .rules-block .rule:last-child { border-bottom: none; padding-bottom: 0; }
   .rules-block .rule:first-child { padding-top: 0; }
   .rules-block strong { color: var(--text); }
 
+  /* Champ prénom */
+  .name-field { margin-bottom: 16px; }
+  .name-field label { display: block; font-size: 0.8em; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .name-field input {
+    width: 100%; padding: 13px 16px; border: 1.5px solid var(--border2); border-radius: 11px;
+    font-family: var(--mono-font); font-size: 0.95em; color: var(--text);
+    background: var(--surface2); outline: none; transition: border-color 0.15s;
+  }
+  .name-field input:focus { border-color: var(--accent); }
+
   #startBtn {
-    width: 100%;
-    padding: 17px;
-    font-size: 1em;
-    font-weight: 700;
-    border: none;
-    border-radius: 13px;
+    width: 100%; padding: 17px; font-size: 1em; font-weight: 700;
+    border: none; border-radius: 13px;
     background: linear-gradient(135deg, #1d6fe5 0%, #1558c0 100%);
-    color: #fff;
-    cursor: pointer;
+    color: #fff; cursor: pointer;
     transition: filter 0.15s, transform 0.1s, box-shadow 0.15s;
-    font-family: var(--body-font);
-    letter-spacing: 0.3px;
+    font-family: var(--body-font); letter-spacing: 0.3px;
     box-shadow: 0 4px 20px rgba(29,111,229,0.35), 0 1px 0 rgba(255,255,255,0.15) inset;
   }
   #startBtn:hover  { filter: brightness(1.08); box-shadow: 0 6px 28px rgba(29,111,229,0.45); }
   #startBtn:active { transform: translateY(1px); }
 
-  /* ── PROGRESS BAR ──────────────────────────── */
-  .progress-wrap {
-    display: flex; align-items: center; gap: 12px; margin-bottom: 22px;
-  }
-  .progress-track {
-    flex: 1; height: 5px;
-    background: var(--border2);
-    border-radius: 99px; overflow: hidden;
-  }
+  /* ── PROGRESS ── */
+  .progress-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+  .progress-track { flex: 1; height: 5px; background: var(--border2); border-radius: 99px; overflow: hidden; }
   .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    border-radius: 99px;
-    transition: width 0.4s cubic-bezier(.4,0,.2,1);
-    width: 0%;
+    height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 99px; transition: width 0.4s cubic-bezier(.4,0,.2,1); width: 0%;
   }
-  .progress-label {
-    font-family: var(--mono-font);
-    font-size: 0.78em;
-    color: var(--muted);
-    white-space: nowrap;
-  }
+  .progress-label { font-family: var(--mono-font); font-size: 0.78em; color: var(--muted); white-space: nowrap; }
 
-  /* ── TIMER ─────────────────────────────────── */
+  /* ── TIMER ── */
   #timerLine { display: flex; justify-content: flex-end; margin-bottom: 6px; }
   #timerDisplay {
-    font-family: var(--mono-font);
-    font-size: 0.8em;
-    color: var(--muted);
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    padding: 4px 13px;
-    border-radius: 999px;
+    font-family: var(--mono-font); font-size: 0.8em; color: var(--muted);
+    background: var(--surface2); border: 1px solid var(--border);
+    padding: 4px 13px; border-radius: 999px;
     transition: color 0.3s, border-color 0.3s, background 0.3s;
   }
-  #timerDisplay.timer-urgent {
-    color: var(--danger);
-    border-color: rgba(220,38,38,0.3);
-    background: rgba(220,38,38,0.05);
-  }
+  #timerDisplay.timer-urgent { color: var(--danger); border-color: rgba(220,38,38,0.3); background: rgba(220,38,38,0.05); }
 
-  /* ── QUESTION ──────────────────────────────── */
-  .q-num {
-    font-family: var(--mono-font);
-    color: var(--accent);
-    font-size: 0.74em;
-    display: block;
-    margin-bottom: 8px;
-    letter-spacing: 0.4px;
-  }
-  .question {
-    font-size: 1.05em;
-    font-weight: 700;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    color: var(--text);
-  }
+  /* ── QUESTION ── */
+  .q-num { font-family: var(--mono-font); color: var(--accent); font-size: 0.74em; display: block; margin-bottom: 8px; letter-spacing: 0.4px; }
+  .question { font-size: 1.05em; font-weight: 700; line-height: 1.5; margin-bottom: 20px; color: var(--text); }
 
-  /* ── OPTIONS ───────────────────────────────── */
+  /* ── OPTIONS ── */
   .options button {
     display: flex; align-items: center; gap: 13px;
     width: 100%; padding: 14px 16px; margin-bottom: 9px;
-    border: 1.5px solid var(--border2);
-    border-radius: 11px;
-    background: var(--surface2);
-    color: var(--text);
-    cursor: pointer;
-    font-weight: 500;
-    font-family: var(--body-font);
-    font-size: 0.94em;
-    text-align: left;
+    border: 1.5px solid var(--border2); border-radius: 11px;
+    background: var(--surface2); color: var(--text); cursor: pointer;
+    font-weight: 500; font-family: var(--body-font); font-size: 0.94em; text-align: left;
     transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
   }
-  .options button:hover {
-    border-color: var(--accent);
-    background: rgba(29,111,229,0.04);
-    box-shadow: 0 2px 12px rgba(29,111,229,0.08);
-  }
-  .options button.selected {
-    border-color: var(--accent);
-    background: rgba(29,111,229,0.07);
-    box-shadow: 0 2px 12px rgba(29,111,229,0.12);
-  }
+  .options button:hover { border-color: var(--accent); background: rgba(29,111,229,0.04); box-shadow: 0 2px 12px rgba(29,111,229,0.08); }
+  .options button.selected { border-color: var(--accent); background: rgba(29,111,229,0.07); box-shadow: 0 2px 12px rgba(29,111,229,0.12); }
   .opt-check {
-    width: 21px; height: 21px; border-radius: 7px;
-    border: 1.5px solid rgba(29,111,229,0.25);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    font-size: 0.78em;
-    font-weight: 900;
-    transition: border-color 0.15s, background 0.15s;
-    color: transparent;
+    width: 21px; height: 21px; border-radius: 7px; border: 1.5px solid rgba(29,111,229,0.25);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    font-size: 0.78em; font-weight: 900; transition: border-color 0.15s, background 0.15s; color: transparent;
   }
-  .options button.selected .opt-check {
-    border-color: var(--accent);
-    background: var(--accent);
-    color: #fff;
-  }
+  .options button.selected .opt-check { border-color: var(--accent); background: var(--accent); color: #fff; }
 
-  /* ── ACTION BUTTONS ────────────────────────── */
- #nextBtn {
-    width: 100%; padding: 14px; margin-top: 10px;
-    border: none;
-    border-radius: 11px;
-    background: var(--accent);
-    color: #fff;
-    cursor: pointer;
-    font-weight: 700;
-    font-family: var(--body-font);
-    font-size: 0.94em;
-    box-shadow: 0 3px 14px rgba(29,111,229,0.28);
-    transition: filter 0.15s, box-shadow 0.15s;
+  /* ── BOUTONS ── */
+  #nextBtn {
+    width: 100%; padding: 14px; margin-top: 10px; border: none; border-radius: 11px;
+    background: var(--accent); color: #fff; cursor: pointer;
+    font-weight: 700; font-family: var(--body-font); font-size: 0.94em;
+    box-shadow: 0 3px 14px rgba(29,111,229,0.28); transition: filter 0.15s, box-shadow 0.15s;
   }
   #nextBtn:not(:disabled):hover { filter: brightness(1.08); box-shadow: 0 4px 20px rgba(29,111,229,0.38); }
   #nextBtn:disabled { opacity: 0.32; cursor: not-allowed; background: var(--muted); box-shadow: none; }
 
   #doubtBtn {
-    width: 100%; padding: 15px; margin-top: 10px;
-    border-radius: 11px;
-    border: 1.5px solid rgba(220,38,38,0.35);
-    background: rgba(220,38,38,0.04);
-    color: var(--danger);
-    font-weight: 700;
-    font-size: 0.92em;
-    cursor: pointer;
-    font-family: var(--body-font);
-    transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
-    letter-spacing: 0.2px;
+    width: 100%; padding: 15px; margin-top: 10px; border-radius: 11px;
+    border: 1.5px solid rgba(220,38,38,0.35); background: rgba(220,38,38,0.04);
+    color: var(--danger); font-weight: 700; font-size: 0.92em; cursor: pointer;
+    font-family: var(--body-font); transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
   }
-  #doubtBtn:hover:not(:disabled) {
-    background: rgba(220,38,38,0.09);
-    border-color: var(--danger);
-    box-shadow: 0 2px 12px rgba(220,38,38,0.12);
-  }
+  #doubtBtn:hover:not(:disabled) { background: rgba(220,38,38,0.09); border-color: var(--danger); box-shadow: 0 2px 12px rgba(220,38,38,0.12); }
   #doubtBtn:disabled { opacity: 0.32; cursor: not-allowed; }
 
-  /* ── ERROR ─────────────────────────────────── */
-  .errorBox {
-    margin-top:10px;padding:12px;border-radius:10px;
-    background:rgba(220,38,38,0.05);
-    border:1px solid rgba(220,38,38,0.2);
-    color:var(--danger);font-weight:600;font-size:0.9em;
-  }
+  .errorBox { margin-top:10px;padding:12px;border-radius:10px;background:rgba(220,38,38,0.05);border:1px solid rgba(220,38,38,0.2);color:var(--danger);font-weight:600;font-size:0.9em; }
 
-  /* ── RESULT ────────────────────────────────── */
+  /* ── RESULT ── */
+  #tokenContainer { width:100%;margin:0 auto 22px;border-radius:14px;overflow:hidden;border:1px solid var(--border2);box-shadow:0 6px 28px rgba(0,0,0,0.10); }
+  #tokenCanvas { display:block;width:100%;height:auto; }
 
-  /* TOKEN */
-  #tokenContainer {
-    width:100%; margin: 0 auto 22px;
-    border-radius: 14px; overflow: hidden;
-    border: 1px solid var(--border2);
-    box-shadow: 0 6px 28px rgba(0,0,0,0.10);
-  }
-  #tokenCanvas { display:block; width:100%; height:auto; }
+  .validation-badge { display:flex;align-items:center;gap:14px;padding:18px 20px;border-radius:14px;margin-bottom:20px;border:1.5px solid; }
+  .validation-badge.validated { background:rgba(22,163,74,0.05);border-color:rgba(22,163,74,0.25); }
+  .validation-badge.not-validated { background:rgba(220,38,38,0.05);border-color:rgba(220,38,38,0.22); }
+  .vb-icon { font-size:1.6em;flex-shrink:0; }
+  .vb-body { flex:1; }
+  .vb-title { font-size:1em;font-weight:800;margin-bottom:3px; }
+  .validation-badge.validated .vb-title { color:var(--success); }
+  .validation-badge.not-validated .vb-title { color:var(--danger); }
+  .vb-sub { font-size:0.83em;color:var(--muted);line-height:1.45; }
 
-  /* VALIDATION BADGE */
-  .validation-badge {
-    display: flex; align-items: center; gap: 14px;
-    padding: 18px 20px;
-    border-radius: 14px;
-    margin-bottom: 20px;
-    border: 1.5px solid;
-  }
-  .validation-badge.validated {
-    background: rgba(22,163,74,0.05);
-    border-color: rgba(22,163,74,0.25);
-  }
-  .validation-badge.not-validated {
-    background: rgba(220,38,38,0.05);
-    border-color: rgba(220,38,38,0.22);
-  }
-  .vb-icon { font-size: 1.6em; flex-shrink: 0; }
-  .vb-body { flex: 1; }
-  .vb-title {
-    font-size: 1em;
-    font-weight: 800;
-    margin-bottom: 3px;
-  }
-  .validation-badge.validated .vb-title { color: var(--success); }
-  .validation-badge.not-validated .vb-title { color: var(--danger); }
-  .vb-sub { font-size: 0.83em; color: var(--muted); line-height: 1.45; }
+  #scoreDetails { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px; }
+  .score-card { background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;position:relative;overflow:hidden; }
+  .score-card::before { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2)); }
+  .score-card .sc-val { font-family:var(--mono-font);font-size:1.7em;font-weight:500;color:var(--accent);display:block;margin-bottom:4px; }
+  .score-card .sc-lbl { font-size:0.77em;font-weight:600;color:var(--muted); }
 
-  /* SCORE CARDS */
-  #scoreDetails {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px;
-  }
-  .score-card {
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 12px; padding: 16px; text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .score-card::before {
-    content:''; position:absolute; top:0; left:0; right:0; height:3px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-  }
-  .score-card .sc-val {
-    font-family: var(--mono-font); font-size: 1.7em; font-weight: 500;
-    color: var(--accent); display: block; margin-bottom: 4px;
-  }
-  .score-card .sc-lbl { font-size: 0.77em; font-weight:600; color: var(--muted); }
+  #howItWorks { margin-top:16px;padding:16px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;font-size:0.84em;line-height:1.85;color:var(--muted); }
+  #howItWorks strong { color:var(--text);font-weight:700;display:block;margin-bottom:5px; }
 
-  /* HOW IT WORKS */
-  #howItWorks {
-    margin-top:16px; padding:16px;
-    background: var(--surface2); border:1px solid var(--border);
-    border-radius:12px; font-size:0.84em; line-height:1.85; color:var(--muted);
-  }
-  #howItWorks strong { color:var(--text); font-weight:700; display:block; margin-bottom:5px; }
+  #reviewContainer { margin-top:22px; }
+  #reviewContainer h3 { font-size:0.78em;font-weight:700;text-transform:uppercase;letter-spacing:1.1px;color:var(--muted);margin-bottom:12px; }
+  .reviewItem { padding:14px 16px;border:1px solid var(--border);border-radius:12px;margin-bottom:9px;background:var(--surface2);line-height:1.55;font-size:0.88em;color:var(--text); }
+  .haluBanner { margin-top:8px;padding:8px 12px;border-radius:8px;font-weight:600;font-size:0.88em;line-height:1.4;background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.2);color:var(--danger); }
+  .haluBanner.ok { background:rgba(22,163,74,0.06);border-color:rgba(22,163,74,0.2);color:var(--success); }
+  .answerTag { display:inline-block;padding:2px 9px;border-radius:6px;font-weight:600;font-size:0.9em; }
+  .answerTag.ok  { background:rgba(22,163,74,0.09);border:1px solid rgba(22,163,74,0.25);color:var(--success); }
+  .answerTag.bad { background:rgba(220,38,38,0.09);border:1px solid rgba(220,38,38,0.22);color:var(--danger); }
 
-  /* REVIEW */
-  #reviewContainer { margin-top: 22px; }
-  #reviewContainer h3 {
-    font-size: 0.78em; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 1.1px; color: var(--muted); margin-bottom: 12px;
+  /* Dashboard link */
+  .dashboard-link {
+    display: block; text-align: center; margin-top: 10px; padding: 12px;
+    border-radius: 11px; border: 1.5px solid var(--border2);
+    background: var(--surface2); color: var(--muted);
+    font-weight: 600; font-size: 0.88em; text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
   }
-  .reviewItem {
-    padding: 14px 16px; border: 1px solid var(--border);
-    border-radius: 12px; margin-bottom: 9px;
-    background: var(--surface2); line-height: 1.55;
-    font-size: 0.88em; color: var(--text);
-  }
-  .haluBanner {
-    margin-top:8px;padding:8px 12px;border-radius:8px;
-    font-weight:600;font-size:0.88em;line-height:1.4;
-    background:rgba(220,38,38,0.06);
-    border:1px solid rgba(220,38,38,0.2);
-    color:var(--danger);
-  }
-  .haluBanner.ok {
-    background:rgba(22,163,74,0.06);
-    border-color:rgba(22,163,74,0.2);
-    color:var(--success);
-  }
-  .answerTag {
-    display:inline-block;padding:2px 9px;border-radius:6px;
-    font-weight:600;font-size:0.9em;
-  }
-  .answerTag.ok  { background:rgba(22,163,74,0.09); border:1px solid rgba(22,163,74,0.25); color:var(--success); }
-  .answerTag.bad { background:rgba(220,38,38,0.09); border:1px solid rgba(220,38,38,0.22); color:var(--danger); }
-
-  /* COOLDOWN */
-  .cooldownMessage { text-align:center; padding:28px 10px; }
-  .cooldownMessage h2 { font-size:1.15em; margin-bottom:12px; color:var(--text); }
-  .cooldownMessage p  { font-size:0.9em; line-height:1.6; color:var(--muted); }
+  .dashboard-link:hover { border-color: var(--accent); color: var(--accent); }
 
   /* NOTIF POPUP */
   .notifPopup { position:fixed;inset:0;background:rgba(15,31,61,0.55);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;backdrop-filter:blur(5px); }
@@ -514,70 +287,58 @@
   .hidden { display: none; }
 
   @media (max-width: 420px) {
-    .logo-title { font-size: 1.2em; }
+    .logo-title { font-size: 1.3em; }
     .stat-row { grid-template-columns: 1fr 1fr; }
     .stat-row .stat-cell:last-child { grid-column: span 2; }
   }
 </style>
 </head>
-
 <body>
 
-  <!-- HEADER : logo toujours visible -->
   <div class="site-header">
-    <div class="live-badge">
-      <span class="dot"></span>
-      AI Vigilance Platform
-    </div>
+    <div class="live-badge"><span class="dot"></span>AI Vigilance Platform</div>
     <div class="logo-wrap">
-      <div class="logo-title" id="title"></div>
+      <div class="logo-title">
+        <span class="title-iqai">IQAI</span>
+        <span class="title-arrow">&gt;</span>
+        <span class="title-test">Test</span>
+        <span class="title-cursor">_</span>
+      </div>
     </div>
     <p class="tagline">Votre formation de vigilance IA</p>
   </div>
 
-  <!-- START SCREEN -->
   <div id="startScreen" class="container">
     <div class="intro-text">
       <p class="section-label">À propos de cette évaluation</p>
       <h2>Mesurez la capacité de vos équipes à détecter les erreurs de l'IA</h2>
       <p>Cette session comprend 10 questions générées par intelligence artificielle. Certaines sont exactes, d'autres contiennent des erreurs délibérées. Votre mission : distinguer l'information fiable des hallucinations.</p>
     </div>
-
     <div class="stat-row">
-      <div class="stat-cell">
-        <span class="stat-val">10</span>
-        <span class="stat-lbl">Questions par session</span>
-      </div>
-      <div class="stat-cell">
-        <span class="stat-val">30s</span>
-        <span class="stat-lbl">Temps par question</span>
-      </div>
-      <div class="stat-cell">
-        <span class="stat-val">7/10</span>
-        <span class="stat-lbl">Seuil de validation</span>
-      </div>
+      <div class="stat-cell"><span class="stat-val">10</span><span class="stat-lbl">Questions par session</span></div>
+      <div class="stat-cell"><span class="stat-val">30s</span><span class="stat-lbl">Temps par question</span></div>
+      <div class="stat-cell"><span class="stat-val">7/10</span><span class="stat-lbl">Seuil de validation</span></div>
     </div>
-
     <div class="rules-block">
       <p class="section-label" style="margin-bottom:14px;">Règles de scoring</p>
       <div class="rule"><span>✅</span><span>Réponse correcte à une question fiable → <strong>+1 point</strong></span></div>
-      <div class="rule"><span>✅</span><span>Erreur IA identifiée via le bouton "Signaler une anomalie" → <strong>+1 point</strong></span></div>
+      <div class="rule"><span>✅</span><span>Erreur IA identifiée via "Signaler une anomalie" → <strong>+1 point</strong></span></div>
       <div class="rule"><span>❌</span><span>Réponse incorrecte ou erreur IA non détectée → <strong>0 point</strong></span></div>
     </div>
-
+    <div class="name-field">
+      <label>Votre prénom</label>
+      <input id="nameInput" type="text" placeholder="Ex : Sophie" maxlength="50">
+    </div>
     <button id="startBtn">▶ Lancer l'évaluation</button>
   </div>
 
-  <!-- GAME CONTAINER -->
   <div class="container hidden" id="gameContainer">
     <div id="quiz">
       <div class="progress-wrap">
         <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
         <div class="progress-label" id="progressLabel">0 / 10</div>
       </div>
-      <div id="timerLine">
-        <div id="timerDisplay" class="hidden">⏱ 30</div>
-      </div>
+      <div id="timerLine"><div id="timerDisplay" class="hidden">⏱ 30</div></div>
       <div id="questionContainer"></div>
       <div class="options" id="optionsContainer"></div>
       <button id="nextBtn" disabled>Suivant →</button>
@@ -586,32 +347,19 @@
     </div>
 
     <div id="result" class="hidden">
-
-      <!-- TOKEN CANVAS -->
-      <div id="tokenContainer" class="hidden">
-        <canvas id="tokenCanvas" width="500" height="250"></canvas>
-      </div>
-
-      <!-- VALIDATION BADGE -->
+      <div id="tokenContainer" class="hidden"><canvas id="tokenCanvas" width="500" height="250"></canvas></div>
       <div id="validationBadge"></div>
-
-      <!-- SCORE CARDS -->
       <div id="scoreDetails"></div>
-
-      <!-- HOW IT WORKS -->
       <div id="howItWorks">
         <strong>📊 Détail du calcul</strong>
         ✅ Bonne réponse (question fiable) = +1 pt &nbsp;|&nbsp; ✅ Anomalie IA détectée = +1 pt<br>
         ❌ Réponse incorrecte = 0 pt &nbsp;|&nbsp; ❌ Anomalie IA non détectée = 0 pt
       </div>
-
-      <!-- REVIEW DES QUESTIONS -->
       <div id="reviewContainer"></div>
-
+      <a href="/dashboard-iqai.html" class="dashboard-link">📊 Voir le dashboard formation</a>
     </div>
   </div>
 
-  <!-- NOTIF POPUP -->
   <div id="notifPopup" class="notifPopup hidden">
     <div class="notifPopupContent">
       <h2>🔔 Rappel quotidien</h2>
@@ -621,50 +369,18 @@
     </div>
   </div>
 
-<!-- ==================== JS ==================== -->
 <script>
-  // ---------- TITLE ANIMATION ----------
-  const colors = ["#1d6fe5","#00b899","#16a34a","#f59e0b","#1d6fe5","#dc2626"];
-  const titleContainer = document.getElementById("title");
-  const parts = ["IQAI","Test"];
-  let cursorSepEl=null, cursorTimeoutId=null, hasShownCursor=false;
-
-  function clearTitle(){ titleContainer.innerHTML=""; cursorSepEl=null; hasShownCursor=false; if(cursorTimeoutId){clearTimeout(cursorTimeoutId);cursorTimeoutId=null;} }
-  function showCursorBlink(){ if(hasShownCursor)return; if(cursorSepEl){cursorSepEl.classList.add("cursor-on");hasShownCursor=true;} }
-
-  function animateTitle({ letterDelayMs=140, initialDelayMs=80 }={}){
-    clearTitle();
-    const spans=[]; let colorIndex=0;
-    function addColoredText(text){
-      text.split("").forEach((c,i)=>{
-        const s=document.createElement("span");
-        s.textContent=c; s.style.opacity="0"; s.style.transform="scale(0.8)";
-        s.style.transition="opacity 180ms ease, transform 180ms ease";
-        s.style.color=colors[(colorIndex+i)%colors.length];
-        spans.push(s); titleContainer.appendChild(s);
-      }); colorIndex+=text.length;
-    }
-    addColoredText(parts[0]);
-    cursorSepEl=document.createElement("span"); cursorSepEl.className="title-sep"; cursorSepEl.textContent="|";
-    titleContainer.appendChild(cursorSepEl);
-    addColoredText(parts[1]);
-    spans.forEach((s,i)=>{ setTimeout(()=>{ s.style.opacity="1"; s.style.transform="scale(1)"; }, initialDelayMs+(i*letterDelayMs)); });
-    return initialDelayMs+(spans.length*letterDelayMs)+220;
-  }
-
-  // Lancer l'animation du titre dès le chargement de la page
-  window.addEventListener('DOMContentLoaded', () => {
-    const ms = animateTitle({ letterDelayMs: 140, initialDelayMs: 80 });
-    cursorTimeoutId = setTimeout(() => showCursorBlink(), ms + 120);
-  });
-
-  // ---------- STATE ----------
+  // ── STATE ──
   const API_URL = "/api/quiz";
   let questions=[], current=0, score=0, vigilance=0, userAnswers=[];
+  let participantName = "", startTime = null;
   const QUESTION_TIME = 30;
   let timeLeft=QUESTION_TIME, timerId=null;
 
-  // ---------- DOM ----------
+  // Timestamps par question pour mesurer temps de détection hallus
+  let questionStartTimes = [];
+
+  // ── DOM ──
   const questionContainer = document.getElementById('questionContainer');
   const optionsContainer  = document.getElementById('optionsContainer');
   const nextBtn           = document.getElementById('nextBtn');
@@ -681,20 +397,12 @@
   const progressFill      = document.getElementById("progressFill");
   const progressLabel     = document.getElementById("progressLabel");
 
-  let gamesPlayed = parseInt(localStorage.getItem("gamesPlayed")||"0", 10);
-
   function updateProgress(){
     const pct=(current/(questions.length||10))*100;
     progressFill.style.width=pct+"%";
     progressLabel.textContent=current+" / "+(questions.length||10);
   }
 
-  // ---------- COOLDOWN ----------
-  function checkCooldown(){ const d=localStorage.getItem("lastPlayedDate"); if(!d)return true; return new Date(d).toDateString()!==new Date().toDateString(); }
-  function setLastPlayed(){ localStorage.setItem("lastPlayedDate", new Date().toISOString()); }
-  function getNextPlayTime(){ const t=new Date(); t.setDate(t.getDate()+1); t.setHours(0,0,0,0); return t; }
-
-  // ---------- HELPERS ----------
   function showError(msg){ errorContainer.classList.remove('hidden'); errorContainer.className="errorBox"; errorContainer.textContent=msg; }
   function clearError(){ errorContainer.classList.add('hidden'); errorContainer.className=""; errorContainer.textContent=""; }
 
@@ -721,7 +429,6 @@
     questions=quiz;
   }
 
-  // ---------- TIMER ----------
   function stopTimer(){ if(timerId){clearInterval(timerId);timerId=null;} }
   function startTimer(){
     stopTimer(); timeLeft=QUESTION_TIME;
@@ -737,15 +444,14 @@
     },1000);
   }
 
-  // ---------- QUIZ UI ----------
   function showQuestion(){
     clearError(); updateProgress();
+    questionStartTimes[current] = Date.now();
     const qObj=questions[current];
     questionContainer.innerHTML=`<div class="question"><span class="q-num">Question ${current+1} sur ${questions.length}</span>${qObj.q}</div>`;
     optionsContainer.innerHTML='';
     nextBtn.disabled=(userAnswers[current]==null);
     doubtBtn.classList.remove("hidden"); doubtBtn.textContent="⚠️ Signaler une anomalie IA"; doubtBtn.disabled=false;
-
     qObj.options.forEach(opt=>{
       const btn=document.createElement('button');
       const check=document.createElement('span'); check.className='opt-check';
@@ -773,17 +479,14 @@
     else { if(!isDoubt && selected===qObj.answer) score+=1; }
     current++; updateProgress();
     if(current<questions.length){ showQuestion(); }
-    else { stopTimer(); timerDisplay.classList.add("hidden"); setLastPlayed(); showResult(); }
+    else { stopTimer(); timerDisplay.classList.add("hidden"); showResult(); }
   }
 
   nextBtn.onclick=()=>{ stopTimer(); advanceQuestion(); };
   doubtBtn.onclick=()=>{ doubtBtn.disabled=true; userAnswers[current]="__DOUBT__"; stopTimer(); advanceQuestion(); };
 
-  // ---------- RESULT ----------
   function showResult(){
     quizDiv.classList.add('hidden'); resultDiv.classList.remove('hidden');
-    gamesPlayed++;
-    localStorage.setItem("gamesPlayed", String(gamesPlayed));
     const playedIds=JSON.parse(localStorage.getItem('playedIds')||'[]');
     const currentIds=questions.map(q=>q.id).filter(id=>id!=null);
     localStorage.setItem('playedIds', JSON.stringify([...new Set([...playedIds,...currentIds])].slice(-1000)));
@@ -793,13 +496,40 @@
     const scoreTotal=score+vigilance;
     const scoreMax=questions.length;
     const validated=(scoreTotal>=7);
+    const duration = startTime ? Math.round((Date.now()-startTime)/1000) : 0;
 
-    // ── TOKEN CANVAS ──
+    // Calcul temps de détection hallus (en secondes)
+    const haluDetections = questions.map((q,i)=>{
+      if(q.kind!=="halu") return null;
+      const isDoubt=(userAnswers[i]==="__DOUBT__");
+      const timeSpent = questionStartTimes[i] ? Math.round((QUESTION_TIME - timeLeft + (isDoubt ? 0 : 0)) * 1) : QUESTION_TIME;
+      // On calcule le temps réel passé sur cette question
+      const nextTime = questionStartTimes[i+1] || (startTime + duration * 1000);
+      const elapsed = Math.round((nextTime - questionStartTimes[i]) / 1000);
+      return { detected: isDoubt, timeSpent: Math.min(elapsed, QUESTION_TIME) };
+    }).filter(Boolean);
+
+    // Envoi à Redis
+    fetch('/api/save-result-iqai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: participantName,
+        score: scoreTotal,
+        total: scoreMax,
+        vigilance,
+        totalHalu,
+        duration,
+        haluDetections,
+        date: new Date().toISOString()
+      })
+    }).catch(e => console.warn("Sauvegarde échouée:", e));
+
+    // TOKEN CANVAS
     const tokenContainer=document.getElementById('tokenContainer');
     const tokenCanvas=document.getElementById('tokenCanvas');
     tokenContainer.classList.remove('hidden');
-
-    const cssW=Math.min(500, tokenContainer.clientWidth-2);
+    const cssW=Math.min(500,tokenContainer.clientWidth-2);
     const w=cssW; const h=Math.round(w*0.46);
     const dpr=window.devicePixelRatio||1;
     tokenCanvas.style.width=w+"px"; tokenCanvas.style.height=h+"px";
@@ -807,137 +537,87 @@
     const ctx=tokenCanvas.getContext("2d");
     ctx.setTransform(dpr,0,0,dpr,0,0);
     ctx.clearRect(0,0,w,h);
-
-    // Fond
     const grad=ctx.createLinearGradient(0,0,w,h);
     if(validated){ grad.addColorStop(0,"#0f3460"); grad.addColorStop(1,"#0d6e5a"); }
     else          { grad.addColorStop(0,"#6b1a1a"); grad.addColorStop(1,"#7c2d12"); }
     ctx.fillStyle=grad; ctx.fillRect(0,0,w,h);
-
-    // Grille subtile
     ctx.strokeStyle='rgba(255,255,255,0.06)'; ctx.lineWidth=1;
     for(let x=0;x<w;x+=38){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
     for(let y=0;y<h;y+=38){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
-
-    // Ligne de séparation décorative
     ctx.strokeStyle='rgba(255,255,255,0.12)'; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(w*0.08, h*0.72); ctx.lineTo(w*0.92, h*0.72); ctx.stroke();
-
-    // Textes
+    ctx.beginPath(); ctx.moveTo(w*0.08,h*0.72); ctx.lineTo(w*0.92,h*0.72); ctx.stroke();
     ctx.textAlign="center";
-    let fSize=Math.min(18, Math.floor(w*0.038));
-
-    ctx.fillStyle="rgba(255,255,255,0.55)";
-    ctx.font=`500 12px 'DM Sans'`;
+    let fSize=Math.min(18,Math.floor(w*0.038));
+    ctx.fillStyle="rgba(255,255,255,0.55)"; ctx.font=`500 12px 'DM Mono'`;
     ctx.fillText("IQAI TEST — AI VIGILANCE PLATFORM", w/2, Math.round(h*0.18));
-
-    ctx.fillStyle="#ffffff";
-    ctx.font=`bold ${fSize}px 'Press Start 2P'`;
-    ctx.fillText(validated ? "✅ FORMATION VALIDÉE" : "❌ NON VALIDÉE", w/2, Math.round(h*0.42));
-
-    ctx.font=`bold ${Math.floor(fSize*1.15)}px 'Press Start 2P'`;
+    ctx.fillStyle="#ffffff"; ctx.font=`bold ${fSize}px 'DM Sans'`;
+    ctx.fillText(validated?"✅ FORMATION VALIDÉE":"❌ NON VALIDÉE", w/2, Math.round(h*0.42));
+    ctx.font=`bold ${Math.floor(fSize*1.3)}px 'DM Mono'`;
     ctx.fillText(`${scoreTotal} / ${scoreMax}`, w/2, Math.round(h*0.62));
-
-    ctx.fillStyle="rgba(255,255,255,0.50)";
-    ctx.font=`500 11px 'DM Sans'`;
+    ctx.fillStyle="rgba(255,255,255,0.50)"; ctx.font=`500 11px 'DM Sans'`;
     ctx.fillText(`Score obtenu — Seuil requis : 7/10`, w/2, Math.round(h*0.84));
 
-    // ── VALIDATION BADGE ──
+    // BADGE
     const badge=document.getElementById('validationBadge');
-    if(validated){
-      badge.innerHTML=`
-        <div class="validation-badge validated">
-          <span class="vb-icon">✅</span>
-          <div class="vb-body">
-            <div class="vb-title">Formation validée</div>
-            <div class="vb-sub">Score obtenu : ${scoreTotal}/${scoreMax} — Le seuil de validation de 7/10 est atteint.</div>
-          </div>
-        </div>`;
-    } else {
-      badge.innerHTML=`
-        <div class="validation-badge not-validated">
-          <span class="vb-icon">❌</span>
-          <div class="vb-body">
-            <div class="vb-title">Formation non validée</div>
-            <div class="vb-sub">Score obtenu : ${scoreTotal}/${scoreMax} — Score insuffisant. Le seuil requis est de 7/10 minimum.</div>
-          </div>
-        </div>`;
-    }
+    badge.innerHTML=validated
+      ?`<div class="validation-badge validated"><span class="vb-icon">✅</span><div class="vb-body"><div class="vb-title">Formation validée</div><div class="vb-sub">Score : ${scoreTotal}/${scoreMax} — Seuil de 7/10 atteint.</div></div></div>`
+      :`<div class="validation-badge not-validated"><span class="vb-icon">❌</span><div class="vb-body"><div class="vb-title">Formation non validée</div><div class="vb-sub">Score : ${scoreTotal}/${scoreMax} — Seuil requis : 7/10 minimum.</div></div></div>`;
 
-    // ── SCORE CARDS ──
     scoreDetails.innerHTML=`
-      <div class="score-card">
-        <span class="sc-val">${score}/${totalSafe}</span>
-        <span class="sc-lbl">Questions culturelles</span>
-      </div>
-      <div class="score-card">
-        <span class="sc-val">${vigilance}/${totalHalu}</span>
-        <span class="sc-lbl">Anomalies IA détectées</span>
-      </div>
-    `;
+      <div class="score-card"><span class="sc-val">${score}/${totalSafe}</span><span class="sc-lbl">Questions correctes</span></div>
+      <div class="score-card"><span class="sc-val">${vigilance}/${totalHalu}</span><span class="sc-lbl">Anomalies IA détectées</span></div>`;
 
     doubtBtn.classList.add("hidden");
     setTimeout(()=>{ if(window.showNotifPopup) window.showNotifPopup(); }, 2000);
 
-    // ── REVIEW ──
+    // REVIEW
     reviewContainer.innerHTML='<h3>Revue détaillée des questions</h3>';
     questions.forEach((q,i)=>{
       const user=userAnswers[i]; const isDoubt=(user==="__DOUBT__");
       const ok=(q.kind==="halu"&&isDoubt)||(q.kind==="safe"&&user===q.answer);
       let statusHTML="";
       if(q.kind==="halu"){
-        statusHTML=isDoubt
-          ?`<div class="haluBanner ok">✅ Anomalie correctement identifiée — +1 pt</div>`
-          :`<div class="haluBanner">❌ Contenu erroné non détecté — 0 pt</div>`;
+        statusHTML=isDoubt?`<div class="haluBanner ok">✅ Anomalie correctement identifiée — +1 pt</div>`:`<div class="haluBanner">❌ Contenu erroné non détecté — 0 pt</div>`;
       } else {
-        if(ok)         statusHTML=`<div style="color:var(--success);font-weight:600;margin-top:8px;font-size:0.88em;">✅ Réponse correcte — +1 pt</div>`;
+        if(ok) statusHTML=`<div style="color:var(--success);font-weight:600;margin-top:8px;font-size:0.88em;">✅ Réponse correcte — +1 pt</div>`;
         else if(isDoubt) statusHTML=`<div style="color:var(--danger);font-weight:600;margin-top:8px;font-size:0.88em;">❌ Signalement injustifié — 0 pt</div>`;
-        else             statusHTML=`<div style="color:var(--danger);font-weight:600;margin-top:8px;font-size:0.88em;">❌ Réponse incorrecte — 0 pt</div>`;
+        else statusHTML=`<div style="color:var(--danger);font-weight:600;margin-top:8px;font-size:0.88em;">❌ Réponse incorrecte — 0 pt</div>`;
       }
       const div=document.createElement('div'); div.className="reviewItem";
-      div.innerHTML=`
-        <strong>Q${i+1} :</strong> ${q.q}<br>
+      div.innerHTML=`<strong>Q${i+1} :</strong> ${q.q}<br>
         <span style="color:var(--muted);font-size:0.85em;">Votre réponse :</span>
         <span class="answerTag ${ok?'ok':'bad'}">${isDoubt?"⚠️ Anomalie signalée":(user||"Temps écoulé")}</span><br>
         <span style="color:var(--muted);font-size:0.85em;">Réponse attendue :</span>
         ${q.kind==="halu"?"Information incorrecte (hallucination IA)":q.answer}<br>
         <div style="margin-top:6px;font-size:0.84em;color:var(--muted);font-style:italic;">${q.explanation}</div>
-        ${statusHTML}
-      `;
+        ${statusHTML}`;
       reviewContainer.appendChild(div);
     });
   }
 
-  // ---------- START ----------
   async function startGame(){
-    if(!checkCooldown()){
-      const next=getNextPlayTime(); const now=new Date(); const diff=next-now;
-      const h=Math.floor(diff/3600000); const m=Math.floor((diff%3600000)/60000);
-      quizDiv.innerHTML=`
-        <div class="cooldownMessage">
-          <h2>Session déjà complétée</h2>
-          <p>Vous avez déjà réalisé votre évaluation aujourd'hui.<br>Prochaine session disponible à <strong>minuit</strong> (dans ${h}h ${m}min).</p>
-          <button onclick="location.reload()" style="margin-top:18px;padding:11px 26px;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-weight:700;font-family:var(--body-font);font-size:0.93em;">Rafraîchir</button>
-        </div>`;
-      return;
-    }
     clearError(); resultDiv.classList.add('hidden'); quizDiv.classList.remove('hidden'); reviewContainer.innerHTML="";
-    current=0; score=0; vigilance=0; userAnswers=new Array(10).fill(null); updateProgress();
+    current=0; score=0; vigilance=0;
+    userAnswers=new Array(10).fill(null);
+    questionStartTimes=[];
+    updateProgress();
     nextBtn.disabled=true; optionsContainer.innerHTML="";
     questionContainer.innerHTML=`<div class="question" style="color:var(--muted);font-weight:500;">Génération de votre évaluation en cours…</div>`;
     doubtBtn.classList.add("hidden"); doubtBtn.disabled=false;
     try{ await loadQuestions(); showQuestion(); }
-    catch(e){ stopTimer(); timerDisplay.classList.add("hidden"); showError("Erreur de chargement : "+(e?.message||e)); questionContainer.innerHTML='<div class="question" style="color:var(--muted);">Impossible de charger l\'évaluation.</div>'; nextBtn.disabled=true; }
+    catch(e){ stopTimer(); timerDisplay.classList.add("hidden"); showError("Erreur : "+(e?.message||e)); questionContainer.innerHTML='<div class="question" style="color:var(--muted);">Impossible de charger l\'évaluation.</div>'; nextBtn.disabled=true; }
   }
 
   startBtn.onclick=()=>{
-    window.quizStartTime=Date.now();
+    const nameVal = document.getElementById('nameInput').value.trim();
+    if(!nameVal){ document.getElementById('nameInput').style.borderColor='var(--danger)'; document.getElementById('nameInput').focus(); return; }
+    participantName = nameVal;
+    startTime = Date.now();
     startScreen.classList.add("hidden");
     gameContainer.classList.remove("hidden");
     startGame();
   };
 
-  // ---------- NOTIF POPUP ----------
   function showNotifPopup(){
     if(window.OneSignalDeferred){ OneSignalDeferred.push(async function(O){ try{ const sup=await O.Notifications.isPushSupported(); if(sup&&O.Notifications.permission!=="granted"){ document.getElementById('notifPopup').classList.remove('hidden'); } }catch(e){} }); }
   }
