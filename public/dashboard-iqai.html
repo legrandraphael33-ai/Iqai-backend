@@ -153,7 +153,7 @@
     const indexes = Array.from(selectedIndexes);
     const res = await fetch('/api/save-result-iqai', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ mode: 'indexes', indexes })
+      body: JSON.stringify({ action: 'delete', mode: 'indexes', indexes })
     });
     if (res.ok) { selectedIndexes.clear(); loadData(); }
     else alert("Erreur lors de la suppression.");
@@ -162,7 +162,7 @@
   async function deleteAll() {
     const res = await fetch('/api/save-result-iqai', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ mode: 'all' })
+      body: JSON.stringify({ action: 'delete', mode: 'all' })
     });
     if (res.ok) { selectedIndexes.clear(); loadData(); }
     else alert("Erreur lors de la suppression.");
