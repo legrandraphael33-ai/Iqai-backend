@@ -579,7 +579,7 @@ footer {
     btn.textContent = 'Envoi en cours…';
 
     try {
-      const res = await fetch('https://formspree.io/f/VOTRE_ID_FORMSPREE', {
+      const res = await fetch('https://formspree.io/f/mykdlkjb', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ prenom, nom, email, entreprise, taille, secteur, message })
