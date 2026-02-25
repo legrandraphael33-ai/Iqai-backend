@@ -131,6 +131,12 @@ nav {
 .gauge-bar-fill.c-high   { background: var(--danger); }
 .gauge-bar-count { font-family: var(--mono); font-size: 0.75em; color: var(--muted); min-width: 20px; text-align: right; }
 
+.source-check { margin-top: 8px; padding: 8px 12px; border-radius: 8px; font-size: 0.8em; font-weight: 600; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+.source-check.confirmed { background: rgba(22,163,74,0.07); border: 1px solid rgba(22,163,74,0.2); color: var(--success); }
+.source-check.exists_but_not_found { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.25); color: var(--warn); }
+.source-check.not_found { background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.18); color: var(--danger); }
+.source-check a { color: inherit; font-size: 0.9em; margin-left: 4px; }
+
 /* SUGGESTIONS PROMPT */
 .prompt-card {
   background: rgba(29,111,229,0.04); border: 1px solid rgba(29,111,229,0.18);
@@ -500,10 +506,21 @@ nav {
         cat.issues.forEach(issue => {
           const trustClass = issue.trustable === true ? 'trust-pill-yes' : issue.trustable === false ? 'trust-pill-no' : 'trust-pill-maybe';
           const trustLabel = issue.trustable === true ? '✓ Info fiable' : issue.trustable === false ? '✗ Info à vérifier' : '~ Incertain';
+
+          // Bloc vérification source
+          let sourceCheckHtml = '';
+          if (issue.sourceCheck) {
+            const sc = issue.sourceCheck;
+            const scIcon = sc.status === 'confirmed' ? '✅' : sc.status === 'exists_but_not_found' ? '⚠️' : '❌';
+            const scLabel = sc.status === 'confirmed' ? 'Source vérifiée' : sc.status === 'exists_but_not_found' ? 'Source trouvée mais chiffre non confirmé' : 'Source introuvable';
+            const urlLink = sc.url ? ` <a href="${sc.url}" target="_blank" rel="noopener">→ voir</a>` : '';
+            sourceCheckHtml = `<div class="source-check ${sc.status}"><span>${scIcon}</span><span><strong>${scLabel}</strong> — ${sc.explanation}${urlLink}</span></div>`;
+          }
           html += `
             <div class="issue">
               <div class="issue-excerpt">"${issue.excerpt}"</div>
               <div class="issue-desc">${issue.description}</div>
+              ${sourceCheckHtml}
               <div class="issue-footer">
                 <span class="pill pill-type">${issue.type}</span>
                 <span class="pill ${trustClass}">${trustLabel}</span>
