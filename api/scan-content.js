@@ -28,6 +28,55 @@ function callOpenAI(payload, apiKey) {
   });
 }
 
+// ── Détection des répétitions côté code (100% fiable) ──────────────────
+function detectRepetitions(text) {
+  // Découper en phrases/lignes significatives (min 15 chars)
+  const lines = text
+    .split(/[\n\r]+/)
+    .map(l => l.trim())
+    .filter(l => l.length >= 15);
+
+  // Normalisation pour comparaison : minuscules, sans ponctuation finale
+  function normalize(s) {
+    return s.toLowerCase().replace(/[?!.,;:]+$/g, '').replace(/\s+/g, ' ').trim();
+  }
+
+  // Similarité de Jaccard sur les mots
+  function similarity(a, b) {
+    const wa = new Set(normalize(a).split(' '));
+    const wb = new Set(normalize(b).split(' '));
+    const intersection = [...wa].filter(w => wb.has(w)).length;
+    const union = new Set([...wa, ...wb]).size;
+    return union === 0 ? 0 : intersection / union;
+  }
+
+  const groups = []; // groupes de répétitions détectées
+  const used = new Set();
+
+  for (let i = 0; i < lines.length; i++) {
+    if (used.has(i)) continue;
+    const group = [i];
+    for (let j = i + 1; j < lines.length; j++) {
+      if (used.has(j)) continue;
+      const sim = similarity(lines[i], lines[j]);
+      if (sim >= 0.75) { // 75% de mots en commun = répétition
+        group.push(j);
+        used.add(j);
+      }
+    }
+    if (group.length > 1) {
+      used.add(i);
+      groups.push({
+        text: lines[i],
+        count: group.length,
+        exact: group.every(idx => normalize(lines[idx]) === normalize(lines[i]))
+      });
+    }
+  }
+
+  return groups;
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS");
@@ -43,12 +92,24 @@ module.exports = async function handler(req, res) {
   const OPENAI_KEY = process.env.OPENAI_API_KEY;
   if (!OPENAI_KEY) return res.status(500).json({ error: "Clé API manquante" });
 
-  // ── ÉTAPE 1 : ANALYSE DES INCOHÉRENCES ──────────────────────────────
+  // ── Détection répétitions avant appel IA ───────────────────────────
+  let repetitionsContext = '';
+  let detectedRepetitions = [];
+  if (mode === 'text' && content) {
+    detectedRepetitions = detectRepetitions(content);
+    if (detectedRepetitions.length > 0) {
+      repetitionsContext = `\n\nRÉPÉTITIONS DÉTECTÉES PAR ANALYSE AUTOMATIQUE (exhaustif, à intégrer obligatoirement dans ta réponse JSON sous "Incohérences structurelles") :\n`;
+      detectedRepetitions.forEach((r, i) => {
+        repetitionsContext += `${i + 1}. "${r.text.substring(0, 80)}" — apparaît ${r.count} fois (${r.exact ? 'identique' : 'quasi-identique'})\n`;
+      });
+      repetitionsContext += `Tu DOIS inclure chacune de ces répétitions comme une issue distincte. Ne les ignore pas.`;
+    }
+  }
+
+  // ── PROMPT PRINCIPAL ────────────────────────────────────────────────
   const systemPrompt = `Tu es un agent spécialisé dans la détection d'incohérences produites par des intelligences artificielles génératives (LLMs).
 
 TON RÔLE : Tu n'analyses pas les erreurs humaines. Tu identifies spécifiquement les patterns d'erreur typiques des LLMs dans un output qui t'est soumis.
-
-CONTEXTE : L'utilisateur te soumet un output produit par une IA, la tâche qui avait été demandée à cette IA, et le secteur métier concerné.
 
 PATTERNS D'ERREUR IA QUE TU CHERCHES :
 
@@ -57,11 +118,10 @@ PATTERNS D'ERREUR IA QUE TU CHERCHES :
    - Dates approximatives ou légèrement fausses
    - Affirmations trop assertives sur des sujets incertains
    - Généralisations abusives ("toutes les études montrent...", "il est prouvé que...")
-   - Fausse précision : donner l'impression d'être expert sans l'être
+   - Fausse précision
 
 2. INCOHÉRENCES STRUCTURELLES
-   - Répétitions d'une même idée formulée différemment
-   - Répétitions d'un même terme (>3 fois sans justification)
+   - Répétitions d'idées ou de phrases (tu recevras la liste exhaustive si applicable — tu dois toutes les inclure)
    - Contradictions entre deux parties du texte
    - Longueur disproportionnée par rapport à la tâche
 
@@ -76,17 +136,31 @@ PATTERNS D'ERREUR IA QUE TU CHERCHES :
    - Le secteur métier n'est pas réellement pris en compte
    - Conseils trop génériques pour être actionnables
 
+5. ERREURS LINGUISTIQUES
+   - Fautes d'orthographe
+   - Accords incorrects (sujet/verbe, adjectif/nom, participe passé)
+   - Conjugaisons fautives
+   - Anglicismes inutiles
+   - Ponctuation aberrante
+
 RÈGLES ABSOLUES :
-- Tu ne dis JAMAIS qu'une affirmation est fausse si tu n'en es pas certain. Tu dis "non vérifiable" ou "à vérifier".
+- Tu ne dis JAMAIS qu'une affirmation est fausse si tu n'en es pas certain.
 - Si tu ne détectes aucune incohérence dans une catégorie, tu le dis explicitement.
-- Tu ne cherches PAS les erreurs humaines, seulement celles de l'IA.
-- Pour les suggestions de prompt : rédige-les comme des instructions directes à une IA en prompt engineering réel — précis, contraignant, avec exemples si utile. Pas de langage vague.
+- Pour les suggestions de prompt : rédige des instructions directes en prompt engineering réel — précises, contraignantes, avec exemples si utile.
+- Pour les chiffres avec source douteuse : needsSourceCheck = true + une sourceQuery précise en anglais.
 
 FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
 {
   "reliabilityScore": <0-100, 100 = parfaitement fiable>,
   "reliabilityLevel": <"Fiable" | "À revoir" | "Non livrable">,
   "summary": <string, 1-2 phrases>,
+  "scoreBreakdown": {
+    "factuel": <0-100>,
+    "structure": <0-100>,
+    "ton": <0-100>,
+    "contexte": <0-100>,
+    "linguistique": <0-100>
+  },
   "categories": [
     {
       "name": <string>,
@@ -95,10 +169,10 @@ FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
           "excerpt": <string, extrait exact max 100 chars>,
           "description": <string, explication précise>,
           "trustable": <true | false | null>,
-          "type": <string, ex: "chiffre sans source", "répétition", "généralisation abusive">,
-          "problemType": <string, ex: "Chiffres non sourcés", "Données imprécises", "Manque de sources", "Répétitions", "Ton générique", "Hors sujet">,
-          "needsSourceCheck": <boolean — true UNIQUEMENT si chiffre précis avec source nommée non vérifiable OU chiffre précis sans source>,
-          "sourceQuery": <string | null — si needsSourceCheck true : requête courte et précise pour trouver la source, ex: "Deloitte 2024 enterprise AI hallucination 47%">
+          "type": <string>,
+          "problemType": <string, ex: "Chiffres non sourcés", "Répétition exacte", "Répétition quasi-identique", "Contradiction", "Faute d'orthographe", "Accord incorrect">,
+          "needsSourceCheck": <boolean>,
+          "sourceQuery": <string | null>
         }
       ],
       "clean": <boolean>
@@ -106,14 +180,14 @@ FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
   ],
   "promptSuggestions": [
     {
-      "problem": <string, nom court du problème>,
-      "suggestion": <string, instruction directe en prompt engineering, précise et contraignante>
+      "problem": <string>,
+      "suggestion": <string, instruction directe en prompt engineering>
     }
   ]
 }`;
 
   const promptPrefix = `TÂCHE DEMANDÉE À L'IA : ${task}\n\nSECTEUR MÉTIER : ${sector || 'Non spécifié'}\n\n`;
-  const promptSuffix = `\n\nProcède en 3 étapes dans ta réflexion interne :\nÉTAPE 1 — Décompose l'output en affirmations individuelles.\nÉTAPE 2 — Évalue chaque affirmation selon les 4 catégories.\nÉTAPE 3 — Agrège et retourne uniquement le JSON final.`;
+  const promptSuffix = `${repetitionsContext}\n\nProcède en 3 étapes dans ta réflexion interne :\nÉTAPE 1 — Décompose l'output en affirmations individuelles.\nÉTAPE 2 — Évalue chaque affirmation selon les 5 catégories. Intègre TOUTES les répétitions listées ci-dessus.\nÉTAPE 3 — Agrège et retourne uniquement le JSON final.`;
 
   let userMessage;
   if (mode === 'image') {
@@ -139,7 +213,7 @@ FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
       model: "gpt-4o",
       messages: [{ role: "system", content: systemPrompt }, userMessage],
       temperature: 0.1,
-      max_tokens: 2500
+      max_tokens: 3000
     }, OPENAI_KEY);
 
     if (analysisResult.error) {
@@ -152,7 +226,7 @@ FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
     const cleaned = raw.replace(/```json|```/g, '').trim();
     const parsed = JSON.parse(cleaned);
 
-    // ── APPEL 2 : VÉRIFICATION WEB DES SOURCES DOUTEUSES ─────────────
+    // ── APPEL 2 : VÉRIFICATION WEB DES SOURCES ────────────────────────
     const toCheck = [];
     (parsed.categories || []).forEach((cat, catIdx) => {
       (cat.issues || []).forEach((issue, issueIdx) => {
@@ -163,9 +237,7 @@ FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
     });
 
     if (toCheck.length > 0) {
-      // Max 4 vérifications pour limiter les coûts
       const checksToRun = toCheck.slice(0, 4);
-
       const checkResults = await Promise.all(checksToRun.map(async (item) => {
         try {
           const checkResult = await callOpenAI({
@@ -173,7 +245,7 @@ FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
             messages: [
               {
                 role: "system",
-                content: `Tu es un agent de vérification de sources. Cherche sur le web si la source existe et si elle contient le chiffre mentionné. Réponds UNIQUEMENT en JSON sans markdown ni backticks : { "status": "confirmed" | "exists_but_not_found" | "not_found", "explanation": <string courte en français>, "url": <string | null> }. "confirmed" = source trouvée ET chiffre confirmé. "exists_but_not_found" = source trouvée mais chiffre absent ou différent. "not_found" = source introuvable.`
+                content: `Tu vérifies si une source existe et contient un chiffre précis. Réponds UNIQUEMENT en JSON sans markdown : { "status": "confirmed" | "exists_but_not_found" | "not_found", "explanation": <string courte en français>, "url": <string | null> }`
               },
               {
                 role: "user",
@@ -191,16 +263,11 @@ FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
         }
       }));
 
-      // Injecter les résultats dans le JSON principal
       checkResults.forEach(({ catIdx, issueIdx, result }) => {
         if (parsed.categories[catIdx]?.issues[issueIdx]) {
           parsed.categories[catIdx].issues[issueIdx].sourceCheck = result;
-          if (result.status === 'confirmed') {
-            parsed.categories[catIdx].issues[issueIdx].trustable = true;
-          } else if (result.status === 'not_found') {
-            parsed.categories[catIdx].issues[issueIdx].trustable = false;
-          }
-          // exists_but_not_found → trustable reste null (incertain)
+          if (result.status === 'confirmed') parsed.categories[catIdx].issues[issueIdx].trustable = true;
+          else if (result.status === 'not_found') parsed.categories[catIdx].issues[issueIdx].trustable = false;
         }
       });
     }
