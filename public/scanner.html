@@ -6,222 +6,131 @@
 <title>IQAI — Scanner d'incohérences IA</title>
 <link rel="icon" href="data:,">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg: #f8fafd; --surface: #ffffff; --surface2: #f1f4fa;
-  --border: rgba(29,111,229,0.10); --border2: rgba(29,111,229,0.18);
-  --text: #0d1b36; --muted: #5e718a;
-  --accent: #1d6fe5; --accent2: #00b899;
-  --warn: #f59e0b; --danger: #dc2626; --success: #16a34a;
-  --body: 'DM Sans', system-ui, sans-serif;
-  --mono: 'DM Mono', monospace;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8fafd;--surface:#ffffff;--surface2:#f1f4fa;
+  --border:rgba(29,111,229,0.10);--border2:rgba(29,111,229,0.18);
+  --text:#0d1b36;--muted:#5e718a;
+  --accent:#1d6fe5;--accent2:#00b899;
+  --warn:#f59e0b;--danger:#dc2626;--success:#16a34a;
+  --body:'DM Sans',system-ui,sans-serif;
+  --mono:'DM Mono',monospace;
 }
-html { scroll-behavior: smooth; }
-body { font-family: var(--body); color: var(--text); background: var(--bg); min-height: 100vh; padding-bottom: 80px; }
-body::before {
-  content: ''; position: fixed; inset: 0; z-index: 0;
-  background: radial-gradient(ellipse 60% 40% at 50% -5%, rgba(29,111,229,0.08) 0%, transparent 65%),
-    linear-gradient(rgba(29,111,229,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(29,111,229,0.04) 1px, transparent 1px);
-  background-size: auto, 52px 52px, 52px 52px; pointer-events: none;
-}
-
-/* NAV */
-nav {
-  position: sticky; top: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 40px; height: 60px;
-  background: rgba(248,250,253,0.92); backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-}
-.nav-logo { font-family: var(--mono); font-size: 1.05em; font-weight: 500; text-decoration: none; color: var(--text); display: flex; align-items: center; }
-.nav-logo .iq { color: var(--accent); font-weight: 700; }
-.nav-logo .arr { color: var(--muted); margin: 0 6px; }
-.nav-logo .cur { color: var(--accent2); animation: blink 1.1s steps(1) infinite; }
-@keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
-.nav-back { font-size: 0.82em; font-weight: 600; color: var(--muted); text-decoration: none; transition: color 0.15s; }
-.nav-back:hover { color: var(--accent); }
-
-/* LAYOUT */
-.page { max-width: 860px; margin: 0 auto; padding: 40px 24px; position: relative; z-index: 1; }
-
-/* HEADER */
-.page-header { margin-bottom: 32px; }
-.page-eyebrow { font-family: var(--mono); font-size: 0.72em; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
-.page-title { font-size: 1.9em; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 8px; }
-.page-sub { font-size: 0.92em; color: var(--muted); line-height: 1.65; max-width: 560px; }
-
-/* FORM CARD */
-.form-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 20px; padding: 32px; box-shadow: 0 4px 24px rgba(29,111,229,0.07); margin-bottom: 20px; }
-.form-card-title { font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 20px; }
-.field { margin-bottom: 18px; }
-.field label { display: block; font-size: 0.78em; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 7px; }
-.field input, .field select, .field textarea {
-  width: 100%; padding: 13px 16px; border: 1.5px solid var(--border2); border-radius: 11px;
-  font-family: var(--body); font-size: 0.93em; color: var(--text);
-  background: var(--surface2); outline: none; transition: border-color 0.15s; resize: vertical;
-}
-.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); background: #fff; }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.field-hint { font-size: 0.75em; color: var(--muted); margin-top: 5px; }
-.char-count { font-size: 0.72em; color: var(--muted); text-align: right; margin-top: 4px; font-family: var(--mono); }
-.char-count.warn { color: var(--warn); }
-.char-count.danger { color: var(--danger); }
-
-/* TABS */
-.input-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
-.input-tab { padding: 8px 18px; border-radius: 9px; border: 1.5px solid var(--border2); background: var(--surface2); font-size: 0.83em; font-weight: 600; color: var(--muted); cursor: pointer; font-family: var(--body); transition: all 0.15s; }
-.input-tab.active { border-color: var(--accent); background: rgba(29,111,229,0.07); color: var(--accent); }
-
-/* UPLOAD */
-.upload-zone { border: 2px dashed var(--border2); border-radius: 12px; padding: 40px 24px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: var(--surface2); }
-.upload-zone:hover, .upload-zone.drag-over { border-color: var(--accent); background: rgba(29,111,229,0.04); }
-.upload-icon { font-size: 2em; margin-bottom: 10px; }
-.upload-label { font-size: 0.92em; font-weight: 600; color: var(--text); margin-bottom: 5px; }
-.upload-hint { font-size: 0.78em; color: var(--muted); }
-
-/* BTN SCAN */
-.btn-scan {
-  width: 100%; padding: 16px; border: none; border-radius: 12px;
-  background: linear-gradient(135deg, #1d6fe5, #1558c0);
-  color: #fff; font-weight: 700; font-size: 1em; cursor: pointer;
-  font-family: var(--body); box-shadow: 0 4px 20px rgba(29,111,229,0.3);
-  transition: filter 0.15s, transform 0.1s;
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-}
-.btn-scan:hover { filter: brightness(1.08); }
-.btn-scan:active { transform: translateY(1px); }
-.btn-scan:disabled { opacity: 0.5; cursor: not-allowed; filter: none; }
-
-/* LOADING */
-.loading-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 20px; padding: 48px 32px; text-align: center; box-shadow: 0 4px 24px rgba(29,111,229,0.07); margin-bottom: 24px; }
-.loading-spinner { width: 40px; height: 40px; border: 3px solid var(--border2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.loading-steps { list-style: none; text-align: left; max-width: 300px; margin: 16px auto 0; }
-.loading-steps li { font-size: 0.82em; color: var(--muted); padding: 5px 0; display: flex; align-items: center; gap: 8px; }
-.loading-steps li .step-icon { width: 16px; text-align: center; }
-.loading-steps li.done { color: var(--success); }
-.loading-steps li.active { color: var(--accent); font-weight: 600; }
-
-/* ── RÉSULTATS : SCORE HEADER ── */
-.result-header {
-  background: var(--surface); border: 1px solid var(--border2); border-radius: 20px;
-  padding: 32px; box-shadow: 0 4px 28px rgba(29,111,229,0.09); margin-bottom: 16px;
-}
-.score-block {
-  display: flex; align-items: stretch; gap: 24px; margin-bottom: 28px; flex-wrap: wrap;
-}
-.score-circle-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 120px; }
-.score-circle {
-  width: 100px; height: 100px; border-radius: 50%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  border: 4px solid; margin-bottom: 8px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-.score-circle.high  { border-color: var(--success); background: rgba(22,163,74,0.06); }
-.score-circle.medium { border-color: var(--warn); background: rgba(245,158,11,0.06); }
-.score-circle.low   { border-color: var(--danger); background: rgba(220,38,38,0.06); }
-.score-number { font-family: var(--mono); font-size: 2em; font-weight: 700; line-height: 1; }
-.score-number.high   { color: var(--success); }
-.score-number.medium { color: var(--warn); }
-.score-number.low    { color: var(--danger); }
-.score-sub { font-size: 0.65em; color: var(--muted); margin-top: 2px; }
-.score-verdict { font-size: 0.78em; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-.score-verdict.high   { color: var(--success); }
-.score-verdict.medium { color: var(--warn); }
-.score-verdict.low    { color: var(--danger); }
-
-.score-detail { flex: 1; }
-.score-detail-title { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 10px; }
-.score-explain { font-size: 0.82em; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
-.mini-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-.mini-bar-label { font-size: 0.75em; color: var(--text); font-weight: 500; min-width: 140px; }
-.mini-bar-track { flex: 1; height: 6px; background: var(--surface2); border-radius: 999px; overflow: hidden; }
-.mini-bar-fill { height: 100%; border-radius: 999px; }
-.mini-bar-fill.mhigh   { background: var(--success); }
-.mini-bar-fill.mmedium { background: var(--warn); }
-.mini-bar-fill.mlow    { background: var(--danger); }
-.mini-bar-val { font-family: var(--mono); font-size: 0.72em; color: var(--muted); min-width: 28px; text-align: right; }
-
-/* SUMMARY */
-.result-summary-block { background: var(--surface2); border-radius: 12px; padding: 16px 18px; border-left: 4px solid var(--accent); }
-.result-summary-block p { font-size: 0.9em; color: var(--text); line-height: 1.65; }
-
-/* JAUGE DÉTAIL */
-.detail-gauge { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
-.detail-gauge-title { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 12px; }
-.gauge-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.gauge-bar-label { font-size: 0.78em; color: var(--text); font-weight: 500; min-width: 180px; }
-.gauge-bar-track { flex: 1; height: 7px; background: var(--surface2); border-radius: 999px; overflow: hidden; border: 1px solid var(--border); }
-.gauge-bar-fill { height: 100%; border-radius: 999px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
-.gauge-bar-fill.c-low    { background: var(--accent2); }
-.gauge-bar-fill.c-medium { background: var(--warn); }
-.gauge-bar-fill.c-high   { background: var(--danger); }
-.gauge-bar-count { font-family: var(--mono); font-size: 0.75em; color: var(--muted); min-width: 20px; text-align: right; }
-
-/* CATÉGORIES */
-.category-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(29,111,229,0.05); margin-bottom: 12px; }
-.category-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-.category-name { font-size: 0.82em; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text); }
-.category-clean { font-size: 0.75em; font-weight: 700; color: var(--success); background: rgba(22,163,74,0.08); border: 1px solid rgba(22,163,74,0.2); padding: 3px 10px; border-radius: 999px; }
-
-/* ISSUES */
-.issue { border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 10px; background: var(--surface2); }
-.issue:last-child { margin-bottom: 0; }
-.issue-excerpt { font-family: var(--mono); font-size: 0.8em; color: var(--text); background: rgba(29,111,229,0.06); border-left: 3px solid var(--accent); padding: 8px 12px; border-radius: 0 8px 8px 0; margin-bottom: 10px; line-height: 1.5; }
-.issue-desc { font-size: 0.87em; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
-
-/* SOURCE CHECK — message unique clair */
-.source-verdict { margin-bottom: 10px; padding: 10px 14px; border-radius: 10px; font-size: 0.84em; font-weight: 600; line-height: 1.55; display: flex; align-items: flex-start; gap: 10px; }
-.source-verdict.sv-ok      { background: rgba(22,163,74,0.07); border: 1px solid rgba(22,163,74,0.22); color: #15803d; }
-.source-verdict.sv-partial { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.28); color: #b45309; }
-.source-verdict.sv-missing { background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.2); color: #b91c1c; }
-.source-verdict .sv-icon { font-size: 1.1em; margin-top: 1px; flex-shrink: 0; }
-.source-verdict .sv-text { flex: 1; }
-.source-verdict .sv-text strong { display: block; margin-bottom: 2px; }
-.source-verdict a { color: inherit; font-weight: 700; text-decoration: underline; margin-left: 6px; }
-
-/* PILLS */
-.issue-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.72em; font-weight: 700; letter-spacing: 0.4px; }
-.pill-type { background: rgba(29,111,229,0.07); border: 1px solid rgba(29,111,229,0.18); color: var(--accent); }
-
-/* SUGGESTIONS PROMPT — bien distinctes */
-.prompt-card {
-  background: #0d1b36; border-radius: 20px; padding: 28px 32px; margin-bottom: 12px;
-  box-shadow: 0 8px 32px rgba(13,27,54,0.18);
-}
-.prompt-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-.prompt-card-icon { font-size: 1.4em; }
-.prompt-card-title { font-size: 0.9em; font-weight: 800; color: #fff; letter-spacing: 0.3px; }
-.prompt-card-sub { font-size: 0.78em; color: rgba(255,255,255,0.5); margin-top: 2px; }
-.prompt-suggestion { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 16px 18px; margin-bottom: 10px; }
-.prompt-suggestion:last-child { margin-bottom: 0; }
-.prompt-suggestion-label { font-size: 0.72em; font-weight: 700; color: var(--accent2); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
-.prompt-suggestion-text { font-size: 0.85em; color: rgba(255,255,255,0.85); line-height: 1.65; font-family: var(--mono); }
-.prompt-copy-btn { margin-top: 8px; background: none; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); font-size: 0.72em; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-family: var(--body); transition: all 0.15s; }
-.prompt-copy-btn:hover { border-color: var(--accent2); color: var(--accent2); }
-
-/* BTN RESET */
-.btn-reset {
-  width: 100%; padding: 15px; border-radius: 12px;
-  border: 2px solid var(--accent); background: rgba(29,111,229,0.06);
-  color: var(--accent); font-weight: 700; font-size: 0.95em;
-  cursor: pointer; font-family: var(--body); transition: all 0.15s;
-  margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 8px;
-}
-.btn-reset:hover { background: var(--accent); color: #fff; }
-
-.hidden { display: none !important; }
-
-@media (max-width: 600px) {
-  nav { padding: 0 16px; }
-  .page { padding: 24px 16px; }
-  .form-card { padding: 20px; }
-  .field-row { grid-template-columns: 1fr; }
-  .score-block { flex-direction: column; }
-  .prompt-card { padding: 20px; }
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--text);background:var(--bg);min-height:100vh;padding-bottom:80px}
+body::before{content:'';position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 60% 40% at 50% -5%,rgba(29,111,229,0.08) 0%,transparent 65%),linear-gradient(rgba(29,111,229,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(29,111,229,0.04) 1px,transparent 1px);background-size:auto,52px 52px,52px 52px;pointer-events:none}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:rgba(248,250,253,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--mono);font-size:1.05em;font-weight:500;text-decoration:none;color:var(--text);display:flex;align-items:center}
+.nav-logo .iq{color:var(--accent);font-weight:800}
+.nav-logo .arr{color:var(--muted);margin:0 6px}
+.nav-logo .cur{color:var(--accent2);animation:blink 1.1s steps(1) infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.nav-back{font-size:0.82em;font-weight:600;color:var(--muted);text-decoration:none;transition:color 0.15s}
+.nav-back:hover{color:var(--accent)}
+.page{max-width:860px;margin:0 auto;padding:40px 24px;position:relative;z-index:1}
+.page-header{margin-bottom:32px}
+.page-eyebrow{font-family:var(--mono);font-size:0.72em;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;display:block}
+.page-title{font-size:1.9em;font-weight:800;letter-spacing:-0.5px;line-height:1.2;margin-bottom:8px}
+.page-sub{font-size:0.92em;color:var(--muted);line-height:1.65;max-width:560px}
+.form-card{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:32px;box-shadow:0 4px 24px rgba(29,111,229,0.07);margin-bottom:20px}
+.form-card-title{font-size:0.75em;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:20px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:0.78em;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:7px}
+.field input,.field select,.field textarea{width:100%;padding:13px 16px;border:1.5px solid var(--border2);border-radius:11px;font-family:var(--body);font-size:0.93em;color:var(--text);background:var(--surface2);outline:none;transition:border-color 0.15s;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);background:#fff}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field-hint{font-size:0.75em;color:var(--muted);margin-top:5px}
+.char-count{font-size:0.72em;color:var(--muted);text-align:right;margin-top:4px;font-family:var(--mono)}
+.char-count.warn{color:var(--warn)}.char-count.danger{color:var(--danger)}
+.input-tabs{display:flex;gap:8px;margin-bottom:14px}
+.input-tab{padding:8px 18px;border-radius:9px;border:1.5px solid var(--border2);background:var(--surface2);font-size:0.83em;font-weight:600;color:var(--muted);cursor:pointer;font-family:var(--body);transition:all 0.15s}
+.input-tab.active{border-color:var(--accent);background:rgba(29,111,229,0.07);color:var(--accent)}
+.upload-zone{border:2px dashed var(--border2);border-radius:12px;padding:40px 24px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;background:var(--surface2)}
+.upload-zone:hover,.upload-zone.drag-over{border-color:var(--accent);background:rgba(29,111,229,0.04)}
+.upload-icon{font-size:2em;margin-bottom:10px}
+.upload-label{font-size:0.92em;font-weight:600;color:var(--text);margin-bottom:5px}
+.upload-hint{font-size:0.78em;color:var(--muted)}
+.pdf-converting{border:2px dashed var(--accent);border-radius:12px;padding:32px 24px;text-align:center;background:rgba(29,111,229,0.04)}
+.pdf-spinner{width:28px;height:28px;border:3px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pdf-pages-info{font-size:0.8em;color:var(--muted);margin-top:6px;font-family:var(--mono)}
+.btn-scan{width:100%;padding:16px;border:none;border-radius:12px;background:linear-gradient(135deg,#1d6fe5,#1558c0);color:#fff;font-weight:700;font-size:1em;cursor:pointer;font-family:var(--body);box-shadow:0 4px 20px rgba(29,111,229,0.3);transition:filter 0.15s,transform 0.1s;display:flex;align-items:center;justify-content:center;gap:10px}
+.btn-scan:hover{filter:brightness(1.08)}.btn-scan:active{transform:translateY(1px)}.btn-scan:disabled{opacity:0.5;cursor:not-allowed;filter:none}
+.loading-card{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:48px 32px;text-align:center;box-shadow:0 4px 24px rgba(29,111,229,0.07);margin-bottom:24px}
+.loading-spinner{width:40px;height:40px;border:3px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px}
+.loading-steps{list-style:none;text-align:left;max-width:300px;margin:16px auto 0}
+.loading-steps li{font-size:0.82em;color:var(--muted);padding:5px 0;display:flex;align-items:center;gap:8px}
+.loading-steps li .step-icon{width:16px;text-align:center}
+.loading-steps li.done{color:var(--success)}.loading-steps li.active{color:var(--accent);font-weight:600}
+.result-header{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:32px;box-shadow:0 4px 28px rgba(29,111,229,0.09);margin-bottom:16px}
+.score-block{display:flex;align-items:stretch;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.score-circle-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:120px}
+.score-circle{width:100px;height:100px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:4px solid;margin-bottom:8px;box-shadow:0 4px 20px rgba(0,0,0,0.08)}
+.score-circle.high{border-color:var(--success);background:rgba(22,163,74,0.06)}
+.score-circle.medium{border-color:var(--warn);background:rgba(245,158,11,0.06)}
+.score-circle.low{border-color:var(--danger);background:rgba(220,38,38,0.06)}
+.score-number{font-family:var(--mono);font-size:2em;font-weight:700;line-height:1}
+.score-number.high{color:var(--success)}.score-number.medium{color:var(--warn)}.score-number.low{color:var(--danger)}
+.score-sub{font-size:0.65em;color:var(--muted);margin-top:2px}
+.score-verdict{font-size:0.78em;font-weight:800;text-transform:uppercase;letter-spacing:1px}
+.score-verdict.high{color:var(--success)}.score-verdict.medium{color:var(--warn)}.score-verdict.low{color:var(--danger)}
+.score-detail{flex:1}
+.score-detail-title{font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:10px}
+.score-explain{font-size:0.82em;color:var(--muted);margin-bottom:14px;line-height:1.5}
+.mini-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.mini-bar-label{font-size:0.75em;color:var(--text);font-weight:500;min-width:140px}
+.mini-bar-track{flex:1;height:6px;background:var(--surface2);border-radius:999px;overflow:hidden}
+.mini-bar-fill{height:100%;border-radius:999px}
+.mini-bar-fill.mhigh{background:var(--success)}.mini-bar-fill.mmedium{background:var(--warn)}.mini-bar-fill.mlow{background:var(--danger)}
+.mini-bar-val{font-family:var(--mono);font-size:0.72em;color:var(--muted);min-width:28px;text-align:right}
+.result-summary-block{background:var(--surface2);border-radius:12px;padding:16px 18px;border-left:4px solid var(--accent)}
+.result-summary-block p{font-size:0.9em;color:var(--text);line-height:1.65}
+.detail-gauge{margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+.detail-gauge-title{font-size:0.72em;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:12px}
+.gauge-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.gauge-bar-label{font-size:0.78em;color:var(--text);font-weight:500;min-width:180px}
+.gauge-bar-track{flex:1;height:7px;background:var(--surface2);border-radius:999px;overflow:hidden;border:1px solid var(--border)}
+.gauge-bar-fill{height:100%;border-radius:999px;transition:width 0.8s cubic-bezier(0.4,0,0.2,1)}
+.gauge-bar-fill.c-low{background:var(--accent2)}.gauge-bar-fill.c-medium{background:var(--warn)}.gauge-bar-fill.c-high{background:var(--danger)}
+.gauge-bar-count{font-family:var(--mono);font-size:0.75em;color:var(--muted);min-width:20px;text-align:right}
+.category-card{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(29,111,229,0.05);margin-bottom:12px}
+.category-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.category-name{font-size:0.82em;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text)}
+.category-clean{font-size:0.75em;font-weight:700;color:var(--success);background:rgba(22,163,74,0.08);border:1px solid rgba(22,163,74,0.2);padding:3px 10px;border-radius:999px}
+.issue{border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:10px;background:var(--surface2)}
+.issue:last-child{margin-bottom:0}
+.issue-excerpt{font-family:var(--mono);font-size:0.8em;color:var(--text);background:rgba(29,111,229,0.06);border-left:3px solid var(--accent);padding:8px 12px;border-radius:0 8px 8px 0;margin-bottom:10px;line-height:1.5}
+.issue-desc{font-size:0.87em;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.source-verdict{margin-bottom:10px;padding:10px 14px;border-radius:10px;font-size:0.84em;font-weight:600;line-height:1.55;display:flex;align-items:flex-start;gap:10px}
+.source-verdict.sv-ok{background:rgba(22,163,74,0.07);border:1px solid rgba(22,163,74,0.22);color:#15803d}
+.source-verdict.sv-partial{background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.28);color:#b45309}
+.source-verdict.sv-missing{background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.2);color:#b91c1c}
+.source-verdict .sv-icon{font-size:1.1em;margin-top:1px;flex-shrink:0}
+.source-verdict .sv-text{flex:1}
+.source-verdict .sv-text strong{display:block;margin-bottom:2px}
+.source-verdict a{color:inherit;font-weight:700;text-decoration:underline;margin-left:6px}
+.issue-footer{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:0.72em;font-weight:700;letter-spacing:0.4px}
+.pill-type{background:rgba(29,111,229,0.07);border:1px solid rgba(29,111,229,0.18);color:var(--accent)}
+.prompt-card{background:#0d1b36;border-radius:20px;padding:28px 32px;margin-bottom:12px;box-shadow:0 8px 32px rgba(13,27,54,0.18)}
+.prompt-card-header{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.prompt-card-icon{font-size:1.4em}
+.prompt-card-title{font-size:0.9em;font-weight:800;color:#fff;letter-spacing:0.3px}
+.prompt-card-sub{font-size:0.78em;color:rgba(255,255,255,0.5);margin-top:2px}
+.prompt-suggestion{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px 18px;margin-bottom:10px}
+.prompt-suggestion:last-child{margin-bottom:0}
+.prompt-suggestion-label{font-size:0.72em;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px}
+.prompt-suggestion-text{font-size:0.85em;color:rgba(255,255,255,0.85);line-height:1.65;font-family:var(--mono)}
+.prompt-copy-btn{margin-top:8px;background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);font-size:0.72em;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:var(--body);transition:all 0.15s}
+.prompt-copy-btn:hover{border-color:var(--accent2);color:var(--accent2)}
+.btn-reset{width:100%;padding:15px;border-radius:12px;border:2px solid var(--accent);background:rgba(29,111,229,0.06);color:var(--accent);font-weight:700;font-size:0.95em;cursor:pointer;font-family:var(--body);transition:all 0.15s;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-reset:hover{background:var(--accent);color:#fff}
+.hidden{display:none!important}
+@media(max-width:600px){
+  nav{padding:0 16px}.page{padding:24px 16px}.form-card{padding:20px}
+  .field-row{grid-template-columns:1fr}.score-block{flex-direction:column}.prompt-card{padding:20px}
 }
 </style>
 </head>
@@ -244,7 +153,6 @@ nav {
     <p class="page-sub">Collez un output produit par une IA, décrivez la tâche et le secteur. L'agent détecte les patterns d'erreur typiques des LLMs et identifie les zones à risque avant livraison.</p>
   </div>
 
-  <!-- FORMULAIRE -->
   <div id="formSection">
     <div class="form-card">
       <div class="form-card-title">1 — Contexte de la tâche</div>
@@ -273,34 +181,41 @@ nav {
     <div class="form-card">
       <div class="form-card-title">2 — Output IA à analyser</div>
       <div class="field">
-        <!-- TABS -->
         <div class="input-tabs">
           <button class="input-tab active" id="tabText" onclick="switchTab('text')">📝 Texte</button>
-          <button class="input-tab" id="tabImage" onclick="switchTab('image')">🖼 Image / Screenshot</button>
+          <button class="input-tab" id="tabImage" onclick="switchTab('image')">🖼 Image / PDF</button>
         </div>
 
-        <!-- TAB TEXTE -->
         <div id="panelText">
           <textarea id="contentInput" rows="12" placeholder="Collez ici le texte ou les données produits par l'IA..." oninput="updateCharCount()"></textarea>
           <div class="char-count" id="charCount">0 / 8000 caractères</div>
           <div class="field-hint">Texte, données chiffrées — max 8000 caractères par analyse.</div>
         </div>
 
-        <!-- TAB IMAGE -->
         <div id="panelImage" class="hidden">
-          <div class="upload-zone" id="uploadZone" onclick="document.getElementById('imageInput').click()" ondragover="dragOver(event)" ondrop="dropImage(event)">
+          <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()" ondragover="dragOver(event)" ondrop="dropFile(event)">
             <div class="upload-icon">📎</div>
-            <div class="upload-label">Glissez une image ou cliquez pour uploader</div>
-            <div class="upload-hint">PNG, JPG, WEBP — screenshot, slide, tableau, rapport</div>
+            <div class="upload-label">Glissez un fichier ou cliquez pour uploader</div>
+            <div class="upload-hint">PNG, JPG, WEBP, PDF — screenshot, slide, rapport</div>
           </div>
-          <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
-          <div id="imagePreview" class="hidden">
-            <img id="previewImg" src="" alt="preview" style="max-width:100%;border-radius:10px;border:1px solid var(--border2);margin-top:12px;">
-            <div style="display:flex;justify-content:flex-end;margin-top:8px;">
-              <button onclick="clearImage()" style="font-size:0.78em;color:var(--danger);background:none;border:none;cursor:pointer;font-weight:700;">✕ Supprimer l'image</button>
+          <input type="file" id="fileInput" accept="image/*,.pdf" class="hidden" onchange="handleFileUpload(event)">
+
+          <div id="pdfConverting" class="hidden">
+            <div class="pdf-converting">
+              <div class="pdf-spinner"></div>
+              <div style="font-size:0.88em;font-weight:700;color:var(--accent)">Conversion du PDF en cours…</div>
+              <div class="pdf-pages-info" id="pdfPagesInfo"></div>
             </div>
           </div>
-          <div class="field-hint" style="margin-top:8px;">Screenshot d'un slide, email, rapport — GPT-4o analyse le contenu visuel.</div>
+
+          <div id="imagePreview" class="hidden">
+            <img id="previewImg" src="" alt="preview" style="max-width:100%;border-radius:10px;border:1px solid var(--border2);margin-top:12px;">
+            <div id="pdfMultiPageInfo" class="hidden" style="font-size:0.78em;color:var(--accent);font-family:var(--mono);margin-top:6px;"></div>
+            <div style="display:flex;justify-content:flex-end;margin-top:8px;">
+              <button onclick="clearFile()" style="font-size:0.78em;color:var(--danger);background:none;border:none;cursor:pointer;font-weight:700;">✕ Supprimer</button>
+            </div>
+          </div>
+          <div class="field-hint" style="margin-top:8px;">Pour les PDFs multi-pages, seule la page 1 est analysée.</div>
         </div>
       </div>
     </div>
@@ -310,7 +225,6 @@ nav {
     </button>
   </div>
 
-  <!-- LOADING -->
   <div id="loadingSection" class="hidden">
     <div class="loading-card">
       <div class="loading-spinner"></div>
@@ -325,299 +239,228 @@ nav {
     </div>
   </div>
 
-  <!-- RÉSULTATS -->
   <div id="resultSection" class="hidden"></div>
 </div>
 
 <script>
-  let currentTab = 'text';
-  let imageBase64 = null;
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-  function switchTab(tab) {
-    currentTab = tab;
-    document.getElementById('tabText').className = 'input-tab' + (tab === 'text' ? ' active' : '');
-    document.getElementById('tabImage').className = 'input-tab' + (tab === 'image' ? ' active' : '');
-    document.getElementById('panelText').classList.toggle('hidden', tab !== 'text');
-    document.getElementById('panelImage').classList.toggle('hidden', tab !== 'image');
-  }
+let currentTab='text';
+let imageBase64=null;
 
-  function handleImageUpload(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      imageBase64 = e.target.result;
-      document.getElementById('previewImg').src = imageBase64;
-      document.getElementById('imagePreview').classList.remove('hidden');
-      document.getElementById('uploadZone').classList.add('hidden');
-    };
-    reader.readAsDataURL(file);
-  }
+function switchTab(tab){
+  currentTab=tab;
+  document.getElementById('tabText').className='input-tab'+(tab==='text'?' active':'');
+  document.getElementById('tabImage').className='input-tab'+(tab==='image'?' active':'');
+  document.getElementById('panelText').classList.toggle('hidden',tab!=='text');
+  document.getElementById('panelImage').classList.toggle('hidden',tab!=='image');
+}
 
-  function clearImage() {
-    imageBase64 = null;
-    document.getElementById('imageInput').value = '';
-    document.getElementById('imagePreview').classList.add('hidden');
+function handleFileUpload(event){
+  const file=event.target.files[0];
+  if(!file)return;
+  if(file.type==='application/pdf'){convertPdfToImage(file);}
+  else{loadImageFile(file);}
+}
+
+function loadImageFile(file){
+  const reader=new FileReader();
+  reader.onload=(e)=>{
+    imageBase64=e.target.result;
+    showPreview(imageBase64);
+  };
+  reader.readAsDataURL(file);
+}
+
+async function convertPdfToImage(file){
+  document.getElementById('uploadZone').classList.add('hidden');
+  document.getElementById('pdfConverting').classList.remove('hidden');
+  try{
+    const arrayBuffer=await file.arrayBuffer();
+    const pdf=await pdfjsLib.getDocument({data:arrayBuffer}).promise;
+    const totalPages=pdf.numPages;
+    document.getElementById('pdfPagesInfo').textContent=
+      totalPages+' page'+(totalPages>1?'s':'')+' détectée'+(totalPages>1?'s':'')+' — analyse de la page 1';
+    const page=await pdf.getPage(1);
+    const scale=2;
+    const viewport=page.getViewport({scale});
+    const canvas=document.createElement('canvas');
+    canvas.width=viewport.width;
+    canvas.height=viewport.height;
+    await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;
+    imageBase64=canvas.toDataURL('image/png');
+    document.getElementById('pdfConverting').classList.add('hidden');
+    showPreview(imageBase64);
+    if(totalPages>1){
+      const info=document.getElementById('pdfMultiPageInfo');
+      info.textContent='📄 PDF '+totalPages+' pages — page 1 analysée';
+      info.classList.remove('hidden');
+    }
+  }catch(err){
+    document.getElementById('pdfConverting').classList.add('hidden');
     document.getElementById('uploadZone').classList.remove('hidden');
+    alert('Erreur lors de la lecture du PDF. Vérifiez que le fichier n\'est pas protégé par un mot de passe.');
   }
+}
 
-  function dragOver(e) { e.preventDefault(); document.getElementById('uploadZone').classList.add('drag-over'); }
-  function dropImage(e) {
-    e.preventDefault();
-    document.getElementById('uploadZone').classList.remove('drag-over');
-    const file = e.dataTransfer.files[0];
-    if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        imageBase64 = ev.target.result;
-        document.getElementById('previewImg').src = imageBase64;
-        document.getElementById('imagePreview').classList.remove('hidden');
-        document.getElementById('uploadZone').classList.add('hidden');
-      };
-      reader.readAsDataURL(file);
-    }
+function showPreview(src){
+  document.getElementById('previewImg').src=src;
+  document.getElementById('imagePreview').classList.remove('hidden');
+  document.getElementById('uploadZone').classList.add('hidden');
+}
+
+function clearFile(){
+  imageBase64=null;
+  document.getElementById('fileInput').value='';
+  document.getElementById('imagePreview').classList.add('hidden');
+  document.getElementById('pdfMultiPageInfo').classList.add('hidden');
+  document.getElementById('pdfConverting').classList.add('hidden');
+  document.getElementById('uploadZone').classList.remove('hidden');
+}
+
+function dragOver(e){e.preventDefault();document.getElementById('uploadZone').classList.add('drag-over');}
+function dropFile(e){
+  e.preventDefault();
+  document.getElementById('uploadZone').classList.remove('drag-over');
+  const file=e.dataTransfer.files[0];
+  if(!file)return;
+  if(file.type==='application/pdf'){convertPdfToImage(file);}
+  else if(file.type.startsWith('image/')){loadImageFile(file);}
+}
+
+function updateCharCount(){
+  const val=document.getElementById('contentInput').value.length;
+  const el=document.getElementById('charCount');
+  el.textContent=val+' / 8000 caractères';
+  el.className='char-count'+(val>7000?' danger':val>5000?' warn':'');
+}
+
+function animateLoadingSteps(){
+  const steps=['lstep1','lstep2','lstep3','lstep4'];
+  let i=0;
+  const interval=setInterval(()=>{
+    if(i>0){const prev=document.getElementById(steps[i-1]);if(prev){prev.className='done';prev.querySelector('.step-icon').textContent='✓';}}
+    if(i<steps.length){const cur=document.getElementById(steps[i]);if(cur){cur.className='active';cur.querySelector('.step-icon').textContent='⟳';}i++;}
+    else{clearInterval(interval);}
+  },900);
+  return interval;
+}
+
+async function startScan(){
+  const task=document.getElementById('taskInput').value.trim();
+  const sector=document.getElementById('sectorInput').value;
+  if(currentTab==='text'){
+    const content=document.getElementById('contentInput').value.trim();
+    if(!content){alert('Collez un output IA à analyser.');return;}
+    if(!task){alert('Décrivez la tâche demandée à l\'IA.');return;}
+    if(content.length>8000){alert('Contenu trop long (max 8000 caractères).');return;}
+  }else{
+    if(!imageBase64){alert('Uploadez une image ou un PDF à analyser.');return;}
+    if(!task){alert('Décrivez la tâche demandée à l\'IA.');return;}
   }
-
-  function updateCharCount() {
-    const val = document.getElementById('contentInput').value.length;
-    const el = document.getElementById('charCount');
-    el.textContent = val + ' / 8000 caractères';
-    el.className = 'char-count' + (val > 7000 ? ' danger' : val > 5000 ? ' warn' : '');
-  }
-
-  function animateLoadingSteps() {
-    const steps = ['lstep1','lstep2','lstep3','lstep4'];
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i > 0) {
-        const prev = document.getElementById(steps[i-1]);
-        if (prev) { prev.className = 'done'; prev.querySelector('.step-icon').textContent = '✓'; }
-      }
-      if (i < steps.length) {
-        const cur = document.getElementById(steps[i]);
-        if (cur) { cur.className = 'active'; cur.querySelector('.step-icon').textContent = '⟳'; }
-        i++;
-      } else { clearInterval(interval); }
-    }, 900);
-    return interval;
-  }
-
-  async function startScan() {
-    const task   = document.getElementById('taskInput').value.trim();
-    const sector = document.getElementById('sectorInput').value;
-
-    if (currentTab === 'text') {
-      const content = document.getElementById('contentInput').value.trim();
-      if (!content) { alert('Collez un output IA à analyser.'); return; }
-      if (!task)    { alert('Décrivez la tâche demandée à l\'IA.'); return; }
-      if (content.length > 8000) { alert('Contenu trop long (max 8000 caractères).'); return; }
-    } else {
-      if (!imageBase64) { alert('Uploadez une image à analyser.'); return; }
-      if (!task) { alert('Décrivez la tâche demandée à l\'IA.'); return; }
-    }
-
-    document.getElementById('formSection').classList.add('hidden');
-    document.getElementById('loadingSection').classList.remove('hidden');
-    document.getElementById('resultSection').classList.add('hidden');
-    const loadingInterval = animateLoadingSteps();
-
-    try {
-      const body = { task, sector, mode: currentTab };
-      if (currentTab === 'text') body.content = document.getElementById('contentInput').value.trim();
-      else body.image = imageBase64;
-
-      const res = await fetch('/api/scan-content', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-
-      clearInterval(loadingInterval);
-      if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Erreur serveur'); }
-
-      const data = await res.json();
-      document.getElementById('loadingSection').classList.add('hidden');
-      renderResults(data);
-
-    } catch(e) {
-      clearInterval(loadingInterval);
-      document.getElementById('loadingSection').classList.add('hidden');
-      document.getElementById('formSection').classList.remove('hidden');
-      alert('Erreur lors de l\'analyse : ' + e.message);
-    }
-  }
-
-  function renderResults(data) {
-    const score = data.reliabilityScore ?? 50;
-    const scoreClass = score >= 70 ? 'high' : score >= 40 ? 'medium' : 'low';
-    const scoreEmoji = score >= 70 ? '✅' : score >= 40 ? '⚠️' : '🚨';
-    const scoreLabel = score >= 70 ? 'Fiable' : score >= 40 ? 'À revoir' : 'Non livrable';
-    const totalIssues = (data.categories || []).reduce((s, c) => s + (c.issues?.length || 0), 0);
-
-    // Mini barres par dimension
-    const breakdown = data.scoreBreakdown || {};
-    const dims = [
-      { label: 'Exactitude factuelle', key: 'factuel' },
-      { label: 'Structure & répétitions', key: 'structure' },
-      { label: 'Ton & style', key: 'ton' },
-      { label: 'Adéquation tâche', key: 'contexte' },
-      { label: 'Qualité linguistique', key: 'linguistique' }
-    ];
-    let miniBarsHtml = dims.map(d => {
-      const val = breakdown[d.key] ?? 80;
-      const cls = val >= 70 ? 'mhigh' : val >= 40 ? 'mmedium' : 'mlow';
-      return `<div class="mini-bar-row">
-        <div class="mini-bar-label">${d.label}</div>
-        <div class="mini-bar-track"><div class="mini-bar-fill ${cls}" style="width:${val}%"></div></div>
-        <div class="mini-bar-val">${val}</div>
-      </div>`;
-    }).join('');
-
-    // Jauge problèmes
-    const problemCounts = {};
-    (data.categories || []).forEach(cat => {
-      (cat.issues || []).forEach(issue => {
-        const key = issue.problemType || issue.type || cat.name;
-        problemCounts[key] = (problemCounts[key] || 0) + 1;
-      });
-    });
-    let gaugeHtml = Object.entries(problemCounts).map(([label, count]) => {
-      const pct = Math.min(100, count * 20);
-      const colorClass = count === 1 ? 'c-low' : count <= 3 ? 'c-medium' : 'c-high';
-      return `<div class="gauge-bar-row">
-        <div class="gauge-bar-label">${label}</div>
-        <div class="gauge-bar-track"><div class="gauge-bar-fill ${colorClass}" style="width:${pct}%"></div></div>
-        <div class="gauge-bar-count">${count}</div>
-      </div>`;
-    }).join('');
-
-    let html = `
-      <div class="result-header">
-        <div class="score-block">
-          <div class="score-circle-wrap">
-            <div class="score-circle ${scoreClass}">
-              <div class="score-number ${scoreClass}">${score}</div>
-              <div class="score-sub">/100</div>
-            </div>
-            <div class="score-verdict ${scoreClass}">${scoreLabel}</div>
-          </div>
-          <div class="score-detail">
-            <div class="score-detail-title">Score de fiabilité — Comment est-il calculé ?</div>
-            <div class="score-explain">100 = document parfaitement fiable, livrable tel quel. En dessous de 70 : des corrections sont nécessaires. En dessous de 40 : non livrable en l'état.</div>
-            ${miniBarsHtml}
-          </div>
-        </div>
-        <div class="result-summary-block">
-          <p>${scoreEmoji} <strong>${totalIssues} point${totalIssues > 1 ? 's' : ''} à corriger.</strong> ${data.summary}</p>
-        </div>
-        ${gaugeHtml ? `<div class="detail-gauge">
-          <div class="detail-gauge-title">Répartition des problèmes détectés</div>
-          ${gaugeHtml}
-        </div>` : ''}
-      </div>`;
-
-    // Catégories
-    (data.categories || []).forEach(cat => {
-      html += `<div class="category-card">
-        <div class="category-header">
-          <span class="category-name">${cat.name}</span>
-          ${cat.clean ? '<span class="category-clean">✓ Aucun problème</span>' : ''}
-        </div>`;
-
-      if (!cat.clean && cat.issues?.length > 0) {
-        cat.issues.forEach(issue => {
-          // Bloc source : un seul message clair
-          let sourceHtml = '';
-          if (issue.sourceCheck) {
-            const sc = issue.sourceCheck;
-            if (sc.status === 'confirmed') {
-              const link = sc.url ? `<a href="${sc.url}" target="_blank" rel="noopener">→ voir la source</a>` : '';
-              sourceHtml = `<div class="source-verdict sv-ok">
-                <span class="sv-icon">✅</span>
-                <span class="sv-text"><strong>Information exacte, mais non sourcée dans le document.</strong> ${sc.explanation} ${link}<br><span style="font-weight:400;opacity:0.85">À corriger : ajoutez la référence dans le document avant livraison.</span></span>
-              </div>`;
-            } else if (sc.status === 'exists_but_not_found') {
-              sourceHtml = `<div class="source-verdict sv-partial">
-                <span class="sv-icon">⚠️</span>
-                <span class="sv-text"><strong>Source trouvée, mais ce chiffre n'y figure pas.</strong> ${sc.explanation}<br><span style="font-weight:400;opacity:0.85">À vérifier impérativement avant livraison.</span></span>
-              </div>`;
-            } else {
-              sourceHtml = `<div class="source-verdict sv-missing">
-                <span class="sv-icon">❌</span>
-                <span class="sv-text"><strong>Source introuvable.</strong> ${sc.explanation}<br><span style="font-weight:400;opacity:0.85">Nous n'avons pas trouvé cette source — elle peut exister, mais ce chiffre ne devrait pas être livré sans vérification manuelle.</span></span>
-              </div>`;
-            }
-          }
-
-          html += `<div class="issue">
-            <div class="issue-excerpt">"${issue.excerpt}"</div>
-            <div class="issue-desc">${issue.description}</div>
-            ${sourceHtml}
-            <div class="issue-footer">
-              <span class="pill pill-type">${issue.type}</span>
-            </div>
-          </div>`;
-        });
-      }
-      html += `</div>`;
-    });
-
-    // Suggestions prompt — section très distincte
-    if (data.promptSuggestions?.length > 0) {
-      html += `<div class="prompt-card">
-        <div class="prompt-card-header">
-          <span class="prompt-card-icon">✍️</span>
-          <div>
-            <div class="prompt-card-title">Suggestions pour améliorer votre prompt</div>
-            <div class="prompt-card-sub">Instructions prêtes à copier-coller, rédigées en prompt engineering</div>
-          </div>
-        </div>`;
-      data.promptSuggestions.forEach(s => {
-        const id = 'ps_' + Math.random().toString(36).substr(2,6);
-        html += `<div class="prompt-suggestion">
-          <div class="prompt-suggestion-label">${s.problem}</div>
-          <div class="prompt-suggestion-text" id="${id}">${s.suggestion}</div>
-          <button class="prompt-copy-btn" onclick="copyPrompt('${id}', this)">Copier</button>
-        </div>`;
-      });
-      html += `</div>`;
-    }
-
-    html += `<button class="btn-reset" onclick="resetScanner()">↩ Nouvelle analyse</button>`;
-
-    const resultSection = document.getElementById('resultSection');
-    resultSection.innerHTML = html;
-    resultSection.classList.remove('hidden');
-    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  function copyPrompt(id, btn) {
-    const text = document.getElementById(id)?.textContent || '';
-    navigator.clipboard.writeText(text).then(() => {
-      btn.textContent = '✓ Copié';
-      setTimeout(() => btn.textContent = 'Copier', 2000);
-    });
-  }
-
-  function resetScanner() {
-    // Vider les champs
-    document.getElementById('contentInput').value = '';
-    document.getElementById('taskInput').value = '';
-    document.getElementById('sectorInput').selectedIndex = 0;
-    document.getElementById('charCount').textContent = '0 / 8000 caractères';
-    clearImage();
-    switchTab('text');
-
-    // Reset loading steps
-    [['lstep1','⏳'],['lstep2','○'],['lstep3','○'],['lstep4','○']].forEach(([id, icon]) => {
-      const el = document.getElementById(id);
-      if (el) { el.className = ''; el.querySelector('.step-icon').textContent = icon; }
-    });
-
-    document.getElementById('resultSection').classList.add('hidden');
+  document.getElementById('formSection').classList.add('hidden');
+  document.getElementById('loadingSection').classList.remove('hidden');
+  document.getElementById('resultSection').classList.add('hidden');
+  const loadingInterval=animateLoadingSteps();
+  try{
+    const body={task,sector,mode:currentTab};
+    if(currentTab==='text')body.content=document.getElementById('contentInput').value.trim();
+    else body.image=imageBase64;
+    const res=await fetch('/api/scan-content',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    clearInterval(loadingInterval);
+    if(!res.ok){const err=await res.json();throw new Error(err.error||'Erreur serveur');}
+    const data=await res.json();
+    document.getElementById('loadingSection').classList.add('hidden');
+    renderResults(data);
+  }catch(e){
+    clearInterval(loadingInterval);
+    document.getElementById('loadingSection').classList.add('hidden');
     document.getElementById('formSection').classList.remove('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    alert('Erreur lors de l\'analyse : '+e.message);
   }
+}
+
+function renderResults(data){
+  const score=data.reliabilityScore??50;
+  const scoreClass=score>=70?'high':score>=40?'medium':'low';
+  const scoreEmoji=score>=70?'✅':score>=40?'⚠️':'🚨';
+  const scoreLabel=score>=70?'Fiable':score>=40?'À revoir':'Non livrable';
+  const totalIssues=(data.categories||[]).reduce((s,c)=>s+(c.issues?.length||0),0);
+  const breakdown=data.scoreBreakdown||{};
+  const dims=[
+    {label:'Exactitude factuelle',key:'factuel'},
+    {label:'Structure & répétitions',key:'structure'},
+    {label:'Ton & style',key:'ton'},
+    {label:'Adéquation tâche',key:'contexte'},
+    {label:'Qualité linguistique',key:'linguistique'}
+  ];
+  let miniBarsHtml=dims.map(d=>{
+    const val=breakdown[d.key]??80;
+    const cls=val>=70?'mhigh':val>=40?'mmedium':'mlow';
+    return `<div class="mini-bar-row"><div class="mini-bar-label">${d.label}</div><div class="mini-bar-track"><div class="mini-bar-fill ${cls}" style="width:${val}%"></div></div><div class="mini-bar-val">${val}</div></div>`;
+  }).join('');
+  const problemCounts={};
+  (data.categories||[]).forEach(cat=>{(cat.issues||[]).forEach(issue=>{const key=issue.problemType||issue.type||cat.name;problemCounts[key]=(problemCounts[key]||0)+1;});});
+  let gaugeHtml=Object.entries(problemCounts).map(([label,count])=>{
+    const pct=Math.min(100,count*20);
+    const colorClass=count===1?'c-low':count<=3?'c-medium':'c-high';
+    return `<div class="gauge-bar-row"><div class="gauge-bar-label">${label}</div><div class="gauge-bar-track"><div class="gauge-bar-fill ${colorClass}" style="width:${pct}%"></div></div><div class="gauge-bar-count">${count}</div></div>`;
+  }).join('');
+  let html=`<div class="result-header"><div class="score-block"><div class="score-circle-wrap"><div class="score-circle ${scoreClass}"><div class="score-number ${scoreClass}">${score}</div><div class="score-sub">/100</div></div><div class="score-verdict ${scoreClass}">${scoreLabel}</div></div><div class="score-detail"><div class="score-detail-title">Score de fiabilité — Comment est-il calculé ?</div><div class="score-explain">100 = document parfaitement fiable, livrable tel quel. En dessous de 70 : des corrections sont nécessaires. En dessous de 40 : non livrable en l'état.</div>${miniBarsHtml}</div></div><div class="result-summary-block"><p>${scoreEmoji} <strong>${totalIssues} point${totalIssues>1?'s':''} à corriger.</strong> ${data.summary}</p></div>${gaugeHtml?`<div class="detail-gauge"><div class="detail-gauge-title">Répartition des problèmes détectés</div>${gaugeHtml}</div>`:''}</div>`;
+  (data.categories||[]).forEach(cat=>{
+    html+=`<div class="category-card"><div class="category-header"><span class="category-name">${cat.name}</span>${cat.clean?'<span class="category-clean">✓ Aucun problème</span>':''}</div>`;
+    if(!cat.clean&&cat.issues?.length>0){
+      cat.issues.forEach(issue=>{
+        let sourceHtml='';
+        if(issue.sourceCheck){
+          const sc=issue.sourceCheck;
+          if(sc.status==='confirmed'){
+            const link=sc.url?`<a href="${sc.url}" target="_blank" rel="noopener">→ voir la source</a>`:'';
+            sourceHtml=`<div class="source-verdict sv-ok"><span class="sv-icon">✅</span><span class="sv-text"><strong>Information exacte, mais non sourcée dans le document.</strong> ${sc.explanation} ${link}<br><span style="font-weight:400;opacity:0.85">Ajoutez la référence avant livraison.</span></span></div>`;
+          }else if(sc.status==='exists_but_not_found'){
+            sourceHtml=`<div class="source-verdict sv-partial"><span class="sv-icon">⚠️</span><span class="sv-text"><strong>Source trouvée, mais ce chiffre n'y figure pas.</strong> ${sc.explanation}<br><span style="font-weight:400;opacity:0.85">À vérifier impérativement avant livraison.</span></span></div>`;
+          }else{
+            sourceHtml=`<div class="source-verdict sv-missing"><span class="sv-icon">❌</span><span class="sv-text"><strong>Source introuvable.</strong> ${sc.explanation}<br><span style="font-weight:400;opacity:0.85">Ne pas livrer sans vérification manuelle.</span></span></div>`;
+          }
+        }
+        html+=`<div class="issue"><div class="issue-excerpt">"${issue.excerpt}"</div><div class="issue-desc">${issue.description}</div>${sourceHtml}<div class="issue-footer"><span class="pill pill-type">${issue.type}</span></div></div>`;
+      });
+    }
+    html+=`</div>`;
+  });
+  if(data.promptSuggestions?.length>0){
+    html+=`<div class="prompt-card"><div class="prompt-card-header"><span class="prompt-card-icon">✍️</span><div><div class="prompt-card-title">Suggestions pour améliorer votre prompt</div><div class="prompt-card-sub">Instructions prêtes à copier-coller, rédigées en prompt engineering</div></div></div>`;
+    data.promptSuggestions.forEach(s=>{
+      const id='ps_'+Math.random().toString(36).substr(2,6);
+      html+=`<div class="prompt-suggestion"><div class="prompt-suggestion-label">${s.problem}</div><div class="prompt-suggestion-text" id="${id}">${s.suggestion}</div><button class="prompt-copy-btn" onclick="copyPrompt('${id}',this)">Copier</button></div>`;
+    });
+    html+=`</div>`;
+  }
+  html+=`<button class="btn-reset" onclick="resetScanner()">↩ Nouvelle analyse</button>`;
+  const rs=document.getElementById('resultSection');
+  rs.innerHTML=html;rs.classList.remove('hidden');
+  rs.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function copyPrompt(id,btn){
+  const text=document.getElementById(id)?.textContent||'';
+  navigator.clipboard.writeText(text).then(()=>{btn.textContent='✓ Copié';setTimeout(()=>btn.textContent='Copier',2000);});
+}
+
+function resetScanner(){
+  document.getElementById('contentInput').value='';
+  document.getElementById('taskInput').value='';
+  document.getElementById('sectorInput').selectedIndex=0;
+  document.getElementById('charCount').textContent='0 / 8000 caractères';
+  clearFile();switchTab('text');
+  [['lstep1','⏳'],['lstep2','○'],['lstep3','○'],['lstep4','○']].forEach(([id,icon])=>{
+    const el=document.getElementById(id);
+    if(el){el.className='';el.querySelector('.step-icon').textContent=icon;}
+  });
+  document.getElementById('resultSection').classList.add('hidden');
+  document.getElementById('formSection').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 </script>
 </body>
 </html>
