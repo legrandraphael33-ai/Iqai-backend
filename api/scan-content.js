@@ -59,8 +59,8 @@ RÈGLES ABSOLUES :
 
 FORMAT DE RÉPONSE : Tu réponds UNIQUEMENT en JSON valide, sans markdown, sans backticks, sans texte avant ou après. Structure exacte :
 {
-  "riskScore": <nombre entre 0 et 100>,
-  "riskLevel": <"FAIBLE" | "MODÉRÉ" | "ÉLEVÉ">,
+  "reliabilityScore": <nombre entre 0 et 100, où 100 = document parfaitement fiable, 0 = non livrable>,
+  "reliabilityLevel": <"Fiable" | "À revoir" | "Non livrable">,
   "summary": <string, 1-2 phrases résumant le verdict global>,
   "categories": [
     {
@@ -68,15 +68,21 @@ FORMAT DE RÉPONSE : Tu réponds UNIQUEMENT en JSON valide, sans markdown, sans 
       "issues": [
         {
           "excerpt": <string, extrait exact du texte concerné, max 100 caractères>,
-          "description": <string, explication de l'incohérence détectée>,
-          "confidence": <"ÉLEVÉ" | "MOYEN" | "FAIBLE">,
-          "type": <"factuelle" | "structurelle" | "ton" | "contexte">
+          "description": <string, explication précise du problème détecté>,
+          "trustable": <boolean | null — true si l'info peut être considérée fiable malgré le signalement, false si vraiment à vérifier, null si incertain>,
+          "type": <string, type court du problème ex: "chiffre sans source", "répétition", "généralisation abusive">,
+          "problemType": <string, catégorie courte pour la jauge ex: "Chiffres non sourcés", "Données imprécises", "Manque de sources", "Répétitions", "Ton générique", "Hors sujet">
         }
       ],
-      "clean": <boolean, true si aucune incohérence dans cette catégorie>
+      "clean": <boolean, true si aucun problème dans cette catégorie>
     }
   ],
-  "recommendation": <string, conseil actionnable en 1-2 phrases>
+  "promptSuggestions": [
+    {
+      "problem": <string, nom court du problème ex: "Sources manquantes">,
+      "suggestion": <string, formulation exacte à ajouter au prompt pour corriger ce problème — rédigée comme une instruction directe à une IA, ex: "Pour chaque chiffre cité, indique systématiquement sa source entre parenthèses. Si tu ne connais pas la source exacte, remplace le chiffre par une formulation qualitative.">
+    }
+  ]
 }`;
 
   // Construction du message utilisateur selon le mode
