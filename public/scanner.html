@@ -18,10 +18,12 @@
   --mono: 'DM Mono', monospace;
 }
 html { scroll-behavior: smooth; }
-body { font-family: var(--body); color: var(--text); background: var(--bg); min-height: 100vh; padding-bottom: 60px; }
+body { font-family: var(--body); color: var(--text); background: var(--bg); min-height: 100vh; padding-bottom: 80px; }
 body::before {
   content: ''; position: fixed; inset: 0; z-index: 0;
-  background: radial-gradient(ellipse 60% 40% at 50% -5%, rgba(29,111,229,0.08) 0%, transparent 65%), linear-gradient(rgba(29,111,229,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(29,111,229,0.04) 1px, transparent 1px);
+  background: radial-gradient(ellipse 60% 40% at 50% -5%, rgba(29,111,229,0.08) 0%, transparent 65%),
+    linear-gradient(rgba(29,111,229,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29,111,229,0.04) 1px, transparent 1px);
   background-size: auto, 52px 52px, 52px 52px; pointer-events: none;
 }
 
@@ -30,7 +32,7 @@ nav {
   position: sticky; top: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 40px; height: 60px;
-  background: rgba(248,250,253,0.9); backdrop-filter: blur(12px);
+  background: rgba(248,250,253,0.92); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
 .nav-logo { font-family: var(--mono); font-size: 1.05em; font-weight: 500; text-decoration: none; color: var(--text); display: flex; align-items: center; }
@@ -51,15 +53,14 @@ nav {
 .page-sub { font-size: 0.92em; color: var(--muted); line-height: 1.65; max-width: 560px; }
 
 /* FORM CARD */
-.form-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 20px; padding: 32px; box-shadow: 0 4px 24px rgba(29,111,229,0.07); margin-bottom: 24px; }
-.form-card-title { font-size: 0.78em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 20px; }
+.form-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 20px; padding: 32px; box-shadow: 0 4px 24px rgba(29,111,229,0.07); margin-bottom: 20px; }
+.form-card-title { font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 20px; }
 .field { margin-bottom: 18px; }
 .field label { display: block; font-size: 0.78em; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 7px; }
 .field input, .field select, .field textarea {
   width: 100%; padding: 13px 16px; border: 1.5px solid var(--border2); border-radius: 11px;
   font-family: var(--body); font-size: 0.93em; color: var(--text);
-  background: var(--surface2); outline: none; transition: border-color 0.15s;
-  resize: vertical;
+  background: var(--surface2); outline: none; transition: border-color 0.15s; resize: vertical;
 }
 .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); background: #fff; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -68,7 +69,19 @@ nav {
 .char-count.warn { color: var(--warn); }
 .char-count.danger { color: var(--danger); }
 
-/* BOUTON SCAN */
+/* TABS */
+.input-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+.input-tab { padding: 8px 18px; border-radius: 9px; border: 1.5px solid var(--border2); background: var(--surface2); font-size: 0.83em; font-weight: 600; color: var(--muted); cursor: pointer; font-family: var(--body); transition: all 0.15s; }
+.input-tab.active { border-color: var(--accent); background: rgba(29,111,229,0.07); color: var(--accent); }
+
+/* UPLOAD */
+.upload-zone { border: 2px dashed var(--border2); border-radius: 12px; padding: 40px 24px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: var(--surface2); }
+.upload-zone:hover, .upload-zone.drag-over { border-color: var(--accent); background: rgba(29,111,229,0.04); }
+.upload-icon { font-size: 2em; margin-bottom: 10px; }
+.upload-label { font-size: 0.92em; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+.upload-hint { font-size: 0.78em; color: var(--muted); }
+
+/* BTN SCAN */
 .btn-scan {
   width: 100%; padding: 16px; border: none; border-radius: 12px;
   background: linear-gradient(135deg, #1d6fe5, #1558c0);
@@ -82,126 +95,133 @@ nav {
 .btn-scan:disabled { opacity: 0.5; cursor: not-allowed; filter: none; }
 
 /* LOADING */
-.loading-card {
-  background: var(--surface); border: 1px solid var(--border2); border-radius: 20px;
-  padding: 48px 32px; text-align: center; box-shadow: 0 4px 24px rgba(29,111,229,0.07);
-  margin-bottom: 24px;
-}
-.loading-spinner {
-  width: 40px; height: 40px; border: 3px solid var(--border2);
-  border-top-color: var(--accent); border-radius: 50%;
-  animation: spin 0.8s linear infinite; margin: 0 auto 16px;
-}
+.loading-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 20px; padding: 48px 32px; text-align: center; box-shadow: 0 4px 24px rgba(29,111,229,0.07); margin-bottom: 24px; }
+.loading-spinner { width: 40px; height: 40px; border: 3px solid var(--border2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.loading-steps { list-style: none; text-align: left; max-width: 280px; margin: 16px auto 0; }
+.loading-steps { list-style: none; text-align: left; max-width: 300px; margin: 16px auto 0; }
 .loading-steps li { font-size: 0.82em; color: var(--muted); padding: 5px 0; display: flex; align-items: center; gap: 8px; }
 .loading-steps li .step-icon { width: 16px; text-align: center; }
 .loading-steps li.done { color: var(--success); }
 .loading-steps li.active { color: var(--accent); font-weight: 600; }
 
-/* RÉSULTATS */
+/* ── RÉSULTATS : SCORE HEADER ── */
 .result-header {
   background: var(--surface); border: 1px solid var(--border2); border-radius: 20px;
-  padding: 28px 32px; box-shadow: 0 4px 24px rgba(29,111,229,0.07); margin-bottom: 16px;
+  padding: 32px; box-shadow: 0 4px 28px rgba(29,111,229,0.09); margin-bottom: 16px;
 }
-.reliability-top { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 24px; }
-.reliability-gauge { text-align: center; min-width: 90px; }
-.reliability-score { font-family: var(--mono); font-size: 2.8em; font-weight: 500; line-height: 1; }
-.reliability-score.high   { color: var(--success); }
-.reliability-score.medium { color: var(--warn); }
-.reliability-score.low    { color: var(--danger); }
-.reliability-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-.reliability-label.high   { color: var(--success); }
-.reliability-label.medium { color: var(--warn); }
-.reliability-label.low    { color: var(--danger); }
-.result-summary { flex: 1; }
-.result-summary h3 { font-size: 1em; font-weight: 700; margin-bottom: 6px; }
-.result-summary p  { font-size: 0.9em; color: var(--muted); line-height: 1.6; }
+.score-block {
+  display: flex; align-items: stretch; gap: 24px; margin-bottom: 28px; flex-wrap: wrap;
+}
+.score-circle-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 120px; }
+.score-circle {
+  width: 100px; height: 100px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border: 4px solid; margin-bottom: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.score-circle.high  { border-color: var(--success); background: rgba(22,163,74,0.06); }
+.score-circle.medium { border-color: var(--warn); background: rgba(245,158,11,0.06); }
+.score-circle.low   { border-color: var(--danger); background: rgba(220,38,38,0.06); }
+.score-number { font-family: var(--mono); font-size: 2em; font-weight: 700; line-height: 1; }
+.score-number.high   { color: var(--success); }
+.score-number.medium { color: var(--warn); }
+.score-number.low    { color: var(--danger); }
+.score-sub { font-size: 0.65em; color: var(--muted); margin-top: 2px; }
+.score-verdict { font-size: 0.78em; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+.score-verdict.high   { color: var(--success); }
+.score-verdict.medium { color: var(--warn); }
+.score-verdict.low    { color: var(--danger); }
+
+.score-detail { flex: 1; }
+.score-detail-title { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 10px; }
+.score-explain { font-size: 0.82em; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
+.mini-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.mini-bar-label { font-size: 0.75em; color: var(--text); font-weight: 500; min-width: 140px; }
+.mini-bar-track { flex: 1; height: 6px; background: var(--surface2); border-radius: 999px; overflow: hidden; }
+.mini-bar-fill { height: 100%; border-radius: 999px; }
+.mini-bar-fill.mhigh   { background: var(--success); }
+.mini-bar-fill.mmedium { background: var(--warn); }
+.mini-bar-fill.mlow    { background: var(--danger); }
+.mini-bar-val { font-family: var(--mono); font-size: 0.72em; color: var(--muted); min-width: 28px; text-align: right; }
+
+/* SUMMARY */
+.result-summary-block { background: var(--surface2); border-radius: 12px; padding: 16px 18px; border-left: 4px solid var(--accent); }
+.result-summary-block p { font-size: 0.9em; color: var(--text); line-height: 1.65; }
 
 /* JAUGE DÉTAIL */
-.detail-gauge { margin-top: 0; }
-.detail-gauge-title { font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 12px; }
+.detail-gauge { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+.detail-gauge-title { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 12px; }
 .gauge-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
 .gauge-bar-label { font-size: 0.78em; color: var(--text); font-weight: 500; min-width: 180px; }
 .gauge-bar-track { flex: 1; height: 7px; background: var(--surface2); border-radius: 999px; overflow: hidden; border: 1px solid var(--border); }
 .gauge-bar-fill { height: 100%; border-radius: 999px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
-.gauge-bar-fill.c-none   { background: var(--success); }
 .gauge-bar-fill.c-low    { background: var(--accent2); }
 .gauge-bar-fill.c-medium { background: var(--warn); }
 .gauge-bar-fill.c-high   { background: var(--danger); }
 .gauge-bar-count { font-family: var(--mono); font-size: 0.75em; color: var(--muted); min-width: 20px; text-align: right; }
 
-.source-check { margin-top: 8px; padding: 8px 12px; border-radius: 8px; font-size: 0.8em; font-weight: 600; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
-.source-check.confirmed { background: rgba(22,163,74,0.07); border: 1px solid rgba(22,163,74,0.2); color: var(--success); }
-.source-check.exists_but_not_found { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.25); color: var(--warn); }
-.source-check.not_found { background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.18); color: var(--danger); }
-.source-check a { color: inherit; font-size: 0.9em; margin-left: 4px; }
-
-/* SUGGESTIONS PROMPT */
-.prompt-card {
-  background: rgba(29,111,229,0.04); border: 1px solid rgba(29,111,229,0.18);
-  border-radius: 16px; padding: 24px; margin-bottom: 12px;
-}
-.prompt-card-title { font-size: 0.78em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 14px; }
-.prompt-suggestion { background: var(--surface); border: 1px solid var(--border2); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; }
-.prompt-suggestion:last-child { margin-bottom: 0; }
-.prompt-suggestion-label { font-size: 0.75em; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; }
-.prompt-suggestion-text { font-size: 0.88em; color: var(--text); line-height: 1.6; font-family: var(--mono); background: var(--surface2); padding: 10px 12px; border-radius: 8px; border-left: 3px solid var(--accent); }
-
-/* FIABILITÉ ISSUE */
-.trust-pill-yes { background: rgba(22,163,74,0.08); border: 1px solid rgba(22,163,74,0.25); color: var(--success); }
-.trust-pill-no  { background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.2); color: var(--danger); }
-.trust-pill-maybe { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); color: var(--warn); }
-
 /* CATÉGORIES */
-.category-card {
-  background: var(--surface); border: 1px solid var(--border2); border-radius: 16px;
-  padding: 24px; box-shadow: 0 2px 12px rgba(29,111,229,0.05); margin-bottom: 12px;
-}
+.category-card { background: var(--surface); border: 1px solid var(--border2); border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(29,111,229,0.05); margin-bottom: 12px; }
 .category-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-.category-name { font-size: 0.82em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text); }
+.category-name { font-size: 0.82em; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text); }
 .category-clean { font-size: 0.75em; font-weight: 700; color: var(--success); background: rgba(22,163,74,0.08); border: 1px solid rgba(22,163,74,0.2); padding: 3px 10px; border-radius: 999px; }
+
+/* ISSUES */
 .issue { border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 10px; background: var(--surface2); }
 .issue:last-child { margin-bottom: 0; }
-.issue-excerpt {
-  font-family: var(--mono); font-size: 0.8em; color: var(--text);
-  background: rgba(29,111,229,0.06); border-left: 3px solid var(--accent);
-  padding: 8px 12px; border-radius: 0 8px 8px 0; margin-bottom: 10px;
-  line-height: 1.5;
-}
+.issue-excerpt { font-family: var(--mono); font-size: 0.8em; color: var(--text); background: rgba(29,111,229,0.06); border-left: 3px solid var(--accent); padding: 8px 12px; border-radius: 0 8px 8px 0; margin-bottom: 10px; line-height: 1.5; }
 .issue-desc { font-size: 0.87em; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+
+/* SOURCE CHECK — message unique clair */
+.source-verdict { margin-bottom: 10px; padding: 10px 14px; border-radius: 10px; font-size: 0.84em; font-weight: 600; line-height: 1.55; display: flex; align-items: flex-start; gap: 10px; }
+.source-verdict.sv-ok      { background: rgba(22,163,74,0.07); border: 1px solid rgba(22,163,74,0.22); color: #15803d; }
+.source-verdict.sv-partial { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.28); color: #b45309; }
+.source-verdict.sv-missing { background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.2); color: #b91c1c; }
+.source-verdict .sv-icon { font-size: 1.1em; margin-top: 1px; flex-shrink: 0; }
+.source-verdict .sv-text { flex: 1; }
+.source-verdict .sv-text strong { display: block; margin-bottom: 2px; }
+.source-verdict a { color: inherit; font-weight: 700; text-decoration: underline; margin-left: 6px; }
+
+/* PILLS */
 .issue-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.72em; font-weight: 700; letter-spacing: 0.5px; }
-.pill-type { background: rgba(29,111,229,0.08); border: 1px solid rgba(29,111,229,0.2); color: var(--accent); }
-.pill-high { background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.2); color: var(--danger); }
-.pill-medium { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); color: var(--warn); }
-.pill-low { background: rgba(94,113,138,0.08); border: 1px solid rgba(94,113,138,0.2); color: var(--muted); }
+.pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.72em; font-weight: 700; letter-spacing: 0.4px; }
+.pill-type { background: rgba(29,111,229,0.07); border: 1px solid rgba(29,111,229,0.18); color: var(--accent); }
 
-/* RESET */
-.input-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
-.input-tab { padding: 8px 18px; border-radius: 9px; border: 1.5px solid var(--border2); background: var(--surface2); font-size: 0.83em; font-weight: 600; color: var(--muted); cursor: pointer; font-family: var(--body); transition: all 0.15s; }
-.input-tab.active { border-color: var(--accent); background: rgba(29,111,229,0.07); color: var(--accent); }
-.upload-zone {
-  border: 2px dashed var(--border2); border-radius: 12px; padding: 40px 24px;
-  text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s;
-  background: var(--surface2);
+/* SUGGESTIONS PROMPT — bien distinctes */
+.prompt-card {
+  background: #0d1b36; border-radius: 20px; padding: 28px 32px; margin-bottom: 12px;
+  box-shadow: 0 8px 32px rgba(13,27,54,0.18);
 }
-.upload-zone:hover, .upload-zone.drag-over { border-color: var(--accent); background: rgba(29,111,229,0.04); }
-.upload-icon { font-size: 2em; margin-bottom: 10px; }
-.upload-label { font-size: 0.92em; font-weight: 600; color: var(--text); margin-bottom: 5px; }
-.upload-hint { font-size: 0.78em; color: var(--muted); }
+.prompt-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+.prompt-card-icon { font-size: 1.4em; }
+.prompt-card-title { font-size: 0.9em; font-weight: 800; color: #fff; letter-spacing: 0.3px; }
+.prompt-card-sub { font-size: 0.78em; color: rgba(255,255,255,0.5); margin-top: 2px; }
+.prompt-suggestion { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 16px 18px; margin-bottom: 10px; }
+.prompt-suggestion:last-child { margin-bottom: 0; }
+.prompt-suggestion-label { font-size: 0.72em; font-weight: 700; color: var(--accent2); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+.prompt-suggestion-text { font-size: 0.85em; color: rgba(255,255,255,0.85); line-height: 1.65; font-family: var(--mono); }
+.prompt-copy-btn { margin-top: 8px; background: none; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); font-size: 0.72em; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-family: var(--body); transition: all 0.15s; }
+.prompt-copy-btn:hover { border-color: var(--accent2); color: var(--accent2); }
 
-.btn-reset { width: 100%; padding: 13px; border-radius: 12px; border: 1.5px solid var(--border2); background: var(--surface); color: var(--text); font-weight: 600; font-size: 0.9em; cursor: pointer; font-family: var(--body); transition: border-color 0.15s; margin-top: 8px; }
-.btn-reset:hover { border-color: var(--accent); }
+/* BTN RESET */
+.btn-reset {
+  width: 100%; padding: 15px; border-radius: 12px;
+  border: 2px solid var(--accent); background: rgba(29,111,229,0.06);
+  color: var(--accent); font-weight: 700; font-size: 0.95em;
+  cursor: pointer; font-family: var(--body); transition: all 0.15s;
+  margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-reset:hover { background: var(--accent); color: #fff; }
 
 .hidden { display: none !important; }
 
 @media (max-width: 600px) {
   nav { padding: 0 16px; }
   .page { padding: 24px 16px; }
-  .form-card { padding: 22px; }
+  .form-card { padding: 20px; }
   .field-row { grid-template-columns: 1fr; }
-  .result-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .score-block { flex-direction: column; }
+  .prompt-card { padding: 20px; }
 }
 </style>
 </head>
@@ -221,7 +241,7 @@ nav {
   <div class="page-header">
     <span class="page-eyebrow">Outil d'analyse</span>
     <h1 class="page-title">Scanner d'incohérences IA</h1>
-    <p class="page-sub">Collez un output produit par une IA, décrivez la tâche demandée et le secteur. L'agent analyse les patterns d'erreur typiques des LLMs et identifie les zones à risque.</p>
+    <p class="page-sub">Collez un output produit par une IA, décrivez la tâche et le secteur. L'agent détecte les patterns d'erreur typiques des LLMs et identifie les zones à risque avant livraison.</p>
   </div>
 
   <!-- FORMULAIRE -->
@@ -231,7 +251,7 @@ nav {
       <div class="field-row">
         <div class="field">
           <label>Tâche demandée à l'IA</label>
-          <input type="text" id="taskInput" placeholder="Ex: Rédiger une analyse de marché sur le secteur SaaS B2B en France">
+          <input type="text" id="taskInput" placeholder="Ex: Rédiger une analyse de marché SaaS B2B France">
         </div>
         <div class="field">
           <label>Secteur métier</label>
@@ -280,7 +300,7 @@ nav {
               <button onclick="clearImage()" style="font-size:0.78em;color:var(--danger);background:none;border:none;cursor:pointer;font-weight:700;">✕ Supprimer l'image</button>
             </div>
           </div>
-          <div class="field-hint" style="margin-top:8px;">Screenshot d'un slide, d'un email, d'un rapport IA — GPT-4o analyse le contenu visuel.</div>
+          <div class="field-hint" style="margin-top:8px;">Screenshot d'un slide, email, rapport — GPT-4o analyse le contenu visuel.</div>
         </div>
       </div>
     </div>
@@ -297,17 +317,16 @@ nav {
       <p style="font-weight:700;margin-bottom:8px;">Analyse en cours…</p>
       <p style="font-size:0.85em;color:var(--muted);margin-bottom:16px;">L'agent décompose et évalue chaque affirmation</p>
       <ul class="loading-steps">
-        <li id="lstep1"><span class="step-icon">⏳</span> Décomposition des affirmations</li>
-        <li id="lstep2"><span class="step-icon">○</span> Analyse des patterns d'erreur IA</li>
-        <li id="lstep3"><span class="step-icon">○</span> Évaluation par catégorie</li>
-        <li id="lstep4"><span class="step-icon">○</span> Calcul du score de risque</li>
+        <li id="lstep1"><span class="step-icon">⏳</span> Détection automatique des répétitions</li>
+        <li id="lstep2"><span class="step-icon">○</span> Analyse des 5 catégories d'incohérences</li>
+        <li id="lstep3"><span class="step-icon">○</span> Vérification des sources douteuses</li>
+        <li id="lstep4"><span class="step-icon">○</span> Calcul du score de fiabilité</li>
       </ul>
     </div>
   </div>
 
   <!-- RÉSULTATS -->
   <div id="resultSection" class="hidden"></div>
-
 </div>
 
 <script>
@@ -327,7 +346,7 @@ nav {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = (e) => {
-      imageBase64 = e.target.result; // data:image/...;base64,...
+      imageBase64 = e.target.result;
       document.getElementById('previewImg').src = imageBase64;
       document.getElementById('imagePreview').classList.remove('hidden');
       document.getElementById('uploadZone').classList.add('hidden');
@@ -366,7 +385,6 @@ nav {
     el.className = 'char-count' + (val > 7000 ? ' danger' : val > 5000 ? ' warn' : '');
   }
 
-  // Animation des étapes loading
   function animateLoadingSteps() {
     const steps = ['lstep1','lstep2','lstep3','lstep4'];
     let i = 0;
@@ -379,18 +397,15 @@ nav {
         const cur = document.getElementById(steps[i]);
         if (cur) { cur.className = 'active'; cur.querySelector('.step-icon').textContent = '⟳'; }
         i++;
-      } else {
-        clearInterval(interval);
-      }
+      } else { clearInterval(interval); }
     }, 900);
     return interval;
   }
 
   async function startScan() {
-    const task    = document.getElementById('taskInput').value.trim();
-    const sector  = document.getElementById('sectorInput').value;
+    const task   = document.getElementById('taskInput').value.trim();
+    const sector = document.getElementById('sectorInput').value;
 
-    // Validation selon le tab actif
     if (currentTab === 'text') {
       const content = document.getElementById('contentInput').value.trim();
       if (!content) { alert('Collez un output IA à analyser.'); return; }
@@ -401,23 +416,15 @@ nav {
       if (!task) { alert('Décrivez la tâche demandée à l\'IA.'); return; }
     }
 
-    // UI
     document.getElementById('formSection').classList.add('hidden');
     document.getElementById('loadingSection').classList.remove('hidden');
     document.getElementById('resultSection').classList.add('hidden');
     const loadingInterval = animateLoadingSteps();
 
     try {
-      const body = {
-        task,
-        sector,
-        mode: currentTab
-      };
-      if (currentTab === 'text') {
-        body.content = document.getElementById('contentInput').value.trim();
-      } else {
-        body.image = imageBase64;
-      }
+      const body = { task, sector, mode: currentTab };
+      if (currentTab === 'text') body.content = document.getElementById('contentInput').value.trim();
+      else body.image = imageBase64;
 
       const res = await fetch('/api/scan-content', {
         method: 'POST',
@@ -426,11 +433,7 @@ nav {
       });
 
       clearInterval(loadingInterval);
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || 'Erreur serveur');
-      }
+      if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Erreur serveur'); }
 
       const data = await res.json();
       document.getElementById('loadingSection').classList.add('hidden');
@@ -445,15 +448,32 @@ nav {
   }
 
   function renderResults(data) {
-    // Score de fiabilité : 100 = parfait, 0 = très problématique
-    const score = data.reliabilityScore ?? (100 - (data.riskScore || 0));
+    const score = data.reliabilityScore ?? 50;
     const scoreClass = score >= 70 ? 'high' : score >= 40 ? 'medium' : 'low';
-    const scoreLabel = score >= 70 ? 'Fiable' : score >= 40 ? 'À revoir' : 'Non livrable';
     const scoreEmoji = score >= 70 ? '✅' : score >= 40 ? '⚠️' : '🚨';
-
+    const scoreLabel = score >= 70 ? 'Fiable' : score >= 40 ? 'À revoir' : 'Non livrable';
     const totalIssues = (data.categories || []).reduce((s, c) => s + (c.issues?.length || 0), 0);
 
-    // Jauge détail — regrouper les issues par type de problème
+    // Mini barres par dimension
+    const breakdown = data.scoreBreakdown || {};
+    const dims = [
+      { label: 'Exactitude factuelle', key: 'factuel' },
+      { label: 'Structure & répétitions', key: 'structure' },
+      { label: 'Ton & style', key: 'ton' },
+      { label: 'Adéquation tâche', key: 'contexte' },
+      { label: 'Qualité linguistique', key: 'linguistique' }
+    ];
+    let miniBarsHtml = dims.map(d => {
+      const val = breakdown[d.key] ?? 80;
+      const cls = val >= 70 ? 'mhigh' : val >= 40 ? 'mmedium' : 'mlow';
+      return `<div class="mini-bar-row">
+        <div class="mini-bar-label">${d.label}</div>
+        <div class="mini-bar-track"><div class="mini-bar-fill ${cls}" style="width:${val}%"></div></div>
+        <div class="mini-bar-val">${val}</div>
+      </div>`;
+    }).join('');
+
+    // Jauge problèmes
     const problemCounts = {};
     (data.categories || []).forEach(cat => {
       (cat.issues || []).forEach(issue => {
@@ -461,38 +481,40 @@ nav {
         problemCounts[key] = (problemCounts[key] || 0) + 1;
       });
     });
-
-    let gaugeHtml = '';
-    Object.entries(problemCounts).forEach(([label, count]) => {
-      const pct = Math.min(100, count * 25);
-      const colorClass = count === 0 ? 'c-none' : count === 1 ? 'c-low' : count <= 3 ? 'c-medium' : 'c-high';
-      gaugeHtml += `
-        <div class="gauge-bar-row">
-          <div class="gauge-bar-label">${label}</div>
-          <div class="gauge-bar-track"><div class="gauge-bar-fill ${colorClass}" style="width:${pct}%"></div></div>
-          <div class="gauge-bar-count">${count}</div>
-        </div>`;
-    });
+    let gaugeHtml = Object.entries(problemCounts).map(([label, count]) => {
+      const pct = Math.min(100, count * 20);
+      const colorClass = count === 1 ? 'c-low' : count <= 3 ? 'c-medium' : 'c-high';
+      return `<div class="gauge-bar-row">
+        <div class="gauge-bar-label">${label}</div>
+        <div class="gauge-bar-track"><div class="gauge-bar-fill ${colorClass}" style="width:${pct}%"></div></div>
+        <div class="gauge-bar-count">${count}</div>
+      </div>`;
+    }).join('');
 
     let html = `
       <div class="result-header">
-        <div class="reliability-top">
-          <div class="reliability-gauge">
-            <div class="reliability-score ${scoreClass}">${score}</div>
-            <div class="reliability-label ${scoreClass}">${scoreLabel}</div>
-            <div style="font-size:0.7em;color:var(--muted);margin-top:2px;">score de fiabilité / 100</div>
+        <div class="score-block">
+          <div class="score-circle-wrap">
+            <div class="score-circle ${scoreClass}">
+              <div class="score-number ${scoreClass}">${score}</div>
+              <div class="score-sub">/100</div>
+            </div>
+            <div class="score-verdict ${scoreClass}">${scoreLabel}</div>
           </div>
-          <div class="result-summary">
-            <h3>${scoreEmoji} ${totalIssues} point${totalIssues > 1 ? 's' : ''} à corriger identifié${totalIssues > 1 ? 's' : ''}</h3>
-            <p>${data.summary}</p>
+          <div class="score-detail">
+            <div class="score-detail-title">Score de fiabilité — Comment est-il calculé ?</div>
+            <div class="score-explain">100 = document parfaitement fiable, livrable tel quel. En dessous de 70 : des corrections sont nécessaires. En dessous de 40 : non livrable en l'état.</div>
+            ${miniBarsHtml}
           </div>
         </div>
+        <div class="result-summary-block">
+          <p>${scoreEmoji} <strong>${totalIssues} point${totalIssues > 1 ? 's' : ''} à corriger.</strong> ${data.summary}</p>
+        </div>
         ${gaugeHtml ? `<div class="detail-gauge">
-          <div class="detail-gauge-title">📊 Répartition des problèmes détectés</div>
+          <div class="detail-gauge-title">Répartition des problèmes détectés</div>
           ${gaugeHtml}
         </div>` : ''}
-      </div>
-    `;
+      </div>`;
 
     // Catégories
     (data.categories || []).forEach(cat => {
@@ -504,42 +526,58 @@ nav {
 
       if (!cat.clean && cat.issues?.length > 0) {
         cat.issues.forEach(issue => {
-          const trustClass = issue.trustable === true ? 'trust-pill-yes' : issue.trustable === false ? 'trust-pill-no' : 'trust-pill-maybe';
-          const trustLabel = issue.trustable === true ? '✓ Info fiable' : issue.trustable === false ? '✗ Info à vérifier' : '~ Incertain';
-
-          // Bloc vérification source
-          let sourceCheckHtml = '';
+          // Bloc source : un seul message clair
+          let sourceHtml = '';
           if (issue.sourceCheck) {
             const sc = issue.sourceCheck;
-            const scIcon = sc.status === 'confirmed' ? '✅' : sc.status === 'exists_but_not_found' ? '⚠️' : '❌';
-            const scLabel = sc.status === 'confirmed' ? 'Source vérifiée' : sc.status === 'exists_but_not_found' ? 'Source trouvée mais chiffre non confirmé' : 'Source introuvable';
-            const urlLink = sc.url ? ` <a href="${sc.url}" target="_blank" rel="noopener">→ voir</a>` : '';
-            sourceCheckHtml = `<div class="source-check ${sc.status}"><span>${scIcon}</span><span><strong>${scLabel}</strong> — ${sc.explanation}${urlLink}</span></div>`;
+            if (sc.status === 'confirmed') {
+              const link = sc.url ? `<a href="${sc.url}" target="_blank" rel="noopener">→ voir la source</a>` : '';
+              sourceHtml = `<div class="source-verdict sv-ok">
+                <span class="sv-icon">✅</span>
+                <span class="sv-text"><strong>Information exacte, mais non sourcée dans le document.</strong> ${sc.explanation} ${link}<br><span style="font-weight:400;opacity:0.85">À corriger : ajoutez la référence dans le document avant livraison.</span></span>
+              </div>`;
+            } else if (sc.status === 'exists_but_not_found') {
+              sourceHtml = `<div class="source-verdict sv-partial">
+                <span class="sv-icon">⚠️</span>
+                <span class="sv-text"><strong>Source trouvée, mais ce chiffre n'y figure pas.</strong> ${sc.explanation}<br><span style="font-weight:400;opacity:0.85">À vérifier impérativement avant livraison.</span></span>
+              </div>`;
+            } else {
+              sourceHtml = `<div class="source-verdict sv-missing">
+                <span class="sv-icon">❌</span>
+                <span class="sv-text"><strong>Source introuvable.</strong> ${sc.explanation}<br><span style="font-weight:400;opacity:0.85">Nous n'avons pas trouvé cette source — elle peut exister, mais ce chiffre ne devrait pas être livré sans vérification manuelle.</span></span>
+              </div>`;
+            }
           }
-          html += `
-            <div class="issue">
-              <div class="issue-excerpt">"${issue.excerpt}"</div>
-              <div class="issue-desc">${issue.description}</div>
-              ${sourceCheckHtml}
-              <div class="issue-footer">
-                <span class="pill pill-type">${issue.type}</span>
-                <span class="pill ${trustClass}">${trustLabel}</span>
-              </div>
-            </div>`;
+
+          html += `<div class="issue">
+            <div class="issue-excerpt">"${issue.excerpt}"</div>
+            <div class="issue-desc">${issue.description}</div>
+            ${sourceHtml}
+            <div class="issue-footer">
+              <span class="pill pill-type">${issue.type}</span>
+            </div>
+          </div>`;
         });
       }
-
       html += `</div>`;
     });
 
-    // Suggestions de prompt
+    // Suggestions prompt — section très distincte
     if (data.promptSuggestions?.length > 0) {
       html += `<div class="prompt-card">
-        <div class="prompt-card-title">💡 Suggestions pour améliorer votre prompt</div>`;
+        <div class="prompt-card-header">
+          <span class="prompt-card-icon">✍️</span>
+          <div>
+            <div class="prompt-card-title">Suggestions pour améliorer votre prompt</div>
+            <div class="prompt-card-sub">Instructions prêtes à copier-coller, rédigées en prompt engineering</div>
+          </div>
+        </div>`;
       data.promptSuggestions.forEach(s => {
+        const id = 'ps_' + Math.random().toString(36).substr(2,6);
         html += `<div class="prompt-suggestion">
           <div class="prompt-suggestion-label">${s.problem}</div>
-          <div class="prompt-suggestion-text">${s.suggestion}</div>
+          <div class="prompt-suggestion-text" id="${id}">${s.suggestion}</div>
+          <button class="prompt-copy-btn" onclick="copyPrompt('${id}', this)">Copier</button>
         </div>`;
       });
       html += `</div>`;
@@ -553,14 +591,31 @@ nav {
     resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  function copyPrompt(id, btn) {
+    const text = document.getElementById(id)?.textContent || '';
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✓ Copié';
+      setTimeout(() => btn.textContent = 'Copier', 2000);
+    });
+  }
+
   function resetScanner() {
+    // Vider les champs
+    document.getElementById('contentInput').value = '';
+    document.getElementById('taskInput').value = '';
+    document.getElementById('sectorInput').selectedIndex = 0;
+    document.getElementById('charCount').textContent = '0 / 8000 caractères';
+    clearImage();
+    switchTab('text');
+
+    // Reset loading steps
+    [['lstep1','⏳'],['lstep2','○'],['lstep3','○'],['lstep4','○']].forEach(([id, icon]) => {
+      const el = document.getElementById(id);
+      if (el) { el.className = ''; el.querySelector('.step-icon').textContent = icon; }
+    });
+
     document.getElementById('resultSection').classList.add('hidden');
     document.getElementById('formSection').classList.remove('hidden');
-    // Reset loading steps
-    ['lstep1','lstep2','lstep3','lstep4'].forEach((id, i) => {
-      const el = document.getElementById(id);
-      if (el) { el.className = ''; el.querySelector('.step-icon').textContent = i === 0 ? '⏳' : '○'; }
-    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
