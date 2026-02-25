@@ -103,25 +103,49 @@ nav {
 .result-header {
   background: var(--surface); border: 1px solid var(--border2); border-radius: 20px;
   padding: 28px 32px; box-shadow: 0 4px 24px rgba(29,111,229,0.07); margin-bottom: 16px;
-  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
 }
-.risk-gauge { text-align: center; min-width: 90px; }
-.risk-score { font-family: var(--mono); font-size: 2.8em; font-weight: 500; line-height: 1; }
-.risk-score.low { color: var(--success); }
-.risk-score.medium { color: var(--warn); }
-.risk-score.high { color: var(--danger); }
-.risk-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-.risk-label.low { color: var(--success); }
-.risk-label.medium { color: var(--warn); }
-.risk-label.high { color: var(--danger); }
+.reliability-top { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 24px; }
+.reliability-gauge { text-align: center; min-width: 90px; }
+.reliability-score { font-family: var(--mono); font-size: 2.8em; font-weight: 500; line-height: 1; }
+.reliability-score.high   { color: var(--success); }
+.reliability-score.medium { color: var(--warn); }
+.reliability-score.low    { color: var(--danger); }
+.reliability-label { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.reliability-label.high   { color: var(--success); }
+.reliability-label.medium { color: var(--warn); }
+.reliability-label.low    { color: var(--danger); }
 .result-summary { flex: 1; }
 .result-summary h3 { font-size: 1em; font-weight: 700; margin-bottom: 6px; }
-.result-summary p { font-size: 0.9em; color: var(--muted); line-height: 1.6; }
-.result-recommendation {
-  background: rgba(29,111,229,0.05); border: 1px solid rgba(29,111,229,0.15);
-  border-radius: 10px; padding: 12px 16px; margin-top: 12px;
-  font-size: 0.85em; color: var(--accent); font-weight: 600;
+.result-summary p  { font-size: 0.9em; color: var(--muted); line-height: 1.6; }
+
+/* JAUGE DÉTAIL */
+.detail-gauge { margin-top: 0; }
+.detail-gauge-title { font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 12px; }
+.gauge-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.gauge-bar-label { font-size: 0.78em; color: var(--text); font-weight: 500; min-width: 180px; }
+.gauge-bar-track { flex: 1; height: 7px; background: var(--surface2); border-radius: 999px; overflow: hidden; border: 1px solid var(--border); }
+.gauge-bar-fill { height: 100%; border-radius: 999px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+.gauge-bar-fill.c-none   { background: var(--success); }
+.gauge-bar-fill.c-low    { background: var(--accent2); }
+.gauge-bar-fill.c-medium { background: var(--warn); }
+.gauge-bar-fill.c-high   { background: var(--danger); }
+.gauge-bar-count { font-family: var(--mono); font-size: 0.75em; color: var(--muted); min-width: 20px; text-align: right; }
+
+/* SUGGESTIONS PROMPT */
+.prompt-card {
+  background: rgba(29,111,229,0.04); border: 1px solid rgba(29,111,229,0.18);
+  border-radius: 16px; padding: 24px; margin-bottom: 12px;
 }
+.prompt-card-title { font-size: 0.78em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 14px; }
+.prompt-suggestion { background: var(--surface); border: 1px solid var(--border2); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; }
+.prompt-suggestion:last-child { margin-bottom: 0; }
+.prompt-suggestion-label { font-size: 0.75em; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; }
+.prompt-suggestion-text { font-size: 0.88em; color: var(--text); line-height: 1.6; font-family: var(--mono); background: var(--surface2); padding: 10px 12px; border-radius: 8px; border-left: 3px solid var(--accent); }
+
+/* FIABILITÉ ISSUE */
+.trust-pill-yes { background: rgba(22,163,74,0.08); border: 1px solid rgba(22,163,74,0.25); color: var(--success); }
+.trust-pill-no  { background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.2); color: var(--danger); }
+.trust-pill-maybe { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); color: var(--warn); }
 
 /* CATÉGORIES */
 .category-card {
@@ -415,24 +439,52 @@ nav {
   }
 
   function renderResults(data) {
-    const riskClass = data.riskScore < 30 ? 'low' : data.riskScore < 60 ? 'medium' : 'high';
-    const riskEmoji = data.riskScore < 30 ? '✅' : data.riskScore < 60 ? '⚠️' : '🚨';
+    // Score de fiabilité : 100 = parfait, 0 = très problématique
+    const score = data.reliabilityScore ?? (100 - (data.riskScore || 0));
+    const scoreClass = score >= 70 ? 'high' : score >= 40 ? 'medium' : 'low';
+    const scoreLabel = score >= 70 ? 'Fiable' : score >= 40 ? 'À revoir' : 'Non livrable';
+    const scoreEmoji = score >= 70 ? '✅' : score >= 40 ? '⚠️' : '🚨';
 
-    // Compter le total d'issues
     const totalIssues = (data.categories || []).reduce((s, c) => s + (c.issues?.length || 0), 0);
+
+    // Jauge détail — regrouper les issues par type de problème
+    const problemCounts = {};
+    (data.categories || []).forEach(cat => {
+      (cat.issues || []).forEach(issue => {
+        const key = issue.problemType || issue.type || cat.name;
+        problemCounts[key] = (problemCounts[key] || 0) + 1;
+      });
+    });
+
+    let gaugeHtml = '';
+    Object.entries(problemCounts).forEach(([label, count]) => {
+      const pct = Math.min(100, count * 25);
+      const colorClass = count === 0 ? 'c-none' : count === 1 ? 'c-low' : count <= 3 ? 'c-medium' : 'c-high';
+      gaugeHtml += `
+        <div class="gauge-bar-row">
+          <div class="gauge-bar-label">${label}</div>
+          <div class="gauge-bar-track"><div class="gauge-bar-fill ${colorClass}" style="width:${pct}%"></div></div>
+          <div class="gauge-bar-count">${count}</div>
+        </div>`;
+    });
 
     let html = `
       <div class="result-header">
-        <div class="risk-gauge">
-          <div class="risk-score ${riskClass}">${data.riskScore}</div>
-          <div class="risk-label ${riskClass}">${data.riskLevel}</div>
-          <div style="font-size:0.7em;color:var(--muted);margin-top:2px;">score / 100</div>
+        <div class="reliability-top">
+          <div class="reliability-gauge">
+            <div class="reliability-score ${scoreClass}">${score}</div>
+            <div class="reliability-label ${scoreClass}">${scoreLabel}</div>
+            <div style="font-size:0.7em;color:var(--muted);margin-top:2px;">score de fiabilité / 100</div>
+          </div>
+          <div class="result-summary">
+            <h3>${scoreEmoji} ${totalIssues} point${totalIssues > 1 ? 's' : ''} à corriger identifié${totalIssues > 1 ? 's' : ''}</h3>
+            <p>${data.summary}</p>
+          </div>
         </div>
-        <div class="result-summary">
-          <h3>${riskEmoji} ${totalIssues} incohérence${totalIssues > 1 ? 's' : ''} identifiée${totalIssues > 1 ? 's' : ''}</h3>
-          <p>${data.summary}</p>
-          <div class="result-recommendation">💡 ${data.recommendation}</div>
-        </div>
+        ${gaugeHtml ? `<div class="detail-gauge">
+          <div class="detail-gauge-title">📊 Répartition des problèmes détectés</div>
+          ${gaugeHtml}
+        </div>` : ''}
       </div>
     `;
 
@@ -441,19 +493,20 @@ nav {
       html += `<div class="category-card">
         <div class="category-header">
           <span class="category-name">${cat.name}</span>
-          ${cat.clean ? '<span class="category-clean">✓ Aucune incohérence</span>' : ''}
+          ${cat.clean ? '<span class="category-clean">✓ Aucun problème</span>' : ''}
         </div>`;
 
       if (!cat.clean && cat.issues?.length > 0) {
         cat.issues.forEach(issue => {
-          const confClass = issue.confidence === 'ÉLEVÉ' ? 'high' : issue.confidence === 'MOYEN' ? 'medium' : 'low';
+          const trustClass = issue.trustable === true ? 'trust-pill-yes' : issue.trustable === false ? 'trust-pill-no' : 'trust-pill-maybe';
+          const trustLabel = issue.trustable === true ? '✓ Info fiable' : issue.trustable === false ? '✗ Info à vérifier' : '~ Incertain';
           html += `
             <div class="issue">
               <div class="issue-excerpt">"${issue.excerpt}"</div>
               <div class="issue-desc">${issue.description}</div>
               <div class="issue-footer">
                 <span class="pill pill-type">${issue.type}</span>
-                <span class="pill pill-${confClass}">Confiance : ${issue.confidence}</span>
+                <span class="pill ${trustClass}">${trustLabel}</span>
               </div>
             </div>`;
         });
@@ -461,6 +514,19 @@ nav {
 
       html += `</div>`;
     });
+
+    // Suggestions de prompt
+    if (data.promptSuggestions?.length > 0) {
+      html += `<div class="prompt-card">
+        <div class="prompt-card-title">💡 Suggestions pour améliorer votre prompt</div>`;
+      data.promptSuggestions.forEach(s => {
+        html += `<div class="prompt-suggestion">
+          <div class="prompt-suggestion-label">${s.problem}</div>
+          <div class="prompt-suggestion-text">${s.suggestion}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    }
 
     html += `<button class="btn-reset" onclick="resetScanner()">↩ Nouvelle analyse</button>`;
 
