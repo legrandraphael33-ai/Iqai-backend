@@ -39,7 +39,7 @@ async function checkWithLanguageTool(text, lang = 'fr') {
     );
     if (!result.matches) return [];
 
-    const relevantCategories = ['TYPOS', 'GRAMMAR', 'CASING', 'COMPOUNDING', 'TYPOGRAPHY'];
+    const relevantCategories = ['TYPOS', 'GRAMMAR', 'AGREEMENT', 'CASING', 'COMPOUNDING', 'TYPOGRAPHY'];
 
     return result.matches
       .filter(m => relevantCategories.includes(m.rule?.category?.id))
@@ -231,11 +231,14 @@ FORMAT : JSON uniquement, sans markdown, sans backticks.
 
       // Ajuster le score linguistique selon le nombre de fautes
       if (parsed.scoreBreakdown) {
-        const penalty = Math.min(40, ltIssues.length * 8);
-        parsed.scoreBreakdown.linguistique = Math.max(20, 100 - penalty);
-        // Recalculer le score global
-        const vals = Object.values(parsed.scoreBreakdown);
-        parsed.reliabilityScore = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+        const penalty = Math.min(80, ltIssues.length * 10);
+        parsed.scoreBreakdown.linguistique = Math.max(10, 100 - penalty);
+        // Le score global donne 40% de poids au linguistique si beaucoup de fautes
+        const { factuel, structure, ton, contexte, linguistique } = parsed.scoreBreakdown;
+        const weight = ltIssues.length >= 4 ? [0.2, 0.15, 0.15, 0.1, 0.4] : [0.25, 0.2, 0.2, 0.15, 0.2];
+        parsed.reliabilityScore = Math.round(
+          factuel * weight[0] + structure * weight[1] + ton * weight[2] + contexte * weight[3] + linguistique * weight[4]
+        );
         parsed.reliabilityLevel = parsed.reliabilityScore >= 70 ? 'Fiable' : parsed.reliabilityScore >= 40 ? 'À revoir' : 'Non livrable';
       }
     }
