@@ -1,25 +1,18 @@
 const https = require('https');
 
-// ── Utilitaire appel HTTPS ──────────────────────────────────────────────
-function callOpenAI(payload, apiKey) {
+// ── Utilitaire appel HTTPS générique ───────────────────────────────────
+function httpPost(hostname, path, headers, body) {
   return new Promise((resolve, reject) => {
-    const body = JSON.stringify(payload);
     const options = {
-      hostname: 'api.openai.com',
-      path: '/v1/chat/completions',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Length': Buffer.byteLength(body)
-      }
+      hostname, path, method: 'POST',
+      headers: { ...headers, 'Content-Length': Buffer.byteLength(body) }
     };
     const req = https.request(options, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
         try { resolve(JSON.parse(data)); }
-        catch(e) { reject(new Error('Réponse OpenAI invalide')); }
+        catch(e) { reject(new Error('Réponse invalide')); }
       });
     });
     req.on('error', reject);
@@ -28,48 +21,64 @@ function callOpenAI(payload, apiKey) {
   });
 }
 
-// ── Détection des répétitions côté code (100% fiable) ──────────────────
-function detectRepetitions(text) {
-  const lines = text
-    .split(/[\n\r]+/)
-    .map(l => l.trim())
-    .filter(l => l.length >= 15);
+function callOpenAI(payload, apiKey) {
+  return httpPost('api.openai.com', '/v1/chat/completions', {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${apiKey}`
+  }, JSON.stringify(payload));
+}
 
-  function normalize(s) {
-    return s.toLowerCase().replace(/[?!.,;:]+$/g, '').replace(/\s+/g, ' ').trim();
+// ── LanguageTool : orthographe et grammaire fiables ────────────────────
+async function checkWithLanguageTool(text, lang = 'fr') {
+  try {
+    const body = new URLSearchParams({ text, language: lang, enabledOnly: 'false' }).toString();
+    const result = await httpPost(
+      'api.languagetool.org', '/v2/check',
+      { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body
+    );
+    if (!result.matches) return [];
+
+    const relevantCategories = ['TYPOS', 'GRAMMAR', 'CASING', 'COMPOUNDING', 'TYPOGRAPHY'];
+
+    return result.matches
+      .filter(m => relevantCategories.includes(m.rule?.category?.id))
+      .map(m => ({
+        excerpt: text.substring(Math.max(0, m.offset - 20), m.offset + m.length + 20).trim(),
+        word: text.substring(m.offset, m.offset + m.length),
+        description: m.message,
+        suggestions: m.replacements?.slice(0, 3).map(r => r.value) || [],
+        type: 'Erreur linguistique',
+        problemType: m.rule?.category?.name || 'Orthographe / Grammaire',
+        needsSourceCheck: false,
+        sourceQuery: null
+      }));
+  } catch(e) {
+    console.error('LanguageTool error:', e.message);
+    return []; // Si LanguageTool est down, on continue sans bloquer
   }
+}
 
+// ── Détection répétitions (Jaccard) ────────────────────────────────────
+function detectRepetitions(text) {
+  const lines = text.split(/[\n\r]+/).map(l => l.trim()).filter(l => l.length >= 15);
+  function normalize(s) { return s.toLowerCase().replace(/[?!.,;:]+$/g, '').replace(/\s+/g, ' ').trim(); }
   function similarity(a, b) {
     const wa = new Set(normalize(a).split(' '));
     const wb = new Set(normalize(b).split(' '));
-    const intersection = [...wa].filter(w => wb.has(w)).length;
+    const inter = [...wa].filter(w => wb.has(w)).length;
     const union = new Set([...wa, ...wb]).size;
-    return union === 0 ? 0 : intersection / union;
+    return union === 0 ? 0 : inter / union;
   }
-
-  const groups = [];
-  const used = new Set();
-
+  const groups = [], used = new Set();
   for (let i = 0; i < lines.length; i++) {
     if (used.has(i)) continue;
     const group = [i];
     for (let j = i + 1; j < lines.length; j++) {
-      if (used.has(j)) continue;
-      if (similarity(lines[i], lines[j]) >= 0.75) {
-        group.push(j);
-        used.add(j);
-      }
+      if (!used.has(j) && similarity(lines[i], lines[j]) >= 0.75) { group.push(j); used.add(j); }
     }
-    if (group.length > 1) {
-      used.add(i);
-      groups.push({
-        text: lines[i],
-        count: group.length,
-        exact: group.every(idx => normalize(lines[idx]) === normalize(lines[i]))
-      });
-    }
+    if (group.length > 1) { used.add(i); groups.push({ text: lines[i], count: group.length, exact: group.every(idx => normalize(lines[idx]) === normalize(lines[i])) }); }
   }
-
   return groups;
 }
 
@@ -88,92 +97,73 @@ module.exports = async function handler(req, res) {
   const OPENAI_KEY = process.env.OPENAI_API_KEY;
   if (!OPENAI_KEY) return res.status(500).json({ error: "Clé API manquante" });
 
-  // ── Détection répétitions avant appel IA ───────────────────────────
+  // ── ÉTAPE 1 : LanguageTool + Jaccard en parallèle (rapide) ──────────
+  let ltIssues = [];
   let repetitionsContext = '';
+
   if (mode === 'text' && content) {
-    const detectedRepetitions = detectRepetitions(content);
-    if (detectedRepetitions.length > 0) {
-      repetitionsContext = `\n\nRÉPÉTITIONS DÉTECTÉES PAR ANALYSE AUTOMATIQUE (à intégrer obligatoirement dans "Incohérences structurelles") :\n`;
-      detectedRepetitions.forEach((r, i) => {
-        repetitionsContext += `${i + 1}. "${r.text.substring(0, 80)}" — apparaît ${r.count} fois (${r.exact ? 'identique' : 'quasi-identique'})\n`;
+    const [ltResults, repetitions] = await Promise.all([
+      checkWithLanguageTool(content, 'fr'),
+      Promise.resolve(detectRepetitions(content))
+    ]);
+    ltIssues = ltResults;
+    if (repetitions.length > 0) {
+      repetitionsContext = `\n\nRÉPÉTITIONS DÉTECTÉES (intègre-les toutes dans "Incohérences structurelles") :\n`;
+      repetitions.forEach((r, i) => {
+        repetitionsContext += `${i + 1}. "${r.text.substring(0, 80)}" — ${r.count} fois (${r.exact ? 'identique' : 'quasi-identique'})\n`;
       });
       repetitionsContext += `Tu DOIS inclure chacune comme une issue distincte.`;
     }
   }
 
-  // ── PROMPT SYSTÈME — 2 passes ───────────────────────────────────────
-  const systemPrompt = `Tu es un relecteur expert bilingue français/anglais. Tu analyses des documents avec une rigueur absolue en deux passes successives.
+  // ── ÉTAPE 2 : GPT-4o — analyse sans orthographe ─────────────────────
+  const systemPrompt = `Tu es un agent d'analyse de documents. LanguageTool gère déjà l'orthographe et la grammaire de base — tu NE vérifies PAS l'orthographe, les accents ou les accords. Concentre-toi uniquement sur ce que tu fais mieux que tout autre outil.
 
-══ PASSE 1 — RÉVISION CLASSIQUE (erreurs universelles) ══
+TES RESPONSABILITÉS EXCLUSIVES :
 
-Cherche toutes les erreurs qu'un relecteur humain professionnel relèverait, indépendamment de l'origine du texte :
+1. INCOHÉRENCES FACTUELLES
+   - Chiffres précis sans source ou avec source invérifiable
+   - Affirmations trop assertives sur des sujets incertains
+   - Généralisations abusives ("toutes les études montrent...", "il est prouvé que...")
+   - Fausse précision, dates approximatives
 
-ORTHOGRAPHE & GRAMMAIRE
-- Fautes d'orthographe (y compris accents manquants ou incorrects sur majuscules)
-- Accords incorrects : sujet/verbe, adjectif/nom, participe passé
-- Conjugaisons fautives
-- Mots manquants ou en trop
-- Erreurs de typographie (espaces manquants, double espace, ponctuation mal placée)
+2. INCOHÉRENCES STRUCTURELLES
+   - Répétitions d'idées (tu recevras la liste exhaustive — intègre-les toutes)
+   - Contradictions entre deux parties du document
+   - Structure disproportionnée par rapport à la tâche
 
-STYLE & COHÉRENCE
-- Incohérences de style ou de registre dans le document
-- Nomenclature incohérente (même entité écrite différemment)
-- Ponctuation incohérente entre les sections (certaines phrases avec point final, d'autres sans)
-- Anglicismes inutiles quand un terme français existe
-- Formulations ambiguës ou maladroites
+3. TON & STYLE IA
+   - Transitions artificielles ("Il est important de noter que...", "En conclusion, il convient de...")
+   - Formulations génériques qui ne répondent pas vraiment à la tâche
+   - Changement de registre injustifié
+   - Listes à puces systématiques injustifiées
 
-STRUCTURE
-- Hiérarchie d'information incohérente
-- Sections manquantes ou mal ordonnées
-- Répétitions d'idées ou de formulations
+4. ADÉQUATION À LA TÂCHE
+   - L'output ne répond pas vraiment à ce qui était demandé
+   - Le secteur métier n'est pas réellement pris en compte
+   - Conseils trop génériques pour être actionnables
 
-══ PASSE 2 — DÉTECTION PATTERNS IA (erreurs spécifiques aux LLMs) ══
-
-Sur le contenu analysé en passe 1, cherche en plus :
-
-HALLUCINATIONS & CHIFFRES
-- Chiffres précis sans source ou avec source invérifiable
-- Affirmations trop assertives sur des sujets incertains
-- Généralisations abusives ("toutes les études montrent...", "il est prouvé que...")
-
-TON IA TYPIQUE
-- Transitions artificielles ("Il est important de noter que...", "En conclusion, il convient de...")
-- Formulations génériques qui ne répondent pas vraiment à la tâche
-- Listes à puces systématiques injustifiées
-
-CONTEXTE
-- L'output ne répond pas vraiment à la tâche demandée
-- Le secteur métier n'est pas réellement pris en compte
-
-══ RÈGLES ABSOLUES ══
-- Signale une erreur uniquement si tu en es certain. En cas de doute, abstiens-toi.
-- Un mot peut être singulier ou pluriel selon le contexte — vérifie le sens avant de signaler.
-- Pour les accents sur majuscules : en français, É, È, À, Ù sont corrects. Signale uniquement les accents manifestement incorrects.
-- Ne jamais inventer une erreur pour remplir une catégorie.
+RÈGLES ABSOLUES :
+- Ne signale JAMAIS une faute d'orthographe, d'accent ou d'accord — c'est géré par LanguageTool.
+- Ne signale une erreur que si tu en es certain.
 - Si une catégorie est propre, marque clean: true et issues: [].
-- Pour les chiffres douteux : needsSourceCheck = true + une sourceQuery précise en anglais.
+- Pour les chiffres douteux : needsSourceCheck = true + sourceQuery précise en anglais.
 
-FORMAT : JSON uniquement, sans markdown, sans backticks, sans texte avant ou après.
+FORMAT : JSON uniquement, sans markdown, sans backticks.
 {
   "reliabilityScore": <0-100>,
   "reliabilityLevel": <"Fiable" | "À revoir" | "Non livrable">,
-  "summary": <string, 1-2 phrases résumant les principaux problèmes>,
-  "scoreBreakdown": {
-    "factuel": <0-100>,
-    "structure": <0-100>,
-    "ton": <0-100>,
-    "contexte": <0-100>,
-    "linguistique": <0-100>
-  },
+  "summary": <string, 1-2 phrases>,
+  "scoreBreakdown": { "factuel": <0-100>, "structure": <0-100>, "ton": <0-100>, "contexte": <0-100>, "linguistique": <0-100> },
   "categories": [
     {
       "name": <string>,
       "issues": [
         {
           "excerpt": <string, extrait exact max 100 chars>,
-          "description": <string, explication précise et certaine>,
+          "description": <string>,
           "type": <string>,
-          "problemType": <string, ex: "Faute d'orthographe", "Accord incorrect", "Répétition", "Chiffre non sourcé", "Ton IA">,
+          "problemType": <string>,
           "needsSourceCheck": <boolean>,
           "sourceQuery": <string | null>
         }
@@ -181,16 +171,11 @@ FORMAT : JSON uniquement, sans markdown, sans backticks, sans texte avant ou apr
       "clean": <boolean>
     }
   ],
-  "promptSuggestions": [
-    {
-      "problem": <string>,
-      "suggestion": <string, instruction directe en prompt engineering>
-    }
-  ]
+  "promptSuggestions": [{ "problem": <string>, "suggestion": <string> }]
 }`;
 
-  const promptPrefix = `TÂCHE DEMANDÉE : ${task}\nSECTEUR : ${sector || 'Non spécifié'}\n\n`;
-  const promptSuffix = `${repetitionsContext}\n\nAPPLIQUE les 2 passes dans ta réflexion interne, puis retourne UNIQUEMENT le JSON final.`;
+  const promptPrefix = `TÂCHE : ${task}\nSECTEUR : ${sector || 'Non spécifié'}\n\n`;
+  const promptSuffix = `${repetitionsContext}\n\nRetourne UNIQUEMENT le JSON final.`;
 
   let userMessage;
   if (mode === 'image') {
@@ -204,39 +189,58 @@ FORMAT : JSON uniquement, sans markdown, sans backticks, sans texte avant ou apr
       ]
     };
   } else {
-    userMessage = {
-      role: "user",
-      content: promptPrefix + `DOCUMENT À ANALYSER :\n---\n${content}\n---` + promptSuffix
-    };
+    userMessage = { role: "user", content: promptPrefix + `DOCUMENT À ANALYSER :\n---\n${content}\n---` + promptSuffix };
   }
 
   try {
-    // ── APPEL 1 : ANALYSE COMPLÈTE (2 passes) ──────────────────────────
     const analysisResult = await callOpenAI({
       model: "gpt-4o",
-      response_format: { type: "json_object" }, // ← force JSON, élimine les "Je suis désolé"
+      response_format: { type: "json_object" },
       messages: [{ role: "system", content: systemPrompt }, userMessage],
       temperature: 0.1,
       max_tokens: 3000
     }, OPENAI_KEY);
 
-    if (analysisResult.error) {
-      return res.status(500).json({ error: 'Erreur API OpenAI', details: analysisResult.error.message });
-    }
+    if (analysisResult.error) return res.status(500).json({ error: 'Erreur API OpenAI', details: analysisResult.error.message });
 
     const raw = analysisResult.choices?.[0]?.message?.content;
     if (!raw) return res.status(500).json({ error: 'Réponse vide de OpenAI' });
 
-    // Parsing sécurisé
     let parsed;
-    try {
-      parsed = JSON.parse(raw.replace(/```json|```/g, '').trim());
-    } catch(e) {
-      console.error('JSON parse error:', raw.substring(0, 200));
-      return res.status(500).json({ error: 'Format de réponse invalide', details: 'GPT-4o n\'a pas retourné un JSON valide' });
+    try { parsed = JSON.parse(raw.replace(/```json|```/g, '').trim()); }
+    catch(e) { return res.status(500).json({ error: 'Format de réponse invalide' }); }
+
+    // ── ÉTAPE 3 : Injecter les résultats LanguageTool dans le JSON ─────
+    if (ltIssues.length > 0) {
+      // Chercher la catégorie linguistique existante ou en créer une
+      let ltCategory = parsed.categories?.find(c =>
+        c.name?.toLowerCase().includes('linguistique') ||
+        c.name?.toLowerCase().includes('orthographe') ||
+        c.name?.toLowerCase().includes('erreur')
+      );
+
+      if (!ltCategory) {
+        if (!parsed.categories) parsed.categories = [];
+        ltCategory = { name: 'Erreurs linguistiques', issues: [], clean: false };
+        parsed.categories.push(ltCategory);
+      }
+
+      // Ajouter les issues LanguageTool
+      ltCategory.issues = [...(ltCategory.issues || []), ...ltIssues];
+      ltCategory.clean = ltCategory.issues.length === 0;
+
+      // Ajuster le score linguistique selon le nombre de fautes
+      if (parsed.scoreBreakdown) {
+        const penalty = Math.min(40, ltIssues.length * 8);
+        parsed.scoreBreakdown.linguistique = Math.max(20, 100 - penalty);
+        // Recalculer le score global
+        const vals = Object.values(parsed.scoreBreakdown);
+        parsed.reliabilityScore = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+        parsed.reliabilityLevel = parsed.reliabilityScore >= 70 ? 'Fiable' : parsed.reliabilityScore >= 40 ? 'À revoir' : 'Non livrable';
+      }
     }
 
-    // ── APPEL 2 : VÉRIFICATION WEB DES SOURCES ────────────────────────
+    // ── ÉTAPE 4 : Vérification web des sources ─────────────────────────
     const toCheck = [];
     (parsed.categories || []).forEach((cat, catIdx) => {
       (cat.issues || []).forEach((issue, issueIdx) => {
@@ -247,26 +251,18 @@ FORMAT : JSON uniquement, sans markdown, sans backticks, sans texte avant ou apr
     });
 
     if (toCheck.length > 0) {
-      const checksToRun = toCheck.slice(0, 4);
-      const checkResults = await Promise.all(checksToRun.map(async (item) => {
+      const checkResults = await Promise.all(toCheck.slice(0, 4).map(async (item) => {
         try {
-          const checkResult = await callOpenAI({
+          const r = await callOpenAI({
             model: "gpt-4o-search-preview",
             messages: [
-              {
-                role: "system",
-                content: `Tu vérifies si une source existe et contient un chiffre précis. Réponds UNIQUEMENT en JSON sans markdown : { "status": "confirmed" | "exists_but_not_found" | "not_found", "explanation": <string courte en français>, "url": <string | null> }`
-              },
-              {
-                role: "user",
-                content: `Affirmation : "${item.excerpt}"\nRequête : ${item.query}`
-              }
+              { role: "system", content: `Vérifie si une source existe et contient ce chiffre. Réponds UNIQUEMENT en JSON : { "status": "confirmed" | "exists_but_not_found" | "not_found", "explanation": <string en français>, "url": <string | null> }` },
+              { role: "user", content: `Affirmation : "${item.excerpt}"\nRequête : ${item.query}` }
             ],
             web_search_options: { search_context_size: "low" }
           }, OPENAI_KEY);
-
-          const rawCheck = checkResult.choices?.[0]?.message?.content || '{}';
-          return { ...item, result: JSON.parse(rawCheck.replace(/```json|```/g, '').trim()) };
+          const raw = r.choices?.[0]?.message?.content || '{}';
+          return { ...item, result: JSON.parse(raw.replace(/```json|```/g, '').trim()) };
         } catch(e) {
           return { ...item, result: { status: 'not_found', explanation: 'Vérification impossible.', url: null } };
         }
