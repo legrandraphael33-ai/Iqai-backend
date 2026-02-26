@@ -30,18 +30,15 @@ function callOpenAI(payload, apiKey) {
 
 // ── Détection des répétitions côté code (100% fiable) ──────────────────
 function detectRepetitions(text) {
-  // Découper en phrases/lignes significatives (min 15 chars)
   const lines = text
     .split(/[\n\r]+/)
     .map(l => l.trim())
     .filter(l => l.length >= 15);
 
-  // Normalisation pour comparaison : minuscules, sans ponctuation finale
   function normalize(s) {
     return s.toLowerCase().replace(/[?!.,;:]+$/g, '').replace(/\s+/g, ' ').trim();
   }
 
-  // Similarité de Jaccard sur les mots
   function similarity(a, b) {
     const wa = new Set(normalize(a).split(' '));
     const wb = new Set(normalize(b).split(' '));
@@ -50,7 +47,7 @@ function detectRepetitions(text) {
     return union === 0 ? 0 : intersection / union;
   }
 
-  const groups = []; // groupes de répétitions détectées
+  const groups = [];
   const used = new Set();
 
   for (let i = 0; i < lines.length; i++) {
@@ -58,8 +55,7 @@ function detectRepetitions(text) {
     const group = [i];
     for (let j = i + 1; j < lines.length; j++) {
       if (used.has(j)) continue;
-      const sim = similarity(lines[i], lines[j]);
-      if (sim >= 0.75) { // 75% de mots en commun = répétition
+      if (similarity(lines[i], lines[j]) >= 0.75) {
         group.push(j);
         used.add(j);
       }
@@ -94,66 +90,74 @@ module.exports = async function handler(req, res) {
 
   // ── Détection répétitions avant appel IA ───────────────────────────
   let repetitionsContext = '';
-  let detectedRepetitions = [];
   if (mode === 'text' && content) {
-    detectedRepetitions = detectRepetitions(content);
+    const detectedRepetitions = detectRepetitions(content);
     if (detectedRepetitions.length > 0) {
-      repetitionsContext = `\n\nRÉPÉTITIONS DÉTECTÉES PAR ANALYSE AUTOMATIQUE (exhaustif, à intégrer obligatoirement dans ta réponse JSON sous "Incohérences structurelles") :\n`;
+      repetitionsContext = `\n\nRÉPÉTITIONS DÉTECTÉES PAR ANALYSE AUTOMATIQUE (à intégrer obligatoirement dans "Incohérences structurelles") :\n`;
       detectedRepetitions.forEach((r, i) => {
         repetitionsContext += `${i + 1}. "${r.text.substring(0, 80)}" — apparaît ${r.count} fois (${r.exact ? 'identique' : 'quasi-identique'})\n`;
       });
-      repetitionsContext += `Tu DOIS inclure chacune de ces répétitions comme une issue distincte. Ne les ignore pas.`;
+      repetitionsContext += `Tu DOIS inclure chacune comme une issue distincte.`;
     }
   }
 
-  // ── PROMPT PRINCIPAL ────────────────────────────────────────────────
-  const systemPrompt = `Tu es un agent spécialisé dans la détection d'incohérences produites par des intelligences artificielles génératives (LLMs).
+  // ── PROMPT SYSTÈME — 2 passes ───────────────────────────────────────
+  const systemPrompt = `Tu es un relecteur expert bilingue français/anglais. Tu analyses des documents avec une rigueur absolue en deux passes successives.
 
-TON RÔLE : Tu n'analyses pas les erreurs humaines. Tu identifies spécifiquement les patterns d'erreur typiques des LLMs dans un output qui t'est soumis.
+══ PASSE 1 — RÉVISION CLASSIQUE (erreurs universelles) ══
 
-PATTERNS D'ERREUR IA QUE TU CHERCHES :
+Cherche toutes les erreurs qu'un relecteur humain professionnel relèverait, indépendamment de l'origine du texte :
 
-1. INCOHÉRENCES FACTUELLES
-   - Chiffres précis sans source ou avec source incomplète
-   - Dates approximatives ou légèrement fausses
-   - Affirmations trop assertives sur des sujets incertains
-   - Généralisations abusives ("toutes les études montrent...", "il est prouvé que...")
-   - Fausse précision
+ORTHOGRAPHE & GRAMMAIRE
+- Fautes d'orthographe (y compris accents manquants ou incorrects sur majuscules)
+- Accords incorrects : sujet/verbe, adjectif/nom, participe passé
+- Conjugaisons fautives
+- Mots manquants ou en trop
+- Erreurs de typographie (espaces manquants, double espace, ponctuation mal placée)
 
-2. INCOHÉRENCES STRUCTURELLES
-   - Répétitions d'idées ou de phrases (tu recevras la liste exhaustive si applicable — tu dois toutes les inclure)
-   - Contradictions entre deux parties du texte
-   - Longueur disproportionnée par rapport à la tâche
+STYLE & COHÉRENCE
+- Incohérences de style ou de registre dans le document
+- Nomenclature incohérente (même entité écrite différemment)
+- Ponctuation incohérente entre les sections (certaines phrases avec point final, d'autres sans)
+- Anglicismes inutiles quand un terme français existe
+- Formulations ambiguës ou maladroites
 
-3. INCOHÉRENCES DE TON
-   - Changement de registre sans raison
-   - Formulations génériques qui ne répondent pas vraiment à la tâche
-   - Transitions artificielles ("Il est important de noter que...", "En conclusion, il convient de...")
-   - Listes à puces systématiques injustifiées
+STRUCTURE
+- Hiérarchie d'information incohérente
+- Sections manquantes ou mal ordonnées
+- Répétitions d'idées ou de formulations
 
-4. INCOHÉRENCES DE CONTEXTE
-   - L'output ne répond pas vraiment à la tâche demandée
-   - Le secteur métier n'est pas réellement pris en compte
-   - Conseils trop génériques pour être actionnables
+══ PASSE 2 — DÉTECTION PATTERNS IA (erreurs spécifiques aux LLMs) ══
 
-5. ERREURS LINGUISTIQUES
-   - Fautes d'orthographe
-   - Accords incorrects (sujet/verbe, adjectif/nom, participe passé)
-   - Conjugaisons fautives
-   - Anglicismes inutiles
-   - Ponctuation aberrante
+Sur le contenu analysé en passe 1, cherche en plus :
 
-RÈGLES ABSOLUES :
-- Tu ne dis JAMAIS qu'une affirmation est fausse si tu n'en es pas certain.
-- Si tu ne détectes aucune incohérence dans une catégorie, tu le dis explicitement.
-- Pour les suggestions de prompt : rédige des instructions directes en prompt engineering réel — précises, contraignantes, avec exemples si utile.
-- Pour les chiffres avec source douteuse : needsSourceCheck = true + une sourceQuery précise en anglais.
+HALLUCINATIONS & CHIFFRES
+- Chiffres précis sans source ou avec source invérifiable
+- Affirmations trop assertives sur des sujets incertains
+- Généralisations abusives ("toutes les études montrent...", "il est prouvé que...")
 
-FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
+TON IA TYPIQUE
+- Transitions artificielles ("Il est important de noter que...", "En conclusion, il convient de...")
+- Formulations génériques qui ne répondent pas vraiment à la tâche
+- Listes à puces systématiques injustifiées
+
+CONTEXTE
+- L'output ne répond pas vraiment à la tâche demandée
+- Le secteur métier n'est pas réellement pris en compte
+
+══ RÈGLES ABSOLUES ══
+- Signale une erreur uniquement si tu en es certain. En cas de doute, abstiens-toi.
+- Un mot peut être singulier ou pluriel selon le contexte — vérifie le sens avant de signaler.
+- Pour les accents sur majuscules : en français, É, È, À, Ù sont corrects. Signale uniquement les accents manifestement incorrects.
+- Ne jamais inventer une erreur pour remplir une catégorie.
+- Si une catégorie est propre, marque clean: true et issues: [].
+- Pour les chiffres douteux : needsSourceCheck = true + une sourceQuery précise en anglais.
+
+FORMAT : JSON uniquement, sans markdown, sans backticks, sans texte avant ou après.
 {
-  "reliabilityScore": <0-100, 100 = parfaitement fiable>,
+  "reliabilityScore": <0-100>,
   "reliabilityLevel": <"Fiable" | "À revoir" | "Non livrable">,
-  "summary": <string, 1-2 phrases>,
+  "summary": <string, 1-2 phrases résumant les principaux problèmes>,
   "scoreBreakdown": {
     "factuel": <0-100>,
     "structure": <0-100>,
@@ -167,10 +171,9 @@ FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
       "issues": [
         {
           "excerpt": <string, extrait exact max 100 chars>,
-          "description": <string, explication précise>,
-          "trustable": <true | false | null>,
+          "description": <string, explication précise et certaine>,
           "type": <string>,
-          "problemType": <string, ex: "Chiffres non sourcés", "Répétition exacte", "Répétition quasi-identique", "Contradiction", "Faute d'orthographe", "Accord incorrect">,
+          "problemType": <string, ex: "Faute d'orthographe", "Accord incorrect", "Répétition", "Chiffre non sourcé", "Ton IA">,
           "needsSourceCheck": <boolean>,
           "sourceQuery": <string | null>
         }
@@ -186,8 +189,8 @@ FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
   ]
 }`;
 
-  const promptPrefix = `TÂCHE DEMANDÉE À L'IA : ${task}\n\nSECTEUR MÉTIER : ${sector || 'Non spécifié'}\n\n`;
-  const promptSuffix = `${repetitionsContext}\n\nProcède en 3 étapes dans ta réflexion interne :\nÉTAPE 1 — Décompose l'output en affirmations individuelles.\nÉTAPE 2 — Évalue chaque affirmation selon les 5 catégories. Intègre TOUTES les répétitions listées ci-dessus.\nÉTAPE 3 — Agrège et retourne uniquement le JSON final.`;
+  const promptPrefix = `TÂCHE DEMANDÉE : ${task}\nSECTEUR : ${sector || 'Non spécifié'}\n\n`;
+  const promptSuffix = `${repetitionsContext}\n\nAPPLIQUE les 2 passes dans ta réflexion interne, puis retourne UNIQUEMENT le JSON final.`;
 
   let userMessage;
   if (mode === 'image') {
@@ -196,21 +199,22 @@ FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
     userMessage = {
       role: "user",
       content: [
-        { type: "text", text: promptPrefix + "OUTPUT IA À ANALYSER : L'image ci-dessous contient l'output produit par une IA." + promptSuffix },
+        { type: "text", text: promptPrefix + "DOCUMENT À ANALYSER : L'image ci-dessous." + promptSuffix },
         { type: "image_url", image_url: { url: `data:${matches[1]};base64,${matches[2]}`, detail: "high" } }
       ]
     };
   } else {
     userMessage = {
       role: "user",
-      content: promptPrefix + `OUTPUT IA À ANALYSER :\n---\n${content}\n---` + promptSuffix
+      content: promptPrefix + `DOCUMENT À ANALYSER :\n---\n${content}\n---` + promptSuffix
     };
   }
 
   try {
-    // ── APPEL 1 : ANALYSE ─────────────────────────────────────────────
+    // ── APPEL 1 : ANALYSE COMPLÈTE (2 passes) ──────────────────────────
     const analysisResult = await callOpenAI({
       model: "gpt-4o",
+      response_format: { type: "json_object" }, // ← force JSON, élimine les "Je suis désolé"
       messages: [{ role: "system", content: systemPrompt }, userMessage],
       temperature: 0.1,
       max_tokens: 3000
@@ -223,8 +227,14 @@ FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
     const raw = analysisResult.choices?.[0]?.message?.content;
     if (!raw) return res.status(500).json({ error: 'Réponse vide de OpenAI' });
 
-    const cleaned = raw.replace(/```json|```/g, '').trim();
-    const parsed = JSON.parse(cleaned);
+    // Parsing sécurisé
+    let parsed;
+    try {
+      parsed = JSON.parse(raw.replace(/```json|```/g, '').trim());
+    } catch(e) {
+      console.error('JSON parse error:', raw.substring(0, 200));
+      return res.status(500).json({ error: 'Format de réponse invalide', details: 'GPT-4o n\'a pas retourné un JSON valide' });
+    }
 
     // ── APPEL 2 : VÉRIFICATION WEB DES SOURCES ────────────────────────
     const toCheck = [];
@@ -256,18 +266,15 @@ FORMAT DE RÉPONSE : JSON uniquement, sans markdown, sans backticks.
           }, OPENAI_KEY);
 
           const rawCheck = checkResult.choices?.[0]?.message?.content || '{}';
-          const cleanedCheck = rawCheck.replace(/```json|```/g, '').trim();
-          return { ...item, result: JSON.parse(cleanedCheck) };
+          return { ...item, result: JSON.parse(rawCheck.replace(/```json|```/g, '').trim()) };
         } catch(e) {
-          return { ...item, result: { status: 'not_found', explanation: 'Vérification impossible techniquement.', url: null } };
+          return { ...item, result: { status: 'not_found', explanation: 'Vérification impossible.', url: null } };
         }
       }));
 
       checkResults.forEach(({ catIdx, issueIdx, result }) => {
         if (parsed.categories[catIdx]?.issues[issueIdx]) {
           parsed.categories[catIdx].issues[issueIdx].sourceCheck = result;
-          if (result.status === 'confirmed') parsed.categories[catIdx].issues[issueIdx].trustable = true;
-          else if (result.status === 'not_found') parsed.categories[catIdx].issues[issueIdx].trustable = false;
         }
       });
     }
